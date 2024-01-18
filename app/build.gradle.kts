@@ -6,7 +6,9 @@ plugins {
 android {
     namespace = "com.org.martall"
     compileSdk = 34
-
+    viewBinding {
+        enable = true
+    }
     defaultConfig {
         applicationId = "com.org.martall"
         minSdk = 23
