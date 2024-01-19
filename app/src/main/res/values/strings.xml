@@ -1,3 +1,20 @@
 <resources>
+    <!-- fragment shop user text-->
     <string name="app_name">MartAll</string>
+    <string name="text_filter">필터</string>
+    <string name="text_filter_title">검색 필터</string>
+    <string name="text_all">전체</string>
+    <string name="text_follower_order">팔로워 순</string>
+    <string name="text_visited_order">방문자 순</string>
+    <string name="text_latest_order">신규 순</string>
+    <string name="text_follow">팔로우</string>
+
+
+    <!-- filter Spinner 에 들어갈 목록 -->
+    <string-array name="sort_list">
+        <item>@string/text_all</item>
+        <item>@string/text_follower_order</item>
+        <item>@string/text_visited_order</item>
+        <item>@string/text_latest_order</item>
+    </string-array>
 </resources>

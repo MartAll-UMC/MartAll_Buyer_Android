@@ -21,6 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.org.martall.view.store.StoreActivity"
+            android:theme="@style/Theme.MartAll"/>
     </application>
 
 </manifest>
