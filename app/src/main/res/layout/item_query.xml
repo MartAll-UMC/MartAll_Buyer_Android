@@ -34,6 +34,7 @@
         android:id="@+id/current_status_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_8"
         app:layout_constraintStart_toEndOf="@id/query_time_stamp_tv"
         app:layout_constraintTop_toTopOf="@id/query_time_stamp_tv"
         app:layout_constraintBottom_toBottomOf="@id/query_time_stamp_tv"/>
