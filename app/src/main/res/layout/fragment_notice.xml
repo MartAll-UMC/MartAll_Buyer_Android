@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notice_rv"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- 이미지 디자인에 맞게 향후 수정 -->
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/arrow_back_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        app:layout_constraintEnd_toStartOf="@id/page_status_tv"
+        app:layout_constraintTop_toBottomOf="@id/notice_rv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:src="@drawable/baseline_arrow_back_ios_24"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/page_status_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/arrow_back_iv"
+        app:layout_constraintBottom_toBottomOf="@id/arrow_back_iv"
+        app:layout_constraintStart_toEndOf="@id/arrow_back_iv"
+        app:layout_constraintEnd_toStartOf="@id/arrow_front_iv"
+        android:text="1/2"
+        android:textSize="@dimen/sp_20"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/arrow_front_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_forward_ios_24"
+        app:layout_constraintBottom_toBottomOf="@+id/arrow_back_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/page_status_tv"
+        app:layout_constraintTop_toTopOf="@id/arrow_back_iv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

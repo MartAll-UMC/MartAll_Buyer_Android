@@ -23,6 +23,7 @@
         </activity>
         <activity android:name="com.org.martall.view.store.StoreActivity"
             android:theme="@style/Theme.MartAll"/>
+        <activity android:name="com.org.martall.view.mypage.customerservice.CustomerServiceActivity" />
     </application>
 
 </manifest>

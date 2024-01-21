@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 공지 사항 recycler view 에 들어 가는 image -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="@dimen/dp_32"
+    android:layout_marginEnd="@dimen/dp_32">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/query_tv"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="wrap_content"
+        tools:text="문의 이름"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/arrow_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_18"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/query_time_stamp_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="2024.01.01 00:00"
+        app:layout_constraintTop_toBottomOf="@id/query_tv"
+        app:layout_constraintStart_toStartOf="@id/query_tv"
+        android:layout_marginTop="@dimen/dp_4"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/current_status_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/query_time_stamp_tv"
+        app:layout_constraintTop_toTopOf="@id/query_time_stamp_tv"
+        app:layout_constraintBottom_toBottomOf="@id/query_time_stamp_tv"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/arrow_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/full_charge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/query_tv"
+        app:srcCompat="@drawable/baseline_arrow_forward_ios_24"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
