@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/menu_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="메뉴"
+        android:fontFamily="@font/pretendardsemibold"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/menu_background"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/menu_profile_cv"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintTop_toBottomOf="@id/menu_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="28dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/menu_profile_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="김윤지님 안녕하세요"
+        android:textColor="#000000"
+        android:fontFamily="@font/pretendardsemibold"
+        android:textSize="14sp"
+        android:layout_marginTop="37dp"
+        android:layout_marginStart="13dp"
+        app:layout_constraintStart_toEndOf="@id/menu_profile_cv"
+        app:layout_constraintTop_toBottomOf="@id/menu_tv"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/menu_notification_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/menu_notification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu_tv"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/menu_button_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="주문현황"
+        android:textSize="12sp"
+        android:fontFamily="@font/pretendardmedium"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:background="@drawable/menu_box"
+        app:layout_constraintTop_toBottomOf="@id/menu_profile_tv"
+        app:layout_constraintStart_toEndOf="@id/menu_profile_cv"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="13dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/menu_button_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="프로필 수정"
+        android:textSize="12sp"
+        android:fontFamily="@font/pretendardmedium"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:background="@drawable/menu_box"
+        app:layout_constraintTop_toBottomOf="@id/menu_profile_tv"
+        app:layout_constraintStart_toEndOf="@id/menu_button_tv"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="13dp"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
