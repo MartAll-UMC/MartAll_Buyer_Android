@@ -61,14 +61,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
-    implementation("androidx.compose.material3:material3:1.0.1")
-    implementation("androidx.compose.material3:material3-window-size-class:1.0.1")
-
     // Splash Screen
     implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
 
     // Circle Image를 위한 라이브러리
     implementation("de.hdodenhof:circleimageview:3.1.0")
-
-
-}

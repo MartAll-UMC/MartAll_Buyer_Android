@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_user_image"
+        android:layout_width="@dimen/dp_96"
+        android:layout_height="@dimen/dp_96"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/dp_32"
+        android:layout_marginTop="@dimen/dp_16"
+        android:src="@drawable/ic_launcher_background"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/iv_user_image"
+        app:layout_constraintTop_toTopOf="@id/iv_user_image"
+        app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
+        app:layout_constraintVertical_bias="0.15"
+        tools:text="회원 명"
+        android:layout_marginStart="@dimen/dp_12"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_user_name"
+        app:layout_constraintStart_toStartOf="@id/tv_user_name"
+        android:textSize="@dimen/sp_15"
+        tools:text="#육아#뷰티#식품"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_follow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_user_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_tag"
+        android:layout_marginEnd="@dimen/dp_24"
+        android:text="@string/text_follow"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_18"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_number_of_follower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tv_user_name"
+        app:layout_constraintBottom_toBottomOf="@id/iv_user_image"
+        app:layout_constraintTop_toBottomOf="@id/tv_tag"
+        app:layout_constraintVertical_bias="0.9"
+        tools:text="팔로워 수 0 "/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_number_of_visitor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tv_number_of_follower"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_number_of_follower"
+        app:layout_constraintBottom_toBottomOf="@id/tv_number_of_follower"
+        app:layout_constraintHorizontal_bias="0.3"
+        tools:text="방문자 수 0"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_image"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/iv_user_image"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

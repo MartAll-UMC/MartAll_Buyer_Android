@@ -1,5 +1,6 @@
 package com.org.martall
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -7,6 +8,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.org.martall.databinding.ActivityMainBinding
+import com.org.martall.view.store.StoreActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +19,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
+
+        // 종혁님 코드
+        binding=ActivityMainBinding.inflate(layoutInflater).also {
+            setContentView(it.root)
+        }
+
+        with(binding) {
+            tvTemp.setOnClickListener {
+                startActivity(Intent(applicationContext,StoreActivity::class.java))
+            }
+        }
+
+        // 내 코드
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -40,5 +56,4 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
-
 }
