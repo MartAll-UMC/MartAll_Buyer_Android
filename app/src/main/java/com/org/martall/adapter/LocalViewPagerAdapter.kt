@@ -1,7 +1,8 @@
-package com.org.martall
+package com.org.martall.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.org.martall.LocalMartFragment
 
 class LocalViewPagerAdapter(fragmentActivity: LocalMartFragment) :
 
