@@ -7,7 +7,7 @@
 
 
     <LinearLayout
-        android:id="@+id/shop_dibs_layout"
+        android:id="@+id/shop_viewlist_layout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:gravity="center"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="찜한 목록"
+            android:text="최근 본 목록"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -40,12 +40,13 @@
 
     </LinearLayout>
 
+
     <View
         android:id="@+id/orderlist_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#D9D9D9"
-        app:layout_constraintTop_toBottomOf="@id/shop_dibs_layout"/>
+        app:layout_constraintTop_toBottomOf="@id/shop_viewlist_layout"/>
 
     <TextView
         android:layout_width="wrap_content"
