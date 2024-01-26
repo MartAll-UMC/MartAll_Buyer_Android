@@ -1,4 +1,4 @@
-package com.org.martall
+package com.org.martall.view.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
