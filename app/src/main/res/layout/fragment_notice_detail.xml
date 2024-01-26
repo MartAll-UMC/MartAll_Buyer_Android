@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notice_name_tv"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_16"
+        tools:text="마트올 앱 업데이트 버전 1.2"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_24"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notice_time_stamp_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/notice_name_tv"
+        app:layout_constraintTop_toBottomOf="@id/notice_name_tv"
+        tools:text="2024-01-01"
+        android:layout_marginTop="@dimen/dp_4"/>
+
+    <View
+        android:id="@+id/divide_line_view"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="0.5dp"
+        android:background="#6A6565"
+        app:layout_constraintTop_toBottomOf="@id/notice_time_stamp_tv"
+        app:layout_constraintStart_toStartOf="@id/notice_name_tv"
+        app:layout_constraintEnd_toEndOf="@id/notice_name_tv"
+        android:layout_marginTop="@dimen/dp_16"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notice_content_tv"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/divide_line_view"
+        app:layout_constraintStart_toStartOf="@id/notice_name_tv"
+        app:layout_constraintEnd_toEndOf="@id/notice_name_tv"
+        android:layout_marginTop="@dimen/dp_12"
+        tools:text="123456\n123456\"
+        android:textSize="@dimen/sp_18"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

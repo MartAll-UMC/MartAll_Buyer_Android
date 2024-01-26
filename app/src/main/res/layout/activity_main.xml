@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <fragment
-        android:id="@+id/HomeFragment"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/tv_temp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:name="com.org.martall.HomeFragment"
         tools:layout="@layout/fragment_home"/>

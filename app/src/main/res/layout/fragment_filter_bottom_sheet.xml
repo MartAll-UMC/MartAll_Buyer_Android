@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet_filter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/Widget.Material3.BottomSheet"
+    android:padding="@dimen/dp_24"
+    app:layout_behavior="com.google.material.bottomsheet.BottomSheetBehavior">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_filter_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_filter_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="@dimen/sp_24"
+            android:textColor="@color/primary_color"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/dp_12"/>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_filter_item"
+            android:layout_width="@dimen/full_charge"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_filter_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_8">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_all"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_child_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="육아용품"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_cosmetics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="화장품"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_fashion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="패션의류"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_animal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="반려동물"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="음식"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_sports"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="스포츠"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_health"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="건강"/>
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_follower_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cg_filter_item"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="팔로워 수"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp_20"
+            android:textColor="@color/primary_color"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/slider_follower_count"
+            app:layout_constraintTop_toBottomOf="@id/tv_follower_count"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:text="1백명 이상"/>
+
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/slider_follower_count"
+            android:layout_width="@dimen/full_charge"
+            android:layout_height="@dimen/full_charge"
+            app:layout_constraintTop_toBottomOf="@id/tv_follower_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/sp_24"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginEnd="@dimen/dp_24"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

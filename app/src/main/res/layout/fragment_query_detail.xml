@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/query_name_tv"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_16"
+        tools:text="마트올 앱 업데이트 버전 1.2"
+        android:textSize="@dimen/sp_20"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_24"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/query_time_stamp_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/query_name_tv"
+        app:layout_constraintTop_toBottomOf="@id/query_name_tv"
+        tools:text="2024-01-01 00:00"
+        android:layout_marginTop="@dimen/dp_4"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/current_status_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/query_time_stamp_tv"
+        app:layout_constraintTop_toTopOf="@id/current_status_iv"
+        android:layout_marginStart="@dimen/dp_8"/>
+
+    <View
+        android:id="@+id/top_divide_line_view"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="0.5dp"
+        android:background="#6A6565"
+        app:layout_constraintTop_toBottomOf="@id/query_time_stamp_tv"
+        app:layout_constraintStart_toStartOf="@id/query_name_tv"
+        app:layout_constraintEnd_toEndOf="@id/query_name_tv"
+        android:layout_marginTop="@dimen/dp_16"/>
+
+    <!-- height 필요 시 수정 -->
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/user_query_tv"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="96dp"
+        tools:text="추가하는 방법이 뭔가요?"
+        android:textSize="@dimen/sp_15"
+        android:layout_marginTop="@dimen/dp_12"
+        app:layout_constraintStart_toStartOf="@id/query_name_tv"
+        app:layout_constraintEnd_toEndOf="@id/query_name_tv"
+        app:layout_constraintTop_toBottomOf="@id/top_divide_line_view"
+        app:layout_constraintBottom_toTopOf="@id/bottom_divide_line_view"/>
+
+    <View
+        android:id="@+id/bottom_divide_line_view"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="0.5dp"
+        android:background="#6A6565"
+        app:layout_constraintTop_toBottomOf="@id/user_query_tv"
+        app:layout_constraintStart_toStartOf="@id/query_name_tv"
+        app:layout_constraintEnd_toEndOf="@id/query_name_tv"
+        android:layout_marginTop="@dimen/dp_16"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/answer_time_stamp_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/bottom_divide_line_view"
+        app:layout_constraintStart_toStartOf="@id/query_name_tv"
+        tools:text="2024.01.01 00:00"
+        android:layout_marginTop="@dimen/dp_8"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/answer_tv"
+        android:layout_width="@dimen/full_charge"
+        android:layout_height="@dimen/full_charge"
+        app:layout_constraintTop_toBottomOf="@id/answer_time_stamp_tv"
+        app:layout_constraintBottom_toBottomOf="@id/bottom_guide_line"
+        app:layout_constraintStart_toStartOf="@id/query_name_tv"
+        app:layout_constraintEnd_toEndOf="@id/query_name_tv"
+        android:layout_marginTop="@dimen/dp_8"
+        android:textSize="@dimen/sp_15"
+        android:textColorHint="@color/black"
+        tools:text="현재 문의가 많아 답변이 지연되고 있습니다.\n신속하게 노력하겠습니다\n\n 마트추가 내용"
+        android:layout_marginBottom="@dimen/dp_16"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/arrow_back_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        app:layout_constraintEnd_toStartOf="@id/page_status_tv"
+        app:layout_constraintTop_toBottomOf="@id/bottom_guide_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:src="@drawable/baseline_arrow_back_ios_24"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/page_status_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/arrow_back_iv"
+        app:layout_constraintBottom_toBottomOf="@id/arrow_back_iv"
+        app:layout_constraintStart_toEndOf="@id/arrow_back_iv"
+        app:layout_constraintEnd_toStartOf="@id/arrow_front_iv"
+        android:text="1/2"
+        android:textSize="@dimen/sp_20"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/arrow_front_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_forward_ios_24"
+        app:layout_constraintBottom_toBottomOf="@+id/arrow_back_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/page_status_tv"
+        app:layout_constraintTop_toTopOf="@id/arrow_back_iv" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_guide_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
