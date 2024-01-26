@@ -53,3 +53,11 @@
     </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
+    <TextView
+        android:id="@+id/tv_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.org.martall.HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

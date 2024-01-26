@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private val fragmentLocalMart = LocalMartFragment()
     private var fragmentManager: FragmentManager = supportFragmentManager
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)

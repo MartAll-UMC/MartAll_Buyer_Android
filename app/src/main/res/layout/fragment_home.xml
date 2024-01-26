@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/logo_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/logo_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardmedium"
+            android:gravity="center"
+            android:text="나의 위치"
+            android:textColor="#5371ff"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/logo_iv"
+            app:layout_constraintTop_toTopOf="@+id/logo_iv" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardsemibold"
+            android:gravity="center"
+            android:text="판교역로 166"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/logo_iv"
+            app:layout_constraintTop_toBottomOf="@id/logo_tv"/>
+
+        <ImageButton
+            android:id="@+id/menu_ib"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/menu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/shoping_cart_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/shopping_cart"
+            android:background="@android:color/transparent"
+            app:layout_constraintRight_toLeftOf="@id/menu_ib"
+            app:layout_constraintTop_toTopOf="@id/logo_iv" />
+
+        <ImageView
+            android:id="@+id/ad_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/temp_ad"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logo_iv" />
+
+
+        <ImageButton
+            android:id="@+id/logo_big_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="11dp"
+            android:src="@drawable/logo_big"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ad_iv" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_bar_sb"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:layout_marginStart="62dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="19dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/logo_big_iv"
+            app:layout_constraintTop_toBottomOf="@id/ad_iv">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/home_search_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/baseline_search_24"
+                android:drawablePadding="32dp"
+                android:hint="검색어를 입력해주세요."
+                android:textColorHint="#999900"
+                android:background="@drawable/background_gray_edt_r11"/>
+
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <include layout="@layout/item_merchandise_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/search_bar_sb"
+            android:id="@+id/item_merchandise_list_ic" />
+
+        <ImageView
+            android:id="@+id/home_ad2_iv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ad2"
+            android:layout_marginTop="28dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toBottomOf="@id/item_merchandise_list_ic"/>
+
+        <include layout="@layout/item_merchandise_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/home_ad2_iv"
+            android:id="@+id/item_merchandise_list_ic_1" />
+
+        <include layout="@layout/item_recommend_mart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/item_merchandise_list_ic_1"
+            android:id="@+id/item_recommend_mart_ic"/>
+
+        <include layout="@layout/item_terms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/item_recommend_mart_ic"
+            android:id="@+id/item_terms_ic"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
