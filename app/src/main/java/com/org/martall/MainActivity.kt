@@ -9,6 +9,7 @@ import com.org.martall.view.store.StoreActivity
 
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

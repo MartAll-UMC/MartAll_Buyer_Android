@@ -6,7 +6,9 @@ plugins {
 android {
     namespace = "com.org.martall"
     compileSdk = 34
-
+    viewBinding {
+        enable = true
+    }
     defaultConfig {
         applicationId = "com.org.martall"
         minSdk = 23
@@ -54,4 +56,5 @@ dependencies {
 
     // Circle Image를 위한 라이브러리
     implementation("de.hdodenhof:circleimageview:3.1.0")
+
 }
