@@ -11,5 +11,5 @@
             android:textColor="#000000"
             android:fontFamily="@font/pretendardsemibold"
             android:background="@drawable/gray_box"
-            android:gravity="center"
+            android:gravity="center"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,7 +51,7 @@
         android:layout_marginTop="10dp" />
 
     <include layout="@layout/item_notification_list"
-        android:id="notification_list_ic"
+        android:id="@+id/notification_list_ic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/notification_line_v"
