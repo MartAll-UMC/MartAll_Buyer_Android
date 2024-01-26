@@ -1,4 +1,4 @@
-package com.org.martall
+package com.org.martall.view.store
 
 import android.os.Bundle
 import android.util.Log

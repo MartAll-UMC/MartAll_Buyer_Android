@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 import com.org.martall.databinding.ActivityMainBinding
+import com.org.martall.view.store.LocalMartFragment
 import com.org.martall.view.store.StoreActivity
 
 class MainActivity : AppCompatActivity() {

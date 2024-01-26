@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LocalMartFragment">
+    tools:context=".view.store.LocalMartFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/local_mart_tab_layout"
