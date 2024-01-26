@@ -17,6 +17,15 @@
         <item>@string/text_visited_order</item>
         <item>@string/text_latest_order</item>
     </string-array>
+  
+    <string-array name="spinner_array">
+        <item>전체</item>
+        <item>입점 상품 순</item>
+        <item>회원 지수 순</item>
+        <item>판매 지수 순</item>
+        <item>신규순</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

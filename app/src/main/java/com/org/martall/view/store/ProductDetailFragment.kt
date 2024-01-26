@@ -22,6 +22,10 @@ class ProductDetailFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
+    private lateinit var binding : ProductDetailFragment
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

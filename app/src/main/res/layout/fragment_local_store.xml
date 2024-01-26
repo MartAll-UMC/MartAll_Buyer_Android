@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.store.LocalStoreFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/local_store_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="총 000개"
+                android:textStyle="bold"
+                android:textSize="25dp"
+                android:layout_margin="30dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="80dp">
+
+                <!--            <Spinner-->
+                <!--                android:id="@+id/spinner"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="wrap_content"-->
+                <!--                android:entries="@array/spinner_array">-->
+                <!--            </Spinner>-->
+
+                <TextView
+                    android:id="@+id/local_store_all_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="전체"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:id="@+id/local_store_CategoryToggle_btn"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/polygon_ic"
+                    android:layout_margin="10dp"/>
+
+                <TextView
+                    android:id="@+id/local_store_filter_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="필터"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/filter_ic"
+                    android:layout_margin="7dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:id="@+id/group_recyclerView"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/rv_local_mart_list"/>
+
+
+    </LinearLayout>
+
+
+</ScrollView>
