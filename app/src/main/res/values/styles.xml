@@ -10,4 +10,10 @@
         <item name="android:layout_width">@dimen/full_charge</item>
         <item name="android:layout_marginTop">@dimen/dp_8</item>
     </style>
+
+    <!-- textView 밑줄 적용 -->
+    <style name="Hyperlink">
+        <item name="android:textColor">#5371FF</item>
+        <item name="android:background">@drawable/hyperlink_underline</item>
+    </style>
 </resources>
