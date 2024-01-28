@@ -20,11 +20,11 @@
     <LinearLayout
         android:id="@+id/login_kakao_login_layout"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="53dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/button_background_kakao_color"
+        android:background="@drawable/button_background_kakao"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/button_background_black_color"
+        android:background="@drawable/button_background_naver"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,15 +63,15 @@
 
         <ImageView
             android:layout_width="22dp"
-            android:layout_height="25dp"
+            android:layout_height="23dp"
             android:layout_marginEnd="7dp"
             android:scaleType="fitXY"
-            android:src="@drawable/btn_apple_phone" />
+            android:src="@drawable/btn_naver_phone" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Apple로 계속하기"
+            android:text="네이버로 계속하기"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -85,7 +85,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/button_background_martall_color"
+        android:background="@drawable/button_background_martall"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"

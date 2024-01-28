@@ -29,6 +29,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="주문 내역"
+            android:fontFamily="@font/pretendardbold"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -63,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="진행상황"
+            android:fontFamily="@font/pretendardbold"
             android:textSize="25dp"
             android:textStyle="bold"/>
 
