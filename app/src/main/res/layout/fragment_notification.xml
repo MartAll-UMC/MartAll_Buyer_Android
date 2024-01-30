@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -40,22 +41,35 @@
         app:layout_constraintTop_toBottomOf="@id/notification_tv"
         android:layout_marginEnd="16dp"/>
 
-    <View
-        android:id="@+id/notification_line_v"
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#d9d9d9"
+        android:layout_height="wrap_content"
+        style="@style/tablayout_font"
         app:layout_constraintTop_toBottomOf="@id/notification_tv_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <include layout="@layout/item_notification_list"
-        android:id="@+id/notification_list_ic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/notification_line_v"
-        android:layout_marginTop="27dp"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/tablayout_font"
+            android:text="주문 현황">
+
+        </com.google.android.material.tabs.TabItem>
+
+        <com.google.android.material.tabs.TabItem
+            style="@style/tablayout_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이벤트"
+            tools:layout_editor_absoluteX="206dp"
+            tools:layout_editor_absoluteY="61dp">
+
+        </com.google.android.material.tabs.TabItem>
+
+
+    </com.google.android.material.tabs.TabLayout>
+
 
 
 

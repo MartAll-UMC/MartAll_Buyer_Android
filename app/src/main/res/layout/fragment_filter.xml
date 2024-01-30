@@ -47,7 +47,6 @@
         app:layout_constraintTop_toBottomOf="@id/filter_line_v">
 
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -56,10 +55,10 @@
                 android:id="@+id/filter_sort_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="정렬"
-                android:textSize="18sp"
                 android:fontFamily="@font/pretendardsemibold"
-                android:textColor="#000000"/>
+                android:text="정렬"
+                android:textColor="#000000"
+                android:textSize="18sp" />
 
 
             <com.google.android.material.chip.ChipGroup
@@ -73,38 +72,68 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/filter_popular_c"
+                    style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="인기순"
-                    app:chipStrokeColor="#000000" />
+                    app:chipStartPadding="6dp"
+                    app:chipEndPadding="6dp"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipCornerRadius="20dp"
+                    app:chipStrokeColor="#000000"
+                    app:chipStrokeWidth="1dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/filter_low_c"
+                    style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="낮은 가격순"
-                    app:chipStrokeColor="#000000" />
+                    app:chipStartPadding="6dp"
+                    app:chipEndPadding="6dp"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipCornerRadius="20dp"
+                    app:chipStrokeColor="#000000"
+                    app:chipStrokeWidth="1dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/filter_sell_c"
+                    style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="판매량순"
-                    app:chipStrokeColor="#000000" />
+                    app:chipStartPadding="6dp"
+                    app:chipEndPadding="6dp"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipCornerRadius="20dp"
+                    app:chipStrokeColor="#000000"
+                    app:chipStrokeWidth="1dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/filter_high_c"
+                    style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="높은 가격순"
-                    app:chipStrokeColor="#000000" />
+                    app:chipStartPadding="6dp"
+                    app:chipEndPadding="6dp"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipCornerRadius="20dp"
+                    app:chipStrokeColor="#000000"
+                    app:chipStrokeWidth="1dp" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/filter_new_c"
+                    style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="최신순"
-                    app:chipStrokeColor="#000000" />
+                    app:chipStartPadding="6dp"
+                    app:chipEndPadding="6dp"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipCornerRadius="20dp"
+                    app:chipStrokeColor="#000000"
+                    app:chipStrokeWidth="1dp" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -135,68 +164,78 @@
         app:layout_constraintTop_toBottomOf="@id/filter_category_tv">
 
         <!-- 체크박스 1 -->
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox1"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginEnd="64dp"
+            style="@style/CheckboxStyle"
             android:text="스낵" />
 
+
         <!-- 체크박스 2 -->
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox2"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginEnd="64dp"
+            style="@style/CheckboxStyle"
             android:text="샐러드" />
 
         <!-- 체크박스 3 -->
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox3"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
+            style="@style/CheckboxStyle"
             android:text="신선과일" />
 
         <!-- 체크박스 4 -->
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox4"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
+            style="@style/CheckboxStyle"
             android:text="음료" />
 
         <!-- 체크박스 5 -->
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox5"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
+            style="@style/CheckboxStyle"
             android:text="간편식품" />
 
         <!-- 체크박스 6 -->
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox6"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
+            style="@style/CheckboxStyle"
             android:text="생활용품" />
 
         <!-- 체크박스 7 -->
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox7"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
+            style="@style/CheckboxStyle"
             android:text="커피" />
 
         <!-- 체크박스 8 -->
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox8"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
+            style="@style/CheckboxStyle"
             android:text="냉동식품" />
 
         <!-- 체크박스 9 -->
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox9"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
+            style="@style/CheckboxStyle"
             android:text="육아템" />
 
     </GridLayout>
@@ -296,36 +335,61 @@
                     android:id="@+id/filter_price_1_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1천원 ~ 5천원"
-                    app:chipStrokeColor="#000000" />
+                    app:chipStrokeWidth="1dp"
+                    app:chipCornerRadius="20dp"
+                    app:chipMinHeight="26dp"
+                    app:chipBackgroundColor="@color/white"
+                    style="@style/ChipStyle3"
+                    app:chipStrokeColor="#d9d9d9"
+                    android:text="1천원 ~ 5천원" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/filter_price_2_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6천원 ~ 1만원"
-                    app:chipStrokeColor="#000000" />
+                    app:chipStrokeWidth="1dp"
+                    app:chipCornerRadius="20dp"
+                    app:chipMinHeight="26dp"
+                    app:chipBackgroundColor="@color/white"
+                    style="@style/ChipStyle3"
+                    app:chipStrokeColor="#d9d9d9"
+                    android:text="6천원 ~ 1만원"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/filter_price_3_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1만 1,000원 ~ 6만원"
-                    app:chipStrokeColor="#000000" />
+                    app:chipStrokeWidth="1dp"
+                    app:chipCornerRadius="20dp"
+                    app:chipMinHeight="26dp"
+                    app:chipBackgroundColor="@color/white"
+                    style="@style/ChipStyle3"
+                    app:chipStrokeColor="#d9d9d9"
+                    android:text="1만 1,000원 ~ 6만원"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/filter_price_4_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6만 1,000원 ~ 18만원"
-                    app:chipStrokeColor="#000000" />
+                    app:chipStrokeWidth="1dp"
+                    app:chipCornerRadius="20dp"
+                    app:chipMinHeight="26dp"
+                    app:chipBackgroundColor="@color/white"
+                    style="@style/ChipStyle3"
+                    app:chipStrokeColor="#d9d9d9"
+                    android:text="6만 1,000원 ~ 18만원"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/filter_price_5_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="18만 1,000원 ~ 39만원"
-                    app:chipStrokeColor="#000000" />
+                    app:chipStrokeWidth="1dp"
+                    app:chipCornerRadius="20dp"
+                    app:chipMinHeight="26dp"
+                    app:chipBackgroundColor="@color/white"
+                    style="@style/ChipStyle3"
+                    app:chipStrokeColor="#d9d9d9"
+                    android:text="18만 1,000원 ~ 39만원"/>
 
             </com.google.android.material.chip.ChipGroup>
 

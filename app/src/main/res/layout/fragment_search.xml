@@ -86,33 +86,49 @@
                     android:id="@+id/search_recent_1_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
                     android:text="최근 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    style="@style/ChipStyle2"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/search_recent_2_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
                     android:text="최근 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    style="@style/ChipStyle2"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/search_recent_3_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
                     android:text="최근 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    style="@style/ChipStyle2"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/search_recent_4_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:chipStartPadding="25dp"
+                    app:chipEndPadding="25dp"
                     android:text="최근 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    style="@style/ChipStyle2"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
 
             </com.google.android.material.chip.ChipGroup>
@@ -149,41 +165,57 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/search_recommed_tv">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/search_recommend_1_c"
+                    style="@style/ChipStyle4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="추천 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    app:chipEndPadding="36dp"
+                    app:chipStartPadding="36dp"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/search_recommend_2_c"
+                    style="@style/ChipStyle4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="추천 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    app:chipEndPadding="36dp"
+                    app:chipStartPadding="36dp"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/search_recommend_3_c"
+                    style="@style/ChipStyle4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="추천 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    app:chipEndPadding="36dp"
+                    app:chipStartPadding="36dp"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/search_recommend_4_c"
+                    style="@style/ChipStyle4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="추천 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    app:chipEndPadding="36dp"
+                    app:chipStartPadding="36dp"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
 
             </com.google.android.material.chip.ChipGroup>
@@ -228,33 +260,49 @@
                     android:id="@+id/search_popular_1_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:chipEndPadding="36dp"
+                    app:chipStartPadding="36dp"
                     android:text="인기 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    style="@style/ChipStyle4"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/search_popular_2_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:chipEndPadding="36dp"
+                    app:chipStartPadding="36dp"
                     android:text="인기 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    style="@style/ChipStyle4"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/search_popular_3_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:chipEndPadding="36dp"
+                    app:chipStartPadding="36dp"
                     android:text="인기 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    style="@style/ChipStyle4"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/search_popular_4_c"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:chipEndPadding="36dp"
+                    app:chipStartPadding="36dp"
                     android:text="인기 검색어"
-                    style="@style/Widget.MaterialComponents.Chip.Entry"
-                    app:chipStrokeColor="#000000" />
+                    style="@style/ChipStyle4"
+                    app:chipBackgroundColor="@color/white"
+                    app:chipStrokeWidth="1dp"
+                    app:chipStrokeColor="@color/tertiay_color" />
 
 
             </com.google.android.material.chip.ChipGroup>

@@ -16,4 +16,53 @@
         <item name="android:textColor">#5371FF</item>
         <item name="android:background">@drawable/hyperlink_underline</item>
     </style>
+
+    <!-- tablayout 폰트 적용-->
+    <style name="tablayout_font" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/pretendardsemibold</item>
+        <item name="android:fontFamily">@font/pretendardsemibold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- 칩 스타일 1-->
+    <style name="ChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:fontFamily">@font/pretendardregular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!-- 칩 스타일 2-->
+
+    <style name="ChipStyle2" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="android:fontFamily">@font/pretendardregular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!-- 칩 스타일 3-->
+
+    <style name="ChipStyle3" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:fontFamily">@font/pretendardregular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!-- 칩 스타일 4-->
+    
+    <style name="ChipStyle4" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:fontFamily">@font/pretendardregular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <!-- 체크박스 스타일 -->
+
+    <style name="CheckboxStyle" parent="Widget.Material3.CompoundButton.CheckBox">
+        <item name="android:fontFamily">@font/pretendardregular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+
+
 </resources>

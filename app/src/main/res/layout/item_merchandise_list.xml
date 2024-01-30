@@ -8,34 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/merchandise_list_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendardsemibold"
-            android:gravity="center"
-            android:text="새로 나온 상품"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="36dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/recommend_merchandise_more_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendardsemibold"
-            android:gravity="center"
-            android:text="더보기"
-            android:textColor="#919191"
-            android:textSize="14sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="17dp"
-            app:layout_constraintTop_toTopOf="@id/merchandise_list_tv"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
         <HorizontalScrollView
                 android:id="@+id/recommend_merchandise_hs"
                 android:layout_width="wrap_content"
