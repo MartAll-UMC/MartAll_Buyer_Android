@@ -18,10 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" >
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:src="@drawable/btn_back_button" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_back"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="5dp"/>
 
         <TextView
             android:layout_width="0dp"
@@ -29,14 +33,20 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="마트샵"
+            android:fontFamily="@font/pretendardbold"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <ImageView
+
+        <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:src="@drawable/btn_search_button"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/categorysearch"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="5dp"/>
 
     </LinearLayout>
 
