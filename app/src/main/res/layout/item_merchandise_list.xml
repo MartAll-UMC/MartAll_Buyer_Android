@@ -17,7 +17,7 @@
                 android:orientation="horizontal"
                 android:scrollbars="none"
                 android:overScrollMode="never"
-                app:layout_constraintTop_toBottomOf="@id/merchandise_list_tv"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 

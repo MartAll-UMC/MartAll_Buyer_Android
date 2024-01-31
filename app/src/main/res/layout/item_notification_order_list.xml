@@ -12,6 +12,6 @@
         android:fontFamily="@font/pretendardsemibold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="26dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
