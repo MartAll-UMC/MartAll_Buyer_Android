@@ -3,27 +3,26 @@
 
     <item
         android:id="@+id/menu_home"
-        android:icon="@drawable/home_ic"
+        android:icon="@drawable/ic_home_24dp"
         android:title="홈" />
 
     <item
         android:id="@+id/menu_localMart"
-        android:icon="@drawable/local_mart_ic"
-        android:title="동네샵" />
+        android:icon="@drawable/ic_store_24dp"
+        android:title="마트샵" />
 
     <item
         android:id="@+id/menu_place"
-        android:icon="@drawable/place_ic"
-        android:title="내 근처" />
+        android:icon="@drawable/ic_menu_24dp"
+        android:title="카테고리" />
 
     <item
         android:id="@+id/menu_heart"
-        android:icon="@drawable/mdi_heart_ic"
+        android:icon="@drawable/ic_heart_24dp"
         android:title="찜한 목록" />
 
     <item
         android:id="@+id/menu_user"
-        android:icon="@drawable/user_ic"
+        android:icon="@drawable/ic_profile_24dp"
         android:title="내 정보" />
-
 </menu>

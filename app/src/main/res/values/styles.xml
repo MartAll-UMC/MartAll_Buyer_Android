@@ -17,6 +17,105 @@
         <item name="android:background">@drawable/hyperlink_underline</item>
     </style>
 
+    <!-- 타이포 그래피 -->
+    <style name="xsRegular" parent="xs">
+        <item name="android:fontFamily">@font/pretendardregular</item>
+        <item name="android:fontWeight">400</item>
+    </style>
+    <style name="sRegular" parent="s">
+        <item name="android:fontFamily">@font/pretendardregular</item>
+        <item name="android:fontWeight">400</item>
+    </style>
+    <style name="mRegular" parent="m">
+        <item name="android:fontFamily">@font/pretendardregular</item>
+        <item name="android:fontWeight">400</item>
+    </style>
+    <style name="xxlRegular" parent="xxl">
+        <item name="android:fontFamily">@font/pretendardregular</item>
+        <item name="android:fontWeight">400</item>
+    </style>
+
+    <style name="xsMedium" parent="xs">
+        <item name="android:fontFamily">@font/pretendardmedium</item>
+        <item name="android:fontWeight">500</item>
+    </style>
+    <style name="sMedium" parent="s">
+        <item name="android:fontFamily">@font/pretendardmedium</item>
+        <item name="android:fontWeight">500</item>
+    </style>
+    <style name="mMedium" parent="m">
+        <item name="android:fontFamily">@font/pretendardmedium</item>
+        <item name="android:fontWeight">500</item>
+    </style>
+    <style name="lMedium" parent="l">
+        <item name="android:fontFamily">@font/pretendardmedium</item>
+        <item name="android:fontWeight">500</item>
+    </style>
+
+    <style name="xsSemiBold" parent="xs">
+        <item name="android:fontFamily">@font/pretendardsemibold</item>
+        <item name="android:fontWeight">600</item>
+    </style>
+    <style name="sSemiBold" parent="s">
+        <item name="android:fontFamily">@font/pretendardsemibold</item>
+        <item name="android:fontWeight">600</item>
+    </style>
+    <style name="mSemiBold" parent="m">
+        <item name="android:fontFamily">@font/pretendardsemibold</item>
+        <item name="android:fontWeight">600</item>
+    </style>
+    <style name="lSemiBold" parent="l">
+        <item name="android:fontFamily">@font/pretendardsemibold</item>
+        <item name="android:fontWeight">600</item>
+    </style>
+
+    <style name="mBold" parent="m">
+        <item name="android:fontFamily">@font/pretendardbold</item>
+        <item name="android:fontWeight">700</item>
+    </style>
+    <style name="lBold" parent="l">
+        <item name="android:fontFamily">@font/pretendardbold</item>
+        <item name="android:fontWeight">700</item>
+    </style>
+    <style name="xlBold" parent="xl">
+        <item name="android:fontFamily">@font/pretendardbold</item>
+        <item name="android:fontWeight">700</item>
+    </style>
+    <style name="xxlBold" parent="xxl">
+        <item name="android:fontFamily">@font/pretendardbold</item>
+        <item name="android:fontWeight">700</item>
+    </style>
+
+    <style name="xs">
+        <item name="android:textSize">10sp</item>
+        <item name="android:lineHeight">12sp</item>
+    </style>
+
+    <style name="s">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineHeight">16sp</item>
+    </style>
+
+    <style name="m">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineHeight">20sp</item>
+    </style>
+
+    <style name="l">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineHeight">20sp</item>
+    </style>
+
+    <style name="xl">
+        <item name="android:textSize">18sp</item>
+        <item name="android:lineHeight">24sp</item>
+    </style>
+
+    <style name="xxl">
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineHeight">24sp</item>
+    </style>
+
     <!-- tablayout 폰트 적용-->
     <style name="tablayout_font" parent="TextAppearance.MaterialComponents.Button">
         <item name="fontFamily">@font/pretendardsemibold</item>
@@ -48,7 +147,7 @@
     </style>
 
     <!-- 칩 스타일 4-->
-    
+
     <style name="ChipStyle4" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="android:fontFamily">@font/pretendardregular</item>
         <item name="android:textSize">14sp</item>
