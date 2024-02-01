@@ -4,11 +4,11 @@ import android.graphics.PostProcessor
 import com.org.martall.R
 
 data class UserDTO(
-    val imageUrl : Int,
-    val name: String,
-    val hashTag: String,
-    val followerCount: Int,
-    val visitorCount: Int,
+    val imageUrl : Int? = null,
+    val name: String = "",
+    val hashTag: String = "",
+    val followerCount: Int? = null,
+    val visitorCount: Int? = null,
     val post : List<Post>
 )
 

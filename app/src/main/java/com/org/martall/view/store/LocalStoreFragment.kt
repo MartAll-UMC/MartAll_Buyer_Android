@@ -1,11 +1,22 @@
 package com.org.martall.view.store
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.org.martall.R
+import com.org.martall.View.Myinfo.MartShopActivity
+import com.org.martall.adapter.MartRVAdapter
+import com.org.martall.databinding.FragmentLocalStoreBinding
+import com.org.martall.model.UserDTO
+import com.org.martall.model.dummyData
+import com.org.martall.view.store.user.bottomsheet.FilterBottomSheet
+import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +33,8 @@ class LocalStoreFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var binding : FragmentLocalStoreBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,9 +47,99 @@ class LocalStoreFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_local_store, container, false)
+        binding = FragmentLocalStoreBinding.inflate(inflater, container, false)
+
+        // initToolBar()
+        initRecyclerView()
+        showFilterBottomSheet()
+        showSortBottomSheet()
+
+        val martRVAdapter = MartRVAdapter(dummyData)
+        martRVAdapter.setMyItemClickListener(object: MartRVAdapter.MyItemClickListener {
+            override fun onItemClick() {
+                val intent = Intent(activity, MartShopActivity::class.java)
+                startActivity(intent)
+            }
+
+        })
+
+        return binding.root
     }
+
+    private fun initRecyclerView() {
+        with(binding) {
+            groupRecyclerView.apply {
+                layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                adapter= MartRVAdapter(dummyData)
+            }
+        }
+    }
+
+    private fun showFilterBottomSheet() {
+        binding.filterTv.setOnClickListener {
+            FilterBottomSheet().show(
+                childFragmentManager,
+                null
+            )
+        }
+    }
+
+    private fun showSortBottomSheet() {
+        binding.sortTv.setOnClickListener {
+            SortBottomSheet().show(
+                childFragmentManager,
+                null
+            )
+        }
+    }
+
+    /*
+    private fun setSpinner() {
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.sort_list,
+            android.R.layout.simple_spinner_item,
+        ).also { adapter->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerOrder.adapter=adapter
+        }
+    }
+
+     */
+
+    /*
+    private fun initToolBar() {
+        with(binding) {
+            tbShop.apply {
+                ivBack.setImageResource(R.drawable.baseline_arrow_back_ios_24)
+                tvTitle.text="동네샵"
+                ivSearch.setImageResource(R.drawable.baseline_format_list_bulleted_24)
+            }
+        }
+    }
+
+     */
+
+
+    val dummyData : List<UserDTO> = listOf(
+        UserDTO(
+            imageUrl = R.drawable.ic_launcher_background, "회원1", "#aa#bb",
+            12, 120, com.org.martall.model.dummyPosts
+        ),
+        UserDTO(
+            imageUrl = R.drawable.ic_launcher_background, "회원2", "#aa#bb",
+            12, 120, com.org.martall.model.dummyPosts
+        ),
+        UserDTO(
+            imageUrl = R.drawable.ic_launcher_background, "회원3", "#aa#bb",
+            12, 120, com.org.martall.model.dummyPosts
+        ),
+        UserDTO(
+            imageUrl = R.drawable.ic_launcher_background, "회원4", "#aa#bb",
+            12, 120, com.org.martall.model.dummyPosts
+        ),
+    )
+
 
     companion object {
         /**

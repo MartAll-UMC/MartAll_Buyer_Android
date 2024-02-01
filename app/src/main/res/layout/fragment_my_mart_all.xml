@@ -11,6 +11,36 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
+        <LinearLayout
+            android:id="@+id/title_orderlist_layout"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:src="@drawable/btn_back_button" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="나의 마트올"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/pretendardsemibold"/>
+        </LinearLayout>
+
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,6 +69,7 @@
                         android:text="앨리사 님"
                         android:textSize="30dp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/pretendardsemibold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,6 +80,7 @@
                         android:text="나를 보여주는 샵을\n꾸며보는 건 어때요?"
                         android:textSize="25dp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/pretendardsemibold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/user_name_tv"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -60,6 +92,7 @@
                     android:text="나의 샵 관리"
                     android:textSize="15dp"
                     android:textColor="#5371FF"
+                    android:fontFamily="@font/pretendardsemibold"
                     style="@style/Hyperlink"
                     android:layout_marginTop="20dp"
                     app:layout_constraintStart_toStartOf="@id/constraint_pannel"
@@ -72,6 +105,7 @@
                     android:text="단골 마트 관리"
                     android:textSize="15dp"
                     android:textColor="#5371FF"
+                    android:fontFamily="@font/pretendardsemibold"
                     style="@style/Hyperlink"
                     android:layout_marginTop="15dp"
                     app:layout_constraintStart_toStartOf="@id/myShop_tv"
@@ -84,6 +118,7 @@
                     android:text="찜한 목록 관리"
                     android:textSize="15dp"
                     android:textColor="#5371FF"
+                    android:fontFamily="@font/pretendardsemibold"
                     style="@style/Hyperlink"
                     android:layout_marginTop="15dp"
                     app:layout_constraintStart_toStartOf="@id/likeMart_tv"
@@ -116,7 +151,8 @@
                 android:layout_height="wrap_content"
                 android:text="최근 본 목록"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/pretendardsemibold" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -150,7 +186,8 @@
                         android:layout_height="wrap_content"
                         android:text="주문내역"
                         android:textSize="20dp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/pretendardsemibold"/>
 
                     <TextView
                         android:id="@+id/orderCount_tv1"
@@ -160,135 +197,8 @@
                         android:textSize="20dp"
                         android:textColor="#9B9B9B"
                         android:textStyle="bold"
+                        android:fontFamily="@font/pretendardsemibold"
                         android:layout_marginLeft="10dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/orderCount_tv2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="9"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="주문요청"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="9"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="주문승인"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="3"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="포장 중"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="주문취소"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="주문반려"
-                            android:textSize="15dp"
-                            android:textStyle="bold"
-                            android:layout_gravity="center" />
-                    </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
 
@@ -309,13 +219,15 @@
                 android:layout_height="wrap_content"
                 android:text="장바구니"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/pretendardsemibold"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_arrow_forward_ios_24"
-                android:layout_gravity="right" />
+                android:layout_gravity="right"
+                android:fontFamily="@font/pretendardsemibold" />
 
         </androidx.cardview.widget.CardView>
 
@@ -359,7 +271,8 @@
                 android:layout_height="wrap_content"
                 android:text="서비스 소개"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="@font/pretendardsemibold" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -381,6 +294,7 @@
                 android:layout_height="wrap_content"
                 android:text="마트올"
                 android:textSize="15dp"
+                android:fontFamily="@font/pretendardsemibold"
                 android:layout_marginTop="20dp"
                 android:padding="10dp"/>
 
@@ -402,18 +316,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="이용약관"
+                    android:fontFamily="@font/pretendardsemibold"
                     android:padding="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="|"
-                    android:textColor="#908D8D"/>
+                    android:textColor="#908D8D"
+                    android:fontFamily="@font/pretendardsemibold"/>
                 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="개인정보처리방침"
+                    android:fontFamily="@font/pretendardsemibold"
                     android:padding="10dp" />
             </LinearLayout>
 
@@ -426,6 +343,7 @@
                 \nCopyrightⓒMARTALL Co., LTD. All rights Reserved."
                 android:textColor="#908D8D"
                 android:textSize="10dp"
+                android:fontFamily="@font/pretendardsemibold"
                 android:padding="10dp"/>
         </LinearLayout>
 

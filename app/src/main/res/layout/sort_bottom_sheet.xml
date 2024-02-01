@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet_filter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/Widget.Material3.BottomSheet"
+    android:padding="@dimen/dp_24"
+    android:orientation="vertical"
+    app:layout_behavior="com.google.material.bottomsheet.BottomSheetBehavior">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/default_sort_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="기본 순"
+        android:textSize="15dp"
+        android:textColor="@color/primary_color"
+        android:padding="10dp"
+        android:fontFamily="@font/pretendardsemibold"
+        android:drawableEnd="@drawable/check_ic"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/latest_sort_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="기본 순"
+        android:textSize="15dp"
+        android:padding="10dp"
+        android:fontFamily="@font/pretendardsemibold"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/membership_sort_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="단골 지수 순"
+        android:textSize="15dp"
+        android:padding="10dp"
+        android:fontFamily="@font/pretendardsemibold"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/heart_sort_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="찜 지수 순"
+        android:textSize="15dp"
+        android:padding="10dp"
+        android:fontFamily="@font/pretendardsemibold"/>
+
+
+
+</LinearLayout>

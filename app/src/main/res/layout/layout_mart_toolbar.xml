@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?android:attr/actionBarSize"
+    android:padding="5dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/toolbar_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_16"
+        android:padding="@dimen/dp_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/place_ic"/>
+
+    <TextView
+        android:id="@+id/toolbar_myPlace_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendardsemibold"
+        android:text="나의 위치"
+        android:textColor="#5371FF"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toEndOf="@id/toolbar_place"
+        app:layout_constraintTop_toTopOf="@id/toolbar_place"/>
+
+    <TextView
+        android:id="@+id/toolbar_realPlace_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="판교역로 166"
+        android:textSize="15dp"
+        android:fontFamily="@font/pretendardsemibold"
+        app:layout_constraintStart_toStartOf="@id/toolbar_myPlace_tv"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_place"/>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/cart_ic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_12"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_search"
+        tools:src="@drawable/cart_ic" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:padding="@dimen/dp_12"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@drawable/baseline_search_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
