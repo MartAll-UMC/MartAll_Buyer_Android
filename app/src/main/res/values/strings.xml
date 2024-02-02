@@ -2,7 +2,7 @@
     <!-- fragment shop user text-->
     <string name="app_name">MartAll</string>
     <string name="text_filter">필터</string>
-    <string name="text_filter_title">검색 필터</string>
+    <string name="text_filter_title">가격</string>
     <string name="text_all">전체</string>
     <string name="text_follower_order">팔로워 순</string>
     <string name="text_visited_order">방문자 순</string>

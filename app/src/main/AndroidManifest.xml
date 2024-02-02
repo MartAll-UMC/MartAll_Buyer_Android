@@ -31,6 +31,17 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.home.notification.NotificationActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+        </intent-filter>
+        </activity>
+        <activity android:name="com.org.martall.view.store.StoreActivity"
+            android:theme="@style/Theme.MartAll"/>
+        <activity android:name="com.org.martall.view.mypage.customerservice.CustomerServiceActivity" />
+        <activity
             android:name=".View.Likelist.DibsActivity"
             android:theme="@style/Theme.MartAll" />
         <activity

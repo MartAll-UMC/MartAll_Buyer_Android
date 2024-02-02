@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/search_merchandise_1_fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/search_merchandise_1_iv"
+                        android:src="@drawable/mart_products_food_1_iv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_like_1_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_unfilled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_1_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_1_iv"
+                        android:visibility="visible"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_unlike_1_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_filled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_1_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_1_iv"
+                        android:visibility="gone"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_mart_1_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오렌지마트 광운대점"
+                android:textAppearance="@style/sRegular"
+                android:textColor="@color/grey700"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_1_fl"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_name_1_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="바나나"
+                android:textAppearance="@style/mMedium"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_mart_1_tv"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_price_1_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5,500원"
+                android:textAppearance="@style/mBold"
+                android:layout_marginTop="@dimen/dp_4"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_name_1_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_48">
+
+            <FrameLayout
+                android:id="@+id/search_merchandise_2_fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/search_merchandise_2_iv"
+                        android:src="@drawable/mart_products_food_2_iv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_like_2_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_unfilled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_2_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_2_iv"
+                        android:visibility="visible"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_unlike_2_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_filled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_2_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_2_iv"
+                        android:visibility="gone"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_mart_2_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오렌지마트 광운대점"
+                android:textAppearance="@style/sRegular"
+                android:textColor="@color/grey700"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_2_fl"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_name_2_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="바나나"
+                android:textAppearance="@style/mMedium"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_mart_2_tv"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_price_2_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5,500원"
+                android:textAppearance="@style/mBold"
+                android:layout_marginTop="@dimen/dp_4"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_name_2_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <FrameLayout
+                android:id="@+id/search_merchandise_3_fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/search_merchandise_3_iv"
+                        android:src="@drawable/mart_products_food_3_iv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_like_3_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_unfilled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_3_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_3_iv"
+                        android:visibility="visible"/>
+                    <ImageButton
+                        android:id="@+id/merchandise_unlike_3_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_filled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_3_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_3_iv"
+                        android:visibility="gone"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_mart_3_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오렌지마트 광운대점"
+                android:textAppearance="@style/sRegular"
+                android:textColor="@color/grey700"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_3_fl"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_name_3_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="바나나"
+                android:textAppearance="@style/mMedium"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_mart_3_tv"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_price_3_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5,500원"
+                android:textAppearance="@style/mBold"
+                android:layout_marginTop="@dimen/dp_4"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_name_3_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/dp_48">
+
+            <FrameLayout
+                android:id="@+id/search_merchandise_4_fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/search_merchandise_4_iv"
+                        android:src="@drawable/mart_products_food_1_iv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_like_4_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_unfilled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_4_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_4_iv"
+                        android:visibility="visible"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_unlike_4_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_filled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_4_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_4_iv"
+                        android:visibility="gone"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_mart_4_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오렌지마트 광운대점"
+                android:textAppearance="@style/sRegular"
+                android:textColor="@color/grey700"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_4_fl"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_name_4_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="바나나"
+                android:textAppearance="@style/mMedium"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_mart_4_tv"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_price_4_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5,500원"
+                android:textAppearance="@style/mBold"
+                android:layout_marginTop="@dimen/dp_4"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_name_4_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <FrameLayout
+                android:id="@+id/search_merchandise_5_fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/search_merchandise_5_iv"
+                        android:src="@drawable/mart_products_food_2_iv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_like_5_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_unfilled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_5_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_5_iv"
+                        android:visibility="visible"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_unlike_5_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_filled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_5_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_5_iv"
+                        android:visibility="gone"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_mart_5_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오렌지마트 광운대점"
+                android:textAppearance="@style/sRegular"
+                android:textColor="@color/grey700"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_5_fl"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_name_5_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="바나나"
+                android:textAppearance="@style/mMedium"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_mart_5_tv"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_price_5_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5,500원"
+                android:textAppearance="@style/mBold"
+                android:layout_marginTop="@dimen/dp_4"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_name_5_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="@dimen/dp_48">
+
+            <FrameLayout
+                android:id="@+id/search_merchandise_6_fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/search_merchandise_6_iv"
+                        android:src="@drawable/mart_products_food_3_iv"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_like_6_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_unfilled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_6_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_6_iv"
+                        android:visibility="visible"/>
+
+                    <ImageButton
+                        android:id="@+id/merchandise_unlike_6_ib"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_like_filled_20dp"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:layout_marginEnd="@dimen/dp_12"
+                        app:layout_constraintTop_toTopOf="@id/search_merchandise_6_iv"
+                        app:layout_constraintEnd_toEndOf="@id/search_merchandise_6_iv"
+                        android:visibility="gone"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_mart_6_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오렌지마트 광운대점"
+                android:textAppearance="@style/sRegular"
+                android:textColor="@color/grey700"
+                android:layout_marginTop="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_6_fl"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_name_6_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="바나나"
+                android:textAppearance="@style/mMedium"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_mart_6_tv"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/search_merchandise_price_6_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5,500원"
+                android:textAppearance="@style/mBold"
+                android:layout_marginTop="@dimen/dp_4"
+                app:layout_constraintTop_toBottomOf="@id/search_merchandise_name_6_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </GridLayout>
+
+</ScrollView>
