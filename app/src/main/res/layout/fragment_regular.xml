@@ -5,13 +5,163 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <View
+        android:id="@+id/regular_mart_1"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+    <ImageView
+        android:id="@+id/mart_image_1"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/mart1"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="@+id/regular_mart_1"
+        app:layout_constraintTop_toTopOf="@+id/regular_mart_1"
+        app:layout_constraintBottom_toBottomOf="@+id/regular_mart_1"/>
+
     <TextView
+        android:id="@+id/regular_mart_1_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="단골마트 프래그먼트"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:text="사과 마트"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendardbold"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/mart_image_1"
+        app:layout_constraintTop_toTopOf="@id/mart_image_1"
+        android:layout_marginStart="16dp" />
+
+    <TextView
+        android:id="@+id/regular_tag_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#과일 #야채"
+        app:layout_constraintStart_toStartOf="@id/regular_mart_1_name"
+        app:layout_constraintTop_toBottomOf="@id/regular_mart_1_name"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/regular_list_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="단골 수 12 | 상품 찜 수 120"
+        android:fontFamily="@font/pretendardregular"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/regular_tag_1"
+        app:layout_constraintTop_toBottomOf="@id/regular_tag_1"
+        android:layout_marginTop="4dp" />
+
+
+
+    <View
+        android:id="@+id/regular_mart_2"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/regular_mart_1"/>
+
+    <ImageView
+        android:id="@+id/mart_image_2"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/mart1"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="@+id/regular_mart_2"
+        app:layout_constraintTop_toTopOf="@+id/regular_mart_2"
+        app:layout_constraintBottom_toBottomOf="@+id/regular_mart_2"/>
+
+    <TextView
+        android:id="@+id/regular_mart_2_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사과 마트"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendardbold"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/mart_image_2"
+        app:layout_constraintTop_toTopOf="@id/mart_image_2"
+        android:layout_marginStart="16dp" />
+
+    <TextView
+        android:id="@+id/regular_tag_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#과일 #야채"
+        app:layout_constraintStart_toStartOf="@id/regular_mart_2_name"
+        app:layout_constraintTop_toBottomOf="@id/regular_mart_2_name"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/regular_list_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="단골 수 12 | 상품 찜 수 120"
+        android:fontFamily="@font/pretendardregular"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/regular_tag_2"
+        app:layout_constraintTop_toBottomOf="@id/regular_tag_2"
+        android:layout_marginTop="4dp" />
+
+
+
+    <View
+        android:id="@+id/regular_mart_3"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/regular_mart_2"/>
+
+    <ImageView
+        android:id="@+id/mart_image_3"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/mart1"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="@+id/regular_mart_3"
+        app:layout_constraintTop_toTopOf="@+id/regular_mart_3"
+        app:layout_constraintBottom_toBottomOf="@+id/regular_mart_3"/>
+
+    <TextView
+        android:id="@+id/regular_mart_3_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사과 마트"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendardbold"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/mart_image_3"
+        app:layout_constraintTop_toTopOf="@id/mart_image_3"
+        android:layout_marginStart="16dp" />
+
+    <TextView
+        android:id="@+id/regular_tag_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#과일 #야채"
+        app:layout_constraintStart_toStartOf="@id/regular_mart_3_name"
+        app:layout_constraintTop_toBottomOf="@id/regular_mart_3_name"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/regular_list_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="단골 수 12 | 상품 찜 수 120"
+        android:fontFamily="@font/pretendardregular"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/regular_tag_3"
+        app:layout_constraintTop_toBottomOf="@id/regular_tag_3"
+        android:layout_marginTop="4dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
