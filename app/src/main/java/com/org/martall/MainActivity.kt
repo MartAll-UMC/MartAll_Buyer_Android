@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.org.martall.View.Likelist.DibsFragment
 import com.org.martall.databinding.ActivityMainBinding
 import com.org.martall.view.home.HomeFragment
 import com.org.martall.view.mypage.customerservice.MyMartAllFragment
 import com.org.martall.view.nearme.NearMeFragment
-import com.org.martall.view.store.LocalStoreFragment
 import com.org.martall.view.store.MartDetailInfoFragment
+import com.org.martall.view.store.LocalMartFragment
+import com.org.martall.view.store.LocalStoreFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     private var fragmentNearMe = NearMeFragment()
     private var fragmentMyMartAll = MyMartAllFragment()
     private var fragmentHome = HomeFragment()
+    private var fragmentHeart = DibsFragment()
     private val fragmentLocalStore = LocalStoreFragment()
     private var fragmentManager: FragmentManager = supportFragmentManager
 
@@ -46,8 +49,10 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.menu_place -> transaction.replace(R.id.menu_frame_view, fragmentNearMe)
                     .commitAllowingStateLoss()
-                R.id.menu_heart -> transaction.replace(R.id.menu_frame_view, fragmentMartDetailInfo)
+
+                R.id.menu_heart -> transaction.replace(R.id.menu_frame_view, fragmentHeart)
                     .commitAllowingStateLoss()
+                    
                 R.id.menu_user -> transaction.replace(R.id.menu_frame_view, fragmentMyMartAll)
                     .commitAllowingStateLoss()
             }
