@@ -26,37 +26,17 @@
                     layout="@layout/item_merch_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"/>
+                    android:layout_marginEnd="10dp"/>
 
                 <include
                     android:id="@+id/categorylist_merchandise_ic2"
-                    layout="@layout/item_merch_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"/>
-            </LinearLayout>
-
-            <!-- 두 번째 세트 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp">
-
-                <include
-                    android:id="@+id/categorylist_merchandise_ic3"
                     layout="@layout/item_merch_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"/>
-
-                <include
-                    android:id="@+id/categorylist_merchandise_ic4"
-                    layout="@layout/item_merch_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"/>
+                    android:layout_marginStart="10dp"/>
             </LinearLayout>
+
+
 
         </LinearLayout>
 
