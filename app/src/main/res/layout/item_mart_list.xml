@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/local_mart_Item">
 
     <ImageView
         android:id="@+id/mart_profile_iv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:src="@drawable/mart_profil_iv"
         android:layout_margin="20dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,9 +22,11 @@
         android:layout_height="wrap_content"
         android:text="마트명"
         android:textStyle="bold"
-        android:textSize="20dp"
+        android:textSize="14sp"
         android:layout_marginLeft="20dp"
+        android:fontFamily="@font/pretendardbold"
         app:layout_constraintTop_toTopOf="@id/mart_profile_iv"
+        app:layout_constraintBottom_toTopOf="@id/mart_hashtag_list_tv"
         app:layout_constraintStart_toEndOf="@id/mart_profile_iv"/>
 
     <LinearLayout
@@ -33,30 +35,37 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@id/mart_name_tv"
-        app:layout_constraintTop_toBottomOf="@id/mart_name_tv">
+        app:layout_constraintTop_toBottomOf="@id/mart_name_tv"
+        app:layout_constraintBottom_toTopOf="@id/mart_hashtag_list_tv" >
 
         <TextView
             android:id="@+id/mart_hashtag_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="#육아"
-            android:textSize="20dp" />
+            android:textSize="12sp"
+            android:textColor="#B9B9B9"
+            android:fontFamily="@font/pretendardregular"/>
 
         <TextView
             android:id="@+id/mart_hashtag_tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="#뷰티"
-            android:textSize="20dp"
-            android:layout_marginLeft="5dp" />
+            android:textSize="12sp"
+            android:textColor="#B9B9B9"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/pretendardregular"/>
 
         <TextView
             android:id="@+id/mart_hashtag_tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="식품"
-            android:textSize="20dp"
-            android:layout_marginLeft="5dp" />
+            android:text="#스포츠"
+            android:textSize="12sp"
+            android:textColor="#B9B9B9"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/pretendardregular"/>
 
     </LinearLayout>
 
@@ -64,10 +73,13 @@
         android:id="@+id/bookmark_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="즐겨찾기"
+        android:text="단골 추가"
         android:textStyle="bold"
+        android:textSize="14sp"
+        android:fontFamily="@font/pretendardmedium"
         android:layout_marginRight="10dp"
-        app:layout_constraintTop_toTopOf="@id/mart_name_tv"
+        app:layout_constraintTop_toTopOf="@id/mart_profile_iv"
+        app:layout_constraintBottom_toBottomOf="@id/mart_profile_iv"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
@@ -76,44 +88,54 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@id/mart_name_tv"
+        app:layout_constraintTop_toBottomOf="@id/mart_hashtag_list_tv"
         app:layout_constraintBottom_toBottomOf="@id/mart_profile_iv" >
 
         <TextView
             android:id="@+id/follower_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="팔로워 수 0"
-            android:textSize="15dp" />
+            android:text="단골 수 0"
+            android:textSize="10sp"
+            android:fontFamily="@font/pretendardregular"/>
+
+        <TextView
+            android:id="@+id/divide_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="|"
+            android:textSize="10sp"
+            android:fontFamily="@font/pretendardregular"/>
 
         <TextView
             android:id="@+id/visiter_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="방문자 수 0"
-            android:textSize="15dp"
-            android:layout_marginLeft="8dp" />
+            android:layout_marginLeft="5dp"
+            android:text="상품 찜 수 0"
+            android:textSize="10sp"
+            android:fontFamily="@font/pretendardregular"/>
 
     </LinearLayout>
-
 
     <HorizontalScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scrollbarFadeDuration="@integer/material_motion_duration_long_2"
-        android:scrollbarSize="8dp"
-        android:scrollbarThumbHorizontal="@android:color/darker_gray"
+        android:scrollbars="none"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="@id/mart_profile_iv"
         app:layout_constraintTop_toBottomOf="@id/follower_visiter_count_tv">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/group_participants_recyclerView"
+            android:id="@+id/mart_image_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="8dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/rv_local_mart_property_list" />
+            tools:listitem="@layout/item_mart_post" />
     </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

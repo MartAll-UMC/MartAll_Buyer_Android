@@ -37,7 +37,6 @@ class LocalMartFragment : Fragment() {
     ): View? {
         binding = FragmentLocalMartBinding.inflate(inflater, container, false)
 
-        Log.d("LocalMart", "setting")
         initViewPager()
 
         return binding.root
@@ -47,9 +46,7 @@ class LocalMartFragment : Fragment() {
 
         //ViewPager2 Adapter 셋팅
         var LocalViewPagerAdapter = LocalViewPagerAdapter(this)
-        LocalViewPagerAdapter.addFragment(LocalMembersFragment())
         LocalViewPagerAdapter.addFragment(LocalStoreFragment())
-        LocalViewPagerAdapter.addFragment(LocalFollowingFragment())
 
         //Adapter 연결
         binding.localMartViewPager.apply {
@@ -66,9 +63,7 @@ class LocalMartFragment : Fragment() {
         TabLayoutMediator(binding.localMartTabLayout, binding.localMartViewPager) { tab, position ->
             Log.e("YMC", "ViewPager position: ${position}")
             when (position) {
-                0 -> tab.text = "회원"
-                1 -> tab.text = "마트"
-                2 -> tab.text = "팔로잉"
+                0 -> tab.text = "마트"
             }
         }.attach()
     }

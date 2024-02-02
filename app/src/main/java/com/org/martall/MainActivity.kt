@@ -10,6 +10,7 @@ import com.org.martall.databinding.ActivityMainBinding
 import com.org.martall.view.home.HomeFragment
 import com.org.martall.view.mypage.customerservice.MyMartAllFragment
 import com.org.martall.view.nearme.NearMeFragment
+import com.org.martall.view.store.MartDetailInfoFragment
 import com.org.martall.view.store.LocalMartFragment
 import com.org.martall.view.store.LocalStoreFragment
 
@@ -22,6 +23,9 @@ class MainActivity : AppCompatActivity() {
     private var fragmentHeart = DibsFragment()
     private val fragmentLocalStore = LocalStoreFragment()
     private var fragmentManager: FragmentManager = supportFragmentManager
+
+    // 상품 상세 확인
+    private var fragmentMartDetailInfo = MartDetailInfoFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -48,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.menu_heart -> transaction.replace(R.id.menu_frame_view, fragmentHeart)
                     .commitAllowingStateLoss()
-
+                    
                 R.id.menu_user -> transaction.replace(R.id.menu_frame_view, fragmentMyMartAll)
                     .commitAllowingStateLoss()
             }
