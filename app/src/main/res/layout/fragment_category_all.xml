@@ -4,14 +4,11 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.textview.MaterialTextView
+    <include layout="@layout/item_search_merchandise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="상품 X개"
-        android:textSize="18sp"
-        android:fontFamily="@font/pretendardsemibold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="26dp"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

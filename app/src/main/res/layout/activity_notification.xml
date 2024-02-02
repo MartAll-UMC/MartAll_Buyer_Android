@@ -1,51 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notification_cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageButton
         android:id="@+id/notification_arrow_back_ib"
-        android:layout_width="22dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/arrow_back"
+        android:src="@drawable/ic_arrow_left_32dp"
         android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="26dp"/>
+        android:layout_marginTop="14dp"
+        android:layout_marginStart="@dimen/dp_12"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/notification_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="알림"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:fontFamily="@font/pretendardsemibold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginStart="@dimen/dp_12"
+        android:textAppearance="@style/lSemiBold"
+        app:layout_constraintStart_toEndOf="@id/notification_arrow_back_ib"
+        app:layout_constraintTop_toTopOf="@id/notification_arrow_back_ib"
+        app:layout_constraintBottom_toBottomOf="@id/notification_arrow_back_ib"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/notification_tv_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="전체읽음"
-        android:textSize="12sp"
-        android:textColor="#000000"
-        android:fontFamily="@font/pretendardregular"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/notification_tv"
-        android:layout_marginEnd="16dp"/>
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/notification_tb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/tablayout_font"
-        app:layout_constraintTop_toBottomOf="@id/notification_tv_1"
+        app:tabIndicatorFullWidth="true"
+        android:layout_marginTop="18dp"
+        app:layout_constraintTop_toBottomOf="@id/notification_tv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -69,6 +60,15 @@
 
 
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/notification_vp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/notification_tb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 
 

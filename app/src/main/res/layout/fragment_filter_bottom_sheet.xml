@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/Widget.Material3.BottomSheet"
-    android:padding="@dimen/dp_24"
+    android:padding="20dp"
     app:layout_behavior="com.google.material.bottomsheet.BottomSheetBehavior">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,107 +18,121 @@
             android:layout_height="wrap_content"
             android:text="@string/text_filter_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="@dimen/sp_24"
-            android:textColor="@color/primary_color"
-            android:textStyle="bold"
+            android:textAppearance="@style/mSemiBold"
             android:layout_marginTop="@dimen/dp_12"/>
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/cg_filter_item"
-            android:layout_width="@dimen/full_charge"
-            android:layout_height="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/min_price_tl"
+            android:layout_width="132dp"
+            android:layout_height="32dp"
+            style="@style/roundedTextInputLayout"
+            android:layout_marginStart="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_8"
             app:layout_constraintTop_toBottomOf="@id/tv_filter_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_8">
+            app:layout_constraintStart_toStartOf="@id/filter_price_tv">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_total"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/filter_min_et"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/text_all"/>
+                android:hint="최소 금액"
+                app:hintTextAppearance="@style/mRegular"
+                android:gravity="center"/>
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_child_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="육아용품"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_cosmetics"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="화장품"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_fashion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="패션의류"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_animal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="반려동물"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_food"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="음식"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_sports"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="스포츠"/>
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_health"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="건강"/>
-
-        </com.google.android.material.chip.ChipGroup>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_follower_count"
+            android:id="@+id/filter_1_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/cg_filter_item"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="팔로워 수"
-            android:layout_marginStart="@dimen/dp_16"
+            android:text="~"
+            android:textAppearance="@style/mSemiBold"
+            app:layout_constraintStart_toEndOf="@id/min_price_tl"
+            app:layout_constraintEnd_toStartOf="@id/max_price_tl"
+            app:layout_constraintTop_toTopOf="@id/min_price_tl"
+            android:layout_marginTop="@dimen/dp_8"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/max_price_tl"
+            android:layout_width="132dp"
+            android:layout_height="@dimen/dp_32"
+            app:layout_constraintTop_toBottomOf="@id/tv_filter_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/roundedTextInputLayout"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:gravity="center">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/filter_max_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="최대 금액"
+                android:textColorHint="#000000"
+                app:hintTextAppearance="@style/mRegular"
+                android:gravity="center"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_guide_1_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/slider_follower_count"
+            app:layout_constraintTop_toBottomOf="@id/filter_1_tv"
             android:layout_marginTop="@dimen/dp_16"
-            android:textStyle="bold"
-            android:textSize="@dimen/sp_20"
-            android:textColor="@color/primary_color"/>
+            android:text="0원"
+            android:textAppearance="@style/xsMedium"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_guide"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/slider_follower_count"
-            app:layout_constraintTop_toBottomOf="@id/tv_follower_count"
-            android:layout_marginEnd="@dimen/dp_12"
-            android:text="1백명 이상"/>
+            app:layout_constraintTop_toBottomOf="@id/filter_1_tv"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="24,000원"
+            android:textAppearance="@style/xsMedium"/>
 
 
         <com.google.android.material.slider.RangeSlider
             android:id="@+id/slider_follower_count"
-            android:layout_width="@dimen/full_charge"
-            android:layout_height="@dimen/full_charge"
-            app:layout_constraintTop_toBottomOf="@id/tv_follower_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/filter_1_tv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="@dimen/sp_24"
+            android:layout_marginTop="@dimen/dp_16"/>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="초기화"
+            android:textAppearance="@style/mMedium"
+            android:textColor="@color/grey400"
+            android:background="@drawable/gray_box"
             android:layout_marginTop="@dimen/dp_12"
-            android:layout_marginEnd="@dimen/dp_24"/>
+            android:layout_marginStart="@dimen/dp_12"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/slider_follower_count"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="적용"
+            android:textAppearance="@style/mMedium"
+            android:textColor="@color/white"
+            android:background="@drawable/blue_box_big"
+            android:layout_marginTop="@dimen/dp_12"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/dp_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/slider_follower_count"/>
 
 
 

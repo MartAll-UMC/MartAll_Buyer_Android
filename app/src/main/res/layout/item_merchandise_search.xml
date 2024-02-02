@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageButton
+        android:id="@+id/search_arrow_back_ib"
+        android:layout_width="22dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_left_32dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="14dp"
+        android:layout_marginStart="@dimen/dp_16"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/search_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상품 검색"
+        android:textAppearance="@style/lSemiBold"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginTop="18dp"
+        app:layout_constraintStart_toEndOf="@id/search_arrow_back_ib"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <include
+        android:id="@+id/item_search_ic"
+        layout="@layout/item_search_bar_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_24"
+        app:layout_constraintStart_toStartOf="@id/search_arrow_back_ib"
+        app:layout_constraintTop_toBottomOf="@id/search_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
