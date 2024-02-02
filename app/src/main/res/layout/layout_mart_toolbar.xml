@@ -3,19 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/actionBarSize"
-    android:padding="5dp">
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/toolbar_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_16"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:padding="@dimen/dp_12"
+        android:src="@drawable/place_ic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/place_ic"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/toolbar_myPlace_tv"
@@ -24,10 +25,10 @@
         android:fontFamily="@font/pretendardsemibold"
         android:text="나의 위치"
         android:textColor="#5371FF"
-        android:textSize="15dp"
+        android:textSize="12sp"
         android:textStyle="bold"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@id/toolbar_place"
         app:layout_constraintTop_toTopOf="@id/toolbar_place"/>
 
@@ -36,30 +37,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="판교역로 166"
-        android:textSize="15dp"
+        android:textSize="12sp"
         android:fontFamily="@font/pretendardsemibold"
         app:layout_constraintStart_toStartOf="@id/toolbar_myPlace_tv"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar_place"/>
+        app:layout_constraintTop_toBottomOf="@id/toolbar_myPlace_tv"/>
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/cart_ic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/dp_12"
+        android:src="@drawable/cart_ic"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/iv_search"
-        tools:src="@drawable/cart_ic" />
+        app:layout_constraintEnd_toStartOf="@id/iv_search" />
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/iv_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_12"
         android:padding="@dimen/dp_12"
+        android:src="@drawable/baseline_search_24"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@drawable/baseline_search_24" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

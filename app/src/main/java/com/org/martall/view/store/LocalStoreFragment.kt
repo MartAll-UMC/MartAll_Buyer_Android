@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.org.martall.R
 import com.org.martall.View.Myinfo.MartShopActivity
@@ -33,7 +33,7 @@ class LocalStoreFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var binding : FragmentLocalStoreBinding
+    private lateinit var binding: FragmentLocalStoreBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,13 +55,17 @@ class LocalStoreFragment : Fragment() {
         showSortBottomSheet()
 
         val martRVAdapter = MartRVAdapter(dummyData)
-        martRVAdapter.setMyItemClickListener(object: MartRVAdapter.MyItemClickListener {
-            override fun onItemClick() {
-                val intent = Intent(activity, MartShopActivity::class.java)
-                startActivity(intent)
-            }
 
-        })
+        binding.groupRecyclerView.setOnClickListener {
+            val martDetailInfoFragment = MartDetailInfoFragment()
+
+            val transaction: FragmentTransaction? = fragmentManager?.beginTransaction()
+
+            transaction?.replace(R.id.main_container, martDetailInfoFragment)
+                ?.commitAllowingStateLoss()
+
+            Log.d("intent", "넘어감")
+        }
 
         return binding.root
     }
@@ -69,8 +73,8 @@ class LocalStoreFragment : Fragment() {
     private fun initRecyclerView() {
         with(binding) {
             groupRecyclerView.apply {
-                layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-                adapter= MartRVAdapter(dummyData)
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                adapter = MartRVAdapter(dummyData)
             }
         }
     }
@@ -93,53 +97,24 @@ class LocalStoreFragment : Fragment() {
         }
     }
 
-    /*
-    private fun setSpinner() {
-        ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.sort_list,
-            android.R.layout.simple_spinner_item,
-        ).also { adapter->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.spinnerOrder.adapter=adapter
-        }
-    }
-
-     */
-
-    /*
-    private fun initToolBar() {
-        with(binding) {
-            tbShop.apply {
-                ivBack.setImageResource(R.drawable.baseline_arrow_back_ios_24)
-                tvTitle.text="동네샵"
-                ivSearch.setImageResource(R.drawable.baseline_format_list_bulleted_24)
-            }
-        }
-    }
-
-     */
-
-
-    val dummyData : List<UserDTO> = listOf(
+    val dummyData: List<UserDTO> = listOf(
         UserDTO(
-            imageUrl = R.drawable.ic_launcher_background, "회원1", "#aa#bb",
+            imageUrl = R.drawable.banana, "회원1", "#aa#bb",
             12, 120, com.org.martall.model.dummyPosts
         ),
         UserDTO(
-            imageUrl = R.drawable.ic_launcher_background, "회원2", "#aa#bb",
+            imageUrl = R.drawable.iv_spam, "회원2", "#aa#bb",
             12, 120, com.org.martall.model.dummyPosts
         ),
         UserDTO(
-            imageUrl = R.drawable.ic_launcher_background, "회원3", "#aa#bb",
+            imageUrl = R.drawable.banana, "회원3", "#aa#bb",
             12, 120, com.org.martall.model.dummyPosts
         ),
         UserDTO(
-            imageUrl = R.drawable.ic_launcher_background, "회원4", "#aa#bb",
+            imageUrl = R.drawable.iv_spam, "회원4", "#aa#bb",
             12, 120, com.org.martall.model.dummyPosts
         ),
     )
-
 
     companion object {
         /**

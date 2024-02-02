@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/mart_detail_info_guide_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가게 상세 정보"
+        android:textSize="18dp"
+        android:fontFamily="@font/pretendardbold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mart_name_guide_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="마트명"
+        android:textSize="12dp"
+        android:textColor="@color/grey400"
+        android:fontFamily="@font/pretendardsemibold"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mart_detail_info_guide_tv" />
+
+    <TextView
+        android:id="@+id/mart_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="제로마트"
+        android:textSize="12dp"
+        android:textColor="@color/primary400"
+        android:fontFamily="@font/pretendardmedium"
+        android:layout_marginRight="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/mart_name_guide_tv" />
+
+    <TextView
+        android:id="@+id/mart_owner_name_guide_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="대표자"
+        android:textSize="12dp"
+        android:textColor="@color/grey400"
+        android:fontFamily="@font/pretendardsemibold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@id/mart_name_guide_tv"
+        app:layout_constraintTop_toBottomOf="@id/mart_name_guide_tv" />
+
+    <TextView
+        android:id="@+id/mart_owner_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="김민지"
+        android:textSize="12dp"
+        android:textColor="@color/primary400"
+        android:fontFamily="@font/pretendardmedium"
+        android:layout_marginRight="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/mart_owner_name_guide_tv" />
+
+    <TextView
+        android:id="@+id/mart_number_guide_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가게번호"
+        android:textSize="12dp"
+        android:textColor="@color/grey400"
+        android:fontFamily="@font/pretendardsemibold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@id/mart_name_guide_tv"
+        app:layout_constraintTop_toBottomOf="@id/mart_owner_name_guide_tv" />
+
+    <TextView
+        android:id="@+id/mart_number_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="02-1234-5678"
+        android:textSize="12dp"
+        android:textColor="@color/primary400"
+        android:fontFamily="@font/pretendardmedium"
+        android:layout_marginRight="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/mart_number_guide_tv" />
+
+    <TextView
+        android:id="@+id/mart_time_guide_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="운영시간"
+        android:textSize="12dp"
+        android:textColor="@color/grey400"
+        android:fontFamily="@font/pretendardsemibold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@id/mart_number_guide_tv"
+        app:layout_constraintTop_toBottomOf="@id/mart_number_guide_tv" />
+
+    <TextView
+        android:id="@+id/mart_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="월~일 9:00 - 21:00"
+        android:textSize="12dp"
+        android:textColor="@color/primary400"
+        android:fontFamily="@font/pretendardmedium"
+        android:layout_marginRight="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/mart_time_guide_tv" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="문의하기"
+        android:textSize="16dp"
+        android:fontFamily="@font/pretendardbold"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mart_time_guide_tv"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

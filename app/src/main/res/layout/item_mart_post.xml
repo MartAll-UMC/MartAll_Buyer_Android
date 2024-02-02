@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/layoutListItem"
-    android:layout_marginLeft="20dp">
+    android:layout_marginLeft="12dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/item_mart_post_cardView"
@@ -43,7 +43,7 @@
         android:fontFamily="@font/pretendardmedium"
         android:text="바나나"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/item_mart_post_cardView"
         app:layout_constraintTop_toBottomOf="@id/item_mart_post_cardView" />
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="5000원"
-        android:textSize="20dp"
+        android:textSize="14sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_marginTop="10dp"

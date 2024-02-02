@@ -1,6 +1,7 @@
 package com.org.martall.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -10,13 +11,26 @@ import com.org.martall.model.dummyPosts
 
 class MartRVAdapter(private val MartList : List<UserDTO>) : RecyclerView.Adapter<MartRVAdapter.ViewHolder>() {
 
-    interface MyItemClickListener {
-        fun onItemClick()
-    }
+    private lateinit var itemClickListener : OnItemClickListener
 
-    private lateinit var mItemClickListener : MyItemClickListener
-    fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
-        mItemClickListener = itemClickListener
+//    interface MyItemClickListener {
+//        fun onItemClick()
+//    }
+
+//    private lateinit var mItemClickListener : MyItemClickListener
+//    fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
+//        mItemClickListener = itemClickListener
+//    }
+
+
+    // 아이템 클릭리스너
+    interface OnItemClickListener {
+        fun onClick(view: View, position: Int) {
+            // Toast.makeText(view.context, "테스트 - ${position}클릭", Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MartRVAdapter.ViewHolder {
@@ -27,8 +41,11 @@ class MartRVAdapter(private val MartList : List<UserDTO>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: MartRVAdapter.ViewHolder, position: Int) {
         holder.bind(MartList[position])
+//        holder.itemView.setOnClickListener {
+//            mItemClickListener.onItemClick()
+//        }
         holder.itemView.setOnClickListener {
-            mItemClickListener.onItemClick()
+            itemClickListener.onClick(it, position)
         }
     }
 

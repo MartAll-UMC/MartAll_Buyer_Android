@@ -47,11 +47,6 @@
                 android:layout_height="wrap_content"
                 android:text="화장품" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_fashion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="패션의류" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_food"
@@ -114,6 +109,9 @@
             android:id="@+id/slider_membership_count"
             android:layout_width="@dimen/full_charge"
             android:layout_height="@dimen/full_charge"
+            android:valueFrom="0"
+            android:valueTo="24"
+            app:values="@array/initial_slider_values"
             app:layout_constraintTop_toBottomOf="@id/membership_count_tv"
             app:layout_constraintStart_toStartOf="@id/membership_count_tv"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,6 +147,9 @@
             android:id="@+id/slider_heart_count"
             android:layout_width="@dimen/full_charge"
             android:layout_height="@dimen/full_charge"
+            android:valueFrom="0"
+            android:valueTo="24"
+            app:values="@array/initial_slider_values"
             app:layout_constraintTop_toBottomOf="@id/heart_count_tv"
             app:layout_constraintStart_toStartOf="@id/heart_count_tv"
             app:layout_constraintEnd_toEndOf="parent"

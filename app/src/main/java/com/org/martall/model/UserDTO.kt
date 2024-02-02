@@ -17,29 +17,29 @@ data class Post(
 )
 
 val dummyPosts : List<Post> = listOf(
-    Post(R.drawable.ic_launcher_background),
-    Post(R.drawable.ic_launcher_background),
-    Post(R.drawable.ic_launcher_background),
-    Post(R.drawable.ic_launcher_background),
-    Post(R.drawable.ic_launcher_background),
+    Post(R.drawable.banana),
+    Post(R.drawable.iv_spam),
+    Post(R.drawable.banana),
+    Post(R.drawable.iv_spam),
+    Post(R.drawable.banana),
 )
 
 
 val dummyData : List<UserDTO> = listOf(
     UserDTO(
-        imageUrl = R.drawable.ic_launcher_background, "회원1", "#aa#bb",
+        imageUrl = R.drawable.banana, "회원1", "#aa#bb",
         1, 2, dummyPosts
     ),
     UserDTO(
-        imageUrl = R.drawable.ic_launcher_background, "회원2", "#aa#bb",
+        imageUrl = R.drawable.iv_spam, "회원2", "#aa#bb",
         1, 2, dummyPosts
     ),
     UserDTO(
-        imageUrl = R.drawable.ic_launcher_background, "회원3", "#aa#bb",
+        imageUrl = R.drawable.banana, "회원3", "#aa#bb",
         1, 2, dummyPosts
     ),
     UserDTO(
-        imageUrl = R.drawable.ic_launcher_background, "회원4", "#aa#bb",
+        imageUrl = R.drawable.iv_spam, "회원4", "#aa#bb",
         1, 2, dummyPosts
     ),
 )
