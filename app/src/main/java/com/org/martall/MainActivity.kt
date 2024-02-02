@@ -15,7 +15,6 @@ import com.org.martall.view.store.MartDetailInfoFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private var fragmentNearMe = NearMeFragment()
     private var fragmentMyMartAll = MyMartAllFragment()
     private var fragmentHome = HomeFragment()

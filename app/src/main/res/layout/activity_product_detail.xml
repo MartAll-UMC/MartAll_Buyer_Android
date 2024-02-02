@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/banana"
+                android:src="@drawable/img_item_banana_360dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

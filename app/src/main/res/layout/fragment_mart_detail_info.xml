@@ -233,7 +233,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="center"
-                    android:src="@drawable/banana" />
+                    android:src="@drawable/img_item_banana_360dp" />
 
             </androidx.cardview.widget.CardView>
 
@@ -382,7 +382,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="center"
-                    android:src="@drawable/banana" />
+                    android:src="@drawable/img_item_banana_360dp" />
 
             </androidx.cardview.widget.CardView>
 

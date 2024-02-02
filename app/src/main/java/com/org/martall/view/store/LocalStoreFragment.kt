@@ -1,6 +1,5 @@
 package com.org.martall.view.store
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,11 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.org.martall.R
-import com.org.martall.View.Myinfo.MartShopActivity
 import com.org.martall.adapter.MartRVAdapter
 import com.org.martall.databinding.FragmentLocalStoreBinding
 import com.org.martall.model.UserDTO
-import com.org.martall.model.dummyData
 import com.org.martall.view.store.user.bottomsheet.FilterBottomSheet
 import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
 
@@ -99,7 +96,7 @@ class LocalStoreFragment : Fragment() {
 
     val dummyData: List<UserDTO> = listOf(
         UserDTO(
-            imageUrl = R.drawable.banana, "회원1", "#aa#bb",
+            imageUrl = R.drawable.img_item_banana_360dp, "회원1", "#aa#bb",
             12, 120, com.org.martall.model.dummyPosts
         ),
         UserDTO(
@@ -107,7 +104,7 @@ class LocalStoreFragment : Fragment() {
             12, 120, com.org.martall.model.dummyPosts
         ),
         UserDTO(
-            imageUrl = R.drawable.banana, "회원3", "#aa#bb",
+            imageUrl = R.drawable.img_item_banana_360dp, "회원3", "#aa#bb",
             12, 120, com.org.martall.model.dummyPosts
         ),
         UserDTO(

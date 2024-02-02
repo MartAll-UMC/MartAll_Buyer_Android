@@ -1,6 +1,5 @@
 package com.org.martall.model
 
-import android.graphics.PostProcessor
 import com.org.martall.R
 
 data class UserDTO(
@@ -17,17 +16,17 @@ data class Post(
 )
 
 val dummyPosts : List<Post> = listOf(
-    Post(R.drawable.banana),
+    Post(R.drawable.img_item_banana_360dp),
     Post(R.drawable.iv_spam),
-    Post(R.drawable.banana),
+    Post(R.drawable.img_item_banana_360dp),
     Post(R.drawable.iv_spam),
-    Post(R.drawable.banana),
+    Post(R.drawable.img_item_banana_360dp),
 )
 
 
 val dummyData : List<UserDTO> = listOf(
     UserDTO(
-        imageUrl = R.drawable.banana, "회원1", "#aa#bb",
+        imageUrl = R.drawable.img_item_banana_360dp, "회원1", "#aa#bb",
         1, 2, dummyPosts
     ),
     UserDTO(
@@ -35,7 +34,7 @@ val dummyData : List<UserDTO> = listOf(
         1, 2, dummyPosts
     ),
     UserDTO(
-        imageUrl = R.drawable.banana, "회원3", "#aa#bb",
+        imageUrl = R.drawable.img_item_banana_360dp, "회원3", "#aa#bb",
         1, 2, dummyPosts
     ),
     UserDTO(
