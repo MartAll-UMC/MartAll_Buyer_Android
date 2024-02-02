@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/home_merchandise_iv"
+        android:layout_width="175dp"
+        android:layout_height="125dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/banana"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/home_merchandise_tv"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:text="오렌지마트 광운대점"
+        android:fontFamily="@font/pretendardmedium"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        android:textColor="#747474"
+        app:layout_constraintTop_toBottomOf="@id/home_merchandise_iv"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/home_merchandise_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="바나나"
+        android:fontFamily="@font/pretendardbold"
+        app:layout_goneMarginTop="2dp"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/home_merchandise_tv"
+        tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/home_merchandise_price_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="5,500원"
+        android:fontFamily="@font/pretendardbold"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/home_merchandise_name_tv"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/home_favorite_ib"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/ic_heart_filled_20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toTopOf="@id/home_merchandise_iv"
+        app:layout_constraintEnd_toEndOf="@id/home_merchandise_iv"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
