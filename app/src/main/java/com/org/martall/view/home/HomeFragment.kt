@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        binding.menuIb.setOnClickListener {
+        binding.tbHome.btnAlarm.setOnClickListener {
             val intent = Intent(context, com.org.martall.view.home.notification.NotificationActivity::class.java)
             startActivity(intent)
         }

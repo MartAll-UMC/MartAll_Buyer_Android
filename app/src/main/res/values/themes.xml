@@ -3,6 +3,7 @@
     <style name="Base.Theme.MartAll" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorSecondary">@color/secondary_color</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="Theme.MartAll" parent="Base.Theme.MartAll" />

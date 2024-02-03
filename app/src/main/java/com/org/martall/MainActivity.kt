@@ -10,15 +10,16 @@ import com.org.martall.databinding.ActivityMainBinding
 import com.org.martall.view.home.HomeFragment
 import com.org.martall.view.mypage.customerservice.MyMartAllFragment
 import com.org.martall.view.store.LocalMartFragment
+import com.org.martall.view.store.LocalStoreFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val fragmentHome = HomeFragment()
+    private val fragmentLocalStore = LocalStoreFragment()
     private val fragmentCategory = CategoryFragment()
     private val fragmentMyMartAll = MyMartAllFragment()
     private val fragmentHeart = DibsFragment()
-    private val fragmentLocalMart = LocalMartFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationview.setOnItemSelectedListener {
                 val fragment = when (it.itemId) {
                     R.id.menu_home -> fragmentHome
-                    R.id.menu_localMart -> fragmentLocalMart
+                    R.id.menu_localMart -> fragmentLocalStore
                     R.id.menu_place -> fragmentCategory
                     R.id.menu_heart -> fragmentHeart
                     R.id.menu_user -> fragmentMyMartAll
