@@ -13,8 +13,7 @@ import com.org.martall.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
-    lateinit var binding: FragmentHomeBinding
-
+    private lateinit var binding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,8 +25,6 @@ class HomeFragment : Fragment() {
             val intent = Intent(context, com.org.martall.view.home.notification.NotificationActivity::class.java)
             startActivity(intent)
         }
-
-
 
         val adAdapter = HomeAdViewPagerAdapter(this)
         adAdapter.addFragment(HomeAdFragment(R.drawable.img_ad_1_360dp))

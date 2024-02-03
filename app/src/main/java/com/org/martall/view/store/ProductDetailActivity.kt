@@ -6,7 +6,6 @@ import com.org.martall.R
 import com.org.martall.databinding.ActivityProductDetailBinding
 
 class ProductDetailActivity : AppCompatActivity() {
-
     private lateinit var binding : ActivityProductDetailBinding
 
     private var isHeartFilled = false
@@ -23,7 +22,7 @@ class ProductDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    fun toggleHeart() {
+    private fun toggleHeart() {
         isHeartFilled = !isHeartFilled
         val heartIcon = binding.likeBtn
 

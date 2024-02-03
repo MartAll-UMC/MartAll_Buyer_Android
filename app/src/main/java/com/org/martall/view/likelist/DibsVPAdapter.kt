@@ -1,4 +1,4 @@
-package com.org.martall.View.Likelist
+package com.org.martall.view.likelist
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

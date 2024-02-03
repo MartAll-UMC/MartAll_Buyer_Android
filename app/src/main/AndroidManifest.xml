@@ -23,7 +23,8 @@
             android:theme="@style/Theme.MartAll"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:saveEnabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -42,10 +43,10 @@
             android:theme="@style/Theme.MartAll"/>
         <activity android:name="com.org.martall.view.mypage.customerservice.CustomerServiceActivity" />
         <activity
-            android:name=".View.Likelist.DibsActivity"
+            android:name=".view.likelist.DibsActivity"
             android:theme="@style/Theme.MartAll" />
         <activity
-            android:name=".View.Myinfo.MartShopActivity"
+            android:name=".view.Myinfo.MartShopActivity"
             android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".view.store.StoreActivity"

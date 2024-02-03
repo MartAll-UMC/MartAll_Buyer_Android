@@ -15,13 +15,13 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding=FragmentFilterBottomSheetBinding.inflate(inflater,container,false)
+    ): View? {
+        binding = FragmentFilterBottomSheetBinding.inflate(inflater,container,false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // 이벤트 처리
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        // 이벤트 처리
+//    }
 }

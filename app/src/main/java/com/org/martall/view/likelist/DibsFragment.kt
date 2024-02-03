@@ -1,11 +1,10 @@
-package com.org.martall.View.Likelist
+package com.org.martall.view.likelist
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.material.tabs.TabLayout.Tab
 import com.google.android.material.tabs.TabLayoutMediator
 import com.org.martall.databinding.FragmentDibsBinding
 

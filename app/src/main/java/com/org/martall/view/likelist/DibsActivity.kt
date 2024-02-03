@@ -1,4 +1,4 @@
-package com.org.martall.View.Likelist
+package com.org.martall.view.likelist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
