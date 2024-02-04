@@ -8,7 +8,7 @@ data class ItemDTO(
     val price: Int = 0,
     val store: String = "",
     val category: Int = 0,
-    val isLiked: Boolean = false,
+    var isLiked: Boolean = false,
 )
 
 var dummyItems: List<ItemDTO> = listOf(

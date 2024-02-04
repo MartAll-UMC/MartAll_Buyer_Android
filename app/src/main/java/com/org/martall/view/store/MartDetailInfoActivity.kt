@@ -2,21 +2,16 @@ package com.org.martall.view.store
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.org.martall.R
-import com.org.martall.databinding.FragmentMartDetailInfoBinding
+import com.org.martall.databinding.ActivityMartDetailInfoBinding
 import com.org.martall.view.store.user.bottomsheet.DetailBottomSheet
-import com.org.martall.view.store.user.bottomsheet.FilterBottomSheet
 import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
 
-class MartDetailInfoFragment : Fragment() {
-    private lateinit var binding : FragmentMartDetailInfoBinding
+class MartDetailInfoActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMartDetailInfoBinding
 
     private var isHeartFilled1 = false
     private var isHeartFilled2 = false
@@ -25,21 +20,26 @@ class MartDetailInfoFragment : Fragment() {
 
     private var isFavorite = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentMartDetailInfoBinding.inflate(inflater, container, false)
-
-        binding.showDetailBtn.setOnClickListener {
-            showDetailBottomSheet()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+        super.onCreate(savedInstanceState)
+        binding = ActivityMartDetailInfoBinding.inflate(layoutInflater).also {
+            setContentView(it.root)
         }
 
-        showSortBottomSheet()
+//        binding.showDetailBtn.setOnClickListener {
+//            showDetailBottomSheet()
+//        }
+//
+//        showSortBottomSheet()
+
+        binding.backIc.setOnClickListener {
+            finish()
+        }
 
         binding.post1.setOnClickListener {
             // 상품 상세 페이지로 이동
-            val intent = Intent(requireActivity(), ProductDetailActivity::class.java)
+            val intent = Intent(this, ProductDetailActivity::class.java)
             startActivity(intent)
         }
 
@@ -91,38 +91,34 @@ class MartDetailInfoFragment : Fragment() {
         binding.addFavoriteMartBtn.setOnClickListener {
             toggleFavoriteButton()
         }
-
-
-        return binding.root
     }
 
-    private fun showDetailBottomSheet() {
-        DetailBottomSheet().show(
-            childFragmentManager,
-            null
-        )
-    }
-
-    private fun showSortBottomSheet() {
-        binding.sortTv.setOnClickListener {
-            SortBottomSheet().show(
-                childFragmentManager,
-                null
-            )
-        }
-    }
+//    private fun showDetailBottomSheet() {
+//        DetailBottomSheet().show(
+//            childFragmentManager,
+//            null
+//        )
+//    }
+//
+//    private fun showSortBottomSheet() {
+//        binding.sortTv.setOnClickListener {
+//            SortBottomSheet().show(
+//                childFragmentManager,
+//                null
+//            )
+//        }
+//    }
 
     @SuppressLint("ResourceAsColor")
-    fun toggleFavoriteButton () {
+    fun toggleFavoriteButton() {
         isFavorite = !isFavorite
 
         if (isFavorite) {
-            binding.addFavoriteMartBtn.text="단골가게"
+            binding.addFavoriteMartBtn.text = "단골가게"
             binding.addFavoriteMartBtn.setBackgroundResource(R.drawable.background_primary400_r12)
             binding.addFavoriteMartBtn.setTextColor(R.color.primary400)
-        }
-        else {
-            binding.addFavoriteMartBtn.text="단골추가"
+        } else {
+            binding.addFavoriteMartBtn.text = "단골추가"
             binding.addFavoriteMartBtn.setTextColor(R.color.white)
             binding.addFavoriteMartBtn.setBackgroundResource(R.drawable.background_primary400_fill_r12)
         }

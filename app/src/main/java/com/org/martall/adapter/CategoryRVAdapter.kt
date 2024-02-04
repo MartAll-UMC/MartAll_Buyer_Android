@@ -7,7 +7,7 @@ import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.model.ItemDTO
 
-class CategoryRVAdapter(private val itemList: List<ItemDTO>) :
+class CategoryRVAdapter(private var itemList: List<ItemDTO>) :
     RecyclerView.Adapter<CategoryRVAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -33,6 +33,12 @@ class CategoryRVAdapter(private val itemList: List<ItemDTO>) :
     inner class ViewHolder(val binding: ItemCategoryProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            binding.root.setOnClickListener {
+                val idx = adapterPosition
+            }
+        }
+
         fun bind(item: ItemDTO) {
             binding.ivProductImg.setImageResource(item.imageUrl)
             binding.tvProductName.text = item.name
@@ -42,6 +48,11 @@ class CategoryRVAdapter(private val itemList: List<ItemDTO>) :
                 binding.btnLike.setImageResource(R.drawable.ic_like_filled_20dp)
             } else {
                 binding.btnLike.setImageResource(R.drawable.ic_like_unfilled_20dp)
+            }
+
+            binding.btnLike.setOnClickListener {
+                item.isLiked = !item.isLiked
+                bind(item)
             }
         }
     }

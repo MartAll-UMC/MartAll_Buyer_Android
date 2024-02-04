@@ -34,14 +34,15 @@ class LocalStoreFragment : Fragment() {
         binding.groupRecyclerView.adapter = martRVAdapter
 
         binding.groupRecyclerView.setOnClickListener {
-          val martDetailInfoFragment = MartDetailInfoFragment()
-
-            val transaction: FragmentTransaction? = fragmentManager?.beginTransaction()
-
-            transaction?.replace(R.id.main_container, martDetailInfoFragment)
-                ?.commitAllowingStateLoss()
-
-            Log.d("intent", "넘어감")
+//            startActivity(this.intent, MartDetailInfoActivity::class.java)
+//          val martDetailInfoFragment = MartDetailInfoFragment()
+//
+//            val transaction: FragmentTransaction? = fragmentManager?.beginTransaction()
+//
+//            transaction?.replace(R.id.main_container, martDetail)
+//                ?.commitAllowingStateLoss()
+//
+//            Log.d("intent", "넘어감")
         }
 
         return binding.root

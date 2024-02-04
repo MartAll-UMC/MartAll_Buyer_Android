@@ -8,7 +8,8 @@ data class MartDTO(
     val hashTag: String = "",
     val followerCount: Int? = null,
     val visitorCount: Int? = null,
-    val post : List<ItemSimpleDTO>
+    val post : List<ItemSimpleDTO>,
+    var isLiked: Boolean = false,
 )
 
 data class ItemSimpleDTO(
@@ -29,19 +30,19 @@ val dummyPosts : List<ItemSimpleDTO> = listOf(
 
 val dummyData : List<MartDTO> = listOf(
     MartDTO(
-        imageUrl = R.drawable.img_item_banana_360dp, "회원1", "#aa#bb",
+        imageUrl = R.drawable.img_item_banana_360dp, "오렌지마트", "#정육",
         1, 2, dummyPosts
     ),
     MartDTO(
-        imageUrl = R.drawable.iv_spam, "회원2", "#aa#bb",
+        imageUrl = R.drawable.iv_spam, "하이마트", "#수산",
         1, 2, dummyPosts
     ),
     MartDTO(
-        imageUrl = R.drawable.img_item_banana_360dp, "회원3", "#aa#bb",
+        imageUrl = R.drawable.img_item_banana_360dp, "맘마농가식자재", "#식품",
         1, 2, dummyPosts
     ),
     MartDTO(
-        imageUrl = R.drawable.iv_spam, "회원4", "#aa#bb",
+        imageUrl = R.drawable.iv_spam, "숲속마트", "#생활용품",
         1, 2, dummyPosts
     ),
 )

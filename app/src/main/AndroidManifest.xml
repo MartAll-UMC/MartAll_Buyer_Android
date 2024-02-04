@@ -52,6 +52,7 @@
             android:name=".view.store.StoreActivity"
             android:theme="@style/Theme.MartAll" />
         <activity android:name=".view.mypage.customerservice.CustomerServiceActivity" />
+        <activity android:name=".view.store.MartDetailInfoActivity"/>
     </application>
 
 </manifest>

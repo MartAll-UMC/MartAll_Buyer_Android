@@ -9,7 +9,7 @@ class DibsVPAdapter(fragment:Fragment) : FragmentStateAdapter(fragment) {
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 -> DibsProductFragment()
-            else -> RegularFragment()
+            else -> DibsMartFragment()
         }
     }
 }
