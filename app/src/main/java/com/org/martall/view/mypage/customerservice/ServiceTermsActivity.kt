@@ -7,10 +7,13 @@ import com.org.martall.databinding.ActivityMainBinding
 import com.org.martall.databinding.ActivityServiceTermsBinding
 
 class ServiceTermsActivity : AppCompatActivity() {
-    lateinit var binding : ActivityServiceTermsBinding
+    private lateinit var binding : ActivityServiceTermsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityServiceTermsBinding.inflate(layoutInflater)
+        binding.backIc.setOnClickListener {
+            finish()
+        }
         setContentView(binding.root)
     }
 }
