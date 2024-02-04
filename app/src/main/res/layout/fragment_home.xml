@@ -127,16 +127,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/home_mart_list_tv" />
 
-            <include
-                android:id="@+id/item_recommend_mart_ic"
-                layout="@layout/item_recommend_mart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_recommend_rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_marginTop="14dp"
-                android:layout_marginBottom="65dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_mart_list_tv" />
-
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingVertical="4dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_mart_list_tv"
+                tools:listitem="@layout/item_recommend_mart" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
