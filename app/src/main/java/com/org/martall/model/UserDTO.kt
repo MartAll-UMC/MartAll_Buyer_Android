@@ -2,42 +2,45 @@ package com.org.martall.model
 
 import com.org.martall.R
 
-data class UserDTO(
+data class MartDTO(
     val imageUrl : Int? = null,
     val name: String = "",
     val hashTag: String = "",
     val followerCount: Int? = null,
     val visitorCount: Int? = null,
-    val post : List<Post>
+    val post : List<ItemDTO>
 )
 
-data class Post(
-    val imageUrl: Int,
+data class ItemDTO(
+    val imageUrl : Int = 0,
+    val name: String = "",
+    val price: Int = 0,
+    val isLiked: Boolean = false,
 )
 
-val dummyPosts : List<Post> = listOf(
-    Post(R.drawable.img_item_banana_360dp),
-    Post(R.drawable.iv_spam),
-    Post(R.drawable.img_item_banana_360dp),
-    Post(R.drawable.iv_spam),
-    Post(R.drawable.img_item_banana_360dp),
+val dummyPosts : List<ItemDTO> = listOf(
+    ItemDTO(R.drawable.img_item_banana_360dp, "바나나", 5000, false),
+    ItemDTO(R.drawable.iv_spam, "스팸", 4500, false),
+    ItemDTO(R.drawable.img_item_banana_360dp, "바나나", 5000, false),
+    ItemDTO(R.drawable.iv_spam, "스팸", 4500, false),
+    ItemDTO(R.drawable.img_item_banana_360dp, "바나나", 5000, false),
 )
 
 
-val dummyData : List<UserDTO> = listOf(
-    UserDTO(
+val dummyData : List<MartDTO> = listOf(
+    MartDTO(
         imageUrl = R.drawable.img_item_banana_360dp, "회원1", "#aa#bb",
         1, 2, dummyPosts
     ),
-    UserDTO(
+    MartDTO(
         imageUrl = R.drawable.iv_spam, "회원2", "#aa#bb",
         1, 2, dummyPosts
     ),
-    UserDTO(
+    MartDTO(
         imageUrl = R.drawable.img_item_banana_360dp, "회원3", "#aa#bb",
         1, 2, dummyPosts
     ),
-    UserDTO(
+    MartDTO(
         imageUrl = R.drawable.iv_spam, "회원4", "#aa#bb",
         1, 2, dummyPosts
     ),

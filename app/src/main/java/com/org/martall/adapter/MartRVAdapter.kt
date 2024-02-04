@@ -6,24 +6,23 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.databinding.ItemMartListBinding
-import com.org.martall.model.UserDTO
-import com.org.martall.model.dummyPosts
+import com.org.martall.model.MartDTO
 
-class MartRVAdapter(private val MartList : List<UserDTO>) : RecyclerView.Adapter<MartRVAdapter.ViewHolder>() {
+class MartRVAdapter(private val martList : List<MartDTO>) : RecyclerView.Adapter<MartRVAdapter.ViewHolder>() {
 
     private lateinit var itemClickListener : OnItemClickListener
 
-//    interface MyItemClickListener {
-//        fun onItemClick()
-//    }
+    interface MyItemClickListener {
+        fun onItemClick()
+    }
 
-//    private lateinit var mItemClickListener : MyItemClickListener
-//    fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
-//        mItemClickListener = itemClickListener
-//    }
+    private lateinit var mItemClickListener : MyItemClickListener
+    fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
+        mItemClickListener = itemClickListener
+    }
 
 
-    // 아이템 클릭리스너
+    // 아이템 클릭 리스너
     interface OnItemClickListener {
         fun onClick(view: View, position: Int) {
             // Toast.makeText(view.context, "테스트 - ${position}클릭", Toast.LENGTH_SHORT).show()
@@ -40,7 +39,7 @@ class MartRVAdapter(private val MartList : List<UserDTO>) : RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: MartRVAdapter.ViewHolder, position: Int) {
-        holder.bind(MartList[position])
+        holder.bind(martList[position])
 //        holder.itemView.setOnClickListener {
 //            mItemClickListener.onItemClick()
 //        }
@@ -50,19 +49,20 @@ class MartRVAdapter(private val MartList : List<UserDTO>) : RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int {
-        return MartList.size
+        return martList.size
     }
 
     inner class ViewHolder(val binding: ItemMartListBinding):  RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(mart: UserDTO) {
+        fun bind(mart: MartDTO) {
             binding.martNameTv.text = mart.name
+            binding.martProfileIv.text = mart.name
             binding.martHashtagTv1.text = mart.hashTag
-            binding.followerCountTv.text= "단골 수 ${mart.followerCount}"
-            binding.visiterCountTv.text= "상품 찜 수 ${mart.visitorCount}"
+            binding.followerCountTv.text= mart.followerCount.toString()
+            binding.dibsCountTv.text= mart.visitorCount.toString()
             binding.martImageRecyclerView.apply {
                 layoutManager= LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-                adapter=UserPostAdapter(dummyPosts)
+                adapter = UserPostAdapter(mart.post) //UserPostAdapter(dummyPosts)
             }
         }
     }

@@ -1,60 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/local_store_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.store.LocalStoreFragment"
-    android:id="@+id/local_store_container">
+    tools:context=".view.store.LocalStoreFragment">
 
     <include
         android:id="@+id/tb_shop"
+        layout="@layout/layout_mart_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        layout="@layout/layout_mart_toolbar"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/sort_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="최신순"
-        android:drawableEnd="@drawable/toggle_ic"
-        android:drawablePadding="5dp"
         android:layout_marginRight="12dp"
-        app:layout_constraintTop_toBottomOf="@id/tb_shop"
+        android:drawableEnd="@drawable/ic_arrow_down_20dp"
+        android:drawablePadding="2dp"
+        android:drawableTint="@color/primary400"
+        android:text="최신순"
+        android:textAppearance="@style/mMedium"
+        android:textColor="@color/primary400"
         app:layout_constraintBottom_toTopOf="@id/group_recyclerView"
-        app:layout_constraintEnd_toStartOf="@id/filter_tv"/>
+        app:layout_constraintEnd_toStartOf="@id/filter_tv"
+        app:layout_constraintTop_toBottomOf="@id/tb_shop" />
 
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/filter_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/sort_tv"
+        android:layout_marginEnd="20dp"
+        android:drawableEnd="@drawable/ic_filter_20dp"
+        android:drawablePadding="2dp"
+        android:drawableTint="@color/grey700"
+        android:text="@string/text_filter"
+        android:textAppearance="@style/mMedium"
+        android:textColor="@color/grey700"
         app:layout_constraintBottom_toBottomOf="@id/sort_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="15dp"
-        android:text="@string/text_filter"
-        android:layout_marginEnd="@dimen/dp_24"
-        android:drawableEnd="@drawable/filter_ic"
-        android:drawablePadding="5dp"/>
+        app:layout_constraintTop_toTopOf="@id/sort_tv" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="598dp" />
+        app:layout_constraintGuide_begin="104dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/group_recyclerView"
         android:layout_width="@dimen/full_charge"
         android:layout_height="@dimen/full_charge"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
+        android:overScrollMode="never"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,8 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guide_top"
         app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/item_mart_list"
-        android:overScrollMode="never" />
+        tools:listitem="@layout/item_mart_list" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
