@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
 import com.org.martall.databinding.ItemMartPostBinding
-import com.org.martall.model.ItemDTO
+import com.org.martall.model.ItemSimpleDTO
 
-class UserPostAdapter(private val items: List<ItemDTO>) :
+class UserPostAdapter(private val items: List<ItemSimpleDTO>) :
     RecyclerView.Adapter<UserPostAdapter.PostViewHolder>() {
 
     inner class PostViewHolder(val binding: ItemMartPostBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ItemDTO) {
+        fun bind(item: ItemSimpleDTO) {
             binding.localMartPropertyIv.setImageResource(item.imageUrl)
             with(binding) {
                 itemMartPostNameTv.text = item.name

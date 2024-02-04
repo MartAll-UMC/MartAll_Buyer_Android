@@ -4,6 +4,8 @@
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorSecondary">@color/secondary_color</item>
         <item name="android:windowBackground">@color/white</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="tabBackground">@color/white</item>
     </style>
 
     <style name="Theme.MartAll" parent="Base.Theme.MartAll" />

@@ -1,4 +1,4 @@
-package com.org.martall.view.home.category
+package com.org.martall.view.category
 
 import android.os.Bundle
 import android.view.LayoutInflater
