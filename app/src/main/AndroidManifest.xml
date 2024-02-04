@@ -13,14 +13,17 @@
         android:theme="@style/Theme.App.Starting"
         tools:targetApi="31">
         <activity
+            android:name=".view.home.NewMerchActivity"
+            android:theme="@style/Theme.MartAll" />
+        <activity
             android:name=".view.mypage.customerservice.PrivacyPolicyActivity"
-            android:theme="@style/Theme.MartAll"/>
+            android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".view.store.ProductDetailActivity"
-            android:theme="@style/Theme.MartAll"/>
+            android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".view.mypage.customerservice.ServiceTermsActivity"
-            android:theme="@style/Theme.MartAll"/>
+            android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -35,24 +38,18 @@
             android:name=".view.home.notification.NotificationActivity"
             android:exported="true"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
-        <activity android:name="com.org.martall.view.store.StoreActivity"
-            android:theme="@style/Theme.MartAll"/>
-        <activity android:name="com.org.martall.view.mypage.customerservice.CustomerServiceActivity" />
-        <activity
-            android:name=".view.likelist.DibsActivity"
-            android:theme="@style/Theme.MartAll" />
-        <activity
-            android:name=".view.Myinfo.MartShopActivity"
-            android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".view.store.StoreActivity"
             android:theme="@style/Theme.MartAll" />
         <activity android:name=".view.mypage.customerservice.CustomerServiceActivity" />
-        <activity android:name=".view.store.MartDetailInfoActivity"/>
+        <activity
+            android:name=".view.likelist.DibsActivity"
+            android:theme="@style/Theme.MartAll" />
+        <activity android:name=".view.store.MartDetailInfoActivity" />
     </application>
 
 </manifest>

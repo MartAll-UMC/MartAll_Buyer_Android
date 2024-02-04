@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.org.martall.R
 import com.org.martall.adapter.HomeAdViewPagerAdapter
+import com.org.martall.adapter.ProductSimpleRVAdapter
 import com.org.martall.databinding.FragmentHomeBinding
+import com.org.martall.model.dummyItems
 
 class HomeFragment : Fragment() {
 
@@ -17,12 +19,15 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         binding.tbHome.btnAlarm.setOnClickListener {
-            val intent = Intent(context, com.org.martall.view.home.notification.NotificationActivity::class.java)
+            val intent = Intent(
+                context,
+                com.org.martall.view.home.notification.NotificationActivity::class.java
+            )
             startActivity(intent)
         }
 
@@ -33,6 +38,12 @@ class HomeFragment : Fragment() {
         adAdapter.addFragment(HomeAdFragment(R.drawable.img_ad_4_360dp))
         binding.homeAdVp.adapter = adAdapter
         binding.homeAdVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        binding.homeMerchandiseRv.adapter = ProductSimpleRVAdapter(dummyItems.subList(0, 4))
+
+        binding.homeMerchandiseMoreTv.setOnClickListener {
+            startActivity(Intent(context, com.org.martall.view.home.NewMerchActivity::class.java))
+        }
 
         return binding.root
     }
