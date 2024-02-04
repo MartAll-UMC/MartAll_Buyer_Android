@@ -39,7 +39,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="판교역로 166"
+                    android:text="문래로 55"
                     android:textSize="15dp"
                     android:fontFamily="@font/pretendardsemibold" />
 
