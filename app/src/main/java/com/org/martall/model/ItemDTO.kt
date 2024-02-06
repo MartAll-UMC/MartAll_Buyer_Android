@@ -34,3 +34,7 @@ var dummyMeatItems: List<ItemDTO> = dummyItems.filter { it.category == 1 }
 var dummyFishItems: List<ItemDTO> = dummyItems.filter { it.category == 2 }
 var dummySnackItems: List<ItemDTO> = dummyItems.filter { it.category == 3 }
 var dummyDailyItems: List<ItemDTO> = dummyItems.filter { it.category == 4 }
+
+var dummyKeywordItems: List<String> = listOf(
+    "바나나", "귤", "삼겹살", "항정살", "세탁세제", "커피", "펩시콜라", "초콜릿", "과자", "신라면"
+)

@@ -16,6 +16,7 @@ import com.org.martall.databinding.ActivityMainBinding
 import com.org.martall.databinding.FragmentHomeBinding
 import com.org.martall.model.dummyData
 import com.org.martall.model.dummyItems
+import com.org.martall.view.search.SearchActivity
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -45,16 +46,15 @@ class HomeFragment : Fragment() {
         binding.homeAdVp.adapter = adAdapter
         binding.homeAdVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        binding.homeSearchBarSb.searchBarEt.isEnabled = false
-        binding.homeSearchBarSb.searchBarEt.setOnClickListener {
-
+        binding.homeSearchTv.setOnClickListener {
+            startActivity(Intent(context, SearchActivity::class.java))
         }
 
         binding.homeMerchandiseRv.adapter = ProductSimpleRVAdapter(dummyItems.subList(0, 4))
         binding.homeRecommendRv.adapter = HomeMartRVAdapter(dummyData.subList(0, 4))
 
         binding.homeMerchandiseMoreTv.setOnClickListener {
-            startActivity(Intent(context, com.org.martall.view.home.NewMerchActivity::class.java))
+            startActivity(Intent(context, NewMerchActivity::class.java))
         }
 
         binding.homeMartMoreTv.setOnClickListener {
