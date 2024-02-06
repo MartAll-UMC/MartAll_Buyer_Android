@@ -1,6 +1,12 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+}
+
+val properties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
 }
 
 android {
@@ -15,6 +21,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "MOCK_USER_URL", project.properties["MOCK_USER_URL"].toString())
+        buildConfigField("String", "MOCK_MART_URL", properties["MOCK_MART_URL"].toString())
+        buildConfigField("String", "MOCK_ITEM_URL", properties["MOCK_ITEM_URL"].toString())
+        buildConfigField("String", "MOCK_CART_URL", properties["MOCK_CART_URL"].toString())
     }
 
     buildTypes {
@@ -33,6 +44,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 //
 //    composeOptions {
@@ -65,6 +77,8 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0") // Circle Image를 위한 라이브러리
     implementation ("com.google.android.material:material:1.2.0-alpha01")
     implementation("androidx.datastore:datastore-preferences:1.0.0") // DataStore
+    implementation("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit
+    implementation("com.google.code.gson:gson:2.10.1") // Gson
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0") // Kotlin Serialization
 }
 
