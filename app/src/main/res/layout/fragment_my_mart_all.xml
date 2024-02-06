@@ -1,316 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="none"
     tools:context=".view.mypage.customerservice.MyMartAllFragment">
 
-    <LinearLayout
+    <include
+        android:id="@+id/tb_mypage"
+        layout="@layout/layout_mypage_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/tb_mypage"
-            layout="@layout/layout_mypage_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_iv"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_marginVertical="20dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/iv_profile"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/mart_name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
-                android:text="마트올"
-                android:textAppearance="@style/xlBold"
-                app:layout_constraintStart_toEndOf="@id/profile_iv"
-                app:layout_constraintTop_toTopOf="@id/profile_iv" />
-
-            <TextView
-                android:id="@+id/kakao_login_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="#카카오"
-                android:textAppearance="@style/mMedium"
-                android:textColor="@color/primary400"
-                app:layout_constraintStart_toStartOf="@id/mart_name_tv"
-                app:layout_constraintTop_toBottomOf="@id/mart_name_tv" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:text="로 로그인 중!"
-                android:textAppearance="@style/mMedium"
-                app:layout_constraintStart_toEndOf="@id/kakao_login_tv"
-                app:layout_constraintTop_toTopOf="@id/kakao_login_tv" />
-
-            <LinearLayout
-                android:id="@+id/buttons"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profile_iv">
-
-                <Button
-                    android:id="@+id/like_goods_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/grey100"
-                    android:fontFamily="@font/pretendardmedium"
-                    android:text="찜한 상품"
-                    android:textColor="@color/grey700" />
-
-                <Button
-                    android:id="@+id/favorite_goods_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/grey100"
-                    android:fontFamily="@font/pretendardmedium"
-                    android:text="단골 상품"
-                    android:textColor="@color/grey700" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/help_guide_tv"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_iv"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/iv_profile"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/mart_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="12dp"
+                    android:text="민지"
+                    android:textAppearance="@style/xlBold"
+                    app:layout_constraintStart_toEndOf="@id/profile_iv"
+                    app:layout_constraintTop_toTopOf="@id/profile_iv" />
+
+                <TextView
+                    android:id="@+id/kakao_login_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="#카카오"
+                    android:textAppearance="@style/mMedium"
+                    android:textColor="@color/primary400"
+                    app:layout_constraintStart_toStartOf="@id/mart_name_tv"
+                    app:layout_constraintTop_toBottomOf="@id/mart_name_tv" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="로 로그인 중!"
+                    android:textAppearance="@style/mMedium"
+                    app:layout_constraintStart_toEndOf="@id/kakao_login_tv"
+                    app:layout_constraintTop_toTopOf="@id/kakao_login_tv" />
+
+                <LinearLayout
+                    android:id="@+id/buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profile_iv">
+
+                    <android.widget.Button
+                        android:id="@+id/like_product_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_grey100_border8"
+                        android:elevation="0dp"
+                        android:stateListAnimator="@null"
+                        android:text="찜한 상품"
+                        android:textAppearance="@style/mMedium"
+                        android:textColor="@color/grey700" />
+
+                    <android.widget.Button
+                        android:id="@+id/like_mart_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_grey100_border8"
+                        android:elevation="0dp"
+                        android:stateListAnimator="@null"
+                        android:text="단골 상품"
+                        android:textAppearance="@style/mMedium"
+                        android:textColor="@color/grey700" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendardmedium"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="16dp"
-                android:text="도움말"
-                android:textAppearance="@style/mMedium"
-                android:textColor="@color/grey400"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+                android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/help_center_pannel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/help_center_btn"
+                <TextView
+                    android:id="@+id/help_guide_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_headphone_20dp"
-                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/pretendardmedium"
                     android:paddingHorizontal="20dp"
-                    android:paddingVertical="15dp"
-                    android:text="고객센터"
-                    android:textAppearance="@style/lBold"
-                    android:textColor="@color/grey700"
-                    app:drawableTint="@color/grey400"
+                    android:paddingVertical="16dp"
+                    android:text="도움말"
+                    android:textAppearance="@style/mMedium"
+                    android:textColor="@color/grey400"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="parent" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/ic_arrow_right_20dp"
-                    app:layout_constraintBottom_toBottomOf="@id/help_center_btn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/help_center_btn"
-                    app:tint="@color/grey400" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/help_center_pannel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/help_center_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_headphone_20dp"
+                        android:drawablePadding="8dp"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="15dp"
+                        android:text="고객센터"
+                        android:textAppearance="@style/lBold"
+                        android:textColor="@color/grey700"
+                        app:drawableTint="@color/grey400"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/privacy_policy_pannel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_arrow_right_20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/help_center_btn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/help_center_btn"
+                        app:tint="@color/grey400" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/privacy_policy_btn"
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/privacy_policy_pannel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/privacy_policy_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_person_20dp"
+                        android:drawablePadding="8dp"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="15dp"
+                        android:text="개인정보처리방침"
+                        android:textAppearance="@style/lBold"
+                        android:textColor="@color/grey700"
+                        app:drawableTint="@color/grey400"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_arrow_right_20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/privacy_policy_btn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/privacy_policy_btn"
+                        app:tint="@color/grey400" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/service_term_pannel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/service_term_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_book_20dp"
+                        android:drawablePadding="8dp"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="15dp"
+                        android:text="서비스이용약관"
+                        android:textAppearance="@style/lBold"
+                        android:textColor="@color/grey700"
+                        app:drawableTint="@color/grey400"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_arrow_right_20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/service_term_btn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/service_term_btn"
+                        app:tint="@color/grey400" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/service_intro_pannel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/service_intro_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_bookmark_20dp"
+                        android:drawablePadding="8dp"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="15dp"
+                        android:text="서비스 소개 "
+                        android:textAppearance="@style/lBold"
+                        android:textColor="@color/grey700"
+                        app:drawableTint="@color/grey400"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_arrow_right_20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/service_intro_btn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/service_intro_btn"
+                        app:tint="@color/grey400" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/setting_guide_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_person_20dp"
-                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/pretendardmedium"
                     android:paddingHorizontal="20dp"
-                    android:paddingVertical="15dp"
-                    android:text="개인정보처리방침"
-                    android:textAppearance="@style/lBold"
-                    android:textColor="@color/grey700"
-                    app:drawableTint="@color/grey400"
+                    android:paddingVertical="16dp"
+                    android:text="설정"
+                    android:textAppearance="@style/mMedium"
+                    android:textColor="@color/grey400"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="parent" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/ic_arrow_right_20dp"
-                    app:layout_constraintBottom_toBottomOf="@id/privacy_policy_btn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/privacy_policy_btn"
-                    app:tint="@color/grey400" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/service_term_pannel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/service_term_btn"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/myplace_pannel"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_book_20dp"
-                    android:drawablePadding="8dp"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="15dp"
-                    android:text="서비스이용약관"
-                    android:textAppearance="@style/lBold"
-                    android:textColor="@color/grey700"
-                    app:drawableTint="@color/grey400"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="wrap_content">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/ic_arrow_right_20dp"
-                    app:layout_constraintBottom_toBottomOf="@id/service_term_btn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/service_term_btn"
-                    app:tint="@color/grey400" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/myplace_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="15dp"
+                        android:text="내 위치 "
+                        android:textAppearance="@style/lBold"
+                        android:textColor="@color/grey700"
+                        app:drawableTint="@color/grey400"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="15dp"
+                        android:src="@drawable/ic_arrow_right_20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/myplace_btn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/myplace_btn"
+                        app:tint="@color/grey400" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/service_intro_pannel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/service_intro_btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_bookmark_20dp"
-                    android:drawablePadding="8dp"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="15dp"
-                    android:text="서비스 소개 "
-                    android:textAppearance="@style/lBold"
-                    android:textColor="@color/grey700"
-                    app:drawableTint="@color/grey400"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/ic_arrow_right_20dp"
-                    app:layout_constraintBottom_toBottomOf="@id/service_intro_btn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/service_intro_btn"
-                    app:tint="@color/grey400" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <TextView
-                android:id="@+id/setting_guide_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/pretendardmedium"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="16dp"
-                android:text="설정"
-                android:textAppearance="@style/mMedium"
-                android:textColor="@color/grey400"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/myplace_pannel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/myplace_btn"
+                <TextView
+                    android:id="@+id/logout_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="15dp"
-                    android:text="내 위치 "
+                    android:text="로그아웃"
                     android:textAppearance="@style/lBold"
-                    android:textColor="@color/grey700"
-                    app:drawableTint="@color/grey400"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textColor="@color/grey700" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/quit_btn"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="15dp"
-                    android:src="@drawable/ic_arrow_right_20dp"
-                    app:layout_constraintBottom_toBottomOf="@id/myplace_btn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/myplace_btn"
-                    app:tint="@color/grey400" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/logout_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="15dp"
-                android:text="로그아웃"
-                android:textAppearance="@style/lBold"
-                android:textColor="@color/grey700" />
-
-            <TextView
-                android:id="@+id/quit_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="15dp"
-                android:text="탈퇴하기"
-                android:textAppearance="@style/lBold"
-                android:textColor="@color/grey700" />
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="15dp"
+                    android:text="탈퇴하기"
+                    android:textAppearance="@style/lBold"
+                    android:textColor="@color/grey700" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
