@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet_filter_sort"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/Widget.Material3.BottomSheet"
+    android:padding="20dp"
+    app:layout_behavior="com.google.material.bottomsheet.BottomSheetBehavior">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/sort_defalut_tv"
+            android:text="기본순"
+            android:textAppearance="@style/mSemiBold"
+            android:drawableEnd="@drawable/ic_check_20dp"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/dp_12"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:id="@+id/sort_lastest_tv"
+        android:text="최신순"
+        android:textAppearance="@style/mSemiBold"
+        android:drawableEnd="@drawable/ic_check_20dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/sort_defalut_tv"
+        android:paddingEnd="@dimen/dp_12"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:id="@+id/sort_dibs_tv"
+        android:text="찜 지수 순"
+        android:textAppearance="@style/mSemiBold"
+        android:drawableEnd="@drawable/ic_check_20dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/sort_lastest_tv"
+        android:paddingEnd="@dimen/dp_12"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

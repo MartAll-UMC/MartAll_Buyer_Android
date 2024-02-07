@@ -16,12 +16,16 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" >
+        app:layout_constraintTop_toTopOf="parent" >
 
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:src="@drawable/btn_back_button" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_back"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="5dp"/>
 
         <TextView
             android:layout_width="0dp"
@@ -29,14 +33,23 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="주문 내역"
+            android:fontFamily="@font/pretendardbold"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <ImageView
+
+        <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:src="@drawable/btn_search_button"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/categorysearch"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="5dp"/>
+
+
+
 
     </LinearLayout>
 
@@ -63,6 +76,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="진행상황"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendardbold"
             android:textSize="25dp"
             android:textStyle="bold"/>
 
@@ -259,7 +274,7 @@
         android:layout_width="19dp"
         android:layout_height="22dp"
         android:layout_marginEnd="6dp"
-        android:background="@drawable/btn_orderlist_date"
+        android:background="@drawable/btn_orderlist_date_1"
         app:layout_constraintTop_toTopOf="@id/orderlist_search_date_1"
         app:layout_constraintBottom_toBottomOf="@id/orderlist_search_date_1"
         app:layout_constraintEnd_toEndOf="@id/orderlist_search_date_1"/>
@@ -290,7 +305,7 @@
         android:layout_width="19dp"
         android:layout_height="22dp"
         android:layout_marginEnd="6dp"
-        android:background="@drawable/btn_orderlist_date"
+        android:background="@drawable/btn_orderlist_date_1"
         app:layout_constraintTop_toTopOf="@id/orderlist_search_date_2"
         app:layout_constraintBottom_toBottomOf="@id/orderlist_search_date_2"
         app:layout_constraintEnd_toEndOf="@id/orderlist_search_date_2"/>
@@ -341,7 +356,7 @@
     <Button
         android:layout_width="93dp"
         android:layout_height="40dp"
-        android:background=""
+        android:background="@color/transparent"
         android:text="전체 ▼"
         android:layout_marginTop="-10dp"
         android:layout_marginEnd="-15dp"
@@ -374,7 +389,9 @@
         android:id="@+id/orderlist_order_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendardbold"
         android:text="주문취소"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="18dp"
         android:layout_marginStart="30dp"
@@ -385,7 +402,7 @@
         android:id="@+id/orderlist_product_image"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:src="@drawable/img_martshop_img"
+        android:src="@drawable/merchandise"
         android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="@+id/orderlist_bg_2"
         app:layout_constraintTop_toBottomOf="@+id/orderlist_order_state"
@@ -396,7 +413,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="마트명"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendardbold"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/orderlist_product_image"
         app:layout_constraintTop_toTopOf="@id/orderlist_product_image"
         android:layout_marginStart="16dp" />
@@ -406,17 +426,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="제품명"
-        android:textSize="14sp"
+        android:fontFamily="@font/pretendardbold"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/orderlist_mart_name"
         app:layout_constraintTop_toBottomOf="@id/orderlist_mart_name"
-        android:layout_marginTop="4dp" />
+        android:layout_marginTop="11dp" />
 
     <TextView
         android:id="@+id/orderlist_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="주문 금액 : 26,000원"
-        android:textSize="14sp"
+        android:fontFamily="@font/pretendardregular"
+        android:textColor="@color/black"
+        android:textSize="13sp"
         app:layout_constraintStart_toStartOf="@id/orderlist_product_name"
         app:layout_constraintTop_toBottomOf="@id/orderlist_product_name"
         android:layout_marginTop="4dp" />

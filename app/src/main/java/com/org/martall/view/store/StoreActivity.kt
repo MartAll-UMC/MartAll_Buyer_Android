@@ -8,16 +8,16 @@ import com.org.martall.view.store.user.ShopUserFragment
 
 class StoreActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityStoreBinding
+    private lateinit var binding: ActivityStoreBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityStoreBinding.inflate(layoutInflater).also {
+        binding = ActivityStoreBinding.inflate(layoutInflater).also {
             setContentView(it.root)
         }
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fcv_fragment,ShopUserFragment())
+            .add(R.id.fcv_fragment, ShopUserFragment())
             .commit()
 
     }

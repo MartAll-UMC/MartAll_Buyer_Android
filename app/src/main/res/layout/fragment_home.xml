@@ -1,150 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
+        android:id="@+id/tb_home"
+        layout="@layout/layout_home_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/logo_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/location"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tb_home">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/logo_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendardmedium"
-            android:gravity="center"
-            android:text="나의 위치"
-            android:textColor="#5371ff"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@id/logo_iv"
-            app:layout_constraintTop_toTopOf="@+id/logo_iv" />
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendardsemibold"
-            android:gravity="center"
-            android:text="판교역로 166"
-            android:textColor="#000000"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@id/logo_iv"
-            app:layout_constraintTop_toBottomOf="@id/logo_tv"/>
-
-        <ImageButton
-            android:id="@+id/menu_ib"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="17dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:src="@drawable/menu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/shoping_cart_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:src="@drawable/shopping_cart"
-            android:background="@android:color/transparent"
-            app:layout_constraintRight_toLeftOf="@id/menu_ib"
-            app:layout_constraintTop_toTopOf="@id/logo_iv" />
-
-        <ImageView
-            android:id="@+id/ad_iv"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/temp_ad"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logo_iv" />
+            android:layout_height="match_parent"
+            android:paddingBottom="40dp">
 
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/home_ad_vp"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/logo_big_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="11dp"
-            android:src="@drawable/logo_big"
-            android:background="@android:color/transparent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ad_iv" />
+            <ImageView
+                android:id="@+id/search_logo_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_logo_line_26dp"
+                app:layout_constraintBottom_toBottomOf="@id/home_search_tv"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@id/home_search_tv" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_bar_sb"
-            android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:layout_marginStart="62dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="19dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/logo_big_iv"
-            app:layout_constraintTop_toBottomOf="@id/ad_iv">
+            <TextView
+                android:id="@+id/home_search_tv"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginLeft="58dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_grey100_border20"
+                android:drawableEnd="@drawable/ic_search_24dp"
+                android:drawableTint="@color/grey700"
+                android:hint="사과, 삼겹살, 과자 등.."
+                android:overScrollMode="ifContentScrolls"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:textAppearance="@style/mMedium"
+                android:textColorHint="@color/grey400"
+                app:layout_constraintLeft_toRightOf="@id/search_logo_iv"
+                app:layout_constraintTop_toBottomOf="@id/home_ad_vp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/home_search_et"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/home_merchandise_list_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="새로 나온 상품"
+                android:textAppearance="@style/xlBold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_search_tv" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/home_merchandise_more_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/pretendardsemibold"
+                android:gravity="center"
+                android:text="더보기"
+                android:textAppearance="@style/sMedium"
+                android:textColor="@color/grey400"
+                app:layout_constraintBottom_toBottomOf="@id/home_merchandise_list_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/home_merchandise_list_tv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_merchandise_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/baseline_search_24"
-                android:drawablePadding="32dp"
-                android:hint="검색어를 입력해주세요."
-                android:textColorHint="#999900"
-                android:background="@drawable/background_gray_edt_r11"/>
+                android:layout_marginTop="12dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:overScrollMode="never"
+                android:paddingVertical="12dp"
+                android:paddingLeft="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/home_merchandise_list_tv"
+                tools:layout_editor_absoluteX="0dp"
+                tools:listitem="@layout/item_home_product" />
 
+            <ImageView
+                android:id="@+id/home_ad2_iv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/img_360_banner_1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_merchandise_rv" />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/home_mart_list_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="34dp"
+                android:fontFamily="@font/pretendardsemibold"
+                android:gravity="center"
+                android:text="민지님만을 위한 추천 마트"
+                android:textAppearance="@style/xlBold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_ad2_iv" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/home_mart_more_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:text="더보기"
+                android:textAppearance="@style/sMedium"
+                android:textColor="@color/grey400"
+                app:layout_constraintBottom_toBottomOf="@id/home_mart_list_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/home_mart_list_tv" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/home_recommend_rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="14dp"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingVertical="4dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_mart_list_tv"
+                tools:listitem="@layout/item_recommend_mart" />
 
-        <include layout="@layout/item_merchandise_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/search_bar_sb"
-            android:id="@+id/item_merchandise_list_ic" />
-
-        <ImageView
-            android:id="@+id/home_ad2_iv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ad2"
-            android:layout_marginTop="28dp"
-            android:adjustViewBounds="true"
-            app:layout_constraintTop_toBottomOf="@id/item_merchandise_list_ic"/>
-
-        <include layout="@layout/item_merchandise_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/home_ad2_iv"
-            android:id="@+id/item_merchandise_list_ic_1" />
-
-        <include layout="@layout/item_recommend_mart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/item_merchandise_list_ic_1"
-            android:id="@+id/item_recommend_mart_ic"/>
-
-        <include layout="@layout/item_terms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/item_recommend_mart_ic"
-            android:id="@+id/item_terms_ic"/>
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</RelativeLayout>

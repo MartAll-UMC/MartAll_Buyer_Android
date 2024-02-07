@@ -22,7 +22,8 @@
         android:layout_marginTop="@dimen/dp_24"
         tools:text="총 x 명"
         android:textStyle="bold"
-        android:textSize="@dimen/sp_18"/>
+        android:textSize="@dimen/sp_18"
+        android:fontFamily="@font/pretendardsemibold"/>
 
     <Spinner
         android:id="@+id/spinner_order"

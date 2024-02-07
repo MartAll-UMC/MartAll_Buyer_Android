@@ -2,28 +2,22 @@
     <!-- fragment shop user text-->
     <string name="app_name">MartAll</string>
     <string name="text_filter">필터</string>
-    <string name="text_filter_title">검색 필터</string>
+    <string name="text_filter_title">가격</string>
     <string name="text_all">전체</string>
     <string name="text_follower_order">팔로워 순</string>
     <string name="text_visited_order">방문자 순</string>
-    <string name="text_latest_order">신규 순</string>
+    <string name="text_latest_order">최신 순</string>
+    <string name="text_membership_order">단골 지수 순</string>
+    <string name="text_heart_order">찜 지수 순</string>
     <string name="text_follow">팔로우</string>
 
 
     <!-- filter Spinner 에 들어갈 목록 -->
     <string-array name="sort_list">
         <item>@string/text_all</item>
-        <item>@string/text_follower_order</item>
-        <item>@string/text_visited_order</item>
         <item>@string/text_latest_order</item>
-    </string-array>
-  
-    <string-array name="spinner_array">
-        <item>전체</item>
-        <item>입점 상품 순</item>
-        <item>회원 지수 순</item>
-        <item>판매 지수 순</item>
-        <item>신규순</item>
+        <item>@string/text_membership_order</item>
+        <item>@string/text_heart_order</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

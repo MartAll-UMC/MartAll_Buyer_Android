@@ -1,45 +1,48 @@
 package com.org.martall.model
 
-import android.graphics.PostProcessor
 import com.org.martall.R
 
-data class UserDTO(
-    val imageUrl : Int,
-    val name: String,
-    val hashTag: String,
-    val followerCount: Int,
-    val visitorCount: Int,
-    val post : List<Post>
+data class MartDTO(
+    val imageUrl : Int? = null,
+    val name: String = "",
+    val hashTag: String = "",
+    val followerCount: Int? = null,
+    val visitorCount: Int? = null,
+    val post : List<ItemSimpleDTO>,
+    var isLiked: Boolean = false,
 )
 
-data class Post(
-    val imageUrl: Int,
+data class ItemSimpleDTO(
+    val imageUrl : Int = 0,
+    val name: String = "",
+    val price: Int = 0,
+    val isLiked: Boolean = false,
 )
 
-val dummyPosts : List<Post> = listOf(
-    Post(R.drawable.ic_launcher_background),
-    Post(R.drawable.ic_launcher_background),
-    Post(R.drawable.ic_launcher_background),
-    Post(R.drawable.ic_launcher_background),
-    Post(R.drawable.ic_launcher_background),
+val dummyPosts : List<ItemSimpleDTO> = listOf(
+    ItemSimpleDTO(R.drawable.img_item_banana_360dp, "바나나", 5000, false),
+    ItemSimpleDTO(R.drawable.iv_spam, "스팸", 4500, false),
+    ItemSimpleDTO(R.drawable.img_item_banana_360dp, "바나나", 5000, false),
+    ItemSimpleDTO(R.drawable.iv_spam, "스팸", 4500, false),
+    ItemSimpleDTO(R.drawable.img_item_banana_360dp, "바나나", 5000, false),
 )
 
 
-val dummyData : List<UserDTO> = listOf(
-    UserDTO(
-        imageUrl = R.drawable.ic_launcher_background, "회원1", "#aa#bb",
+val dummyData : List<MartDTO> = listOf(
+    MartDTO(
+        imageUrl = R.drawable.img_item_banana_360dp, "오렌지마트", "#정육",
         1, 2, dummyPosts
     ),
-    UserDTO(
-        imageUrl = R.drawable.ic_launcher_background, "회원2", "#aa#bb",
+    MartDTO(
+        imageUrl = R.drawable.iv_spam, "하이마트", "#수산",
         1, 2, dummyPosts
     ),
-    UserDTO(
-        imageUrl = R.drawable.ic_launcher_background, "회원3", "#aa#bb",
+    MartDTO(
+        imageUrl = R.drawable.img_item_banana_360dp, "맘마농가식자재", "#식품",
         1, 2, dummyPosts
     ),
-    UserDTO(
-        imageUrl = R.drawable.ic_launcher_background, "회원4", "#aa#bb",
+    MartDTO(
+        imageUrl = R.drawable.iv_spam, "숲속마트", "#생활용품",
         1, 2, dummyPosts
     ),
 )

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notification_order_ready_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상품 준비중"
+        android:textAppearance="@style/lSemiBold"
+        android:textColor="@color/pink"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginStart="20dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notification_merchandise_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="제로마트 상품 3개"
+        android:textAppearance="@style/lSemiBold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginEnd="20dp"/>
+
+    <GridLayout
+        android:id="@+id/notification_order_1_gl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/notification_order_ready_tv">
+        
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/notification_order_1_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical"
+            android:layout_rowSpan="3"
+            android:src="@drawable/mart_products_food_1_56dp_iv"/>
+        
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notification_order_category_1_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="과일&amp;채소"
+            android:textAppearance="@style/xsRegular"
+            android:textColor="@color/grey400"
+            android:layout_marginStart="12dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notification_order_name_1_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:text="돌 바나나 1.2kg 1개"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginStart="@dimen/dp_12"
+          
+            android:textAppearance="@style/sRegular"/>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notification_order_price_1_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:text="5,000원"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginStart="12dp"
+            android:textAppearance="@style/mBold"/>
+
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/notification_order_2_gl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/notification_order_1_gl">
+      
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/notification_order_2_gl_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical"
+            android:layout_rowSpan="3"
+            android:src="@drawable/mart_products_food_1_56dp_iv"/>
+        
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notification_order_category_2_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="과일&amp;채소"
+            android:textAppearance="@style/xsRegular"
+            android:textColor="@color/grey400"
+            android:layout_marginStart="12dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notification_order_name_2_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:text="돌 바나나 1.2kg 1개"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginStart="@dimen/dp_12"
+            android:textAppearance="@style/sRegular"/>
+        
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notification_order_price_2_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:text="5,000원"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginStart="12dp"
+            android:textAppearance="@style/mBold"/>
+
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/notification_order_3_gl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/notification_order_2_gl">
+       
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/notification_order_3_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical"
+            android:layout_rowSpan="3"
+            android:src="@drawable/mart_products_food_3_56dp_iv"/>
+        
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notification_order_category_3_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="정육"
+            android:textAppearance="@style/xsRegular"
+            android:textColor="@color/grey400"
+            android:layout_marginStart="12dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notification_order_name_3_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="1"
+            android:text="스팸"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginStart="@dimen/dp_12"
+            android:textAppearance="@style/sRegular"/>
+        
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/notification_order_price_3_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_row="2"
+            android:text="5,500원"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginStart="12dp"
+            android:textAppearance="@style/mBold"/>
+
+    </GridLayout>
+    
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="총 주문 금액"
+        android:textAppearance="@style/mMedium"
+        android:textColor="@color/primary400"
+        app:layout_constraintTop_toBottomOf="@id/notification_order_3_gl"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="@dimen/dp_32"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15,500원"
+        android:textAppearance="@style/mBold"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/notification_order_3_gl"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="@dimen/dp_32"/>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

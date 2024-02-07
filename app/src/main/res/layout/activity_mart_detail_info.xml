@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/mart_detail_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:id="@+id/back_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_12"
+                android:src="@drawable/ic_arrow_left_32dp"
+                android:layout_margin="14dp" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상품 상세"
+                android:textSize="16sp"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/pretendardbold"
+                app:layout_constraintStart_toEndOf="@id/back_ic"
+                app:layout_constraintTop_toTopOf="@id/back_ic" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/mart_profile_iv"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/mart_profil_iv"
+            android:layout_margin="20dp"
+            app:layout_constraintTop_toBottomOf="@id/mart_detail_toolbar"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/mart_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="마트명"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginLeft="20dp"
+            android:fontFamily="@font/pretendardsemibold"
+            app:layout_constraintTop_toTopOf="@id/mart_profile_iv"
+            app:layout_constraintBottom_toTopOf="@id/mart_hashtag_list_tv"
+            app:layout_constraintStart_toEndOf="@id/mart_profile_iv"/>
+
+        <LinearLayout
+            android:id="@+id/mart_hashtag_list_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/mart_name_tv"
+            app:layout_constraintTop_toBottomOf="@id/mart_name_tv"
+            app:layout_constraintBottom_toTopOf="@id/mart_hashtag_list_tv" >
+
+            <TextView
+                android:id="@+id/mart_hashtag_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#육아"
+                android:textSize="12sp"
+                android:textColor="#B9B9B9"
+                android:fontFamily="@font/pretendardregular"/>
+
+            <TextView
+                android:id="@+id/mart_hashtag_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#뷰티"
+                android:textSize="12sp"
+                android:textColor="#B9B9B9"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/pretendardregular"/>
+
+            <TextView
+                android:id="@+id/mart_hashtag_tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#스포츠"
+                android:textSize="12sp"
+                android:textColor="#B9B9B9"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/pretendardregular"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/follower_visiter_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@id/mart_name_tv"
+            app:layout_constraintTop_toBottomOf="@id/mart_hashtag_list_tv"
+            app:layout_constraintBottom_toBottomOf="@id/mart_profile_iv" >
+
+            <TextView
+                android:id="@+id/follower_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="단골 수 0"
+                android:textSize="10sp"
+                android:fontFamily="@font/pretendardregular"
+                app:layout_constraintTop_toBottomOf="@id/mart_hashtag_list_tv"/>
+
+            <TextView
+                android:id="@+id/divide_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="|"
+                android:textSize="10sp"
+                android:fontFamily="@font/pretendardregular"/>
+
+            <TextView
+                android:id="@+id/visiter_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="상품 찜 수 0"
+                android:textSize="10sp"
+                android:fontFamily="@font/pretendardregular"/>
+        </LinearLayout>
+        
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/show_detail_btn"
+            android:layout_width="155dp"
+            android:layout_height="40dp"
+            android:text="상세정보"
+            android:textColor="@color/grey400"
+            android:textSize="14dp"
+            android:fontFamily="@font/pretendardsemibold"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/background_gray_square_r8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/add_favorite_mart_btn"
+            app:layout_constraintTop_toBottomOf="@id/mart_profile_iv" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_favorite_mart_btn"
+            android:layout_width="155dp"
+            android:layout_height="40dp"
+            android:text="단골 추가"
+            android:textSize="14dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/pretendardsemibold"
+            android:background="@drawable/background_primary400_fill_r12"
+            app:layout_constraintStart_toEndOf="@id/show_detail_btn"
+            app:layout_constraintTop_toTopOf="@id/show_detail_btn"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/place_guide_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="위치"
+            android:textSize="18dp"
+            android:fontFamily="@font/pretendardbold"
+            android:layout_marginTop="14dp"
+            app:layout_constraintStart_toStartOf="@id/mart_profile_iv"
+            app:layout_constraintTop_toBottomOf="@id/show_detail_btn" />
+
+        <TextView
+            android:id="@+id/mart_place_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서울 도봉구 113길 42 (쌍문동) 1층"
+            android:textSize="12sp"
+            android:fontFamily="@font/pretendardregular"
+            android:layout_marginTop="14dp"
+            app:layout_constraintStart_toStartOf="@id/mart_profile_iv"
+            app:layout_constraintTop_toBottomOf="@id/place_guide_tv" />
+
+        <TextView
+            android:id="@+id/goods_list_guide_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상품 목록"
+            android:textSize="18dp"
+            android:fontFamily="@font/pretendardbold"
+            android:layout_marginTop="14dp"
+            app:layout_constraintStart_toStartOf="@id/mart_place_tv"
+            app:layout_constraintTop_toBottomOf="@id/mart_place_tv" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/sort_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="최신순"
+            android:textColor="@color/primary400"
+            android:drawableEnd="@drawable/toggle_ic"
+            android:layout_marginRight="5dp"
+            app:layout_constraintTop_toTopOf="@id/goods_list_guide_tv"
+            app:layout_constraintEnd_toEndOf="@id/add_favorite_mart_btn"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/post1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/post2"
+            app:layout_constraintTop_toBottomOf="@id/goods_list_guide_tv" >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/item_mart_post1_cardView"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" >
+
+                <ImageView
+                    android:id="@+id/local_mart_property1_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:src="@drawable/img_item_banana_360dp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/item_mart_post_heart1_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/white_heart_ic"
+                android:clickable="true"
+                android:onClick="toggleHeart"
+                app:layout_constraintEnd_toEndOf="@id/item_mart_post1_cardView"
+                app:layout_constraintTop_toTopOf="@id/item_mart_post1_cardView" />
+
+            <TextView
+                android:id="@+id/mart_name1_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오렌지마트 광운대점"
+                android:textSize="12sp"
+                android:textColor="@color/grey700"
+                android:fontFamily="@font/pretendardregular"
+                app:layout_constraintStart_toStartOf="@id/item_mart_post1_cardView"
+                app:layout_constraintTop_toBottomOf="@id/item_mart_post1_cardView" />
+            <TextView
+                android:id="@+id/item_mart_post_name1_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendardregular"
+                android:text="바나나"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                app:layout_constraintStart_toStartOf="@id/mart_name1_tv"
+                app:layout_constraintTop_toBottomOf="@id/mart_name1_tv" />
+
+            <TextView
+                android:id="@+id/item_mart_post_price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5000원"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="@font/pretendardregular"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@id/item_mart_post1_cardView"
+                app:layout_constraintTop_toBottomOf="@id/item_mart_post_name1_tv" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/post2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toEndOf="@id/post1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/goods_list_guide_tv" >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/item_mart_post2_cardView"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" >
+
+                <ImageView
+                    android:id="@+id/local_mart_property2_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:src="@drawable/iv_spam" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/item_mart_post_heart2_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/white_heart_ic"
+                app:layout_constraintEnd_toEndOf="@id/item_mart_post2_cardView"
+                app:layout_constraintTop_toTopOf="@id/item_mart_post2_cardView" />
+
+            <TextView
+                android:id="@+id/mart_name2_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오렌지마트 광운대점"
+                android:textSize="12sp"
+                android:textColor="@color/grey700"
+                android:fontFamily="@font/pretendardregular"
+                app:layout_constraintStart_toStartOf="@id/item_mart_post2_cardView"
+                app:layout_constraintTop_toBottomOf="@id/item_mart_post2_cardView" />
+            <TextView
+                android:id="@+id/item_mart_post_name2_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendardregular"
+                android:text="스팸"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/mart_name2_tv"
+                app:layout_constraintTop_toBottomOf="@id/mart_name2_tv" />
+
+            <TextView
+                android:id="@+id/item_mart_post_price2_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5000원"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="@font/pretendardregular"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@id/item_mart_post2_cardView"
+                app:layout_constraintTop_toBottomOf="@id/item_mart_post_name2_tv" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/post3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@id/post1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/post4">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/item_mart_post3_cardView"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" >
+
+                <ImageView
+                    android:id="@+id/local_mart_property3_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:src="@drawable/img_item_banana_360dp" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/item_mart_post_heart3_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/white_heart_ic"
+                app:layout_constraintEnd_toEndOf="@id/item_mart_post3_cardView"
+                app:layout_constraintTop_toTopOf="@id/item_mart_post3_cardView" />
+
+            <TextView
+                android:id="@+id/mart_name3_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오렌지마트 광운대점"
+                android:textSize="12sp"
+                android:textColor="@color/grey700"
+                android:fontFamily="@font/pretendardregular"
+                app:layout_constraintStart_toStartOf="@id/item_mart_post3_cardView"
+                app:layout_constraintTop_toBottomOf="@id/item_mart_post3_cardView" />
+            <TextView
+                android:id="@+id/item_mart_post_name3_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendardregular"
+                android:text="바나나"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/mart_name3_tv"
+                app:layout_constraintTop_toBottomOf="@id/mart_name3_tv" />
+
+            <TextView
+                android:id="@+id/item_mart_post_price3_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5000원"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:fontFamily="@font/pretendardregular"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@id/item_mart_post3_cardView"
+                app:layout_constraintTop_toBottomOf="@id/item_mart_post_name3_tv" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/post4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@id/post2"
+            app:layout_constraintStart_toEndOf="@id/post3"
+            app:layout_constraintEnd_toEndOf="parent" >
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/item_mart_post4_cardView"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/local_mart_property4_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    android:src="@drawable/iv_spam" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/item_mart_post_heart4_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/white_heart_ic"
+                app:layout_constraintEnd_toEndOf="@id/item_mart_post4_cardView"
+                app:layout_constraintTop_toTopOf="@id/item_mart_post4_cardView" />
+
+            <TextView
+                android:id="@+id/mart_name4_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendardregular"
+                android:text="오렌지마트 광운대점"
+                android:textColor="@color/grey700"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/item_mart_post4_cardView"
+                app:layout_constraintTop_toBottomOf="@id/item_mart_post4_cardView" />
+
+            <TextView
+                android:id="@+id/item_mart_post_name4_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendardregular"
+                android:text="스팸"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/mart_name4_tv"
+                app:layout_constraintTop_toBottomOf="@id/mart_name4_tv" />
+
+            <TextView
+                android:id="@+id/item_mart_post_price4_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/pretendardregular"
+                android:text="5000원"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/item_mart_post4_cardView"
+                app:layout_constraintTop_toBottomOf="@id/item_mart_post_name4_tv" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>
+
