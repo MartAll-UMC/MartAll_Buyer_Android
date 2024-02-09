@@ -12,5 +12,6 @@ data class DibsProductResponseDTO(
         val content: String,
         val itemId: Int,
         val itemName: String,
-        val price: Int)
+        val price: Int,
+        var isLiked: Boolean = false)
 }
