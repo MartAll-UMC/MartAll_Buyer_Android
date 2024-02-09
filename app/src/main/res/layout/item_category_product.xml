@@ -32,6 +32,7 @@
         android:layout_marginEnd="@dimen/dp_12"
         android:src="@drawable/ic_like_unfilled_20dp"
         android:visibility="visible"
+        android:background="@color/transparent"
         app:layout_constraintEnd_toEndOf="@id/cv_product_img"
         app:layout_constraintTop_toTopOf="@id/cv_product_img" />
 
