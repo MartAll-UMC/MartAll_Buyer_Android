@@ -1,18 +1,16 @@
 package com.org.martall.view.store
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.org.martall.R
 import com.org.martall.adapter.MartRVAdapter
 import com.org.martall.databinding.FragmentLocalStoreBinding
-import com.org.martall.model.MartDTO
 import com.org.martall.model.dummyData
+import com.org.martall.view.search.SearchActivity
 import com.org.martall.view.store.user.bottomsheet.FilterBottomSheet
 import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
 
@@ -25,10 +23,15 @@ class LocalStoreFragment : Fragment() {
     ): View? {
         binding = FragmentLocalStoreBinding.inflate(inflater, container, false)
 
-        // initToolBar()
         initRecyclerView()
         showFilterBottomSheet()
         showSortBottomSheet()
+
+        binding.tbShop.ivSearch.setOnClickListener {
+            val intent = Intent(context, SearchActivity::class.java)
+            intent.putExtra("isProductSearch", false)
+            startActivity(intent)
+        }
 
         val martRVAdapter = MartRVAdapter(dummyData)
         binding.groupRecyclerView.adapter = martRVAdapter

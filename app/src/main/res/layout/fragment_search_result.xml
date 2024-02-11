@@ -82,7 +82,7 @@
         android:id="@+id/search_result_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:clipToPadding="false"
+        android:clipToPadding="true"
         android:paddingVertical="12dp"
         android:paddingRight="20dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

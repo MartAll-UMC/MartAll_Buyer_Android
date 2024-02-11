@@ -1,7 +1,6 @@
 package com.org.martall.view.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class SearchBeforeFragment(private val isProduct: Boolean) :
+class SearchBeforeFragment(private val isProductSearch: Boolean) :
     Fragment() {
     lateinit var binding: FragmentSearchBeforeBinding
 
@@ -25,11 +24,18 @@ class SearchBeforeFragment(private val isProduct: Boolean) :
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentSearchBeforeBinding.inflate(inflater, container, false)
-        var keywords : MutableList<String> = mutableListOf()
+        var keywords: MutableList<String> = mutableListOf()
 
         GlobalScope.launch(Dispatchers.Main) {
-            val dataStore = requireContext().dataStore
-            keywords = ListToDataStoreUtil().getList(dataStore, "recentKeywords").toMutableList()
+            if (isProductSearch) {
+                val dataStore = requireContext().dataStore
+                keywords = ListToDataStoreUtil().getList(dataStore, "recentProductKeywords")
+                    .toMutableList()
+            } else {
+                val dataStore = requireContext().dataStore
+                keywords =
+                    ListToDataStoreUtil().getList(dataStore, "recentMartKeywords").toMutableList()
+            }
 
             if (keywords.isEmpty()) {
                 binding.recentSearchTitleTv.visibility = View.GONE
@@ -37,14 +43,16 @@ class SearchBeforeFragment(private val isProduct: Boolean) :
             } else {
                 binding.recentSearchTitleTv.visibility = View.VISIBLE
                 binding.recentSearchRv.visibility = View.VISIBLE
-                binding.recentSearchRv.adapter = RecentKeywordRVAdapter(keywords)
+                binding.recentSearchRv.adapter = RecentKeywordRVAdapter(isProductSearch, keywords)
             }
         }
 
         binding.recommendKeywords1Rv.adapter = RecommendKeywordRVAdapter(
+            isProductSearch,
             dummyKeywordItems.subList(0, 5)
         )
         binding.recommendKeywords2Rv.adapter = RecommendKeywordRVAdapter(
+            isProductSearch,
             dummyKeywordItems.subList(5, 10),
             true
         )

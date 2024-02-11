@@ -19,8 +19,9 @@ class ListToDataStoreUtil {
 
     suspend fun getList(dataStore: DataStore<Preferences>, key: String): List<String> {
         val jsonString = dataStore.data.map { pref ->
-            pref[stringPreferencesKey(key)].toString()
+            pref[stringPreferencesKey(key)] ?: "[]"
         }.first()
+
         return Json.decodeFromString<List<String>>(jsonString)
     }
 }

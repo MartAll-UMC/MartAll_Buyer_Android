@@ -47,7 +47,9 @@ class HomeFragment : Fragment() {
         binding.homeAdVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         binding.homeSearchTv.setOnClickListener {
-            startActivity(Intent(context, SearchActivity::class.java))
+            val intent = Intent(context, SearchActivity::class.java)
+            intent.putExtra("isProduct", true)
+            startActivity(intent)
         }
 
         binding.homeMerchandiseRv.adapter = ProductSimpleRVAdapter(dummyItems.subList(0, 4))
