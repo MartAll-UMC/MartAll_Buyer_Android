@@ -18,7 +18,7 @@ class CategoryAllFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCategoryAllBinding.inflate(inflater, container, false)
-        binding.rvProductList.adapter = CategoryRVAdapter(dummyItems)
+  /*      binding.rvProductList.adapter = CategoryRVAdapter(dummyItems)*/
 
         return binding.root
     }

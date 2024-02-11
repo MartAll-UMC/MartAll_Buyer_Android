@@ -1,13 +1,13 @@
 package com.org.martall
 
 import CategoryFragment
+import HomeFragment
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.org.martall.databinding.ActivityMainBinding
-import com.org.martall.view.home.HomeFragment
 import com.org.martall.view.likelist.DibsFragment
 import com.org.martall.view.mypage.customerservice.MyMartAllFragment
 import com.org.martall.view.store.LocalStoreFragment
@@ -54,5 +54,9 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.menu_frame_view, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    fun selectBottomNavigationItem(itemId: Int) {
+        binding.bottomNavigationview.selectedItemId = itemId
     }
 }

@@ -20,7 +20,7 @@ class DibsProductFragment : Fragment() {
     ): View? {
         binding = FragmentDibsProductBinding.inflate(inflater,container, false)
         var likedItems = dummyItems.filter { it.isLiked }
-        binding.rvProductList.adapter = CategoryRVAdapter(likedItems)
+/*        binding.rvProductList.adapter = CategoryRVAdapter(likedItems)*/
 
         if(likedItems.isEmpty()) {
             binding.shopDibsLayout.root.visibility = VISIBLE
