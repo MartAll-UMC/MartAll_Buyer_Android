@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.org.martall.BuildConfig
@@ -23,6 +24,8 @@ import com.org.martall.model.Response
 import com.org.martall.view.home.HomeAdFragment
 import com.org.martall.view.home.NewMerchActivity
 import com.org.martall.view.search.SearchActivity
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response as RetrofitResponse
@@ -49,6 +52,10 @@ class HomeFragment : Fragment() {
             )
             startActivity(intent)
         }
+
+        // 데이터 로딩 전 스켈레톤 뷰 표시
+        showMerchandiseData(isLoading = true)
+        showMartData(isLoading = true)
 
         // Retrofit 객체 생성
         val retrofit = Retrofit.Builder()
@@ -81,10 +88,12 @@ class HomeFragment : Fragment() {
                 } else {
                     Log.e("Retrofit", "Failed to get recommend mart. Server error: ${response.code()}")
                 }
+                showMartData(isLoading = false)
             }
 
             override fun onFailure(call: Call<ResponseMart>, t: Throwable) {
                 Log.e("Retrofit", "Failed to get recommend mart. Network error: ${t.message}")
+                showMartData(isLoading = false)
             }
         })
 
@@ -103,10 +112,12 @@ class HomeFragment : Fragment() {
                 } else {
                     Log.e("Retrofit", "Failed to get new item. Server error: ${response.code()}")
                 }
+                showMerchandiseData(isLoading = false)
             }
 
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 Log.e("Retrofit", "Failed to get new item. Network error: ${t.message}")
+                showMerchandiseData(isLoading = false)
             }
         })
 
@@ -131,5 +142,29 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+/* 스켈레톤 뷰 함수*/
+    private fun showMerchandiseData(isLoading: Boolean) {
+        if (isLoading) {
+            binding.homeShimmerFl.startShimmer()
+            binding.homeShimmerFl.visibility = View.VISIBLE
+            binding.homeMerchandiseRv.visibility = View.GONE
+        } else {
+            binding.homeShimmerFl.stopShimmer()
+            binding.homeShimmerFl.visibility = View.GONE
+            binding.homeMerchandiseRv.visibility = View.VISIBLE
+        }
+    }
+    private fun showMartData(isLoading: Boolean) {
+        if (isLoading) {
+            binding.homeMartShimmerFl.startShimmer()
+            binding.homeMartShimmerFl.visibility = View.VISIBLE
+            binding.homeRecommendRv.visibility = View.GONE
+        } else {
+            binding.homeMartShimmerFl.stopShimmer()
+            binding.homeMartShimmerFl.visibility = View.GONE
+            binding.homeRecommendRv.visibility = View.VISIBLE
+        }
     }
 }

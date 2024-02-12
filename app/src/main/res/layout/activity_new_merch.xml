@@ -33,6 +33,64 @@
 
     </LinearLayout>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/new_merch_shimmer_fl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar_ll">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingVertical="20dp"
+            android:columnCount="2"
+            android:padding="20dp"
+            android:layout_gravity="fill_horizontal">
+
+            <include layout="@layout/item_category_product_shimmer"
+                android:layout_width="176dp"
+                android:layout_height="wrap_content"/>
+            <include layout="@layout/item_category_product_shimmer"
+                android:layout_width="176dp"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content"/>
+            <include layout="@layout/item_category_product_shimmer"
+                android:layout_width="176dp"
+                android:layout_marginTop="19dp"
+                android:layout_height="wrap_content"/>
+            <include layout="@layout/item_category_product_shimmer"
+                android:layout_width="176dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content"/>
+            <include layout="@layout/item_category_product_shimmer"
+                android:layout_width="176dp"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"/>
+            <include layout="@layout/item_category_product_shimmer"
+                android:layout_width="176dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content"/>
+            <include layout="@layout/item_category_product_shimmer"
+                android:layout_width="176dp"
+                android:layout_marginTop="19dp"
+                android:layout_height="wrap_content"/>
+            <include layout="@layout/item_category_product_shimmer"
+                android:layout_width="176dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginStart="20dp"
+                android:layout_height="wrap_content"/>
+
+
+
+
+        </GridLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_list_rv"
         android:layout_width="match_parent"

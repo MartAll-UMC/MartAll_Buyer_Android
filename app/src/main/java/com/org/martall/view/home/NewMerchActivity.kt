@@ -2,6 +2,7 @@ package com.org.martall.view.home
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.GridLayoutManager
@@ -33,6 +34,9 @@ class NewMerchActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+        // 데이터 로딩 전 스켈레톤 뷰 표시
+        showNewMerchData(isLoading = true)
+
         // Retrofit 인터페이스 생성
         val service = retrofit.create(MartItemService::class.java)
         val call = service.getNewItem()
@@ -56,12 +60,25 @@ class NewMerchActivity : AppCompatActivity() {
                     // Retrofit 호출 실패 로그
                     Log.e("Retrofit", "Retrofit call failed with code: ${response.code()}")
                 }
+                showNewMerchData(isLoading = false)
             }
 
             override fun onFailure(call: Call<Response>, t: Throwable) {
                 // Retrofit 호출 실패 로그
                 Log.e("Retrofit", "Retrofit call failed", t)
+                showNewMerchData(isLoading = false)
             }
         })
+    }
+    private fun showNewMerchData(isLoading: Boolean) {
+        if (isLoading) {
+            binding.newMerchShimmerFl.startShimmer()
+            binding.newMerchShimmerFl.visibility = View.VISIBLE
+            binding.productListRv.visibility = View.GONE
+        } else {
+            binding.newMerchShimmerFl.stopShimmer()
+            binding.newMerchShimmerFl.visibility = View.GONE
+            binding.productListRv.visibility = View.VISIBLE
+        }
     }
 }
