@@ -51,7 +51,9 @@
         <activity
             android:name=".view.likelist.DibsActivity"
             android:theme="@style/Theme.MartAll" />
-        <activity android:name=".view.store.MartDetailInfoActivity" />
+
+        <activity android:name=".view.store.MartDetailInfoActivity"
+            android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".view.search.SearchActivity"
             android:theme="@style/Theme.MartAll" />

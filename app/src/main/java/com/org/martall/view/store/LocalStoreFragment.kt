@@ -13,9 +13,16 @@ import com.org.martall.model.dummyData
 import com.org.martall.view.search.SearchActivity
 import com.org.martall.view.store.user.bottomsheet.FilterBottomSheet
 import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import androidx.fragment.app.activityViewModels
+import com.org.martall.ViewModel.SharedMartViewModel
 
 class LocalStoreFragment : Fragment() {
     private lateinit var binding: FragmentLocalStoreBinding
+    private val sharedMartViewModel: SharedMartViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,8 +31,6 @@ class LocalStoreFragment : Fragment() {
         binding = FragmentLocalStoreBinding.inflate(inflater, container, false)
 
         initRecyclerView()
-        showFilterBottomSheet()
-        showSortBottomSheet()
 
         binding.tbShop.ivSearch.setOnClickListener {
             val intent = Intent(context, SearchActivity::class.java)
@@ -36,45 +41,81 @@ class LocalStoreFragment : Fragment() {
         val martRVAdapter = MartRVAdapter(dummyData)
         binding.groupRecyclerView.adapter = martRVAdapter
 
-        binding.groupRecyclerView.setOnClickListener {
-//            startActivity(this.intent, MartDetailInfoActivity::class.java)
-//          val martDetailInfoFragment = MartDetailInfoFragment()
-//
-//            val transaction: FragmentTransaction? = fragmentManager?.beginTransaction()
-//
-//            transaction?.replace(R.id.main_container, martDetail)
-//                ?.commitAllowingStateLoss()
-//
-//            Log.d("intent", "넘어감")
+        binding.sortTv.setOnClickListener {
+            showSortBottomSheet()
         }
 
+//        val martRVAdapter = MartRVAdapter(dummyData)
+//        binding.groupRecyclerView.adapter = martRVAdapter
+
+
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadMartData()
     }
 
     private fun initRecyclerView() {
         with(binding) {
             groupRecyclerView.apply {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                adapter = MartRVAdapter(dummyData)
             }
         }
     }
 
     private fun showFilterBottomSheet() {
-        binding.filterTv.setOnClickListener {
-            FilterBottomSheet().show(
-                childFragmentManager,
-                null
-            )
-        }
+        FilterBottomSheet().show(
+            childFragmentManager,
+            null
+        )
     }
 
     private fun showSortBottomSheet() {
-        binding.sortTv.setOnClickListener {
-            SortBottomSheet().show(
-                childFragmentManager,
-                null
-            )
+        SortBottomSheet().show(
+            childFragmentManager,
+            null
+        )
+    }
+
+    private fun loadMartData() {
+        val apiService = ApiServiceManager.MartapiService
+        val call = apiService.getAllShops()
+
+        call.enqueue(object : Callback<MartListResponseDTO> {
+            override fun onResponse(
+                call: Call<MartListResponseDTO>,
+                response: Response<MartListResponseDTO>
+            ) {
+                if (response.isSuccessful) {
+                    val martList = response.body()?.marts ?: emptyList()
+                    // 데이터 설정
+                    sharedMartViewModel.setMartList(martList)
+
+                    updateRecyclerView(martList)
+                } else {
+                    // Handle server error
+                }
+            }
+
+            override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
+                Log.d("check", "마트 전체 조회 연결 실패")
+            }
+        })
+    }
+
+    private fun updateRecyclerView(martList: List<MartDataDTO>) {
+        val martRVAdapter = MartRVAdapter(martList) { selectedMart ->
+            // 사용자가 마트를 선택했을 때, 해당 마트의 정보를 SharedViewModel에 설정
+            // sharedMartViewModel.setSelectedMart(selectedMart)
+
+            val intent = Intent(requireContext(), MartDetailInfoActivity::class.java)
+            intent.putExtra("martId", selectedMart.martId)
+            startActivity(intent)
         }
+        binding.groupRecyclerView.adapter = martRVAdapter
+//        Log.d("MartRVAdapter", "Adapter set with click listener")
     }
 }
