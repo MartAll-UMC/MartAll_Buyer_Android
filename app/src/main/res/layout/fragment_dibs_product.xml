@@ -17,7 +17,7 @@
         app:spanCount="2"
         tools:listitem="@layout/item_category_product" />
 
-    <include
+   <include
         android:id="@+id/shop_dibs_layout"
         layout="@layout/fragment_dibs_product_empty"
         android:layout_width="match_parent"
