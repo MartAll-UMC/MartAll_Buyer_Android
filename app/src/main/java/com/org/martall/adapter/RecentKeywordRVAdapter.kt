@@ -12,6 +12,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class RecentKeywordRVAdapter(
+    private val isProductSearch: Boolean,
     private var keywords: MutableList<String>,
 ) :
     RecyclerView.Adapter<RecentKeywordRVAdapter.ViewHolder>() {
@@ -45,7 +46,7 @@ class RecentKeywordRVAdapter(
                     binding.recentKeywordTv.text
                 )
                 GlobalScope.launch {
-                    (binding.root.context as SearchActivity).search()
+                    (binding.root.context as SearchActivity).search(isProductSearch)
                 }
             }
 
@@ -53,7 +54,7 @@ class RecentKeywordRVAdapter(
                 keywords.remove(binding.recentKeywordTv.text.toString())
                 notifyItemRemoved(adapterPosition)
                 GlobalScope.launch(Dispatchers.Main) {
-                    removeKeyword(binding.recentKeywordTv.text.toString())
+                    removeKeyword(isProductSearch, binding.recentKeywordTv.text.toString())
                 }
             }
         }
@@ -62,14 +63,16 @@ class RecentKeywordRVAdapter(
             binding.recentKeywordTv.text = keyword
         }
 
-        private suspend fun removeKeyword(keyword: String) {
+        private suspend fun removeKeyword(isProductSearch: Boolean, keyword: String) {
             val dataStore = binding.root.context.dataStore
             val listToDataStoreUtil = ListToDataStoreUtil()
 
+            val dataStoreKey = if (isProductSearch) "recentProductKeywords" else "recentMartKeywords"
+
             var newKeywords: MutableList<String> =
-                (listToDataStoreUtil.getList(dataStore, "recentKeywords")).toMutableList()
+                (listToDataStoreUtil.getList(dataStore, dataStoreKey)).toMutableList()
             newKeywords.remove(keyword)
-            listToDataStoreUtil.saveList(dataStore, "recentKeywords", newKeywords.toList())
+            listToDataStoreUtil.saveList(dataStore, dataStoreKey, newKeywords.toList())
         }
     }
 }

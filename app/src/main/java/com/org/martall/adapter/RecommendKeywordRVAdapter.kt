@@ -12,6 +12,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class RecommendKeywordRVAdapter(
+    private var isProductSearch: Boolean,
     private var keywordList: List<String>,
     private val isSecond: Boolean = false,
 ) :
@@ -47,7 +48,7 @@ class RecommendKeywordRVAdapter(
                     binding.keywordTv.text
                 )
                 GlobalScope.launch {
-                    (binding.root.context as SearchActivity).search()
+                    (binding.root.context as SearchActivity).search(isProductSearch)
                 }
             }
         }

@@ -35,6 +35,9 @@ var dummyFishItems: List<ItemDTO> = dummyItems.filter { it.category == 2 }
 var dummySnackItems: List<ItemDTO> = dummyItems.filter { it.category == 3 }
 var dummyDailyItems: List<ItemDTO> = dummyItems.filter { it.category == 4 }
 
-var dummyKeywordItems: List<String> = listOf(
+var itemKeyword: List<String> = listOf(
     "바나나", "귤", "삼겹살", "항정살", "세탁세제", "커피", "펩시콜라", "초콜릿", "과자", "신라면"
+)
+var martKeyword: List<String> = listOf(
+    "오렌지마트", "하이마트", "광운대", "맘마농가식자재마트", "숲속마트", "원이네마트", "순이네마트", "한국외대", "덕성여대", "제로마트"
 )
