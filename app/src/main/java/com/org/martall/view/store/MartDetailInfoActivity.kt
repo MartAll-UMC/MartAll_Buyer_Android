@@ -1,139 +1,257 @@
 package com.org.martall.view.store
 
 import android.annotation.SuppressLint
+import android.content.ClipData.Item
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import androidx.recyclerview.widget.GridLayoutManager
+import com.bumptech.glide.Glide
 import com.org.martall.R
+import com.org.martall.ViewModel.SharedMartViewModel
+import com.org.martall.adapter.MartDetailRVAdapter
 import com.org.martall.databinding.ActivityMartDetailInfoBinding
+import com.org.martall.model.FollowResponseDTO
+import com.org.martall.model.MartDataDTO
+import com.org.martall.model.MartItemDTO
+import com.org.martall.model.MartListResponseDTO
+import com.org.martall.services.ApiServiceManager
 import com.org.martall.view.store.user.bottomsheet.DetailBottomSheet
 import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MartDetailInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMartDetailInfoBinding
+    private val sharedMartViewModel: SharedMartViewModel by viewModels()
 
-    private var isHeartFilled1 = false
-    private var isHeartFilled2 = false
-    private var isHeartFilled3 = false
-    private var isHeartFilled4 = false
-
-    private var isFavorite = false
+    private var isFollowing: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
         super.onCreate(savedInstanceState)
-        binding = ActivityMartDetailInfoBinding.inflate(layoutInflater).also {
-            setContentView(it.root)
+
+        binding = ActivityMartDetailInfoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        /*
+        val selectedMartLiveData: LiveData<MartDataDTO> = sharedMartViewModel.getSelectedMart()
+
+        selectedMartLiveData.observe(this) {
+            it?.let { selectedMart ->
+                updateUI(selectedMart)
+            }
         }
 
-//        binding.showDetailBtn.setOnClickListener {
-//            showDetailBottomSheet()
-//        }
-//
-//        showSortBottomSheet()
+         */
+
+        // 클릭된 아이템의 martId
+        val martId = intent.getIntExtra("martId", -1)
+        Log.d("MartDetail", martId.toString())
+
+        loadMartData(martId)
+
+        binding.sortTv.setOnClickListener {
+            showSortBottomSheet()
+        }
 
         binding.backIc.setOnClickListener {
             finish()
         }
 
-        binding.post1.setOnClickListener {
-            // 상품 상세 페이지로 이동
-            val intent = Intent(this, ProductDetailActivity::class.java)
-            startActivity(intent)
+        binding.showDetailBtn.setOnClickListener {
+            val detailBottomSheet = DetailBottomSheet.newInstance(martId)
+            Log.d("BottomSheet", martId.toString())
+            detailBottomSheet.show(supportFragmentManager, null)
         }
-
-        binding.itemMartPostHeart1Iv.setOnClickListener {
-            isHeartFilled1 = !isHeartFilled1
-            val heartIcon = binding.itemMartPostHeart1Iv
-
-            if (isHeartFilled1) {
-                heartIcon.setImageResource(R.drawable.ic_heart_filled_20dp)
-            } else {
-                heartIcon.setImageResource(R.drawable.white_heart_ic)
-            }
-        }
-
-        binding.itemMartPostHeart2Iv.setOnClickListener {
-            isHeartFilled2 = !isHeartFilled2
-            val heartIcon = binding.itemMartPostHeart2Iv
-
-            if (isHeartFilled2) {
-                heartIcon.setImageResource(R.drawable.ic_heart_filled_20dp)
-            } else {
-                heartIcon.setImageResource(R.drawable.white_heart_ic)
-            }
-        }
-
-        binding.itemMartPostHeart3Iv.setOnClickListener {
-            isHeartFilled3 = !isHeartFilled3
-            val heartIcon = binding.itemMartPostHeart3Iv
-
-            if (isHeartFilled3) {
-                heartIcon.setImageResource(R.drawable.ic_heart_filled_20dp)
-            } else {
-                heartIcon.setImageResource(R.drawable.white_heart_ic)
-            }
-        }
-
-        binding.itemMartPostHeart4Iv.setOnClickListener {
-            isHeartFilled4 = !isHeartFilled4
-            val heartIcon = binding.itemMartPostHeart4Iv
-
-            if (isHeartFilled4) {
-                heartIcon.setImageResource(R.drawable.ic_heart_filled_20dp)
-            } else {
-                heartIcon.setImageResource(R.drawable.white_heart_ic)
-            }
-        }
-
 
         binding.addFavoriteMartBtn.setOnClickListener {
-            toggleFavoriteButton()
+            if (isFollowing) {
+                // 언팔로우 요청
+                Log.d("follow", isFollowing.toString())
+                Log.d("follow", "언팔로우 요청")
+                unfollowMart(martId)
+            } else {
+                // 팔로우 요청
+                followMart(martId)
+                Log.d("follow", isFollowing.toString())
+                Log.d("follow", "팔로우 요청")
+            }
         }
     }
 
-//    private fun showDetailBottomSheet() {
-//        DetailBottomSheet().show(
-//            childFragmentManager,
-//            null
-//        )
-//    }
-//
-//    private fun showSortBottomSheet() {
-//        binding.sortTv.setOnClickListener {
-//            SortBottomSheet().show(
-//                childFragmentManager,
-//                null
-//            )
-//        }
-//    }
+
+    private fun loadMartData(martId: Int) {
+        val apiService = ApiServiceManager.MartapiService
+        val call = apiService.getAllShops()
+
+        call.enqueue(object : Callback<MartListResponseDTO> {
+            override fun onResponse(
+                call: Call<MartListResponseDTO>,
+                response: Response<MartListResponseDTO>
+            ) {
+                if (response.isSuccessful) {
+                    val martList = response.body()?.marts ?: emptyList()
+
+                    // 특정 martId의 데이터만 필터링하여 가져오기 (예시에서는 전체 데이터를 그대로 사용)
+                    val selectedMart = martList.find { it.martId == martId }
+                    val martName = selectedMart?.name
+
+                    // 데이터 설정
+                    selectedMart?.let {
+                        updateMartDetailUI(selectedMart)
+                    }
+
+                    val martProduct = selectedMart?.items
+                    martProduct?.let {
+                        if (martName != null) {
+                            updateMartDetailProduct(martProduct, martName)
+                        }
+                    }
+                } else {
+                    // Handle server error
+                }
+            }
+
+            override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
+                Log.d("check", "마트 전체 조회 연결 실패")
+            }
+        })
+    }
+
+    private fun followMart(martId: Int) {
+        val apiService = ApiServiceManager.MartapiService
+        val call = apiService.followMart(shopId = martId)
+
+        call.enqueue(object : Callback<FollowResponseDTO> {
+            override fun onResponse(
+                call: Call<FollowResponseDTO>,
+                response: Response<FollowResponseDTO>
+            ) {
+                if (response.isSuccessful) {
+                    // 성공적으로 팔로우한 경우
+                    isFollowing = true
+                    Log.d("SuccessFollow", "팔로우 통신 성공")
+                    updateUI()
+
+                } else {
+                    Log.d("FailFollow", "통신 실패")
+                }
+            }
+
+            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                Log.d("check", "마트 전체 조회 연결 실패")
+            }
+        })
+    }
+
+    private fun unfollowMart(martId: Int) {
+        val apiService = ApiServiceManager.MartapiService
+        val call = apiService.unfollowMart(shopId = martId)
+
+        call.enqueue(object : Callback<FollowResponseDTO> {
+            override fun onResponse(
+                call: Call<FollowResponseDTO>,
+                response: Response<FollowResponseDTO>
+            ) {
+                if (response.isSuccessful) {
+                    // 성공적으로 팔로우한 경우
+                    isFollowing = false
+                    Log.d("SuccessUnfollow", "언팔로우 성공")
+                    updateUI()
+
+                } else {
+                    Log.d("FailFollow", "통신 실패")
+                }
+            }
+
+            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                Log.d("check", "마트 전체 조회 연결 실패")
+            }
+        })
+    }
 
     @SuppressLint("ResourceAsColor")
-    fun toggleFavoriteButton() {
-        isFavorite = !isFavorite
+    private fun updateUI() {
+        Log.d("SuccessUpdateUI", "UI 업데이트")
+        val buttonText = if (isFollowing) "단골 취소" else "단골 추가"
+        binding.addFavoriteMartBtn.text = buttonText
 
-        if (isFavorite) {
-            binding.addFavoriteMartBtn.text = "단골가게"
-            binding.addFavoriteMartBtn.setBackgroundResource(R.drawable.background_primary400_r12)
-            binding.addFavoriteMartBtn.setTextColor(R.color.primary400)
-        } else {
-            binding.addFavoriteMartBtn.text = "단골추가"
-            binding.addFavoriteMartBtn.setTextColor(R.color.white)
-            binding.addFavoriteMartBtn.setBackgroundResource(R.drawable.background_primary400_fill_r12)
+        val buttonColor = if (isFollowing) R.drawable.background_primary400_r12 else R.drawable.background_primary400_fill_r12
+        binding.addFavoriteMartBtn.setBackgroundResource(buttonColor)
+
+        val buttonTextColor = if (isFollowing) R.color.primary400 else R.color.white
+        binding.addFavoriteMartBtn.setTextColor(ContextCompat.getColor(this, buttonTextColor))
+    }
+
+
+    private fun updateMartDetailUI(selectedMart: MartDataDTO) {
+        binding.martNameTv.text = selectedMart.name
+        Log.d("selectedMart", selectedMart.name)
+        binding.followerCountTv.text = selectedMart.followersCount.toString()
+        binding.visitorCountTv.text = selectedMart.visitorsCount.toString()
+        binding.martPlaceTv.text = selectedMart.location
+        Glide.with(this).load(selectedMart.imageUrl).into(binding.martProfileIv)
+        setCategories(selectedMart.categories)
+    }
+
+    private fun updateMartDetailProduct(martProduct: List<MartItemDTO>, martName: String) {
+        val martDetailRVAdapter = MartDetailRVAdapter(martProduct, martName)
+        val layoutManager = GridLayoutManager(this, 2)
+
+        binding.martDetailRecyclerview.layoutManager = layoutManager
+        binding.martDetailRecyclerview.adapter = martDetailRVAdapter
+
+        // 아이템 클릭 리스너 설정
+        martDetailRVAdapter.setOnItemClickListener(object : MartDetailRVAdapter.OnItemClickListener {
+            override fun onItemClick(ItemName: String) {
+                // 아이템 클릭 시 호출되는 메서드
+                val intent = Intent(this@MartDetailInfoActivity, ProductDetailActivity::class.java)
+                intent.putExtra(ProductDetailActivity.EXTRA_ITEM_NAME, ItemName)
+                startActivity(intent)
+            }
+        })
+    }
+
+    // 카테고리 동적 생성
+    private fun setCategories(categories: List<String>) {
+
+        val linearLayout: LinearLayout = binding.martCategoriesLayout
+        linearLayout.removeAllViews()
+
+        for (category in categories) {
+            val textView = TextView(binding.root.context)
+            textView.text = "#$category"
+            textView.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            textView.setTextColor(ContextCompat.getColor(binding.root.context, R.color.grey400))
+            textView.setTextAppearance(R.style.sRegular)
+
+            // Add margin to TextViews
+            val marginParams = LinearLayout.LayoutParams(textView.layoutParams)
+            marginParams.setMargins(binding.root.context.resources.getDimensionPixelSize(R.dimen.margin_right), 0, 0, 0)
+            textView.layoutParams = marginParams
+
+            linearLayout.addView(textView)
         }
     }
 
-    /*
-    fun toggleHeart() {
-        isHeartFilled = !isHeartFilled
-        val heartIcon = binding.itemMartPostHeart1Iv
-
-        if (isHeartFilled) {
-            heartIcon.setImageResource(R.drawable.ic_heart_filled_20dp)
-        } else {
-            heartIcon.setImageResource(R.drawable.white_heart_ic)
+    private fun showSortBottomSheet() {
+        binding.sortTv.setOnClickListener {
+            SortBottomSheet().show(
+                supportFragmentManager,
+                null
+            )
         }
     }
-     */
 }

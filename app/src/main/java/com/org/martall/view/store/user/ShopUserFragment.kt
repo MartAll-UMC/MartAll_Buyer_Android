@@ -37,7 +37,7 @@ class ShopUserFragment : Fragment() {
                 showBottomSheet()
             }
         }
-        (binding.rvUserList.adapter as? UserAdapter)?.submitList(dummyData)
+//        (binding.rvUserList.adapter as? UserAdapter)?.submitList(dummyData)
     }
 
     private fun setSpinner() {
@@ -69,11 +69,11 @@ class ShopUserFragment : Fragment() {
     }
 
     private fun initRecyclerView() {
-        with(binding) {
-            rvUserList.apply {
-                layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-                adapter=UserAdapter()
-            }
-        }
+//        with(binding) {
+//            rvUserList.apply {
+//                layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+//                adapter=UserAdapter()
+//            }
+//        }
     }
 }

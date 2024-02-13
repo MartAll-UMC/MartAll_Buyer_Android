@@ -31,7 +31,7 @@
         android:layout_height="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_like_unfilled_20dp"
+        android:src="@drawable/white_heart_ic"
         app:layout_constraintEnd_toEndOf="@id/item_mart_post_cardView"
         app:layout_constraintTop_toTopOf="@id/item_mart_post_cardView" />
 

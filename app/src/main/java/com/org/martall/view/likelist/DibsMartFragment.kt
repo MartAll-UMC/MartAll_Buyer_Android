@@ -18,16 +18,16 @@ class DibsMartFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentDibsMartBinding.inflate(inflater, container, false)
-        var likedMarts = dummyData.filter { it.isLiked }
-        binding.groupRecyclerView.adapter = MartRVAdapter(likedMarts)
-
-        if(likedMarts.isEmpty()) {
-            binding.shopDibsLayout.root.visibility = View.VISIBLE
-            binding.groupRecyclerView.visibility = View.GONE
-        } else {
-            binding.shopDibsLayout.root.visibility = View.GONE
-            binding.groupRecyclerView.visibility = View.VISIBLE
-        }
+//        var likedMarts = dummyData.filter { it.isLiked }
+//        binding.groupRecyclerView.adapter = MartRVAdapter(likedMarts)
+//
+//        if(likedMarts.isEmpty()) {
+//            binding.shopDibsLayout.root.visibility = View.VISIBLE
+//            binding.groupRecyclerView.visibility = View.GONE
+//        } else {
+//            binding.shopDibsLayout.root.visibility = View.GONE
+//            binding.groupRecyclerView.visibility = View.VISIBLE
+//        }
 
         return binding.root
     }
