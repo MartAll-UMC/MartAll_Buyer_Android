@@ -80,5 +80,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0") // Retrofit
     implementation("com.google.code.gson:gson:2.10.1") // Gson
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0") // Kotlin Serialization
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Retrofit Gson Converter
 }
 
