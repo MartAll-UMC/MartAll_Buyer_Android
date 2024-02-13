@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.org.martall.databinding.ItemRecommendMartBinding
 import com.org.martall.model.MartDTO
+import com.org.martall.model.RecommendedMart
 
-class HomeMartRVAdapter(private var martList: List<MartDTO>) :
+class HomeMartRVAdapter(private var martList: List<RecommendedMart>) :
     RecyclerView.Adapter<HomeMartRVAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -23,7 +25,8 @@ class HomeMartRVAdapter(private var martList: List<MartDTO>) :
     }
 
     override fun onBindViewHolder(holder: HomeMartRVAdapter.ViewHolder, position: Int) {
-        holder.bind(martList[position])
+        val currentMart = martList[position]
+        holder.bind(currentMart)
     }
 
     override fun getItemCount(): Int {
@@ -39,11 +42,16 @@ class HomeMartRVAdapter(private var martList: List<MartDTO>) :
             }
         }
 
-        fun bind(mart: MartDTO) {
-            binding.martLogoTv.text = mart.name
-            binding.recommendMartTv.text = mart.name
-            binding.recommendMartTagTv.text = mart.hashTag
-            binding.recommendMartIv.visibility = View.INVISIBLE
+        fun bind(mart: RecommendedMart) {
+            binding.apply {
+                martLogoTv.text = mart.name
+                recommendMartTv.text = mart.name
+                recommendMartTagTv.text = mart.martcategory.joinToString(" ") { "#$it" }
+                Glide.with(itemView.context)
+                    .load(mart.photo)
+                    .into(recommendMartIv)
+
+            }
         }
     }
 }
