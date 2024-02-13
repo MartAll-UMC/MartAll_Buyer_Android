@@ -8,7 +8,8 @@ import androidx.fragment.app.Fragment
 import com.org.martall.adapter.RecentKeywordRVAdapter
 import com.org.martall.adapter.RecommendKeywordRVAdapter
 import com.org.martall.databinding.FragmentSearchBeforeBinding
-import com.org.martall.model.dummyKeywordItems
+import com.org.martall.model.itemKeyword
+import com.org.martall.model.martKeyword
 import com.org.martall.utils.ListToDataStoreUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -47,13 +48,20 @@ class SearchBeforeFragment(private val isProductSearch: Boolean) :
             }
         }
 
+        var recommendKeywords: List<String>
+        if (isProductSearch) {
+            recommendKeywords = itemKeyword
+        } else {
+            recommendKeywords = martKeyword
+        }
+
         binding.recommendKeywords1Rv.adapter = RecommendKeywordRVAdapter(
             isProductSearch,
-            dummyKeywordItems.subList(0, 5)
+            recommendKeywords.subList(0, 5)
         )
         binding.recommendKeywords2Rv.adapter = RecommendKeywordRVAdapter(
             isProductSearch,
-            dummyKeywordItems.subList(5, 10),
+            recommendKeywords.subList(5, 10),
             true
         )
 

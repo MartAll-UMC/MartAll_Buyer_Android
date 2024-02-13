@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.org.martall.adapter.CategoryRVAdapter
 import com.org.martall.adapter.MartSimpleRVAdapter
+import com.org.martall.adapter.SearchItemRVAdapter
 import com.org.martall.databinding.FragmentSearchResultBinding
 import com.org.martall.model.SearchResponse
 import com.org.martall.model.dummyItems
@@ -20,7 +21,8 @@ import retrofit2.Callback
 class SearchResultFragment(private val isProduct: Boolean, private val keyword: String) :
     Fragment() {
     private lateinit var binding: FragmentSearchResultBinding
-    private val api = ApiService.create()
+    private val apiMart = ApiService.createMartVer()
+    private val apiItem = ApiService.createItemVer()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,30 +32,48 @@ class SearchResultFragment(private val isProduct: Boolean, private val keyword: 
         binding = FragmentSearchResultBinding.inflate(inflater, container, false)
 
         if (isProduct) {
-            val items = dummyItems.filter { it.name.contains(keyword) }
-
-            binding.searchResultTitleTv.text = "총 ${items.size}건"
-            binding.searchResultRv.adapter =
-                CategoryRVAdapter(dummyItems.filter { it.name.contains(keyword) })
-
-            if (items.isEmpty()) {
-                binding.searchResultRv.visibility = View.GONE
-                binding.searchResultEmptyLl.visibility = View.VISIBLE
-            } else {
-                binding.searchResultRv.layoutManager = GridLayoutManager(context, 2)
-                binding.searchResultRv.visibility = View.VISIBLE
-                binding.searchResultEmptyLl.visibility = View.GONE
-            }
-        } else {
             binding.searchResultRv.visibility = View.GONE
             binding.searchResultEmptyLl.visibility = View.GONE
 
-            api.searchMartList(keyword).enqueue(object : Callback<SearchResponse> {
+            apiItem.searchItemList(keyword).enqueue(object : Callback<SearchResponse> {
                 override fun onResponse(
                     call: Call<SearchResponse>,
                     response: retrofit2.Response<SearchResponse>,
                 ) {
-                    Log.d("PRINT", response.body().toString())
+                    if (response.isSuccessful) {
+                        val data = response.body()
+                        data?.items?.let { items ->
+                            binding.searchResultTitleTv.text = "총 ${items.size}건"
+                            binding.searchResultRv.adapter = SearchItemRVAdapter(items)
+
+                            if (items.isEmpty()) {
+                                binding.searchResultRv.visibility = View.GONE
+                                binding.searchResultEmptyLl.visibility = View.VISIBLE
+                            } else {
+                                binding.searchResultRv.layoutManager = GridLayoutManager(context, 2)
+                                binding.searchResultRv.visibility = View.VISIBLE
+                                binding.searchResultEmptyLl.visibility = View.GONE
+                            }
+                            binding.loadingPb.visibility = View.GONE
+                        }
+                    } else {
+                        Log.e("ERROR", "error")
+                    }
+                }
+
+                override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+                    Log.e("ERROR", t.message ?: "complete failure")
+                }
+            })
+        } else {
+            binding.searchResultRv.visibility = View.GONE
+            binding.searchResultEmptyLl.visibility = View.GONE
+
+            apiMart.searchMartList(keyword).enqueue(object : Callback<SearchResponse> {
+                override fun onResponse(
+                    call: Call<SearchResponse>,
+                    response: retrofit2.Response<SearchResponse>,
+                ) {
                     if (response.isSuccessful) {
                         val data = response.body()
                         data?.marts?.let { marts ->

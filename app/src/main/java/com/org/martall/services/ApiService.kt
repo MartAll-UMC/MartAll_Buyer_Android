@@ -16,12 +16,25 @@ interface ApiService {
         @Query("keyword") keyword: String,
     ): Call<SearchResponse>
 
+    @GET("/item/search")
+    fun searchItemList(
+        @Query("itemName") keyword: String,
+    ): Call<SearchResponse>
+
     companion object {
         private const val MOCK_MART = BuildConfig.MOCK_MART_URL
+        private const val MOCK_ITEM = BuildConfig.MOCK_ITEM_URL
         private val gson: Gson = GsonBuilder().setLenient().create()
 
-        fun create(): ApiService {
+        fun createMartVer(): ApiService {
             return retrofit2.Retrofit.Builder().baseUrl(MOCK_MART)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+                .create(ApiService::class.java)
+        }
+
+        fun createItemVer(): ApiService {
+            return retrofit2.Retrofit.Builder().baseUrl(MOCK_ITEM)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(ApiService::class.java)
