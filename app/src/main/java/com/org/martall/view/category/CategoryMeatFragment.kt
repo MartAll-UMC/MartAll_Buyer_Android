@@ -19,7 +19,7 @@ class CategoryMeatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCategoryMeatBinding.inflate(inflater, container, false)
-        binding.rvProductList.adapter = CategoryRVAdapter(dummyMeatItems)
+/*        binding.rvProductList.adapter = CategoryRVAdapter(dummyMeatItems)*/
         return binding.root
     }
 

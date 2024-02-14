@@ -12,6 +12,7 @@ import com.org.martall.R
 import com.org.martall.databinding.ActivityMainBinding
 import com.org.martall.databinding.FragmentDibsMartBinding
 import com.org.martall.databinding.FragmentMyMartAllBinding
+import com.org.martall.view.likelist.DibsFragment
 
 class MyMartAllFragment : Fragment() {
     private lateinit var mainBinding: ActivityMainBinding
@@ -24,13 +25,15 @@ class MyMartAllFragment : Fragment() {
         binding = FragmentMyMartAllBinding.inflate(inflater, container, false)
         mainBinding = (requireActivity() as MainActivity).binding
 
+
         binding.likeProductBtn.setOnClickListener {
             mainBinding.bottomNavigationview.selectedItemId = R.id.menu_heart
+            navigateToDibsFragment(0) // 0은 '찜한 상품' 탭을 나타냄
         }
 
         binding.likeMartBtn.setOnClickListener {
             mainBinding.bottomNavigationview.selectedItemId = R.id.menu_heart
-
+            navigateToDibsFragment(1) // 1은 '단골 마트' 탭을 나타냄
         }
 
         binding.privacyPolicyPannel.setOnClickListener {
@@ -46,5 +49,17 @@ class MyMartAllFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun navigateToDibsFragment(tabIndex: Int) {
+        val dibsFragment = DibsFragment().apply {
+            arguments = Bundle().apply {
+                putInt("selectedTab", tabIndex)
+            }
+        }
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.menu_frame_view, dibsFragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

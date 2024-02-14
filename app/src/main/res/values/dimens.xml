@@ -15,4 +15,6 @@
     <dimen name="sp_18">18sp</dimen>
     <dimen name="sp_15">15sp</dimen>
     <dimen name="sp_12">12sp</dimen>
+
+    <dimen name="margin_right">4dp</dimen>
 </resources>

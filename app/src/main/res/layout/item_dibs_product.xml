@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingVertical="12dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/mart_profile_iv"
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="12dp"
         android:background="@drawable/bg_mart_profile_52dp"
         android:gravity="center"
         android:text="마트명"
@@ -70,12 +70,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
-        android:background="@drawable/bg_blue_border20"
+        android:background="@drawable/selector_follow_btn"
+        android:text="단골 추가"
         android:paddingHorizontal="8dp"
         android:paddingVertical="4dp"
-        android:text="단골 추가"
         android:textAppearance="@style/mMedium"
         android:textColor="@color/white"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@id/mart_profile_iv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/mart_profile_iv" />

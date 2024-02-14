@@ -1,6 +1,20 @@
 package com.org.martall.model
 
+import com.google.gson.annotations.SerializedName
 import com.org.martall.R
+
+data class RecommendedMart(
+    val martId: Int,
+    val name: String,
+    val photo: String,
+    val martcategory: List<String>,
+    val location: String
+)
+data class ResponseMart(
+    val status: Int,
+    val message: String,
+    val recommendedMarts: List<RecommendedMart>
+)
 
 data class MartDTO(
     val imageUrl : Int? = null,

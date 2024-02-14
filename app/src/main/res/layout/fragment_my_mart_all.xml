@@ -104,7 +104,7 @@
                         android:background="@drawable/bg_grey100_border8"
                         android:elevation="0dp"
                         android:stateListAnimator="@null"
-                        android:text="단골 상품"
+                        android:text="단골 마트"
                         android:textAppearance="@style/mMedium"
                         android:textColor="@color/grey700" />
                 </LinearLayout>

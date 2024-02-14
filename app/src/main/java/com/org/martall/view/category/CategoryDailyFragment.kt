@@ -18,7 +18,7 @@ class CategoryDailyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCategoryDailyBinding.inflate(inflater, container, false)
-        binding.rvProductList.adapter = CategoryRVAdapter(dummyDailyItems)
+       /* binding.rvProductList.adapter = CategoryRVAdapter(dummyDailyItems)*/
         return binding.root
     }
 

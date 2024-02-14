@@ -21,55 +21,66 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
+        init(intent.getBooleanExtra("isProductSearch", true))
 
-        initFrame()
+        setContentView(binding.root)
+    }
 
+    private fun init(isProductSearch: Boolean) {
+        initFrame(isProductSearch)
         binding.searchToolbar.toolbarBackBtn.setOnClickListener {
             finish()
         }
-
         binding.searchBar.searchBarEt.setOnEditorActionListener { _, i, _ ->
             if (i == EditorInfo.IME_ACTION_SEARCH) {
                 GlobalScope.launch {
-                    search()
+                    search(isProductSearch)
                 }
                 return@setOnEditorActionListener true
             }
             false
         }
-
-        setContentView(binding.root)
     }
 
-    private fun initFrame() {
+    private fun initFrame(isProductSearch: Boolean) {
         val fragmentManger = supportFragmentManager
         val fragmentTransaction = fragmentManger.beginTransaction()
 
-        val searchBeforeFragment = SearchBeforeFragment(isProduct = true)
+        binding.searchToolbar.toolbarTitleTv.text = if (isProductSearch) "상품 검색" else "마트 검색"
+        val searchBeforeFragment = SearchBeforeFragment(isProductSearch = isProductSearch)
         fragmentTransaction.replace(binding.searchContentFl.id, searchBeforeFragment)
         fragmentTransaction.commit()
     }
 
-    suspend fun search() {
+    suspend fun search(isProductSearch: Boolean) {
         val fragmentManger = supportFragmentManager
         val fragmentTransaction = fragmentManger.beginTransaction()
 
-        saveKeyword(binding.searchBar.searchBarEt.text.toString())
+        saveKeyword(isProductSearch, binding.searchBar.searchBarEt.text.toString())
 
         val resultFragment =
-            SearchResultFragment(true, binding.searchBar.searchBarEt.text.toString())
+            SearchResultFragment(isProductSearch, binding.searchBar.searchBarEt.text.toString())
         fragmentTransaction.replace(binding.searchContentFl.id, resultFragment)
         fragmentTransaction.commit()
     }
 
-    private suspend fun saveKeyword(keyword: String) {
+    private suspend fun saveKeyword(isProductSearch: Boolean, keyword: String) {
         val dataStore = applicationContext.dataStore
         val listToDataStoreUtil = ListToDataStoreUtil()
 
-        var keywords: MutableList<String> =
-            (listToDataStoreUtil.getList(dataStore, "recentKeywords")).toMutableList()
-        keywords.remove(keyword)
-        keywords.add(0, keyword)
-        listToDataStoreUtil.saveList(dataStore, "recentKeywords", keywords.toList())
+        if (isProductSearch) {
+            var keywords: MutableList<String> =
+                (listToDataStoreUtil.getList(dataStore, "recentProductKeywords")).toMutableList()
+            keywords.remove(keyword)
+            keywords.add(0, keyword)
+            listToDataStoreUtil.saveList(dataStore, "recentProductKeywords", keywords.toList())
+        } else {
+            var keywords: MutableList<String> =
+                (listToDataStoreUtil.getList(dataStore, "recentMartKeywords")).toMutableList()
+            keywords.remove(keyword)
+            keywords.add(0, keyword)
+            listToDataStoreUtil.saveList(dataStore, "recentMartKeywords", keywords.toList())
+        }
+
     }
 }

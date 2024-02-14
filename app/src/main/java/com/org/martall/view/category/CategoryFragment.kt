@@ -1,3 +1,4 @@
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.org.martall.adapter.CategoryViewPagerAdapter
 import com.org.martall.databinding.FragmentCategoryBinding
+import com.org.martall.view.search.SearchActivity
 
 
 class CategoryFragment : Fragment() {
@@ -20,6 +22,11 @@ class CategoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCategoryBinding.inflate(inflater, container, false)
+        binding.tbCategory.searchIc.setOnClickListener {
+            val intent = Intent(context, SearchActivity::class.java)
+            intent.putExtra("isProductSearch", true)
+            startActivity(intent)
+        }
         return binding.root
     }
 
