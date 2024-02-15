@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.org.martall.adapter.DibsProductRVAdapter
 import com.org.martall.Model.DibsProductManager
 import com.org.martall.databinding.FragmentDibsProductBinding
-import com.org.martall.model.DibsProductResponseDTO
+import com.org.martall.Model.DibsProductResponseDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +34,7 @@ class DibsProductFragment : Fragment() {
                 call: Call<DibsProductResponseDTO>, response: Response<DibsProductResponseDTO>
             ) {
                 if (response.isSuccessful) {
-                    val dibsProducts = response.body()?.data ?: emptyList()
+                    val dibsProducts = response.body()?.result?.item?:emptyList()
                     updateRecyclerView(dibsProducts)
                 } else {
                     // Handle the error case
@@ -76,6 +76,4 @@ class DibsProductFragment : Fragment() {
         }
     }
 }
-
-
 
