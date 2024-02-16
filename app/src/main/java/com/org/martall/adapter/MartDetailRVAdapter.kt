@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemMartDetailPostBinding
+import com.org.martall.model.MartDataDTO
 import com.org.martall.model.MartItemDTO
 import kotlinx.coroutines.NonDisposableHandle.parent
 import java.text.NumberFormat
 
-class MartDetailRVAdapter(private val itemList: List<MartItemDTO>, private val martName: String) :
+class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
     RecyclerView.Adapter<MartDetailRVAdapter.ViewHolder>(){
 
     interface OnItemClickListener {
-        fun onItemClick(ItemName: String)
+        fun onItemClick(martId: Int, itemId: Int)
     }
 
     // 리스너 변수
@@ -32,11 +33,11 @@ class MartDetailRVAdapter(private val itemList: List<MartItemDTO>, private val m
     }
 
     override fun onBindViewHolder(holder: MartDetailRVAdapter.ViewHolder, position: Int) {
-        holder.bind(itemList[position])
+        holder.bind(martProduct.items[position])
     }
 
     override fun getItemCount(): Int {
-        return itemList.size
+        return martProduct.items.size
     }
 
     inner class ViewHolder(val binding: ItemMartDetailPostBinding) :
@@ -45,10 +46,11 @@ class MartDetailRVAdapter(private val itemList: List<MartItemDTO>, private val m
 
         init {
             binding.root.setOnClickListener {
-                val ItemName = itemList[adapterPosition].name
+                val martId = martProduct.martId
+                val itemId = martProduct.items[adapterPosition].itemId
 
                 // 리스너가 설정되어 있다면 실행
-                onItemClickListener?.onItemClick(ItemName)
+                onItemClickListener?.onItemClick(martId, itemId)
             }
 
             binding.itemMartPostHeartIv.setOnClickListener {
@@ -62,7 +64,7 @@ class MartDetailRVAdapter(private val itemList: List<MartItemDTO>, private val m
         }
 
         fun bind(item: MartItemDTO) {
-            binding.martNameTv.text = martName
+            binding.martNameTv.text = martProduct.name
             binding.itemMartPostNameTv.text = item.name
 
             val formattedPrice = NumberFormat.getNumberInstance().format(item.price)

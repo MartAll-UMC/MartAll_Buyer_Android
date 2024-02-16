@@ -103,19 +103,19 @@ class MartDetailInfoActivity : AppCompatActivity() {
 
                     // 특정 martId의 데이터만 필터링하여 가져오기 (예시에서는 전체 데이터를 그대로 사용)
                     val selectedMart = martList.find { it.martId == martId }
-                    val martName = selectedMart?.name
 
                     // 데이터 설정
                     selectedMart?.let {
                         updateMartDetailUI(selectedMart)
+                        updateMartDetailProduct(selectedMart)
                     }
 
-                    val martProduct = selectedMart?.items
-                    martProduct?.let {
-                        if (martName != null) {
-                            updateMartDetailProduct(martProduct, martName)
-                        }
-                    }
+//                    val martProduct = selectedMart?.items
+//                    martProduct?.let {
+//                        if (martName != null) {
+//                            updateMartDetailProduct(martProduct, martName)
+//                        }
+//                    }
                 } else {
                     // Handle server error
                 }
@@ -203,8 +203,8 @@ class MartDetailInfoActivity : AppCompatActivity() {
         setCategories(selectedMart.categories)
     }
 
-    private fun updateMartDetailProduct(martProduct: List<MartItemDTO>, martName: String) {
-        val martDetailRVAdapter = MartDetailRVAdapter(martProduct, martName)
+    private fun updateMartDetailProduct(martProduct: MartDataDTO) {
+        val martDetailRVAdapter = MartDetailRVAdapter(martProduct)
         val layoutManager = GridLayoutManager(this, 2)
 
         binding.martDetailRecyclerview.layoutManager = layoutManager
@@ -212,10 +212,11 @@ class MartDetailInfoActivity : AppCompatActivity() {
 
         // 아이템 클릭 리스너 설정
         martDetailRVAdapter.setOnItemClickListener(object : MartDetailRVAdapter.OnItemClickListener {
-            override fun onItemClick(ItemName: String) {
+            override fun onItemClick(martId: Int, itemId: Int) {
                 // 아이템 클릭 시 호출되는 메서드
                 val intent = Intent(this@MartDetailInfoActivity, ProductDetailActivity::class.java)
-                intent.putExtra(ProductDetailActivity.EXTRA_ITEM_NAME, ItemName)
+                intent.putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemId)
+                 intent.putExtra(ProductDetailActivity.EXTRA_MART_ID, martId)
                 startActivity(intent)
             }
         })

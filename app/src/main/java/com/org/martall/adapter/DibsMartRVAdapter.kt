@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.org.martall.Model.DibsMartUnfollowDTO
+import com.org.martall.model.DibsMartUnfollowDTO
 import com.org.martall.R
 import com.org.martall.model.DibsMartResponseDTO
 import com.org.martall.databinding.ItemDibsProductBinding // 수정된 부분

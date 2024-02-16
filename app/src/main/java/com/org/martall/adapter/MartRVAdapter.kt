@@ -97,8 +97,10 @@ class MartRVAdapter(
             setCategories(mart.categories)
 
 
+            // martId 저장
+            val martId = mart.martId
             // MartPostAdapter 초기화
-            val itemAdapter = MartPostAdapter(mart.items)
+            val itemAdapter = MartPostAdapter(mart.items, martId)
             binding.martImageRecyclerView.apply {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = itemAdapter

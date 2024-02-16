@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.org.martall.Model.DibsMartManager
+import com.org.martall.model.DibsMartManager
 import com.org.martall.adapter.DibsMartRVAdapter
 import com.org.martall.databinding.FragmentDibsMartBinding
 import com.org.martall.model.DibsMartResponseDTO

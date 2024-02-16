@@ -9,6 +9,6 @@ class DibsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dibs)
+        // setContentView(R.layout.activity_dibs)
     }
 }

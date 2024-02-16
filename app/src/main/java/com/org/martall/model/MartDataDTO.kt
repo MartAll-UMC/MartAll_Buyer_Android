@@ -14,6 +14,7 @@ data class MartDataDTO(
 )
 
 class MartItemDTO(
+    @SerializedName("itemId") val itemId: Int,
     @SerializedName("name") val name: String,
     @SerializedName("imageUrl") val imageUrl: String,
     @SerializedName("price") val price: Int,
