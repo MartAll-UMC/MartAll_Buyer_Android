@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.org.martall.Model.DibsMartManager
 import com.org.martall.adapter.DibsMartRVAdapter
@@ -49,6 +50,7 @@ class DibsMartFragment : Fragment() {
             // API 요청이 실패했을 때 호출
             override fun onFailure(call: Call<DibsMartResponseDTO>, t: Throwable) {
                 Log.d("check", "failed")
+                showToast("단골 마트 목록을 가져오는 데 실패했습니다.")
             }
         })
     }
@@ -98,5 +100,8 @@ class DibsMartFragment : Fragment() {
             martList.removeAt(position)
             binding.groupRecyclerView.adapter?.notifyItemRemoved(position) //아이템 제거
         }
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

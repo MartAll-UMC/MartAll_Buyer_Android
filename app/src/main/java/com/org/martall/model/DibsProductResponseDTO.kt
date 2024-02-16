@@ -14,11 +14,11 @@ data class DibsProductResponseDTO(
 
     data class DibsProducts(
         val martShopId: Long,
-        val picName: String, // 이미지 경로는 문자열로 설정
+        val picName: String,
         val martName: String,
         val itemId: Int,
         val itemName: String,
         val price: Int,
-        var like: Boolean = false // var로 선언할 필요가 없으므로 val로 변경
+        var like: Boolean = true
     )
 }

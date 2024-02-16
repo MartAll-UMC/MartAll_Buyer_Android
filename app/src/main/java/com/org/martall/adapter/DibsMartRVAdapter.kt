@@ -31,7 +31,8 @@ class DibsMartRVAdapter(
     }
 
 
-    inner class ViewHolder(val binding: ItemDibsProductBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(val binding: ItemDibsProductBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(Mart: DibsMartResponseDTO.DibsMarts) {
 
             binding.martNameTv.text = Mart.martname
