@@ -25,7 +25,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MartRVAdapter(
-    private val martList: List<MartDataDTO>,
+    private var martList: List<MartDataDTO>,
     private val onItemClick: (MartDataDTO) -> Unit) :
     RecyclerView.Adapter<MartRVAdapter.ViewHolder>() {
 
@@ -37,6 +37,12 @@ class MartRVAdapter(
                 onItemClick(selectedMart)
             }
         }
+    }
+
+    // setData 함수 추가
+    fun setData(newMartList: List<MartDataDTO>) {
+        martList = newMartList
+        notifyDataSetChanged()
     }
 
     // 아이템 클릭 리스너
@@ -93,7 +99,8 @@ class MartRVAdapter(
             // Access views using binding
             binding.martNameTv.text = mart.name
             binding.followerCountTv.text = mart.followersCount.toString()
-            binding.dibsCountTv.text = mart.visitorsCount.toString()
+            binding.dibsCountTv.text = mart.likeCount.toString()
+            binding.martProfileIv.text = mart.name.toString()
             setCategories(mart.categories)
 
 
@@ -196,7 +203,7 @@ class MartRVAdapter(
                     binding.bookmarkBtn.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
                     binding.bookmarkBtn.setBackgroundResource(R.drawable.background_primary400_r20)
                 }
-                notifyItemChanged(position)
+                // notifyItemChanged(position)
             }
         }
     }

@@ -78,14 +78,11 @@ class MartPostAdapter(private val itemList: List<MartItemDTO>, private val martI
                 Log.d("MartPostAdapter", "Image URL: ${item.imageUrl}")
                 Glide.with(itemView.context).load(item.imageUrl).into(binding.localMartPropertyIv)
 
-                // 초기 찜 UI
-                // isLiked = itemList.찜여부
+                isLiked = item.likeYn
                 if (isLiked)
                     binding.itemMartPostHeartIv.setImageResource(R.drawable.ic_heart_filled_20dp)
                 else
                     binding.itemMartPostHeartIv.setImageResource(R.drawable.ic_heart_unfilled_20dp)
-//                // 클릭 시 찜 UI 변경
-//                updateLikeUI()
             }
 
         private fun toggleLikeState() {

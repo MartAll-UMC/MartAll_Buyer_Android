@@ -26,6 +26,7 @@ android {
         buildConfigField("String", "MOCK_MART_URL", properties["MOCK_MART_URL"].toString())
         buildConfigField("String", "MOCK_ITEM_URL", properties["MOCK_ITEM_URL"].toString())
         buildConfigField("String", "MOCK_CART_URL", properties["MOCK_CART_URL"].toString())
+        buildConfigField("String", "REAL_SERVER_URL", properties["REAL_SERVER_URL"].toString())
     }
 
     buildTypes {

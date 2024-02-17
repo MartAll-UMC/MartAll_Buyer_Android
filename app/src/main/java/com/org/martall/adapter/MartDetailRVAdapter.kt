@@ -9,7 +9,12 @@ import com.org.martall.R
 import com.org.martall.databinding.ItemMartDetailPostBinding
 import com.org.martall.model.MartDataDTO
 import com.org.martall.model.MartItemDTO
+import com.org.martall.model.MartLikedResponseDTO
+import com.org.martall.services.ItemApiServiceManager
 import kotlinx.coroutines.NonDisposableHandle.parent
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.NumberFormat
 
 class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
@@ -54,12 +59,8 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
             }
 
             binding.itemMartPostHeartIv.setOnClickListener {
-                // 클릭되었을 때의 동작을 정의
-                val isChecked = !binding.itemMartPostHeartIv.isSelected
-                // isChecked 값에 따라 서버와 통신하여 토글 처리
-                handleToggle(isChecked)
-                // 선택 상태를 업데이트
-                binding.itemMartPostHeartIv.isSelected = isChecked
+                toggleLikeState()
+                Log.d("toggleLikeState", "클릭됨")
             }
         }
 
@@ -72,28 +73,58 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
             Log.d("MartPostAdapter", "Image URL: ${item.imageUrl}")
             Glide.with(itemView.context).load(item.imageUrl).into(binding.localMartPropertyIv)
 
-            // 초기 찜 UI
-            // binding.itemMartPostHeartIv.setImageResource(R.drawable.ic_heart_filled_20dp)
-            // 초기 토글 상태 설정
-            binding.itemMartPostHeartIv.isSelected = isLiked
-            // 클릭 시 찜 UI 변경
-            // updateLikeUI()
+            isLiked = item.likeYn
+            updateLikeUI()
         }
 
-        private fun handleToggle(isChecked: Boolean) {
-            // isChecked 값에 따라 서버와 통신하여 토글 처리
-            if (isChecked) {
-                // 선택됨: 찜하기
-                // 서버 통신 및 UI 업데이트
-                updateLikeUI(true)
+        private fun toggleLikeState() {
+            if (isLiked) {
+                // 찜취소 -> UI 업데이트
+                isLiked = !isLiked
+                updateLikeUI()
+
+                // 찜취소 서버 통신
+                val apiService = ItemApiServiceManager.ItemapiService
+                val call = apiService.unLikedItem(itemId = martProduct.items[adapterPosition].itemId)
+
+                call.enqueue(object : Callback<MartLikedResponseDTO> {
+                    override fun onResponse(
+                        call: Call<MartLikedResponseDTO>,
+                        response: Response<MartLikedResponseDTO>
+                    ) {
+                        Log.d("isLiked", "찜 취소 서버 통신 성공")
+                    }
+
+                    override fun onFailure(call: Call<MartLikedResponseDTO>, t: Throwable) {
+                        Log.d("isLiked", "찜 취소 서버 통신 실패")
+                    }
+                })
             } else {
-                // 선택 해제됨: 찜 취소
-                // 서버 통신 및 UI 업데이트
-                updateLikeUI(false)
+                isLiked = !isLiked
+                // 찜하기 성공 -> UI 업데이트
+                updateLikeUI()
+
+                // 찜하기 서버 통신
+                val apiService = ItemApiServiceManager.ItemapiService
+                val call = apiService.likedItem(itemId = martProduct.items[adapterPosition].itemId)
+
+                call.enqueue(object : Callback<MartLikedResponseDTO> {
+                    override fun onResponse(
+                        call: Call<MartLikedResponseDTO>,
+                        response: Response<MartLikedResponseDTO>
+                    ) {
+                        Log.d("isLiked", "찜하기 서버 통신 성공")
+                    }
+
+                    override fun onFailure(call: Call<MartLikedResponseDTO>, t: Throwable) {
+                        Log.d("isLiked", "찜하기 서버 통신 실패")
+                    }
+                })
             }
         }
 
-        private fun updateLikeUI(isLiked: Boolean) {
+
+        private fun updateLikeUI() {
             // UI 업데이트
             if (isLiked) {
                 // 찜하기 상태: 하트가 빨간색으로 채워짐

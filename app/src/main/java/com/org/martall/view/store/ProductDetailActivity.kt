@@ -170,6 +170,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun updateMartUI(martDetail: Mart) {
         with(binding) {
+            martProfileIv.text = martDetail.martName
             martNameTv.text = martDetail.martName
             followerCountTv.text = martDetail.bookmarkCount.toString()
             likedCountTv.text = martDetail.likeCount.toString()
