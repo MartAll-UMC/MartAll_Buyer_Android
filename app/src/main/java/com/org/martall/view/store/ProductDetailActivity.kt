@@ -166,6 +166,7 @@ class ProductDetailActivity : AppCompatActivity() {
             productNameTv.text = productDetail.itemName
             productPriceTv.text = productDetail.price.toString()
         }
+        Glide.with(this).load(productDetail.content).into(binding.productDetailIv)
     }
 
     private fun updateMartUI(martDetail: Mart) {

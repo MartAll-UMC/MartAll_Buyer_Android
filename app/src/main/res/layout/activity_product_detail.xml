@@ -253,6 +253,7 @@
                 app:layout_constraintStart_toStartOf="@id/mart_profile_iv" />
 
             <ImageView
+                android:id="@+id/product_detail_iv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/product_detail"
