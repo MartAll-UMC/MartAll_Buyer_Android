@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.App.Starting"
+        android:theme="@style/Theme.MartAll"
         tools:targetApi="31">
         <activity
             android:name=".view.home.NewMerchActivity"
@@ -30,11 +30,11 @@
             android:name=".MainActivity"
             android:exported="true"
             android:saveEnabled="false">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".view.home.notification.NotificationActivity"
@@ -49,10 +49,7 @@
             android:theme="@style/Theme.MartAll" />
         <activity android:name=".view.mypage.customerservice.CustomerServiceActivity" />
         <activity
-            android:name=".view.likelist.DibsActivity"
-            android:theme="@style/Theme.MartAll" />
-
-        <activity android:name=".view.store.MartDetailInfoActivity"
+            android:name=".view.store.MartDetailInfoActivity"
             android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".view.search.SearchActivity"
