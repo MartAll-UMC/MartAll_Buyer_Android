@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="12dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/notification_order_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_vertical"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/mart_products_food_1_56dp_iv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notification_order_category_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="과일&amp;채소"
+        android:textAppearance="@style/xsRegular"
+        android:textColor="@color/grey400"
+        app:layout_constraintStart_toEndOf="@id/notification_order_iv"
+        app:layout_constraintTop_toTopOf="@id/notification_order_iv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notification_order_name_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="돌 바나나 1.2kg 1개"
+        android:textAppearance="@style/sRegular"
+        app:layout_constraintStart_toStartOf="@id/notification_order_category_tv"
+        app:layout_constraintTop_toBottomOf="@id/notification_order_category_tv" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notification_order_price_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="5,000원"
+        android:textAppearance="@style/mBold"
+        app:layout_constraintStart_toStartOf="@id/notification_order_name_tv"
+        app:layout_constraintTop_toBottomOf="@id/notification_order_name_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
