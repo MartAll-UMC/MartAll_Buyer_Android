@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.org.martall.model.DibsMartManager
+import com.org.martall.Model.DibsMartManager
 import com.org.martall.adapter.DibsMartRVAdapter
 import com.org.martall.databinding.FragmentDibsMartBinding
-import com.org.martall.Model.DibsMartResponseDTO
+import com.org.martall.models.DibsMartResponseDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,6 +44,7 @@ class DibsMartFragment : Fragment() {
                     martList.addAll(response.body()?.followedMarts ?: emptyList())
                     updateRecyclerView(martList) // RecyclerView를 업데이트
                 } else {
+                    // 에러 처리
                 }
             }
 

@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import com.org.martall.adapter.RecentKeywordRVAdapter
 import com.org.martall.adapter.RecommendKeywordRVAdapter
 import com.org.martall.databinding.FragmentSearchBeforeBinding
-import com.org.martall.model.itemKeyword
-import com.org.martall.model.martKeyword
+import com.org.martall.models.itemKeyword
+import com.org.martall.models.martKeyword
 import com.org.martall.utils.ListToDataStoreUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.org.martall.R
-import com.org.martall.adapter.UserAdapter
 import com.org.martall.databinding.FragmentShopUserBinding
-import com.org.martall.model.dummyData
 import com.org.martall.view.store.user.bottomsheet.FilterBottomSheet
 
 class ShopUserFragment : Fragment() {

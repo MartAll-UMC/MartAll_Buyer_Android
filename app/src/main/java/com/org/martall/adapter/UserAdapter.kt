@@ -1,16 +1,5 @@
 package com.org.martall.adapter
 
-import android.annotation.SuppressLint
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.org.martall.databinding.ItemUserInfoBinding
-import com.org.martall.model.MartDTO
-import com.org.martall.model.dummyPosts
-
 class UserAdapter { //: ListAdapter<MartDTO,UserAdapter.UserViewHolder>(diffUtil) {
 
 //    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

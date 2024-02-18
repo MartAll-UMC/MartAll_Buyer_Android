@@ -2,15 +2,20 @@ package com.org.martall
 
 import CategoryFragment
 import HomeFragment
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.org.martall.databinding.ActivityMainBinding
+import com.org.martall.services.UserInfoManager
 import com.org.martall.view.likelist.DibsFragment
+import com.org.martall.view.login.LoginActivity
 import com.org.martall.view.mypage.customerservice.MyMartAllFragment
 import com.org.martall.view.store.LocalStoreFragment
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +24,8 @@ class MainActivity : AppCompatActivity() {
     private val fragmentLocalStore = LocalStoreFragment()
     private val fragmentCategory = CategoryFragment()
     private val fragmentMyMartAll = MyMartAllFragment()
-    val fragmentHeart = DibsFragment()
+    private val fragmentHeart = DibsFragment()
+    private lateinit var userInfoManager: UserInfoManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -28,7 +34,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initBottomNavigation()
+        userInfoManager = UserInfoManager(applicationContext)
+
+        GlobalScope.launch {
+            if (!userInfoManager.isValidToken()) {
+                Log.d("[ERROR]", userInfoManager.getTokens().toString())
+                val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+                startActivity(intent)
+            } else {
+                initBottomNavigation()
+            }
+        }
     }
 
     private fun initBottomNavigation() {

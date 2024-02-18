@@ -1,7 +1,6 @@
 package com.org.martall.interfaces
 
-import com.org.martall.model.MartDetailResponseDTO
-import com.org.martall.model.MartLikedResponseDTO
+import com.org.martall.models.MartLikedResponseDTO
 import retrofit2.Call
 import retrofit2.http.DELETE
 import retrofit2.http.POST

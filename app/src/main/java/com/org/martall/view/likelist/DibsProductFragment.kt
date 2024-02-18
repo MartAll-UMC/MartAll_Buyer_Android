@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.org.martall.adapter.DibsProductRVAdapter
-import com.org.martall.model.DibsProductManager
+import com.org.martall.Model.DibsProductManager
 import com.org.martall.databinding.FragmentDibsProductBinding
-import com.org.martall.Model.DibsProductResponseDTO
+import com.org.martall.models.DibsProductResponseDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

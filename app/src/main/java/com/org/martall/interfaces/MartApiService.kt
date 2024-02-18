@@ -1,12 +1,10 @@
 package com.org.martall.interfaces
 
-import com.org.martall.model.FollowResponseDTO
-import com.org.martall.model.MartDetailDTO
-import com.org.martall.model.MartDetailResponseDTO
-import com.org.martall.model.MartListResponseDTO
+import com.org.martall.models.FollowResponseDTO
+import com.org.martall.models.MartDetailResponseDTO
+import com.org.martall.models.MartListResponseDTO
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface MartApiService {

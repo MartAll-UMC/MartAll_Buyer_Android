@@ -1,6 +1,5 @@
-package com.org.martall.model
+package com.org.martall.models
 
-import com.google.gson.annotations.SerializedName
 import com.org.martall.R
 
 data class RecommendedMart(
