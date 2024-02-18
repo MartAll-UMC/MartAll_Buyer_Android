@@ -12,7 +12,7 @@ import com.org.martall.BuildConfig
 import com.org.martall.databinding.FragmentCategoryAllBinding
 import com.org.martall.interfaces.CategoryService
 import com.org.martall.interfaces.MartItemdibs
-import com.org.martall.model.SecondResponse
+import com.org.martall.models.SecondResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

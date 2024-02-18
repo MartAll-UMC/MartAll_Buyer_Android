@@ -10,9 +10,9 @@ import com.org.martall.adapter.SimpleProductRVAdapter
 import com.org.martall.databinding.ActivityNewMerchBinding
 import com.org.martall.interfaces.MartItemService
 import com.org.martall.interfaces.MartItemdibs
-import com.org.martall.model.Item
-import com.org.martall.model.Response
-import com.org.martall.model.SecondItem
+import com.org.martall.models.Item
+import com.org.martall.models.Response
+import com.org.martall.models.SecondItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit

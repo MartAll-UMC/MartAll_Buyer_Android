@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.interfaces.MartItemdibs
-import com.org.martall.model.Item
+import com.org.martall.models.Item
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

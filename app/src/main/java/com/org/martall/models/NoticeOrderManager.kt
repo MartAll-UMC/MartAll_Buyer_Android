@@ -1,4 +1,4 @@
-package com.org.martall.Model
+package com.org.martall.models
 
 import com.org.martall.BuildConfig
 import com.org.martall.interfaces.NoticeOrderApi

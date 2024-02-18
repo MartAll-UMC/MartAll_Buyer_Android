@@ -1,4 +1,4 @@
-package com.org.martall.Model
+package com.org.martall.models
 
 data class NoticeOrderDTO(
     val timeStamp: String,

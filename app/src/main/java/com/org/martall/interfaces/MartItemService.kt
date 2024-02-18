@@ -1,8 +1,8 @@
 package com.org.martall.interfaces
 
-import com.org.martall.model.Response
-import com.org.martall.model.ResponseMart
-import com.org.martall.model.SecondResponse
+import com.org.martall.models.Response
+import com.org.martall.models.ResponseMart
+import com.org.martall.models.SecondResponse
 import retrofit2.Call
 import retrofit2.http.*
 

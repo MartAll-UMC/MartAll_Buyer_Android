@@ -12,8 +12,8 @@ import com.org.martall.BuildConfig
 import com.org.martall.databinding.FragmentCategoryFruitBinding
 import com.org.martall.interfaces.CategoryService
 import com.org.martall.interfaces.MartItemdibs
-import com.org.martall.model.SecondItem
-import com.org.martall.model.SecondResponse
+import com.org.martall.models.SecondItem
+import com.org.martall.models.SecondResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

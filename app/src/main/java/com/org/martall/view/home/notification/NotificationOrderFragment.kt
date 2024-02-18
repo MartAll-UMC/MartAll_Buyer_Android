@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.org.martall.Model.NoticeOrderDTO
-import com.org.martall.Model.NoticeOrderManager
+import com.org.martall.models.NoticeOrderDTO
+import com.org.martall.models.NoticeOrderManager
 import com.org.martall.databinding.FragmentNotificationOrderBinding
 import retrofit2.Call
 import retrofit2.Callback

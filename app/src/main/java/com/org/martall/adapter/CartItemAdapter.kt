@@ -1,11 +1,11 @@
-package com.org.martall.Adapter
+package com.org.martall.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.org.martall.Model.NoticeOrderDTO
 import com.org.martall.databinding.ItemOrderStatusBinding
+import com.org.martall.models.NoticeOrderDTO
 import java.text.NumberFormat
 import java.util.Locale
 

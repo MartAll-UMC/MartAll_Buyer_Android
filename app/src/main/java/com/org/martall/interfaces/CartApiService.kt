@@ -1,8 +1,8 @@
 package com.org.martall.interfaces
 
-import com.org.martall.model.MartDetailResponseDTO
-import com.org.martall.model.MartListResponseDTO
-import com.org.martall.model.ProductDetailResponseDTO
+import com.org.martall.models.MartDetailResponseDTO
+import com.org.martall.models.MartListResponseDTO
+import com.org.martall.models.ProductDetailResponseDTO
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

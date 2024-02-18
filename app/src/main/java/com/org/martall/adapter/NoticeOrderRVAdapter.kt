@@ -1,10 +1,11 @@
-package com.org.martall.Adapter
+package com.org.martall.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.org.martall.Model.NoticeOrderDTO
+import com.org.martall.adapter.CartItemAdapter
+import com.org.martall.models.NoticeOrderDTO
 import com.org.martall.databinding.FragmentNotificationOrderBinding
 
 class MartAdapter(private val martList: List<NoticeOrderDTO.MartResult>) :

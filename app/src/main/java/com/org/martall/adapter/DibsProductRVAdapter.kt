@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
-import com.org.martall.Model.DibsProductResponseDTO
+import com.org.martall.models.DibsProductResponseDTO
 import com.org.martall.databinding.ItemCategoryProductBinding
 import java.text.NumberFormat
 import java.util.Locale

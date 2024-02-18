@@ -17,10 +17,10 @@ import com.org.martall.databinding.FragmentHomeBinding
 import com.org.martall.interfaces.MartItemService
 import com.org.martall.interfaces.MartItemdibs
 import com.org.martall.interfaces.MartRecommendService
-import com.org.martall.model.Item
-import com.org.martall.model.RecommendedMart
-import com.org.martall.model.Response
-import com.org.martall.model.ResponseMart
+import com.org.martall.models.Item
+import com.org.martall.models.RecommendedMart
+import com.org.martall.models.Response
+import com.org.martall.models.ResponseMart
 import com.org.martall.view.home.HomeAdFragment
 import com.org.martall.view.home.NewMerchActivity
 import com.org.martall.view.search.SearchActivity

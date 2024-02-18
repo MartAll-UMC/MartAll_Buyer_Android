@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.interfaces.MartItemdibs
-import com.org.martall.model.SecondItem
+import com.org.martall.models.SecondItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,7 +14,7 @@ import java.util.Locale
 
 class CategoryRVAdapter(
     private val itemList: List<SecondItem>,
-    private val martItemdibs: MartItemdibs
+    private val martItemdibs: MartItemdibs,
 ) : RecyclerView.Adapter<CategoryRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

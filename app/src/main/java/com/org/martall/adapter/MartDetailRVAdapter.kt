@@ -7,18 +7,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemMartDetailPostBinding
-import com.org.martall.model.MartDataDTO
-import com.org.martall.model.MartItemDTO
-import com.org.martall.model.MartLikedResponseDTO
+import com.org.martall.models.MartDataDTO
+import com.org.martall.models.MartItemDTO
+import com.org.martall.models.MartLikedResponseDTO
 import com.org.martall.services.ItemApiServiceManager
-import kotlinx.coroutines.NonDisposableHandle.parent
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.NumberFormat
 
 class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
-    RecyclerView.Adapter<MartDetailRVAdapter.ViewHolder>(){
+    RecyclerView.Adapter<MartDetailRVAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(martId: Int, itemId: Int)
@@ -32,8 +31,12 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
         onItemClickListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MartDetailRVAdapter.ViewHolder {
-        val binding = ItemMartDetailPostBinding.inflate(LayoutInflater.from(parent.context), parent,false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): MartDetailRVAdapter.ViewHolder {
+        val binding =
+            ItemMartDetailPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -85,12 +88,13 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
 
                 // 찜취소 서버 통신
                 val apiService = ItemApiServiceManager.ItemapiService
-                val call = apiService.unLikedItem(itemId = martProduct.items[adapterPosition].itemId)
+                val call =
+                    apiService.unLikedItem(itemId = martProduct.items[adapterPosition].itemId)
 
                 call.enqueue(object : Callback<MartLikedResponseDTO> {
                     override fun onResponse(
                         call: Call<MartLikedResponseDTO>,
-                        response: Response<MartLikedResponseDTO>
+                        response: Response<MartLikedResponseDTO>,
                     ) {
                         Log.d("isLiked", "찜 취소 서버 통신 성공")
                     }
@@ -111,7 +115,7 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
                 call.enqueue(object : Callback<MartLikedResponseDTO> {
                     override fun onResponse(
                         call: Call<MartLikedResponseDTO>,
-                        response: Response<MartLikedResponseDTO>
+                        response: Response<MartLikedResponseDTO>,
                     ) {
                         Log.d("isLiked", "찜하기 서버 통신 성공")
                     }

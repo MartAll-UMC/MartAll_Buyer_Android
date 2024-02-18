@@ -29,8 +29,6 @@ android {
         buildConfigField("String", "BASE_URL", properties["BASE_URL"].toString())
         buildConfigField("String", "KAKAO_KEY", properties["KAKAO_KEY"].toString())
         buildConfigField("String", "KAKAO_CHANNEL_URL", properties["KAKAO_CHANNEL"].toString())
-        buildConfigField("String", "REAL_SERVER_URL", properties["REAL_SERVER_URL"].toString())
-        buildConfigField("String", "REAL_URL", properties["REAL_URL"].toString())
     }
 
     buildTypes {

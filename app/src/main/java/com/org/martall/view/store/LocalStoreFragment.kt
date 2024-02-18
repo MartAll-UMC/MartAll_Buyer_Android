@@ -7,21 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.org.martall.ViewModel.SharedMartViewModel
 import com.org.martall.adapter.MartRVAdapter
 import com.org.martall.databinding.FragmentLocalStoreBinding
-import com.org.martall.model.dummyData
+import com.org.martall.models.MartDataDTO
+import com.org.martall.models.MartListResponseDTO
+import com.org.martall.services.ApiServiceManager
 import com.org.martall.view.search.SearchActivity
 import com.org.martall.view.store.user.bottomsheet.FilterBottomSheet
 import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.fragment.app.activityViewModels
-import com.org.martall.ViewModel.SharedMartViewModel
-import com.org.martall.model.MartDataDTO
-import com.org.martall.model.MartListResponseDTO
-import com.org.martall.services.ApiServiceManager
 
 class LocalStoreFragment : Fragment() {
     private lateinit var binding: FragmentLocalStoreBinding
@@ -51,7 +50,6 @@ class LocalStoreFragment : Fragment() {
 
 //        val martRVAdapter = MartRVAdapter(dummyData)
 //        binding.groupRecyclerView.adapter = martRVAdapter
-
 
 
         return binding.root
@@ -91,10 +89,10 @@ class LocalStoreFragment : Fragment() {
         call.enqueue(object : Callback<MartListResponseDTO> {
             override fun onResponse(
                 call: Call<MartListResponseDTO>,
-                response: Response<MartListResponseDTO>
+                response: Response<MartListResponseDTO>,
             ) {
                 if (response.isSuccessful) {
-                    val martList = response.body()?.marts ?: emptyList()
+                    val martList = response.body()?.result ?: emptyList()
                     // 데이터 설정
                     sharedMartViewModel.setMartList(martList)
 
