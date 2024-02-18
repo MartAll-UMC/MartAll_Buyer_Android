@@ -29,6 +29,8 @@ android {
         buildConfigField("String", "BASE_URL", properties["BASE_URL"].toString())
         buildConfigField("String", "KAKAO_KEY", properties["KAKAO_KEY"].toString())
         buildConfigField("String", "KAKAO_CHANNEL_URL", properties["KAKAO_CHANNEL"].toString())
+        buildConfigField("String", "REAL_SERVER_URL", properties["REAL_SERVER_URL"].toString())
+        buildConfigField("String", "REAL_URL", properties["REAL_URL"].toString())
     }
 
     buildTypes {
@@ -77,6 +79,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.drawerlayout:drawerlayout:1.2.0")
     implementation("androidx.datastore:datastore-preferences-core:1.0.0")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

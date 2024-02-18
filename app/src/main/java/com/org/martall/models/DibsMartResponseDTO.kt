@@ -1,4 +1,4 @@
-package com.org.martall.models
+package com.org.martall.Model
 
 data class DibsMartResponseDTO(
     val message: String,
@@ -11,5 +11,6 @@ data class DibsMartResponseDTO(
         val martname: String,
         val martshopId: Int,
         val salesIndex: Int,
-        val visitorCount: Int)
+        val visitorCount: Int,
+        var isfollowed: Boolean = true)
     }

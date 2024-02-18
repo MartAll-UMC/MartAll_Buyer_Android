@@ -1,3 +1,5 @@
+package com.org.martall.adapter
+
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -5,24 +7,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.interfaces.MartItemdibs
-import com.org.martall.model.SecondItem
+import com.org.martall.model.Item
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.NumberFormat
 import java.util.Locale
-
-class CategoryRVAdapter(
-    private val itemList: List<SecondItem>,
-    private val martItemdibs: MartItemdibs
-) : RecyclerView.Adapter<CategoryRVAdapter.ViewHolder>() {
+//새로 나온 상품 어댑터 입니다. 카테고리와 리사이클러 뷰가 겹치나, api구조가 달라 새로 생성했습니다//
+class SimpleProductRVAdapter(private val itemList: List<Item>, private val martItemdibs: MartItemdibs) :
+    RecyclerView.Adapter<SimpleProductRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemCategoryProductBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
+        val binding = ItemCategoryProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -32,8 +28,7 @@ class CategoryRVAdapter(
 
     override fun getItemCount(): Int = itemList.size
 
-    inner class ViewHolder(private val binding: ItemCategoryProductBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemCategoryProductBinding) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.btnLike.setOnClickListener {
@@ -66,7 +61,7 @@ class CategoryRVAdapter(
             }
         }
 
-        fun bind(item: SecondItem) {
+        fun bind(item: Item) {
             binding.apply {
                 tvProductName.text = item.itemName
                 val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.price)

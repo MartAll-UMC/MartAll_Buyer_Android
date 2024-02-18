@@ -1,5 +1,6 @@
 package com.org.martall.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,12 +8,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemMartPostBinding
-import com.org.martall.models.MartItemDTO
+import com.org.martall.model.MartItemDTO
+import com.org.martall.model.MartLikedResponseDTO
+import com.org.martall.services.ApiServiceManager
 import com.org.martall.services.ItemApiServiceManager
+import com.org.martall.view.store.ProductDetailActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.NumberFormat
 
-class MartPostAdapter(private val itemList: List<MartItemDTO>) :
+class MartPostAdapter(private val itemList: List<MartItemDTO>, private val martId: Int) :
     RecyclerView.Adapter<MartPostAdapter.ViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(martId: Int, itemId: Int)
+    }
+
+    // 리스너 변수
+    private var onItemClickListener: OnItemClickListener? = null
+
+    // 리스너 설정 메서드
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        onItemClickListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MartPostAdapter.ViewHolder {
         val binding: ItemMartPostBinding =
@@ -36,6 +55,17 @@ class MartPostAdapter(private val itemList: List<MartItemDTO>) :
 
             init {
                 binding.root.setOnClickListener {
+                    val martId = martId
+                    val itemId = itemList[adapterPosition].itemId
+
+                    val intent = Intent(binding.root.context, ProductDetailActivity::class.java)
+                    intent.putExtra(ProductDetailActivity.EXTRA_ITEM_ID, martId)
+                    intent.putExtra(ProductDetailActivity.EXTRA_MART_ID, itemId)
+                    Log.d("MartPostAdapter", "martId: " + martId.toString() + "itemId: " + itemId.toString())
+                    binding.root.context.startActivity(intent)
+                }
+
+                binding.itemMartPostHeartIv.setOnClickListener {
                     toggleLikeState()
                 }
             }
@@ -48,26 +78,59 @@ class MartPostAdapter(private val itemList: List<MartItemDTO>) :
                 Log.d("MartPostAdapter", "Image URL: ${item.imageUrl}")
                 Glide.with(itemView.context).load(item.imageUrl).into(binding.localMartPropertyIv)
 
-                // 초기 찜 UI
-                binding.itemMartPostHeartIv.setImageResource(R.drawable.ic_heart_filled_20dp)
-                // 클릭 시 찜 UI 변경
-                updateLikeUI()
+                isLiked = item.likeYn
+                if (isLiked)
+                    binding.itemMartPostHeartIv.setImageResource(R.drawable.ic_heart_filled_20dp)
+                else
+                    binding.itemMartPostHeartIv.setImageResource(R.drawable.ic_heart_unfilled_20dp)
             }
 
         private fun toggleLikeState() {
-            isLiked = !isLiked
 
             if (isLiked) {
-                // 찜하기 서버 통신
-                val apiService = ItemApiServiceManager.ItemapiService
 
+                // 찜취소 -> UI 업데이트
+                isLiked = !isLiked
+                updateLikeUI()
+
+                // 찜취소 서버 통신
+                val apiService = ItemApiServiceManager.ItemapiService
+                val call = apiService.unLikedItem(itemId = itemList[adapterPosition].itemId)
+
+                call.enqueue(object : Callback<MartLikedResponseDTO> {
+                    override fun onResponse(
+                        call: Call<MartLikedResponseDTO>,
+                        response: Response<MartLikedResponseDTO>
+                    ) {
+                        Log.d("isLiked", "찜 취소 서버 통신 성공")
+                    }
+
+                    override fun onFailure(call: Call<MartLikedResponseDTO>, t: Throwable) {
+                        Log.d("isLiked", "찜 취소 서버 통신 실패")
+                    }
+                })
+            } else {
+                isLiked = !isLiked
                 // 찜하기 성공 -> UI 업데이트
                 updateLikeUI()
-            } else {
-                // 찜 취소 서버 통신
 
-                // 찜 취소 성공 -> UI 업데이트
-                updateLikeUI()
+                // 찜하기 서버 통신
+                val apiService = ItemApiServiceManager.ItemapiService
+                val call = apiService.likedItem(itemId = itemList[adapterPosition].itemId)
+
+                call.enqueue(object : Callback<MartLikedResponseDTO>{
+                    override fun onResponse(
+                        call: Call<MartLikedResponseDTO>,
+                        response: Response<MartLikedResponseDTO>
+                    ) {
+                        Log.d("isLiked", "찜하기 서버 통신 성공")
+                    }
+
+                    override fun onFailure(call: Call<MartLikedResponseDTO>, t: Throwable) {
+                        Log.d("isLiked", "찜하기 서버 통신 실패")
+                    }
+
+                })
             }
         }
 

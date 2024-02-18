@@ -14,7 +14,7 @@ import retrofit2.Response
 import java.text.NumberFormat
 import java.util.Locale
 
-class ProductSimpleRVAdapter(private var itemList: List<Item>, private val martItemdibs: MartItemdibs) :
+class ProductSimpleRVAdapter(private val itemList: List<Item>, private val martItemdibs: MartItemdibs) :
     RecyclerView.Adapter<ProductSimpleRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -38,7 +38,6 @@ class ProductSimpleRVAdapter(private var itemList: List<Item>, private val martI
         return itemList.size
     }
 
-
     inner class ViewHolder(private val binding: ItemHomeProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -50,14 +49,14 @@ class ProductSimpleRVAdapter(private var itemList: List<Item>, private val martI
             }
 
             // 초기 상태 설정
-            updateLikeButton(item.isLiked)
+            updateLikeButton(item.like)
 
             binding.productLikeIb.setOnClickListener {
                 val itemId = item.itemId
-                val isLiked = !item.isLiked
+                val isLiked = !item.like
 
                 // 클릭 상태를 업데이트하여 UI를 변경
-                item.isLiked = isLiked
+                item.like = isLiked
                 updateLikeButton(isLiked)
 
                 // 로그 추가: 클릭 상태 변경 및 업데이트 요청 로그
@@ -72,7 +71,7 @@ class ProductSimpleRVAdapter(private var itemList: List<Item>, private val martI
                             Log.d("Retrofit", "Update request successful for item $itemId")
                         } else {
                             // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
-                            item.isLiked = !isLiked
+                            item.like = !isLiked
                             updateLikeButton(!isLiked)
                             Log.e("Retrofit", "Failed to send update request for item $itemId")
                         }
@@ -80,13 +79,12 @@ class ProductSimpleRVAdapter(private var itemList: List<Item>, private val martI
 
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
-                        item.isLiked = !isLiked
+                        item.like = !isLiked
                         updateLikeButton(!isLiked)
                         Log.e("ProductSimpleRVAdapter", "Failed to send update request for item $itemId")
                     }
                 })
             }
-
         }
 
         private fun updateLikeButton(isLiked: Boolean) {
@@ -95,5 +93,4 @@ class ProductSimpleRVAdapter(private var itemList: List<Item>, private val martI
             binding.productLikeIb.setImageResource(likeIconResId)
         }
     }
-
 }

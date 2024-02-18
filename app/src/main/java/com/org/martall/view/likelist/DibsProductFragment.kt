@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.org.martall.adapter.DibsProductRVAdapter
 import com.org.martall.Model.DibsProductManager
@@ -16,13 +17,23 @@ import retrofit2.Response
 
 class DibsProductFragment : Fragment() {
     private lateinit var binding: FragmentDibsProductBinding
+    private val productList: ArrayList<DibsProductResponseDTO.DibsProducts> = ArrayList()
+    private var adapter: DibsProductRVAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentDibsProductBinding.inflate(inflater, container, false)
+        initializeRecyclerView()
         getLikedItems()
         return binding.root
+    }
+
+    private fun initializeRecyclerView() {
+        adapter = DibsProductRVAdapter(productList) { itemId ->
+            onCancelDibsProduct(itemId)
+        }
+        binding.rvProductList.adapter = adapter
     }
 
     private fun getLikedItems() {
@@ -34,48 +45,65 @@ class DibsProductFragment : Fragment() {
                 call: Call<DibsProductResponseDTO>, response: Response<DibsProductResponseDTO>
             ) {
                 if (response.isSuccessful) {
-                    val dibsProducts = response.body()?.data ?: emptyList()
+                    val dibsProducts = response.body()?.result?.item ?: emptyList()
                     updateRecyclerView(dibsProducts)
                 } else {
-                    // Handle the error case
+                    // Handle error case
                 }
             }
 
             override fun onFailure(call: Call<DibsProductResponseDTO>, t: Throwable) {
                 Log.d("DibsProductFragment", "Failed to get liked items: ${t.message}")
+                showToast("찜한 상품을 가져오는 데 실패했습니다.")
             }
         })
     }
 
     private fun updateRecyclerView(dibsProducts: List<DibsProductResponseDTO.DibsProducts>) {
-        if (dibsProducts.isEmpty()) {
+        productList.clear()
+        productList.addAll(dibsProducts)
+
+        if (productList.isEmpty()) {
             binding.shopDibsLayout.root.visibility = View.VISIBLE
             binding.rvProductList.visibility = View.GONE
         } else {
             binding.shopDibsLayout.root.visibility = View.GONE
             binding.rvProductList.visibility = View.VISIBLE
-            binding.rvProductList.adapter = DibsProductRVAdapter(dibsProducts, object : DibsProductRVAdapter.DibsProductClickListener {
-                override fun onCancelDibsProduct(itemId: Int) {
-                    // 찜 취소 API 호출
-                    val apiService = DibsProductManager.dibsProductApiService
-                    apiService.cancelDibsProduct(itemId).enqueue(object : Callback<DibsProductResponseDTO> {
-                        override fun onResponse(call: Call<DibsProductResponseDTO>, response: Response<DibsProductResponseDTO>) {
-                            if (response.isSuccessful) {
-                                // 성공적으로 찜 취소. 상태 업데이트 필요
-                                getLikedItems() // 상품 목록을 다시 가져와서 UI를 업데이트
-                            }
-                        }
-
-                        override fun onFailure(call: Call<DibsProductResponseDTO>, t: Throwable) {
-                            // 요청 실패 처리
-                            Log.d("DibsProductFragment", "Failed to cancel dibs: ${t.message}")
-                        }
-                    })
-                }
-            })
+            adapter?.notifyDataSetChanged()
         }
     }
+
+    private fun onCancelDibsProduct(itemId: Int) {
+        val apiService = DibsProductManager.dibsProductApiService
+        apiService.cancelDibsProduct(itemId).enqueue(object : Callback<DibsProductResponseDTO> {
+            override fun onResponse(
+                call: Call<DibsProductResponseDTO>,
+                response: Response<DibsProductResponseDTO>
+            ) {
+                if (response.isSuccessful) {
+                    removeProductFromList(itemId)
+                } else {
+                    // Handle error case
+                }
+            }
+
+            override fun onFailure(call: Call<DibsProductResponseDTO>, t: Throwable) {
+                Log.d("DibsProductFragment", "Failed to cancel dibs: ${t.message}")
+                showToast("찜 취소에 실패했습니다.")
+            }
+        })
+    }
+
+    private fun removeProductFromList(itemId: Int) {
+        val position = productList.indexOfFirst { it.itemId == itemId }
+        if (position != -1) {
+            productList.removeAt(position)
+            adapter?.notifyItemRemoved(position)
+            adapter?.notifyItemRangeChanged(position, productList.size)
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
 }
-
-
-

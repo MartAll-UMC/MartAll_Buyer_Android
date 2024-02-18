@@ -4,22 +4,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
-import com.org.martall.models.DibsProductResponseDTO
+import com.org.martall.Model.DibsProductResponseDTO
 import com.org.martall.databinding.ItemCategoryProductBinding
 import java.text.NumberFormat
 import java.util.Locale
 
-class DibsProductRVAdapter (private val productList: List<DibsProductResponseDTO.DibsProducts>, private val dibsProductClickListener: DibsProductClickListener) : RecyclerView.Adapter<DibsProductRVAdapter.ViewHolder>() {
-    interface DibsProductClickListener {
-        fun onCancelDibsProduct(itemId: Int)
-    }
+class DibsProductRVAdapter(
+    private val productList: List<DibsProductResponseDTO.DibsProducts>,
+    private val onCancelDibsProduct: (Int) -> Unit
+) : RecyclerView.Adapter<DibsProductRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemCategoryProductBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
-        ) // 수정된 부분
+        )
         return ViewHolder(binding)
     }
 
@@ -35,30 +35,34 @@ class DibsProductRVAdapter (private val productList: List<DibsProductResponseDTO
     inner class ViewHolder(val binding: ItemCategoryProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: DibsProductResponseDTO.DibsProducts) {
+
             val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(product.price)
-            //binding.ivProductImg.setImageResource(product.imageUrl)
+            //binding.ivProductImg.setImageResource(product.picName)
             binding.tvProductName.text = product.itemName
             binding.tvProductPrice.text = "${formattedPrice}원"
-            //binding.tvMartName.text = product.
-            // 찜 상태에 따라 버튼 이미지 변경
-            if (product.isLiked) {
-                binding.btnLike.setImageResource(R.drawable.ic_like_unfilled_20dp)
-            } else {
-                binding.btnLike.setImageResource(R.drawable.ic_like_filled_20dp)
-            }
-            binding.btnLike.setOnClickListener {
-                // 찜 상태 변경
-                product.isLiked = !product.isLiked
+            binding.tvMartName.text = product.martName
 
-                // 찜 상태에 따른 이벤트 처리
-                if (product.isLiked) {
-                    binding.btnLike.setImageResource(R.drawable.ic_like_unfilled_20dp)
-                } else {
-                    binding.btnLike.setImageResource(R.drawable.ic_like_filled_20dp)
-                    dibsProductClickListener.onCancelDibsProduct(product.itemId)
+            setLikeButtonImage(product.like)
+
+            // 찜 버튼 클릭 이벤트.
+            binding.btnLike.setOnClickListener {
+                product.like = !product.like
+                setLikeButtonImage(product.like)
+
+                if (!product.like) {
+                    onCancelDibsProduct(product.itemId)
                 }
             }
+        }
 
+        // 찜 상태에 따른 버튼 이미지 설정
+        private fun setLikeButtonImage(isLiked: Boolean) {
+            if (isLiked) { //찜한 상태
+                binding.btnLike.setImageResource(R.drawable.ic_like_filled_20dp)
+            } else { //찜취소
+                binding.btnLike.setImageResource(R.drawable.ic_like_unfilled_20dp)
+            }
         }
     }
 }
+

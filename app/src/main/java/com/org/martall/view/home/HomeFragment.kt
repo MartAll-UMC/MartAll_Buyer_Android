@@ -17,11 +17,15 @@ import com.org.martall.databinding.FragmentHomeBinding
 import com.org.martall.interfaces.MartItemService
 import com.org.martall.interfaces.MartItemdibs
 import com.org.martall.interfaces.MartRecommendService
-import com.org.martall.models.ResponseMart
-import com.org.martall.models.Response
+import com.org.martall.model.Item
+import com.org.martall.model.RecommendedMart
+import com.org.martall.model.Response
+import com.org.martall.model.ResponseMart
 import com.org.martall.view.home.HomeAdFragment
 import com.org.martall.view.home.NewMerchActivity
 import com.org.martall.view.search.SearchActivity
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response as RetrofitResponse
@@ -55,7 +59,7 @@ class HomeFragment : Fragment() {
 
         // Retrofit 객체 생성
         val retrofit = Retrofit.Builder()
-            .baseUrl("${BuildConfig.MOCK_ITEM_URL}")
+            .baseUrl("${BuildConfig.MOCK_CART_URL}")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -93,12 +97,12 @@ class HomeFragment : Fragment() {
             }
         })
 
-// Retrofit 호출 실행
+        // Retrofit 호출 실행
         call.enqueue(object : Callback<Response> {
             override fun onResponse(call: Call<Response>, response: RetrofitResponse<Response>) {
                 if (response.isSuccessful) {
                     val newItemResponse = response.body()
-                    newItemResponse?.data?.let { items ->
+                    newItemResponse?.result?.let { items ->
                         // 리싸이클러뷰 어댑터 생성 및 설정
                         val adapter = ProductSimpleRVAdapter(items, martItemdibs)
                         binding.homeMerchandiseRv.adapter = adapter
@@ -142,7 +146,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-/* 스켈레톤 뷰 함수*/
+    /* 스켈레톤 뷰 함수*/
     private fun showMerchandiseData(isLoading: Boolean) {
         if (isLoading) {
             binding.homeShimmerFl.startShimmer()
@@ -154,6 +158,7 @@ class HomeFragment : Fragment() {
             binding.homeMerchandiseRv.visibility = View.VISIBLE
         }
     }
+
     private fun showMartData(isLoading: Boolean) {
         if (isLoading) {
             binding.homeMartShimmerFl.startShimmer()

@@ -33,50 +33,79 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_filter_title">
+            app:layout_constraintTop_toBottomOf="@id/tv_filter_title"
+            app:singleSelection="true" >
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_child_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="육아용품" />
+                android:text="육아용품"
+                android:textColor="@color/grey400"
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendardmedium"
+                android:backgroundTint="@color/white"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_cosmetics"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="화장품" />
+                android:text="화장품"
+                android:textColor="@color/grey400"
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendardmedium"
+                android:backgroundTint="@color/white" />
 
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_food"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="식품" />
+                android:text="식품"
+                android:textColor="@color/grey400"
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendardmedium"
+                android:backgroundTint="@color/white" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_fish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="수산" />
+                android:text="수산"
+                android:textColor="@color/grey400"
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendardmedium"
+                android:backgroundTint="@color/white" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_health"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="건강식품" />
+                android:text="건강식품"
+                android:textColor="@color/grey400"
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendardmedium"
+                android:backgroundTint="@color/white" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_animal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="반려동물"/>
+                android:text="반려동물"
+                android:textColor="@color/grey400"
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendardmedium"
+                android:backgroundTint="@color/white" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_meat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="정육" />
+                android:text="정육"
+                android:textColor="@color/grey400"
+                android:textSize="12sp"
+                android:fontFamily="@font/pretendardmedium"
+                android:backgroundTint="@color/white" />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -156,28 +185,32 @@
             android:layout_marginTop="@dimen/dp_12"
             android:layout_marginEnd="@dimen/dp_24"/>
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bottomsheet_reset_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="초기화"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:textColor="@color/grey400"
+            android:textSize="14sp"
+            android:fontFamily="@font/pretendardmedium"
+            android:background="@drawable/background_gray_square_r8"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/bottomsheet_save_btn"
             app:layout_constraintTop_toBottomOf="@id/slider_heart_count" />
 
-        <com.google.android.material.button.MaterialButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bottomsheet_save_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="저장"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:text="적용"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:fontFamily="@font/pretendardmedium"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:background="@drawable/background_primary400_fill_r12"
             app:layout_constraintTop_toTopOf="@id/bottomsheet_reset_btn"
             app:layout_constraintStart_toEndOf="@id/bottomsheet_reset_btn"
             app:layout_constraintEnd_toEndOf="parent" />

@@ -53,75 +53,91 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+<!--            <ImageView-->
+<!--                android:id="@+id/mart_profile_iv"-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:src="@drawable/mart_profil_iv"-->
+<!--                android:layout_margin="20dp"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/post_image_iv"-->
+<!--                app:layout_constraintStart_toStartOf="parent" />-->
+
+            <TextView
                 android:id="@+id/mart_profile_iv"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/mart_profil_iv"
-                android:layout_margin="20dp"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_mart_profile_52dp"
+                android:gravity="center"
+                android:text="마트명"
+                android:textAppearance="@style/xsSemiBold"
+                android:textColor="@color/primary500"
                 app:layout_constraintTop_toBottomOf="@id/post_image_iv"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/mart_name_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="마트명"
-                android:textStyle="bold"
-                android:textSize="15sp"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/pretendardbold"
-                app:layout_constraintTop_toTopOf="@id/mart_profile_iv"
-                app:layout_constraintBottom_toTopOf="@id/mart_hashtag_list_tv"
-                app:layout_constraintStart_toEndOf="@id/mart_profile_iv"/>
-
-            <LinearLayout
-                android:id="@+id/mart_hashtag_list_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@id/mart_name_tv"
-                app:layout_constraintTop_toBottomOf="@id/mart_name_tv"
-                app:layout_constraintBottom_toTopOf="@id/mart_hashtag_list_tv" >
-
                 <TextView
-                    android:id="@+id/mart_hashtag_tv1"
+                    android:id="@+id/mart_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="#육아"
-                    android:textSize="12sp"
-                    android:textColor="#B9B9B9"
-                    android:fontFamily="@font/pretendardregular"/>
+                    android:text="마트명"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="20dp"
+                    android:fontFamily="@font/pretendardbold"
+                    app:layout_constraintTop_toTopOf="@id/mart_profile_iv"
+                    app:layout_constraintBottom_toTopOf="@id/mart_hashtag_list_tv"
+                    app:layout_constraintStart_toEndOf="@id/mart_profile_iv"/>
 
-                <TextView
-                    android:id="@+id/mart_hashtag_tv2"
+                <LinearLayout
+                    android:id="@+id/mart_hashtag_list_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="#뷰티"
-                    android:textSize="12sp"
-                    android:textColor="#B9B9B9"
-                    android:layout_marginLeft="5dp"
-                    android:fontFamily="@font/pretendardregular"/>
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/mart_name_tv"
+                    app:layout_constraintTop_toBottomOf="@id/mart_name_tv"
+                    app:layout_constraintBottom_toTopOf="@id/mart_hashtag_list_tv" >
 
-                <TextView
-                    android:id="@+id/mart_hashtag_tv3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="#스포츠"
-                    android:textSize="12sp"
-                    android:textColor="#B9B9B9"
-                    android:layout_marginLeft="5dp"
-                    android:fontFamily="@font/pretendardregular"/>
+                    <TextView
+                        android:id="@+id/mart_hashtag_tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#육아"
+                        android:textSize="12sp"
+                        android:textColor="#B9B9B9"
+                        android:fontFamily="@font/pretendardregular"/>
+
+    <!--                <TextView-->
+<!--                    android:id="@+id/mart_hashtag_tv2"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="#뷰티"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textColor="#B9B9B9"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:fontFamily="@font/pretendardregular"/>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/mart_hashtag_tv3"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="#스포츠"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textColor="#B9B9B9"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:fontFamily="@font/pretendardregular"/>-->
 
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/bookmark_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="단골 추가"
                 android:textStyle="bold"
+                android:textColor="@color/white"
                 android:layout_marginRight="10dp"
+                android:background="@drawable/background_primary400_r20"
                 app:layout_constraintTop_toTopOf="@id/mart_profile_iv"
                 app:layout_constraintBottom_toBottomOf="@id/mart_profile_iv"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -136,10 +152,18 @@
                 app:layout_constraintBottom_toBottomOf="@id/mart_profile_iv" >
 
                 <TextView
+                    android:id="@+id/follower_guide_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="단골 수 "
+                    android:textSize="10sp"
+                    android:fontFamily="@font/pretendardregular"/>
+
+                <TextView
                     android:id="@+id/follower_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="단골 수 0"
+                    android:text="0"
                     android:textSize="10sp"
                     android:fontFamily="@font/pretendardregular"/>
 
@@ -153,11 +177,20 @@
                     android:fontFamily="@font/pretendardregular"/>
 
                 <TextView
-                    android:id="@+id/visiter_count_tv"
+                    android:id="@+id/liked_guide_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="상품 찜 수 0"
+                    android:text="상품 찜 수 "
+                    android:textSize="10sp"
+                    android:fontFamily="@font/pretendardregular"/>
+
+                <TextView
+                    android:id="@+id/liked_count_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="0"
                     android:textSize="10sp"
                     android:fontFamily="@font/pretendardregular"/>
 
@@ -220,6 +253,7 @@
                 app:layout_constraintStart_toStartOf="@id/mart_profile_iv" />
 
             <ImageView
+                android:id="@+id/product_detail_iv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/product_detail"
