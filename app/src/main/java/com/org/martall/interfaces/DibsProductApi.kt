@@ -1,6 +1,6 @@
 package com.org.martall.interfaces
 
-import com.org.martall.model.DibsProductResponseDTO
+import com.org.martall.models.DibsProductResponseDTO
 import retrofit2.Call
 import retrofit2.http.DELETE
 import retrofit2.http.GET

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.org.martall.BuildConfig
@@ -18,14 +17,11 @@ import com.org.martall.databinding.FragmentHomeBinding
 import com.org.martall.interfaces.MartItemService
 import com.org.martall.interfaces.MartItemdibs
 import com.org.martall.interfaces.MartRecommendService
-import com.org.martall.model.ResponseMart
-import com.org.martall.model.RecommendedMart
-import com.org.martall.model.Response
+import com.org.martall.models.ResponseMart
+import com.org.martall.models.Response
 import com.org.martall.view.home.HomeAdFragment
 import com.org.martall.view.home.NewMerchActivity
 import com.org.martall.view.search.SearchActivity
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response as RetrofitResponse

@@ -1,9 +1,9 @@
-package com.org.martall.model
+package com.org.martall.models
 
 import com.google.gson.annotations.SerializedName
 
-data class MartListResponseDTO(
+data class MartDetailResponseDTO(
     @SerializedName("status") val status: Int,
     @SerializedName("message") val message: String,
-    @SerializedName("marts") val marts: List<MartDataDTO>
+    @SerializedName("data") val data: MartDetailDTO
 )

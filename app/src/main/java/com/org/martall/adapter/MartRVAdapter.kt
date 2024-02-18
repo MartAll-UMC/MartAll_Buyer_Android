@@ -1,25 +1,18 @@
 package com.org.martall.adapter
 
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemMartListBinding
-import com.org.martall.model.FollowResponseDTO
-import com.org.martall.model.MartDTO
-import com.org.martall.model.MartDataDTO
-import com.org.martall.model.dummyPosts
+import com.org.martall.models.FollowResponseDTO
+import com.org.martall.models.MartDataDTO
 import com.org.martall.services.ApiServiceManager
-import com.org.martall.view.store.MartDetailInfoActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
 import com.org.martall.databinding.ItemMartPostBinding
-import com.org.martall.model.ItemSimpleDTO
+import com.org.martall.models.ItemSimpleDTO
 
 class UserPostAdapter(private val items: List<ItemSimpleDTO>) :
     RecyclerView.Adapter<UserPostAdapter.PostViewHolder>() {

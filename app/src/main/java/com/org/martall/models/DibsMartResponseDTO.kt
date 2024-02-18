@@ -1,4 +1,4 @@
-package com.org.martall.model
+package com.org.martall.models
 
 data class DibsMartResponseDTO(
     val message: String,

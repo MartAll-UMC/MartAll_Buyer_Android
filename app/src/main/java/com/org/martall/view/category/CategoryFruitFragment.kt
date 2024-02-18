@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.org.martall.adapter.CategoryRVAdapter
 import com.org.martall.databinding.FragmentCategoryFruitBinding
-import com.org.martall.model.dummyDailyItems
-import com.org.martall.model.dummyFruitItems
 
 class CategoryFruitFragment : Fragment() {
 

@@ -5,13 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.org.martall.databinding.MartDetailBottomsheetBinding
-import com.org.martall.model.MartDataDTO
-import com.org.martall.model.MartDetailDTO
-import com.org.martall.model.MartDetailResponseDTO
-import com.org.martall.model.MartListResponseDTO
+import com.org.martall.models.MartDetailDTO
+import com.org.martall.models.MartDetailResponseDTO
 import com.org.martall.services.ApiServiceManager
 import retrofit2.Call
 import retrofit2.Callback

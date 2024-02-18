@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.org.martall.Model.DibsMartManager
 import com.org.martall.adapter.DibsMartRVAdapter
 import com.org.martall.databinding.FragmentDibsMartBinding
-import com.org.martall.model.DibsMartResponseDTO
+import com.org.martall.models.DibsMartResponseDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

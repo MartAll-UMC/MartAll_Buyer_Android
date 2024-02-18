@@ -3,7 +3,7 @@ package com.org.martall.ViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.org.martall.model.MartDataDTO
+import com.org.martall.models.MartDataDTO
 
 class SharedMartViewModel : ViewModel() {
     private var martList: MutableLiveData<List<MartDataDTO>> = MutableLiveData()

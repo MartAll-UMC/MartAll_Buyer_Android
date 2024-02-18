@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemMartDetailPostBinding
-import com.org.martall.model.MartItemDTO
-import kotlinx.coroutines.NonDisposableHandle.parent
+import com.org.martall.models.MartItemDTO
 import java.text.NumberFormat
 
 class MartDetailRVAdapter(private val itemList: List<MartItemDTO>, private val martName: String) :

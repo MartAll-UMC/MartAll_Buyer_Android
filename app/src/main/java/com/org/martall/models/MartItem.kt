@@ -1,7 +1,4 @@
-package com.org.martall.model
-
-import com.google.gson.annotations.SerializedName
-import java.util.Date
+package com.org.martall.models
 
 data class Response(
     val timeStamp: String,

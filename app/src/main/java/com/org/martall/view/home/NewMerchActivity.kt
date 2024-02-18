@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.GridLayoutManager
 import com.org.martall.BuildConfig
 import com.org.martall.adapter.CategoryRVAdapter
 import com.org.martall.databinding.ActivityNewMerchBinding
 import com.org.martall.interfaces.MartItemService
 import com.org.martall.interfaces.MartItemdibs
-import com.org.martall.model.Response
+import com.org.martall.models.Response
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit

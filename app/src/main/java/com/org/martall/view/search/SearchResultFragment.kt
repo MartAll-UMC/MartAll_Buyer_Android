@@ -8,12 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.org.martall.adapter.CategoryRVAdapter
 import com.org.martall.adapter.MartSimpleRVAdapter
 import com.org.martall.adapter.SearchItemRVAdapter
 import com.org.martall.databinding.FragmentSearchResultBinding
-import com.org.martall.model.SearchResponse
-import com.org.martall.model.dummyItems
+import com.org.martall.models.SearchResponse
 import com.org.martall.services.ApiService
 import retrofit2.Call
 import retrofit2.Callback

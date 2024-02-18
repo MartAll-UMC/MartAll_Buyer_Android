@@ -1,14 +1,11 @@
 package com.org.martall.adapter
 
-import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.org.martall.Model.DibsMartUnfollowDTO
 import com.org.martall.R
-import com.org.martall.model.DibsMartResponseDTO
+import com.org.martall.models.DibsMartResponseDTO
 import com.org.martall.databinding.ItemDibsProductBinding // 수정된 부분
 
 class DibsMartRVAdapter (private val MartList: List<DibsMartResponseDTO.DibsMarts>, private val onUnfollowClicked: (Int) -> Unit) : RecyclerView.Adapter<DibsMartRVAdapter.ViewHolder>() {

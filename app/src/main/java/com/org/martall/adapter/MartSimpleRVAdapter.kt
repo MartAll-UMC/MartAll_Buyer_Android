@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
 import com.org.martall.databinding.ItemDibsProductBinding
-import com.org.martall.model.MartSimpleDTO
+import com.org.martall.models.MartSimpleDTO
 
 class MartSimpleRVAdapter(private var martList: List<MartSimpleDTO>) :
     RecyclerView.Adapter<MartSimpleRVAdapter.ViewHolder>() {

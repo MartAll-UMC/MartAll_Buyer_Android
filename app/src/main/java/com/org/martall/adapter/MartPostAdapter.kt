@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemMartPostBinding
-import com.org.martall.model.MartItemDTO
-import com.org.martall.services.ApiServiceManager
+import com.org.martall.models.MartItemDTO
 import com.org.martall.services.ItemApiServiceManager
 import java.text.NumberFormat
 

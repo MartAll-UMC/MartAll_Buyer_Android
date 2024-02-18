@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.org.martall.adapter.MartRVAdapter
 import com.org.martall.databinding.FragmentLocalStoreBinding
-import com.org.martall.model.dummyData
 import com.org.martall.view.search.SearchActivity
 import com.org.martall.view.store.user.bottomsheet.FilterBottomSheet
 import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
@@ -19,8 +18,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import androidx.fragment.app.activityViewModels
 import com.org.martall.ViewModel.SharedMartViewModel
-import com.org.martall.model.MartDataDTO
-import com.org.martall.model.MartListResponseDTO
+import com.org.martall.models.MartDataDTO
+import com.org.martall.models.MartListResponseDTO
 import com.org.martall.services.ApiServiceManager
 
 class LocalStoreFragment : Fragment() {

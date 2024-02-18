@@ -1,13 +1,11 @@
 package com.org.martall.adapter
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
-import com.org.martall.model.ItemDTO
-import com.org.martall.model.ItemSearchDTO
+import com.org.martall.models.ItemSearchDTO
 
 class SearchItemRVAdapter(private var itemList: List<ItemSearchDTO>) :
     RecyclerView.Adapter<SearchItemRVAdapter.ViewHolder>() {
