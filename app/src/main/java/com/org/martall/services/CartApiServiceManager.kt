@@ -1,13 +1,13 @@
-package com.org.martall.model
+package com.org.martall.services
 
 import com.org.martall.BuildConfig
-import com.org.martall.interfaces.DibsProductApi
+import com.org.martall.interfaces.CartApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object DibsProductManager {
+object CartApiServiceManager {
     private val retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.MOCK_CART_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -20,7 +20,5 @@ object DibsProductManager {
         )
         .build()
 
-    val dibsProductApiService: DibsProductApi by lazy {
-        retrofit.create(DibsProductApi::class.java)
-    }
+    val CartapiService: CartApiService = retrofit.create(CartApiService::class.java)
 }

@@ -1,4 +1,4 @@
-package com.org.martall.Model
+package com.org.martall.model
 
 data class DibsMartUnfollowDTO(
     val status: Int,

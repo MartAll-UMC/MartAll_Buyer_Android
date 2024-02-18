@@ -24,7 +24,7 @@
         android:id="@+id/latest_sort_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="촤신 순"
+        android:text="최신 순"
         android:textSize="15dp"
         android:padding="10dp"
         android:fontFamily="@font/pretendardsemibold"/>

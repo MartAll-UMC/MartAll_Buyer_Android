@@ -24,6 +24,7 @@ import com.org.martall.model.MartDataDTO
 import com.org.martall.model.MartItemDTO
 import com.org.martall.model.MartListResponseDTO
 import com.org.martall.services.ApiServiceManager
+import com.org.martall.services.CartApiServiceManager
 import com.org.martall.view.store.user.bottomsheet.DetailBottomSheet
 import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
 import retrofit2.Call
@@ -90,8 +91,9 @@ class MartDetailInfoActivity : AppCompatActivity() {
 
 
     private fun loadMartData(martId: Int) {
-        val apiService = ApiServiceManager.MartapiService
-        val call = apiService.getAllShops()
+        val apiService = CartApiServiceManager.CartapiService
+        val call = apiService.ShowAllShops(tag = null, minBookmark = null, maxBookmark = null,
+            minLike = null, maxLike = null, sort = null)
 
         call.enqueue(object : Callback<MartListResponseDTO> {
             override fun onResponse(
@@ -99,23 +101,23 @@ class MartDetailInfoActivity : AppCompatActivity() {
                 response: Response<MartListResponseDTO>
             ) {
                 if (response.isSuccessful) {
-                    val martList = response.body()?.marts ?: emptyList()
+                    val martList = response.body()?.result ?: emptyList()
 
                     // 특정 martId의 데이터만 필터링하여 가져오기 (예시에서는 전체 데이터를 그대로 사용)
                     val selectedMart = martList.find { it.martId == martId }
-                    val martName = selectedMart?.name
 
                     // 데이터 설정
                     selectedMart?.let {
                         updateMartDetailUI(selectedMart)
+                        updateMartDetailProduct(selectedMart)
                     }
 
-                    val martProduct = selectedMart?.items
-                    martProduct?.let {
-                        if (martName != null) {
-                            updateMartDetailProduct(martProduct, martName)
-                        }
-                    }
+//                    val martProduct = selectedMart?.items
+//                    martProduct?.let {
+//                        if (martName != null) {
+//                            updateMartDetailProduct(martProduct, martName)
+//                        }
+//                    }
                 } else {
                     // Handle server error
                 }
@@ -197,14 +199,15 @@ class MartDetailInfoActivity : AppCompatActivity() {
         binding.martNameTv.text = selectedMart.name
         Log.d("selectedMart", selectedMart.name)
         binding.followerCountTv.text = selectedMart.followersCount.toString()
-        binding.visitorCountTv.text = selectedMart.visitorsCount.toString()
+        binding.visitorCountTv.text = selectedMart.likeCount.toString()
         binding.martPlaceTv.text = selectedMart.location
-        Glide.with(this).load(selectedMart.imageUrl).into(binding.martProfileIv)
+        binding.martProfileIv.text= selectedMart.name
+        // Glide.with(this).load(selectedMart.imageUrl).into(binding.martProfileIv)
         setCategories(selectedMart.categories)
     }
 
-    private fun updateMartDetailProduct(martProduct: List<MartItemDTO>, martName: String) {
-        val martDetailRVAdapter = MartDetailRVAdapter(martProduct, martName)
+    private fun updateMartDetailProduct(martProduct: MartDataDTO) {
+        val martDetailRVAdapter = MartDetailRVAdapter(martProduct)
         val layoutManager = GridLayoutManager(this, 2)
 
         binding.martDetailRecyclerview.layoutManager = layoutManager
@@ -212,10 +215,11 @@ class MartDetailInfoActivity : AppCompatActivity() {
 
         // 아이템 클릭 리스너 설정
         martDetailRVAdapter.setOnItemClickListener(object : MartDetailRVAdapter.OnItemClickListener {
-            override fun onItemClick(ItemName: String) {
+            override fun onItemClick(martId: Int, itemId: Int) {
                 // 아이템 클릭 시 호출되는 메서드
                 val intent = Intent(this@MartDetailInfoActivity, ProductDetailActivity::class.java)
-                intent.putExtra(ProductDetailActivity.EXTRA_ITEM_NAME, ItemName)
+                intent.putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemId)
+                 intent.putExtra(ProductDetailActivity.EXTRA_MART_ID, martId)
                 startActivity(intent)
             }
         })

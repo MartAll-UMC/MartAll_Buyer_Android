@@ -2,31 +2,34 @@ package com.org.martall.interfaces
 
 import com.org.martall.model.Response
 import com.org.martall.model.ResponseMart
+import com.org.martall.model.SecondResponse
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
-
+import retrofit2.http.*
 
 interface MartItemService {
-    @GET("item/new-item")
+    @GET("/item/new-item")
     fun getNewItem(): Call<Response>
 }
 
 interface MartRecommendService {
-    @GET("mart/shops/recommended")
+    @GET("/mart/shops/recommended")
     fun getRecommendMart(): Call<ResponseMart>
 }
 
 interface MartItemdibs {
-    @POST("item-like/{itemId}")
-    fun dibsItem(@Path("itemId") itemId: Int, @Query("isLiked") isLiked: Boolean): Call<Unit>
+    @POST("/item-like/{itemId}")
+    fun dibsItem(@Path("itemId") itemId: Int, @Query("like") like: Boolean): Call<Unit>
 
-    @DELETE("item-like/{itemId}")
+    @DELETE("/item-like/{itemId}")
     fun cancelDibsItem(@Path("itemId") itemId: Int): Call<Unit>
 }
 
-
+interface CategoryService {
+    @GET("/item/category")
+    fun getCategoryItem(
+        @Query("category") category: String,
+        @Query("minPrice") minPrice: Int,
+        @Query("maxPrice") maxPrice: Int,
+        @Query("sort") sort: String
+    ): Call<SecondResponse>
+}

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.org.martall.adapter.CategoryRVAdapter
 import com.org.martall.adapter.MartSimpleRVAdapter
 import com.org.martall.adapter.SearchItemRVAdapter
 import com.org.martall.databinding.FragmentSearchResultBinding
