@@ -86,6 +86,7 @@ class DetailBottomSheet : BottomSheetDialogFragment() {
 
     private fun updateUI(martDetail: MartDetailDTO) {
         binding.martNameTv.text = martDetail.name
+        binding.martOwnerNameTv.text = martDetail.ownerName
         binding.martNumberTv.text = martDetail.shopnumber
         binding.martTimeTv.text = martDetail.operatingHours
     }

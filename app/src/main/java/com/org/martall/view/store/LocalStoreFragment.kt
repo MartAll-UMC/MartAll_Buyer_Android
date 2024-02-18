@@ -22,11 +22,21 @@ import com.org.martall.ViewModel.SharedMartViewModel
 import com.org.martall.model.MartDataDTO
 import com.org.martall.model.MartListResponseDTO
 import com.org.martall.services.ApiServiceManager
+import com.org.martall.services.CartApiServiceManager
+import kotlinx.coroutines.selects.select
 
-class LocalStoreFragment : Fragment() {
+class LocalStoreFragment : Fragment(), SortBottomSheet.SortSelectionListener,
+    FilterBottomSheet.OnFilterAppliedListener {
     private lateinit var binding: FragmentLocalStoreBinding
     private val sharedMartViewModel: SharedMartViewModel by activityViewModels()
+    private lateinit var martRVAdapter: MartRVAdapter
 
+    private var tag: String? = null
+    private var minBookmark: Int? = null
+    private var maxBookmark: Int? = null
+    private var minLiked: Int? = null
+    private var maxLiked: Int? = null
+    private var sort: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,23 +52,31 @@ class LocalStoreFragment : Fragment() {
             startActivity(intent)
         }
 
-/*        val martRVAdapter = MartRVAdapter(dummyData)
-        binding.groupRecyclerView.adapter = martRVAdapter*/
+//        val martRVAdapter = MartRVAdapter(dummyData)
+//        binding.groupRecyclerView.adapter = martRVAdapter
 
         binding.sortTv.setOnClickListener {
             showSortBottomSheet()
         }
 
-//        val martRVAdapter = MartRVAdapter(dummyData)
-//        binding.groupRecyclerView.adapter = martRVAdapter
-
-
+        binding.filterTv.setOnClickListener {
+            showFilterBottomSheet()
+        }
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // 초기화할 때 빈 리스트로 어댑터 생성
+        martRVAdapter = MartRVAdapter(emptyList()) { selectedMart ->
+            // 사용자가 마트를 선택했을 때, 해당 마트의 정보를 처리
+            val intent = Intent(requireContext(), MartDetailInfoActivity::class.java)
+            intent.putExtra("martId", selectedMart.martId)
+            startActivity(intent)
+        }
+
         loadMartData()
     }
 
@@ -71,22 +89,56 @@ class LocalStoreFragment : Fragment() {
     }
 
     private fun showFilterBottomSheet() {
-        FilterBottomSheet().show(
-            childFragmentManager,
-            null
-        )
+        val filterBottomSheet = FilterBottomSheet()
+        filterBottomSheet.setTargetFragment(this, 0)  // 이 부분이 중요합니다.
+        filterBottomSheet.show(parentFragmentManager, filterBottomSheet.tag)
     }
 
     private fun showSortBottomSheet() {
-        SortBottomSheet().show(
-            childFragmentManager,
-            null
-        )
+        val bottomSheet = SortBottomSheet()
+
+        // 콜백 설정
+        bottomSheet.setSortSelectionListener(this)
+        bottomSheet.show(childFragmentManager, null)
     }
 
-    private fun loadMartData() {
-        val apiService = ApiServiceManager.MartapiService
-        val call = apiService.getAllShops()
+    // 콜백 메서드 override
+    override fun onSortSelected(selectedSort: String) {
+        Log.d("BottomSheet", "LocalStore - Selected Sort: $selectedSort")
+        binding.sortTv.text = selectedSort
+        sort = selectedSort
+        updateFilterUI()
+    }
+
+    override fun onFilterApplied(
+        selectedChipText: String?,
+        selectedMembershipCountMin: Int?,
+        selectedMembershipCountMax: Int?,
+        selectedHeartCountMin: Int?,
+        selectedHeartCountMax: Int?
+    ) {
+        Log.d(
+            "LocalStoreFragment", "Filter Applied: " +
+                    "tag : $selectedChipText" +
+                    "Membership Count Min: $selectedMembershipCountMin, " +
+                    "Membership Count Max: $selectedMembershipCountMax, " +
+                    "Heart Count Min: $selectedHeartCountMin, " +
+                    "Heart Count Max: $selectedHeartCountMax"
+        )
+
+        tag = selectedChipText
+        minBookmark = selectedMembershipCountMin
+        maxBookmark = selectedMembershipCountMax
+        minLiked = selectedHeartCountMin
+        maxLiked = selectedHeartCountMax
+
+        updateFilterUI()
+    }
+
+    private fun updateFilterUI() {
+        val apiService = CartApiServiceManager.CartapiService
+        val call = apiService.ShowAllShops(tag = tag, minBookmark = minBookmark, maxBookmark = maxBookmark,
+            minLike = minLiked, maxLike = maxLiked, sort = sort)
 
         call.enqueue(object : Callback<MartListResponseDTO> {
             override fun onResponse(
@@ -94,8 +146,37 @@ class LocalStoreFragment : Fragment() {
                 response: Response<MartListResponseDTO>
             ) {
                 if (response.isSuccessful) {
-                    val martList = response.body()?.marts ?: emptyList()
-                    // 데이터 설정
+                    val martList = response.body()?.result ?: emptyList()
+                    Log.d("updateFilterUI", "응답 성공")
+                    // 기존 어댑터에 데이터 설정 후 갱신
+                    Log.d("updateFilterUI", "어댑터 갱신 전") // 추가
+                    (binding.groupRecyclerView.adapter as? MartRVAdapter)?.setData(martList)
+                    (binding.groupRecyclerView.adapter as? MartRVAdapter)?.notifyDataSetChanged()
+                    Log.d("updateFilterUI", "어댑터 갱신 후") // 추가
+                } else {
+                    // Handle server error
+                }
+            }
+
+            override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
+                Log.d("check", "마트 전체 조회 연결 실패")
+            }
+        })
+    }
+
+    // 초기 UI 구성 서버 통신
+    private fun loadMartData() {
+        val apiService = CartApiServiceManager.CartapiService
+        val call = apiService.ShowAllShops(tag = null, minBookmark = null, maxBookmark = null,
+            minLike = null, maxLike = null, sort = null)
+
+        call.enqueue(object : Callback<MartListResponseDTO> {
+            override fun onResponse(
+                call: Call<MartListResponseDTO>,
+                response: Response<MartListResponseDTO>
+            ) {
+                if (response.isSuccessful) {
+                    val martList = response.body()?.result ?: emptyList()
                     sharedMartViewModel.setMartList(martList)
 
                     updateRecyclerView(martList)
@@ -111,15 +192,7 @@ class LocalStoreFragment : Fragment() {
     }
 
     private fun updateRecyclerView(martList: List<MartDataDTO>) {
-        val martRVAdapter = MartRVAdapter(martList) { selectedMart ->
-            // 사용자가 마트를 선택했을 때, 해당 마트의 정보를 SharedViewModel에 설정
-            // sharedMartViewModel.setSelectedMart(selectedMart)
-
-            val intent = Intent(requireContext(), MartDetailInfoActivity::class.java)
-            intent.putExtra("martId", selectedMart.martId)
-            startActivity(intent)
-        }
+        martRVAdapter.setData(martList)
         binding.groupRecyclerView.adapter = martRVAdapter
-//        Log.d("MartRVAdapter", "Adapter set with click listener")
     }
 }
