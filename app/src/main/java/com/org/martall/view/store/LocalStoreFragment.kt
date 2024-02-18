@@ -178,6 +178,7 @@ class LocalStoreFragment : Fragment(), SortBottomSheet.SortSelectionListener,
                 if (response.isSuccessful) {
                     val martList = response.body()?.result ?: emptyList()
                     sharedMartViewModel.setMartList(martList)
+
                     updateRecyclerView(martList)
                 } else {
                     // Handle server error
