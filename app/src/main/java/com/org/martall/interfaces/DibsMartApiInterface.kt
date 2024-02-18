@@ -6,7 +6,7 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface DibsMartApi {
+interface DibsMartApiInterface {
     @GET("/mart/shops/follows")
     fun getDibsMart(): Call<DibsMartResponseDTO>
 

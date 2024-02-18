@@ -1,7 +1,7 @@
 package com.org.martall.models
 
 import com.org.martall.BuildConfig
-import com.org.martall.interfaces.DibsMartApi
+import com.org.martall.interfaces.DibsMartApiInterface
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,7 +20,7 @@ object DibsMartManager {
         )
         .build()
 
-    val dibsMartApiService: DibsMartApi by lazy {
-        retrofit.create(DibsMartApi::class.java)
+    val dibsMartApiService: DibsMartApiInterface by lazy {
+        retrofit.create(DibsMartApiInterface::class.java)
     }
 }

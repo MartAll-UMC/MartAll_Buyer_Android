@@ -1,7 +1,7 @@
 package com.org.martall.services
 
 import com.org.martall.BuildConfig
-import com.org.martall.interfaces.CartApiService
+import com.org.martall.interfaces.CartApiInterface
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,5 +20,5 @@ object CartApiServiceManager {
         )
         .build()
 
-    val CartapiService: CartApiService = retrofit.create(CartApiService::class.java)
+    val CartapiService: CartApiInterface = retrofit.create(CartApiInterface::class.java)
 }

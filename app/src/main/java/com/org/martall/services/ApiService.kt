@@ -5,6 +5,8 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.org.martall.BuildConfig
+import com.org.martall.interfaces.CartApiInterface
+import com.org.martall.interfaces.DibsMartApiInterface
 import com.org.martall.models.LoginRequest
 import com.org.martall.models.LoginResponse
 import com.org.martall.models.RefreshResponse

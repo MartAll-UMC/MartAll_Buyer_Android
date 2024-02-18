@@ -1,7 +1,7 @@
 package com.org.martall.services
 
 import com.org.martall.BuildConfig
-import com.org.martall.interfaces.MartApiService
+import com.org.martall.interfaces.MartApiInterface
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,5 +20,5 @@ object ApiServiceManager {
         )
         .build()
 
-    val MartapiService: MartApiService = retrofit.create(MartApiService::class.java)
+    val MartapiService: MartApiInterface = retrofit.create(MartApiInterface::class.java)
 }
