@@ -42,8 +42,8 @@ class LocalStoreFragment : Fragment() {
             startActivity(intent)
         }
 
-        //val martRVAdapter = MartRVAdapter(dummyData)
-        //binding.groupRecyclerView.adapter = martRVAdapter
+/*        val martRVAdapter = MartRVAdapter(dummyData)
+        binding.groupRecyclerView.adapter = martRVAdapter*/
 
         binding.sortTv.setOnClickListener {
             showSortBottomSheet()

@@ -7,17 +7,40 @@ data class Response(
     val timeStamp: String,
     val status: Int,
     val message: String,
-    val data: List<Item>,
-    val success: Boolean
+    val result: List<Item>,
+    var success: Boolean
 )
 
 data class Item(
     val itemId: Int,
-    val categoryId: Int,
+    val pic: String,
+    val categoryName: String,
+    val martShopName: String,
     val itemName: String,
     val price: Int,
     val content: String,
-    var isLiked: Boolean = false
+    var like: Boolean
+)
+
+data class SecondResponse(
+    val timeStamp: String,
+    val status: Int,
+    val message: String,
+    val result: SecondResult,
+    var success: Boolean
+)
+
+data class SecondResult(
+    val item: List<SecondItem>
+)
+
+data class SecondItem(
+    val itemId: Int,
+    val pic: String,
+    val martShopName: String,
+    val itemName: String,
+    val price: Int,
+    var like: Boolean
 )
 
 

@@ -8,9 +8,17 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.org.martall.BuildConfig
 import com.org.martall.adapter.CategoryViewPagerAdapter
 import com.org.martall.databinding.FragmentCategoryBinding
+import com.org.martall.interfaces.CategoryService
 import com.org.martall.view.search.SearchActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 
 class CategoryFragment : Fragment() {
@@ -29,6 +37,7 @@ class CategoryFragment : Fragment() {
         }
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
