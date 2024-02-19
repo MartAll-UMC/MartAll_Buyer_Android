@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
         userInfoManager = UserInfoManager(applicationContext)
 
         GlobalScope.launch {
+            Log.d("[PRINT/TOKEN]", "${userInfoManager.getTokens()}")
             if (!userInfoManager.isValidToken()) {
-                Log.d("[ERROR]", userInfoManager.getTokens().toString())
                 val intent = Intent(this@MainActivity, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

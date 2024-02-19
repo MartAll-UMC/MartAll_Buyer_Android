@@ -44,18 +44,14 @@ class SearchItemRVAdapter(private var itemList: List<ItemSearchDTO>) :
             binding.tvProductName.text = item.name
             binding.tvProductPrice.text = "${item.price}원"
             binding.tvMartName.text = item.store
-            if (item.isLiked == "Y") {
+            if (item.isLiked) {
                 binding.btnLike.setImageResource(R.drawable.ic_like_filled_20dp)
             } else {
                 binding.btnLike.setImageResource(R.drawable.ic_like_unfilled_20dp)
             }
 
             binding.btnLike.setOnClickListener {
-                if (item.isLiked == "Y") {
-                    item.isLiked = "N"
-                } else {
-                    item.isLiked = "Y"
-                }
+                item.isLiked = !item.isLiked
                 bind(item)
             }
         }

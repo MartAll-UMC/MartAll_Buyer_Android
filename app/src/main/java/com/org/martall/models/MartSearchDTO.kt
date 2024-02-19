@@ -6,7 +6,7 @@ data class SearchResponse(
     @SerializedName("status") val status: Int,
     @SerializedName("message") val message: String,
     @SerializedName("searchResults") val marts: List<MartSimpleDTO>,
-    @SerializedName("data") val items: List<ItemSearchDTO>
+    @SerializedName("result") val items: List<ItemSearchDTO>?
 )
 
 data class MartSimpleDTO(
@@ -25,5 +25,5 @@ data class ItemSearchDTO(
     @SerializedName("itemName") val name: String,
     @SerializedName("price") val price: Int,
     @SerializedName("content") val content: String,
-    @SerializedName("like") var isLiked: String = "Y",
+    @SerializedName("like") var isLiked: Boolean,
 )

@@ -5,8 +5,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.org.martall.BuildConfig
-import com.org.martall.interfaces.CartApiInterface
-import com.org.martall.interfaces.DibsMartApiInterface
+import com.org.martall.interfaces.HomeInterface
 import com.org.martall.models.LoginRequest
 import com.org.martall.models.LoginResponse
 import com.org.martall.models.RefreshResponse
@@ -64,7 +63,7 @@ interface ApiService {
             val interceptor =
                 AppInterceptor(userInfoManager.getTokens(), userInfoManager.needRefreshToken())
             val okHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
-            return retrofit2.Retrofit.Builder().baseUrl(BASE_URL)
+            return retrofit2.Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(ApiService::class.java)
@@ -122,10 +121,10 @@ interface ApiService {
                 .build()
 
             val response = chain.proceed(newRequest)
-//            val headers = response.headers()
-//            val body = response.body()?.string()
 
-            return response
+            Log.d("[PRINT/interceptor]", response.body?.string() ?: "null")
+
+            return chain.proceed(newRequest)
         }
     }
 }
