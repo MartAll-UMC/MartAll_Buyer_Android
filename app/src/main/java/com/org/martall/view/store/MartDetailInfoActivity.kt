@@ -10,25 +10,25 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.ViewModel.SharedMartViewModel
 import com.org.martall.adapter.MartDetailRVAdapter
 import com.org.martall.databinding.ActivityMartDetailInfoBinding
 import com.org.martall.models.FollowResponseDTO
 import com.org.martall.models.MartDataDTO
-import com.org.martall.models.MartItemDTO
 import com.org.martall.models.MartListResponseDTO
+import com.org.martall.services.ApiService
 import com.org.martall.services.ApiServiceManager
-import com.org.martall.services.CartApiServiceManager
 import com.org.martall.view.store.user.bottomsheet.DetailBottomSheet
-import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MartDetailInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMartDetailInfoBinding
+    private lateinit var api: ApiService
     private val sharedMartViewModel: SharedMartViewModel by viewModels()
 
     private var isFollowing: Boolean = false
@@ -55,10 +55,6 @@ class MartDetailInfoActivity : AppCompatActivity() {
         Log.d("MartDetail", martId.toString())
 
         loadMartData(martId)
-
-        binding.sortTv.setOnClickListener {
-            showSortBottomSheet()
-        }
 
         binding.backIc.setOnClickListener {
             finish()
@@ -87,26 +83,28 @@ class MartDetailInfoActivity : AppCompatActivity() {
 
 
     private fun loadMartData(martId: Int) {
-        val apiService = CartApiServiceManager.CartapiService
-        val call = apiService.ShowAllShops(tag = null, minBookmark = null, maxBookmark = null,
-            minLike = null, maxLike = null, sort = null)
+        GlobalScope.launch {
+            api = ApiService.createWithHeader(applicationContext)
 
-        call.enqueue(object : Callback<MartListResponseDTO> {
-            override fun onResponse(
-                call: Call<MartListResponseDTO>,
-                response: Response<MartListResponseDTO>
-            ) {
-                if (response.isSuccessful) {
-                    val martList = response.body()?.result ?: emptyList()
+            api.ShowAllShops(
+                tag = null, minBookmark = null, maxBookmark = null,
+                minLike = null, maxLike = null, sort = null
+            ).enqueue(object : Callback<MartListResponseDTO> {
+                override fun onResponse(
+                    call: Call<MartListResponseDTO>,
+                    response: Response<MartListResponseDTO>,
+                ) {
+                    if (response.isSuccessful) {
+                        val martList = response.body()?.result ?: emptyList()
 
-                    // 특정 martId의 데이터만 필터링하여 가져오기 (예시에서는 전체 데이터를 그대로 사용)
-                    val selectedMart = martList.find { it.martId == martId }
+                        // 특정 martId의 데이터만 필터링하여 가져오기 (예시에서는 전체 데이터를 그대로 사용)
+                        val selectedMart = martList.find { it.martId == martId }
 
-                    // 데이터 설정
-                    selectedMart?.let {
-                        updateMartDetailUI(selectedMart)
-                        updateMartDetailProduct(selectedMart)
-                    }
+                        // 데이터 설정
+                        selectedMart?.let {
+                            updateMartDetailUI(selectedMart)
+                            updateMartDetailProduct(selectedMart)
+                        }
 
 //                    val martProduct = selectedMart?.items
 //                    martProduct?.let {
@@ -114,15 +112,16 @@ class MartDetailInfoActivity : AppCompatActivity() {
 //                            updateMartDetailProduct(martProduct, martName)
 //                        }
 //                    }
-                } else {
-                    // Handle server error
+                    } else {
+                        // Handle server error
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
-                Log.d("check", "마트 전체 조회 연결 실패")
-            }
-        })
+                override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
+                    Log.d("check", "마트 전체 조회 연결 실패")
+                }
+            })
+        }
     }
 
     private fun followMart(martId: Int) {
@@ -132,7 +131,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
         call.enqueue(object : Callback<FollowResponseDTO> {
             override fun onResponse(
                 call: Call<FollowResponseDTO>,
-                response: Response<FollowResponseDTO>
+                response: Response<FollowResponseDTO>,
             ) {
                 if (response.isSuccessful) {
                     // 성공적으로 팔로우한 경우
@@ -158,7 +157,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
         call.enqueue(object : Callback<FollowResponseDTO> {
             override fun onResponse(
                 call: Call<FollowResponseDTO>,
-                response: Response<FollowResponseDTO>
+                response: Response<FollowResponseDTO>,
             ) {
                 if (response.isSuccessful) {
                     // 성공적으로 팔로우한 경우
@@ -183,7 +182,8 @@ class MartDetailInfoActivity : AppCompatActivity() {
         val buttonText = if (isFollowing) "단골 취소" else "단골 추가"
         binding.addFavoriteMartBtn.text = buttonText
 
-        val buttonColor = if (isFollowing) R.drawable.background_primary400_r12 else R.drawable.background_primary400_fill_r12
+        val buttonColor =
+            if (isFollowing) R.drawable.background_primary400_r12 else R.drawable.background_primary400_fill_r12
         binding.addFavoriteMartBtn.setBackgroundResource(buttonColor)
 
         val buttonTextColor = if (isFollowing) R.color.primary400 else R.color.white
@@ -197,7 +197,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
         binding.followerCountTv.text = selectedMart.followersCount.toString()
         binding.visitorCountTv.text = selectedMart.likeCount.toString()
         binding.martPlaceTv.text = selectedMart.location
-        binding.martProfileIv.text= selectedMart.name
+        binding.martProfileIv.text = selectedMart.name
         // Glide.with(this).load(selectedMart.imageUrl).into(binding.martProfileIv)
         setCategories(selectedMart.categories)
     }
@@ -210,12 +210,13 @@ class MartDetailInfoActivity : AppCompatActivity() {
         binding.martDetailRecyclerview.adapter = martDetailRVAdapter
 
         // 아이템 클릭 리스너 설정
-        martDetailRVAdapter.setOnItemClickListener(object : MartDetailRVAdapter.OnItemClickListener {
+        martDetailRVAdapter.setOnItemClickListener(object :
+            MartDetailRVAdapter.OnItemClickListener {
             override fun onItemClick(martId: Int, itemId: Int) {
                 // 아이템 클릭 시 호출되는 메서드
                 val intent = Intent(this@MartDetailInfoActivity, ProductDetailActivity::class.java)
                 intent.putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemId)
-                 intent.putExtra(ProductDetailActivity.EXTRA_MART_ID, martId)
+                intent.putExtra(ProductDetailActivity.EXTRA_MART_ID, martId)
                 startActivity(intent)
             }
         })
@@ -239,19 +240,24 @@ class MartDetailInfoActivity : AppCompatActivity() {
 
             // Add margin to TextViews
             val marginParams = LinearLayout.LayoutParams(textView.layoutParams)
-            marginParams.setMargins(binding.root.context.resources.getDimensionPixelSize(R.dimen.margin_right), 0, 0, 0)
+            marginParams.setMargins(
+                binding.root.context.resources.getDimensionPixelSize(R.dimen.margin_right),
+                0,
+                0,
+                0
+            )
             textView.layoutParams = marginParams
 
             linearLayout.addView(textView)
         }
     }
 
-    private fun showSortBottomSheet() {
-        binding.sortTv.setOnClickListener {
-            SortBottomSheet().show(
-                supportFragmentManager,
-                null
-            )
-        }
-    }
+//    private fun showSortBottomSheet() {
+//        binding.sortTv.setOnClickListener {
+//            SortBottomSheet().show(
+//                supportFragmentManager,
+//                null
+//            )
+//        }
+//    }
 }

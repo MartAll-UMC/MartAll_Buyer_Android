@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
-import com.org.martall.databinding.ItemMartDetailPostBinding
+import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.models.MartDataDTO
 import com.org.martall.models.MartItemDTO
 import com.org.martall.models.MartLikedResponseDTO
@@ -36,7 +36,7 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
         viewType: Int,
     ): MartDetailRVAdapter.ViewHolder {
         val binding =
-            ItemMartDetailPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemCategoryProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -48,7 +48,7 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
         return martProduct.items.size
     }
 
-    inner class ViewHolder(val binding: ItemMartDetailPostBinding) :
+    inner class ViewHolder(val binding: ItemCategoryProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private var isLiked: Boolean = false
 
@@ -61,20 +61,19 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
                 onItemClickListener?.onItemClick(martId, itemId)
             }
 
-            binding.itemMartPostHeartIv.setOnClickListener {
+            binding.btnLike.setOnClickListener {
                 toggleLikeState()
                 Log.d("toggleLikeState", "클릭됨")
             }
         }
 
         fun bind(item: MartItemDTO) {
-            binding.martNameTv.text = martProduct.name
-            binding.itemMartPostNameTv.text = item.name
+            binding.tvMartName.text = martProduct.name
+            binding.tvProductName.text = item.name
 
             val formattedPrice = NumberFormat.getNumberInstance().format(item.price)
-            binding.itemMartPostPriceTv.text = "${formattedPrice}원"
-            Log.d("MartPostAdapter", "Image URL: ${item.imageUrl}")
-            Glide.with(itemView.context).load(item.imageUrl).into(binding.localMartPropertyIv)
+            binding.tvProductPrice.text = "${formattedPrice}원"
+            Glide.with(itemView.context).load(item.imageUrl).into(binding.ivProductImg)
 
             isLiked = item.likeYn
             updateLikeUI()
@@ -132,10 +131,10 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
             // UI 업데이트
             if (isLiked) {
                 // 찜하기 상태: 하트가 빨간색으로 채워짐
-                binding.itemMartPostHeartIv.setBackgroundResource(R.drawable.ic_heart_filled_20dp)
+                binding.btnLike.setBackgroundResource(R.drawable.ic_heart_filled_20dp)
             } else {
                 // 찜 취소 상태: 하트가 빈 상태
-                binding.itemMartPostHeartIv.setBackgroundResource(R.drawable.ic_heart_unfilled_20dp)
+                binding.btnLike.setBackgroundResource(R.drawable.ic_heart_unfilled_20dp)
             }
         }
     }

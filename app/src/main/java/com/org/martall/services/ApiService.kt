@@ -5,7 +5,9 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.org.martall.BuildConfig
+import com.org.martall.interfaces.CartApiInterface
 import com.org.martall.interfaces.HomeInterface
+import com.org.martall.interfaces.MartApiInterface
 import com.org.martall.models.LoginRequest
 import com.org.martall.models.LoginResponse
 import com.org.martall.models.RefreshResponse
@@ -24,7 +26,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 import java.io.IOException
 
-interface ApiService : HomeInterface {
+interface ApiService : HomeInterface, MartApiInterface, CartApiInterface {
     @GET("/mart/shops/search")
     fun searchMartList(
         @Query("keyword") keyword: String,
@@ -46,8 +48,6 @@ interface ApiService : HomeInterface {
     ): Call<RefreshResponse>
 
     companion object {
-        private const val MOCK_MART = BuildConfig.MOCK_MART_URL
-        private const val MOCK_ITEM = BuildConfig.MOCK_ITEM_URL
         private const val BASE_URL = BuildConfig.BASE_URL
         private val gson: Gson = GsonBuilder().setLenient().create()
         private lateinit var userInfoManager: UserInfoManager
@@ -109,6 +109,7 @@ interface ApiService : HomeInterface {
 
             val response = chain.proceed(newRequest)
 
+            Log.d("[PRINT/interceptor]", newRequest.url.toString())
             Log.d("[PRINT/interceptor]", response.body?.string() ?: "null")
 
             return chain.proceed(newRequest)
