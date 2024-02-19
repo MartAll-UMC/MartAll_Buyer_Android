@@ -4,8 +4,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
-import com.org.martall.interfaces.MartItemdibs
+import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.models.SecondItem
+import com.org.martall.services.ApiService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,7 +17,7 @@ import java.util.Locale
 
 class CategoryRVAdapter(
     private val itemList: List<SecondItem>,
-    private val martItemdibs: MartItemdibs,
+    private val api: ApiService,
 ) : RecyclerView.Adapter<CategoryRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -36,33 +39,60 @@ class CategoryRVAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.btnLike.setOnClickListener {
-                val item = itemList[adapterPosition]
-                val itemId = item.itemId
+            GlobalScope.launch {
+                binding.btnLike.setOnClickListener {
+                    val item = itemList[adapterPosition]
+                    val itemId = item.itemId
 
-                // 클릭 상태를 업데이트하여 UI를 변경
-                item.like = !item.like
-                updateLikeButton(item.like)
+                    item.like = !item.like
+                    updateLikeButton(item.like)
 
-                // 서버에 클릭 상태 업데이트 요청 보내기
-                martItemdibs.dibsItem(itemId, item.like).enqueue(object : Callback<Unit> {
-                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                        if (!response.isSuccessful) {
-                            // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                            item.like = !item.like
-                            updateLikeButton(item.like)
-                        } else {
-                            // 성공 시 로그로 상태 변경 확인
-                            Log.d("retrofit", "Like status changed: $item")
-                        }
+                    if (item.like) {
+                        api.likedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
+                            override fun onResponse(
+                                call: Call<ItemLikedResponseDTO>,
+                                response: Response<ItemLikedResponseDTO>,
+                            ) {
+                                if (!response.isSuccessful) {
+                                    // 실패 시 처리: 클릭 상태를 이전 상태로 변경
+                                    item.like = !item.like
+                                    updateLikeButton(item.like)
+                                } else {
+                                    // 성공 시 로그로 상태 변경 확인
+                                    Log.d("retrofit", "Like status changed: $item")
+                                }
+                            }
+
+                            override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
+                                // 실패 시 처리: 클릭 상태를 이전 상태로 변경
+                                item.like = !item.like
+                                updateLikeButton(item.like)
+                            }
+                        })
+                    } else {
+                        api.unLikedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
+                            override fun onResponse(
+                                call: Call<ItemLikedResponseDTO>,
+                                response: Response<ItemLikedResponseDTO>,
+                            ) {
+                                if (!response.isSuccessful) {
+                                    // 실패 시 처리: 클릭 상태를 이전 상태로 변경
+                                    item.like = !item.like
+                                    updateLikeButton(item.like)
+                                } else {
+                                    // 성공 시 로그로 상태 변경 확인
+                                    Log.d("retrofit", "Like status changed: $item")
+                                }
+                            }
+
+                            override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
+                                // 실패 시 처리: 클릭 상태를 이전 상태로 변경
+                                item.like = !item.like
+                                updateLikeButton(item.like)
+                            }
+                        })
                     }
-
-                    override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                        item.like = !item.like
-                        updateLikeButton(item.like)
-                    }
-                })
+                }
             }
         }
 

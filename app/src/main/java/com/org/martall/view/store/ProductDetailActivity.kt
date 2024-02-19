@@ -12,13 +12,11 @@ import com.org.martall.R
 import com.org.martall.ViewModel.ProductDetailViewModel
 import com.org.martall.databinding.ActivityProductDetailBinding
 import com.org.martall.models.FollowResponseDTO
+import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.models.Mart
-import com.org.martall.models.MartLikedResponseDTO
 import com.org.martall.models.ProductDetailResponseDTO
 import com.org.martall.models.Results
 import com.org.martall.services.ApiService
-import com.org.martall.services.ApiServiceManager
-import com.org.martall.services.ItemApiServiceManager
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -74,48 +72,44 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
         binding.likeBtn.setOnClickListener {
-            if (isLiked) {
-                isLiked = !isLiked
-                updateLikedUI(isLiked)
+            GlobalScope.launch {
+                if (isLiked) {
+                    isLiked = !isLiked
+                    updateLikedUI(isLiked)
 
-                // 찜 취소 서버 통신
-                val apiService = ItemApiServiceManager.ItemapiService
-                val call = apiService.unLikedItem(itemId = itemId)
+                    // 찜 취소 서버 통신
+                    api.unLikedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
+                        override fun onResponse(
+                            call: Call<ItemLikedResponseDTO>,
+                            response: Response<ItemLikedResponseDTO>,
+                        ) {
+                            Log.d("isLiked", "찜취소 서버 통신 성공")
+                        }
 
-                call.enqueue(object : Callback<MartLikedResponseDTO> {
-                    override fun onResponse(
-                        call: Call<MartLikedResponseDTO>,
-                        response: Response<MartLikedResponseDTO>,
-                    ) {
-                        Log.d("isLiked", "찜취소 서버 통신 성공")
-                    }
+                        override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
+                            Log.d("isLiked", "찜취소 서버 통신 실패")
+                        }
 
-                    override fun onFailure(call: Call<MartLikedResponseDTO>, t: Throwable) {
-                        Log.d("isLiked", "찜취소 서버 통신 실패")
-                    }
+                    })
+                } else {
+                    isLiked = !isLiked
+                    updateLikedUI(isLiked)
 
-                })
-            } else {
-                isLiked = !isLiked
-                updateLikedUI(isLiked)
 
-                // 찜하기 서버 통신
-                val apiService = ItemApiServiceManager.ItemapiService
-                val call = apiService.likedItem(itemId = itemId)
+                    api.likedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
+                        override fun onResponse(
+                            call: Call<ItemLikedResponseDTO>,
+                            response: Response<ItemLikedResponseDTO>,
+                        ) {
+                            Log.d("isLiked", "찜하기 서버 통신 성공")
+                        }
 
-                call.enqueue(object : Callback<MartLikedResponseDTO> {
-                    override fun onResponse(
-                        call: Call<MartLikedResponseDTO>,
-                        response: Response<MartLikedResponseDTO>,
-                    ) {
-                        Log.d("isLiked", "찜하기 서버 통신 성공")
-                    }
+                        override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
+                            Log.d("isLiked", "찜하기 서버 통신 실패")
+                        }
 
-                    override fun onFailure(call: Call<MartLikedResponseDTO>, t: Throwable) {
-                        Log.d("isLiked", "찜하기 서버 통신 실패")
-                    }
-
-                })
+                    })
+                }
             }
         }
     }
@@ -189,55 +183,55 @@ class ProductDetailActivity : AppCompatActivity() {
 
 
     private fun followMart(martId: Int) {
-        val apiService = ApiServiceManager.MartapiService
-        val call = apiService.followMart(shopId = martId)
+        GlobalScope.launch {
+            api.followMart(martId).enqueue(object : Callback<FollowResponseDTO> {
+                override fun onResponse(
+                    call: Call<FollowResponseDTO>,
+                    response: Response<FollowResponseDTO>,
+                ) {
+                    if (response.isSuccessful) {
+                        // 성공적으로 팔로우한 경우
+                        isFollowing = true
+                        Log.d("SuccessFollow", "팔로우 통신 성공")
+                        updateBookMarkUI()
 
-        call.enqueue(object : Callback<FollowResponseDTO> {
-            override fun onResponse(
-                call: Call<FollowResponseDTO>,
-                response: Response<FollowResponseDTO>,
-            ) {
-                if (response.isSuccessful) {
-                    // 성공적으로 팔로우한 경우
-                    isFollowing = true
-                    Log.d("SuccessFollow", "팔로우 통신 성공")
-                    updateBookMarkUI()
-
-                } else {
-                    Log.d("FailFollow", "통신 실패")
+                    } else {
+                        Log.d("FailFollow", "통신 실패")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                Log.d("check", "마트 전체 조회 연결 실패")
-            }
-        })
+                override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                    Log.d("check", "마트 전체 조회 연결 실패")
+                }
+            })
+        }
+
     }
 
     private fun unfollowMart(martId: Int) {
-        val apiService = ApiServiceManager.MartapiService
-        val call = apiService.unfollowMart(shopId = martId)
+        GlobalScope.launch {
+            api.unfollowMart(martId).enqueue(object : Callback<FollowResponseDTO> {
+                override fun onResponse(
+                    call: Call<FollowResponseDTO>,
+                    response: Response<FollowResponseDTO>,
+                ) {
+                    if (response.isSuccessful) {
+                        // 성공적으로 팔로우한 경우
+                        isFollowing = false
+                        Log.d("SuccessUnfollow", "언팔로우 성공")
+                        updateBookMarkUI()
 
-        call.enqueue(object : Callback<FollowResponseDTO> {
-            override fun onResponse(
-                call: Call<FollowResponseDTO>,
-                response: Response<FollowResponseDTO>,
-            ) {
-                if (response.isSuccessful) {
-                    // 성공적으로 팔로우한 경우
-                    isFollowing = false
-                    Log.d("SuccessUnfollow", "언팔로우 성공")
-                    updateBookMarkUI()
-
-                } else {
-                    Log.d("FailFollow", "통신 실패")
+                    } else {
+                        Log.d("FailFollow", "통신 실패")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                Log.d("check", "마트 전체 조회 연결 실패")
-            }
-        })
+                override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                    Log.d("check", "마트 전체 조회 연결 실패")
+                }
+            })
+        }
+
     }
 
     @SuppressLint("ResourceAsColor")

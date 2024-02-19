@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
-import com.org.martall.BuildConfig
 import com.org.martall.MainActivity
 import com.org.martall.R
 import com.org.martall.adapter.HomeAdViewPagerAdapter
 import com.org.martall.adapter.HomeMartRVAdapter
 import com.org.martall.adapter.ProductSimpleRVAdapter
 import com.org.martall.databinding.FragmentHomeBinding
-import com.org.martall.interfaces.MartItemdibs
 import com.org.martall.models.Response
 import com.org.martall.models.ResponseMart
 import com.org.martall.services.ApiService
@@ -25,14 +23,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Response as RetrofitResponse
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mainBinding: MainActivity
-    private lateinit var martItemdibs: MartItemdibs
     private lateinit var api: ApiService
 
     override fun onCreateView(
@@ -54,13 +49,6 @@ class HomeFragment : Fragment() {
         // 데이터 로딩 전 스켈레톤 뷰 표시
         showMerchandiseData(isLoading = true)
         showMartData(isLoading = true)
-
-        // Retrofit 객체 생성
-        val retrofit = Retrofit.Builder()
-            .baseUrl("${BuildConfig.MOCK_CART_URL}")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        martItemdibs = retrofit.create(MartItemdibs::class.java)
 
         GlobalScope.launch {
             api = ApiService.createWithHeader(requireContext())
@@ -109,7 +97,7 @@ class HomeFragment : Fragment() {
                         val newItemResponse = response.body()
                         newItemResponse?.result?.let { items ->
                             // 리싸이클러뷰 어댑터 생성 및 설정
-                            val adapter = ProductSimpleRVAdapter(items.subList(0, 5), martItemdibs)
+                            val adapter = ProductSimpleRVAdapter(items.subList(0, 5), api)
                             binding.homeMerchandiseRv.adapter = adapter
                             binding.homeMerchandiseRv.layoutManager = LinearLayoutManager(
                                 requireContext(),

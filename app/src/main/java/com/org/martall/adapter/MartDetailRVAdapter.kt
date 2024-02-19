@@ -9,8 +9,7 @@ import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.models.MartDataDTO
 import com.org.martall.models.MartItemDTO
-import com.org.martall.models.MartLikedResponseDTO
-import com.org.martall.services.ItemApiServiceManager
+import com.org.martall.models.ItemLikedResponseDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -85,44 +84,44 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
                 isLiked = !isLiked
                 updateLikeUI()
 
-                // 찜취소 서버 통신
-                val apiService = ItemApiServiceManager.ItemapiService
-                val call =
-                    apiService.unLikedItem(itemId = martProduct.items[adapterPosition].itemId)
-
-                call.enqueue(object : Callback<MartLikedResponseDTO> {
-                    override fun onResponse(
-                        call: Call<MartLikedResponseDTO>,
-                        response: Response<MartLikedResponseDTO>,
-                    ) {
-                        Log.d("isLiked", "찜 취소 서버 통신 성공")
-                    }
-
-                    override fun onFailure(call: Call<MartLikedResponseDTO>, t: Throwable) {
-                        Log.d("isLiked", "찜 취소 서버 통신 실패")
-                    }
-                })
+//                // 찜취소 서버 통신
+//                val apiService = ItemApiServiceManager.ItemapiService
+//                val call =
+//                    apiService.unLikedItem(itemId = martProduct.items[adapterPosition].itemId)
+//
+//                call.enqueue(object : Callback<ItemLikedResponseDTO> {
+//                    override fun onResponse(
+//                        call: Call<ItemLikedResponseDTO>,
+//                        response: Response<ItemLikedResponseDTO>,
+//                    ) {
+//                        Log.d("isLiked", "찜 취소 서버 통신 성공")
+//                    }
+//
+//                    override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
+//                        Log.d("isLiked", "찜 취소 서버 통신 실패")
+//                    }
+//                })
             } else {
                 isLiked = !isLiked
                 // 찜하기 성공 -> UI 업데이트
                 updateLikeUI()
 
-                // 찜하기 서버 통신
-                val apiService = ItemApiServiceManager.ItemapiService
-                val call = apiService.likedItem(itemId = martProduct.items[adapterPosition].itemId)
-
-                call.enqueue(object : Callback<MartLikedResponseDTO> {
-                    override fun onResponse(
-                        call: Call<MartLikedResponseDTO>,
-                        response: Response<MartLikedResponseDTO>,
-                    ) {
-                        Log.d("isLiked", "찜하기 서버 통신 성공")
-                    }
-
-                    override fun onFailure(call: Call<MartLikedResponseDTO>, t: Throwable) {
-                        Log.d("isLiked", "찜하기 서버 통신 실패")
-                    }
-                })
+//                // 찜하기 서버 통신
+//                val apiService = ItemApiServiceManager.ItemapiService
+//                val call = apiService.likedItem(itemId = martProduct.items[adapterPosition].itemId)
+//
+//                call.enqueue(object : Callback<ItemLikedResponseDTO> {
+//                    override fun onResponse(
+//                        call: Call<ItemLikedResponseDTO>,
+//                        response: Response<ItemLikedResponseDTO>,
+//                    ) {
+//                        Log.d("isLiked", "찜하기 서버 통신 성공")
+//                    }
+//
+//                    override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
+//                        Log.d("isLiked", "찜하기 서버 통신 실패")
+//                    }
+//                })
             }
         }
 

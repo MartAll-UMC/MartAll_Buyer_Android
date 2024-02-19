@@ -7,6 +7,8 @@ import com.google.gson.GsonBuilder
 import com.org.martall.BuildConfig
 import com.org.martall.interfaces.CartApiInterface
 import com.org.martall.interfaces.CategoryInterface
+import com.org.martall.interfaces.DibsMartApiInterface
+import com.org.martall.interfaces.DibsProductApiInterface
 import com.org.martall.interfaces.HomeInterface
 import com.org.martall.interfaces.MartApiInterface
 import com.org.martall.models.LoginRequest
@@ -27,7 +29,8 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 import java.io.IOException
 
-interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, CategoryInterface {
+interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, CategoryInterface,
+    DibsMartApiInterface, DibsProductApiInterface {
     @GET("/mart/shops/search")
     fun searchMartList(
         @Query("keyword") keyword: String,

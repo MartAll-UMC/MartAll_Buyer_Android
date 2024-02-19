@@ -19,7 +19,7 @@ interface MartApiInterface {
     @GET("/mart/shops/{shopid}/follow")
     fun followMart(
         @Path("shopid") shopId: Int)
-    : Call<FollowResponseDTO>
+            : Call<FollowResponseDTO>
 
     @GET("/mart/shops/{shopid}/unfollow")
     fun unfollowMart(

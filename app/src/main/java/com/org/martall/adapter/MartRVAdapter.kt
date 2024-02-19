@@ -19,7 +19,8 @@ import retrofit2.Response
 
 class MartRVAdapter(
     private var martList: List<MartDataDTO>,
-    private val onItemClick: (MartDataDTO) -> Unit) :
+    private val onItemClick: (MartDataDTO) -> Unit,
+) :
     RecyclerView.Adapter<MartRVAdapter.ViewHolder>() {
 
     private lateinit var itemClickListener: OnItemClickListener
@@ -150,7 +151,7 @@ class MartRVAdapter(
             call.enqueue(object : Callback<FollowResponseDTO> {
                 override fun onResponse(
                     call: Call<FollowResponseDTO>,
-                    response: Response<FollowResponseDTO>
+                    response: Response<FollowResponseDTO>,
                 ) {
                     if (response.isSuccessful) {
                         val followResponse = response.body()
@@ -178,6 +179,7 @@ class MartRVAdapter(
                 }
             })
         }
+
         private fun updateUIAfterFollow(martId: Int, isFollowed: Boolean) {
             // 해당 아이템의 위치 찾기
             val position = martList.indexOfFirst { it.martId == martId }
@@ -188,12 +190,22 @@ class MartRVAdapter(
                 if (isFollowed) {
                     // 팔로우한 경우
                     binding.bookmarkBtn.text = "단골 취소"
-                    binding.bookmarkBtn.setTextColor(ContextCompat.getColor(binding.root.context, R.color.primary400))
+                    binding.bookmarkBtn.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.primary400
+                        )
+                    )
                     binding.bookmarkBtn.setBackgroundResource(R.drawable.background_white_r20)
                 } else {
                     // 팔로우를 취소한 경우
                     binding.bookmarkBtn.text = "단골 추가"
-                    binding.bookmarkBtn.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
+                    binding.bookmarkBtn.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.white
+                        )
+                    )
                     binding.bookmarkBtn.setBackgroundResource(R.drawable.background_primary400_r20)
                 }
                 // notifyItemChanged(position)

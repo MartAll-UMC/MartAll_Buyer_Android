@@ -7,58 +7,65 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.org.martall.models.DibsMartManager
 import com.org.martall.adapter.DibsMartRVAdapter
 import com.org.martall.databinding.FragmentDibsMartBinding
+import com.org.martall.models.DibsMartManager
 import com.org.martall.models.DibsMartResponseDTO
+import com.org.martall.models.FollowResponseDTO
+import com.org.martall.services.ApiService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DibsMartFragment : Fragment() {
     lateinit var binding: FragmentDibsMartBinding
+    private lateinit var api: ApiService
     private val martList: ArrayList<DibsMartResponseDTO.DibsMarts> = ArrayList()
 
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentDibsMartBinding.inflate(inflater, container, false)
         getLikedMarts() //단골마트 불러오기
         return binding.root
     }
 
-    private fun getLikedMarts(){
-        val apiService = DibsMartManager.dibsMartApiService
-        val call = apiService.getDibsMart()
+    private fun getLikedMarts() {
+        GlobalScope.launch {
+            api = ApiService.createWithHeader(requireContext())
 
-        call.enqueue(object : Callback<DibsMartResponseDTO>{
-            override fun onResponse(
-                call: Call<DibsMartResponseDTO>,
-                response: Response<DibsMartResponseDTO>
-            ) {
-                if (response.isSuccessful){
-                    martList.clear() //현재 목록을 초기화하고 새 데이터로 업데이트
-                    martList.addAll(response.body()?.followedMarts ?: emptyList())
-                    updateRecyclerView(martList) // RecyclerView를 업데이트
-                } else {
-                    // 에러 처리
+            api.getDibsMart().enqueue(object : Callback<DibsMartResponseDTO> {
+                override fun onResponse(
+                    call: Call<DibsMartResponseDTO>,
+                    response: Response<DibsMartResponseDTO>,
+                ) {
+                    if (response.isSuccessful) {
+                        martList.clear() //현재 목록을 초기화하고 새 데이터로 업데이트
+                        martList.addAll(response.body()?.followedMarts ?: emptyList())
+                        updateRecyclerView(martList) // RecyclerView를 업데이트
+                    } else {
+                        // 에러 처리
+                    }
                 }
-            }
 
-            // API 요청이 실패했을 때 호출
-            override fun onFailure(call: Call<DibsMartResponseDTO>, t: Throwable) {
-                Log.d("check", "failed")
-                showToast("단골 마트 목록을 가져오는 데 실패했습니다.")
-            }
-        })
+                // API 요청이 실패했을 때 호출
+                override fun onFailure(call: Call<DibsMartResponseDTO>, t: Throwable) {
+                    Log.d("check", "failed")
+                    showToast("단골 마트 목록을 가져오는 데 실패했습니다.")
+                }
+            })
+        }
+
     }
 
     // RecyclerView를 업데이트
-    private fun updateRecyclerView(dibsMarts: ArrayList<DibsMartResponseDTO.DibsMarts>){
-        if (dibsMarts.isEmpty()){
+    private fun updateRecyclerView(dibsMarts: ArrayList<DibsMartResponseDTO.DibsMarts>) {
+        if (dibsMarts.isEmpty()) {
             // 단골마트 없을 경우
             binding.shopDibsLayout.root.visibility = View.VISIBLE
             binding.groupRecyclerView.visibility = View.GONE
@@ -75,10 +82,10 @@ class DibsMartFragment : Fragment() {
     private fun unfollowMart(martShopId: Int) {
         Log.d("DibsMartFragment", "Unfollowing mart with ID: $martShopId")
         val apiService = DibsMartManager.dibsMartApiService
-        apiService.cancelDibsMart(martShopId).enqueue(object : Callback<DibsMartResponseDTO> {
+        apiService.unfollowMart(martShopId).enqueue(object : Callback<FollowResponseDTO> {
             override fun onResponse(
-                call: Call<DibsMartResponseDTO>,
-                response: Response<DibsMartResponseDTO>
+                call: Call<FollowResponseDTO>,
+                response: Response<FollowResponseDTO>,
             ) {
                 if (response.isSuccessful) {
                     removeMartFromList(martShopId) // 목록에서 제거
@@ -89,7 +96,7 @@ class DibsMartFragment : Fragment() {
             }
 
             // 요청 실패 시
-            override fun onFailure(call: Call<DibsMartResponseDTO>, t: Throwable) {
+            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
 
             }
         })
@@ -102,6 +109,7 @@ class DibsMartFragment : Fragment() {
             binding.groupRecyclerView.adapter?.notifyItemRemoved(position) //아이템 제거
         }
     }
+
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }

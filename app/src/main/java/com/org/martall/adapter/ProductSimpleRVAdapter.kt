@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemHomeProductBinding
-import com.org.martall.interfaces.MartItemdibs
 import com.org.martall.models.Item
+import com.org.martall.models.ItemLikedResponseDTO
+import com.org.martall.services.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -17,7 +18,7 @@ import java.util.Locale
 
 class ProductSimpleRVAdapter(
     private val itemList: List<Item>,
-    private val martItemdibs: MartItemdibs,
+    private val api: ApiService,
 ) :
     RecyclerView.Adapter<ProductSimpleRVAdapter.ViewHolder>() {
 
@@ -64,37 +65,36 @@ class ProductSimpleRVAdapter(
                 item.like = isLiked
                 updateLikeButton(isLiked)
 
-                // 로그 추가: 클릭 상태 변경 및 업데이트 요청 로그
-                Log.d("ProductSimpleRVAdapter", "Item liked status changed: $isLiked")
-                Log.d(
-                    "ProductSimpleRVAdapter",
-                    "Sending update request for item $itemId with liked status: $isLiked"
-                )
+                if (item.like) {
+                    api.likedItem(item.itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
+                        override fun onResponse(
+                            call: Call<ItemLikedResponseDTO>,
+                            response: Response<ItemLikedResponseDTO>,
+                        ) {
+                            if (response.isSuccessful) {
+                                // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
+                                Log.d("Retrofit", "Update request successful for item $itemId")
+                            } else {
+                                // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
+                                item.like = !isLiked
+                                updateLikeButton(!isLiked)
+                                Log.e("Retrofit", "Failed to send update request for item $itemId")
+                            }
+                        }
 
-                // 서버에 클릭 상태 업데이트 요청 보내기
-                martItemdibs.dibsItem(itemId, isLiked).enqueue(object : Callback<Unit> {
-                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                        if (response.isSuccessful) {
-                            // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
-                            Log.d("Retrofit", "Update request successful for item $itemId")
-                        } else {
+                        override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                             // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
                             item.like = !isLiked
                             updateLikeButton(!isLiked)
-                            Log.e("Retrofit", "Failed to send update request for item $itemId")
+                            Log.e(
+                                "ProductSimpleRVAdapter",
+                                "Failed to send update request for item $itemId"
+                            )
                         }
-                    }
+                    })
+                } else {
 
-                    override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
-                        item.like = !isLiked
-                        updateLikeButton(!isLiked)
-                        Log.e(
-                            "ProductSimpleRVAdapter",
-                            "Failed to send update request for item $itemId"
-                        )
-                    }
-                })
+                }
             }
         }
 

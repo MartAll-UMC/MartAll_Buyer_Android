@@ -5,22 +5,17 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import com.org.martall.BuildConfig
 import com.org.martall.adapter.SimpleProductRVAdapter
 import com.org.martall.databinding.ActivityNewMerchBinding
-import com.org.martall.interfaces.MartItemdibs
 import com.org.martall.models.Response
 import com.org.martall.services.ApiService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class NewMerchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNewMerchBinding
-    private lateinit var martItemdibs: MartItemdibs
     private lateinit var api: ApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +29,6 @@ class NewMerchActivity : AppCompatActivity() {
         // 데이터 로딩 전 스켈레톤 뷰 표시
         showNewMerchData(isLoading = true)
 
-        // 찜 기능
-        val retrofit = Retrofit.Builder()
-            .baseUrl("${BuildConfig.MOCK_CART_URL}")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        martItemdibs = retrofit.create(MartItemdibs::class.java)
-
         GlobalScope.launch {
             api = ApiService.createWithHeader(applicationContext)
 
@@ -53,7 +41,7 @@ class NewMerchActivity : AppCompatActivity() {
                         val newItemResponse = response.body()
                         newItemResponse?.result?.let { items ->
                             // 리싸이클러뷰 어댑터 생성 및 설정
-                            val adapter = SimpleProductRVAdapter(items, martItemdibs)
+                            val adapter = SimpleProductRVAdapter(items, api)
                             binding.productListRv.adapter = adapter
                             binding.productListRv.layoutManager = GridLayoutManager(
                                 this@NewMerchActivity,

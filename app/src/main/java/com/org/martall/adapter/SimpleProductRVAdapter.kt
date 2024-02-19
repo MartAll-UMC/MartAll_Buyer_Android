@@ -7,19 +7,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
-import com.org.martall.interfaces.MartItemdibs
 import com.org.martall.models.Item
+import com.org.martall.models.ItemLikedResponseDTO
+import com.org.martall.services.ApiService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.NumberFormat
 import java.util.Locale
+
 //새로 나온 상품 어댑터 입니다. 카테고리와 리사이클러 뷰가 겹치나, api구조가 달라 새로 생성했습니다//
-class SimpleProductRVAdapter(private val itemList: List<Item>, private val martItemdibs: MartItemdibs) :
+class SimpleProductRVAdapter(private val itemList: List<Item>, private val api: ApiService) :
     RecyclerView.Adapter<SimpleProductRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemCategoryProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemCategoryProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -29,7 +32,8 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val martI
 
     override fun getItemCount(): Int = itemList.size
 
-    inner class ViewHolder(private val binding: ItemCategoryProductBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemCategoryProductBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.btnLike.setOnClickListener {
@@ -41,8 +45,11 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val martI
                 updateLikeButton(item.like)
 
                 // 서버에 클릭 상태 업데이트 요청 보내기
-                martItemdibs.dibsItem(itemId, item.like).enqueue(object : Callback<Unit> {
-                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                api.likedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
+                    override fun onResponse(
+                        call: Call<ItemLikedResponseDTO>,
+                        response: Response<ItemLikedResponseDTO>,
+                    ) {
                         if (!response.isSuccessful) {
                             // 실패 시 처리: 클릭 상태를 이전 상태로 변경
                             item.like = !item.like
@@ -53,7 +60,7 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val martI
                         }
                     }
 
-                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                         // 실패 시 처리: 클릭 상태를 이전 상태로 변경
                         item.like = !item.like
                         updateLikeButton(item.like)
