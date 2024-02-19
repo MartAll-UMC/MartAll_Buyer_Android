@@ -6,16 +6,13 @@ import com.org.martall.models.SecondResponse
 import retrofit2.Call
 import retrofit2.http.*
 
-interface MartItemService {
+interface HomeInterface {
     @GET("/item/new-item")
     fun getNewItem(): Call<Response>
-}
 
-interface MartRecommendService {
     @GET("/mart/shops/recommended")
     fun getRecommendMart(): Call<ResponseMart>
 }
-
 interface MartItemdibs {
     @POST("/item-like/{itemId}")
     fun dibsItem(@Path("itemId") itemId: Int, @Query("like") like: Boolean): Call<Unit>

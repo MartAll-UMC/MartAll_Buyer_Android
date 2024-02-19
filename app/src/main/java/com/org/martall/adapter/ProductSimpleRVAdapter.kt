@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemHomeProductBinding
 import com.org.martall.interfaces.MartItemdibs
@@ -14,12 +15,15 @@ import retrofit2.Response
 import java.text.NumberFormat
 import java.util.Locale
 
-class ProductSimpleRVAdapter(private val itemList: List<Item>, private val martItemdibs: MartItemdibs) :
+class ProductSimpleRVAdapter(
+    private val itemList: List<Item>,
+    private val martItemdibs: MartItemdibs,
+) :
     RecyclerView.Adapter<ProductSimpleRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ViewHolder {
         val binding: ItemHomeProductBinding = ItemHomeProductBinding.inflate(
             LayoutInflater.from(viewGroup.context),
@@ -43,6 +47,7 @@ class ProductSimpleRVAdapter(private val itemList: List<Item>, private val martI
 
         fun bind(item: Item) {
             binding.apply {
+                Glide.with(itemView).load(item.pic).into(productImgIv)
                 productNameTv.text = item.itemName
                 val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.price)
                 productPriceTv.text = "${formattedPrice}원"
@@ -61,7 +66,10 @@ class ProductSimpleRVAdapter(private val itemList: List<Item>, private val martI
 
                 // 로그 추가: 클릭 상태 변경 및 업데이트 요청 로그
                 Log.d("ProductSimpleRVAdapter", "Item liked status changed: $isLiked")
-                Log.d("ProductSimpleRVAdapter", "Sending update request for item $itemId with liked status: $isLiked")
+                Log.d(
+                    "ProductSimpleRVAdapter",
+                    "Sending update request for item $itemId with liked status: $isLiked"
+                )
 
                 // 서버에 클릭 상태 업데이트 요청 보내기
                 martItemdibs.dibsItem(itemId, isLiked).enqueue(object : Callback<Unit> {
@@ -81,7 +89,10 @@ class ProductSimpleRVAdapter(private val itemList: List<Item>, private val martI
                         // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
                         item.like = !isLiked
                         updateLikeButton(!isLiked)
-                        Log.e("ProductSimpleRVAdapter", "Failed to send update request for item $itemId")
+                        Log.e(
+                            "ProductSimpleRVAdapter",
+                            "Failed to send update request for item $itemId"
+                        )
                     }
                 })
             }

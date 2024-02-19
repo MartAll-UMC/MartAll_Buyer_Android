@@ -23,7 +23,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 import java.io.IOException
 
-interface ApiService {
+interface ApiService : HomeInterface {
     @GET("/mart/shops/search/keyword")
     fun searchMartList(
         @Query("keyword") keyword: String,

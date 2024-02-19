@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.interfaces.MartItemdibs
@@ -63,6 +64,7 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val martI
 
         fun bind(item: Item) {
             binding.apply {
+                Glide.with(itemView).load(item.pic).into(ivProductImg)
                 tvProductName.text = item.itemName
                 val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.price)
                 tvProductPrice.text = "${formattedPrice}원"
@@ -75,7 +77,7 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val martI
             if (isLiked) {
                 binding.btnLike.setImageResource(R.drawable.ic_like_filled_20dp)
             } else {
-                binding.btnLike.setImageResource(R.drawable.ic_heart_line_20dp)
+                binding.btnLike.setImageResource(R.drawable.ic_like_unfilled_20dp)
             }
         }
     }
