@@ -80,7 +80,7 @@ class CategoryRVAdapter(
             if (isLiked) {
                 binding.btnLike.setImageResource(R.drawable.ic_like_filled_20dp)
             } else {
-                binding.btnLike.setImageResource(R.drawable.ic_heart_line_20dp)
+                binding.btnLike.setImageResource(R.drawable.ic_like_unfilled_20dp)
             }
         }
     }

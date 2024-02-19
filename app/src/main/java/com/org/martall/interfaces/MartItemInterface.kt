@@ -20,13 +20,3 @@ interface MartItemdibs {
     @DELETE("/item-like/{itemId}")
     fun cancelDibsItem(@Path("itemId") itemId: Int): Call<Unit>
 }
-
-interface CategoryService {
-    @GET("/item/category")
-    fun getCategoryItem(
-        @Query("category") category: String,
-        @Query("minPrice") minPrice: Int,
-        @Query("maxPrice") maxPrice: Int,
-        @Query("sort") sort: String
-    ): Call<SecondResponse>
-}

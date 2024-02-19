@@ -4,21 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.org.martall.BuildConfig
 import com.org.martall.adapter.CategoryViewPagerAdapter
 import com.org.martall.databinding.FragmentCategoryBinding
-import com.org.martall.interfaces.CategoryService
 import com.org.martall.view.search.SearchActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 
 class CategoryFragment : Fragment() {
@@ -27,7 +18,7 @@ class CategoryFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentCategoryBinding.inflate(inflater, container, false)
         binding.tbCategory.searchIc.setOnClickListener {
