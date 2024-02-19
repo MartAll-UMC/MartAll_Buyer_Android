@@ -9,7 +9,8 @@ import com.org.martall.interfaces.HomeInterface
 import com.org.martall.models.LoginRequest
 import com.org.martall.models.LoginResponse
 import com.org.martall.models.RefreshResponse
-import com.org.martall.models.SearchResponse
+import com.org.martall.models.SearchItemResponse
+import com.org.martall.models.SearchMartResponse
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import okhttp3.Interceptor
@@ -24,15 +25,15 @@ import retrofit2.http.Query
 import java.io.IOException
 
 interface ApiService : HomeInterface {
-    @GET("/mart/shops/search/keyword")
+    @GET("/mart/shops/search")
     fun searchMartList(
         @Query("keyword") keyword: String,
-    ): Call<SearchResponse>
+    ): Call<SearchMartResponse>
 
     @GET("/item/search")
     fun searchItemList(
         @Query("itemName") keyword: String,
-    ): Call<SearchResponse>
+    ): Call<SearchItemResponse>
 
     @POST("/user/login-kakao")
     fun login(
@@ -64,20 +65,6 @@ interface ApiService : HomeInterface {
                 AppInterceptor(userInfoManager.getTokens(), userInfoManager.needRefreshToken())
             val okHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
             return retrofit2.Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
-                .create(ApiService::class.java)
-        }
-
-        fun createMartVer(): ApiService {
-            return retrofit2.Retrofit.Builder().baseUrl(MOCK_MART)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
-                .create(ApiService::class.java)
-        }
-
-        fun createItemVer(): ApiService {
-            return retrofit2.Retrofit.Builder().baseUrl(MOCK_ITEM)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(ApiService::class.java)

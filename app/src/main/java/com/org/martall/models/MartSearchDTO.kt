@@ -2,11 +2,16 @@ package com.org.martall.models
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchResponse(
+data class SearchMartResponse(
     @SerializedName("status") val status: Int,
     @SerializedName("message") val message: String,
-    @SerializedName("searchResults") val marts: List<MartSimpleDTO>,
-    @SerializedName("result") val items: List<ItemSearchDTO>?
+    @SerializedName("result") val marts: List<MartSimpleDTO>?,
+)
+
+data class SearchItemResponse(
+    @SerializedName("status") val status: Int,
+    @SerializedName("message") val message: String,
+    @SerializedName("result") val items: List<ItemSearchDTO>?,
 )
 
 data class MartSimpleDTO(

@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.org.martall.adapter.MartSimpleRVAdapter
 import com.org.martall.adapter.SearchItemRVAdapter
 import com.org.martall.databinding.FragmentSearchResultBinding
-import com.org.martall.models.SearchResponse
+import com.org.martall.models.SearchItemResponse
+import com.org.martall.models.SearchMartResponse
 import com.org.martall.services.ApiService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,7 +22,6 @@ import retrofit2.Callback
 class SearchResultFragment(private val isProduct: Boolean, private val keyword: String) :
     Fragment() {
     private lateinit var binding: FragmentSearchResultBinding
-    private val apiMart = ApiService.createMartVer()
     private lateinit var api: ApiService
 
     override fun onCreateView(
@@ -38,10 +38,10 @@ class SearchResultFragment(private val isProduct: Boolean, private val keyword: 
                 binding.searchResultRv.visibility = View.GONE
                 binding.searchResultEmptyLl.visibility = View.GONE
 
-                api.searchItemList(keyword).enqueue(object : Callback<SearchResponse> {
+                api.searchItemList(keyword).enqueue(object : Callback<SearchItemResponse> {
                     override fun onResponse(
-                        call: Call<SearchResponse>,
-                        response: retrofit2.Response<SearchResponse>,
+                        call: Call<SearchItemResponse>,
+                        response: retrofit2.Response<SearchItemResponse>,
                     ) {
                         val data = response.body()
                         Log.d("[PRINT/SEARCH]", "${response}")
@@ -68,7 +68,7 @@ class SearchResultFragment(private val isProduct: Boolean, private val keyword: 
                         }
                     }
 
-                    override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+                    override fun onFailure(call: Call<SearchItemResponse>, t: Throwable) {
                         Log.e("[ERROR/SEARCH]", t.message ?: "API error")
                     }
                 })
@@ -76,10 +76,10 @@ class SearchResultFragment(private val isProduct: Boolean, private val keyword: 
                 binding.searchResultRv.visibility = View.GONE
                 binding.searchResultEmptyLl.visibility = View.GONE
 
-                apiMart.searchMartList(keyword).enqueue(object : Callback<SearchResponse> {
+                api.searchMartList(keyword).enqueue(object : Callback<SearchMartResponse> {
                     override fun onResponse(
-                        call: Call<SearchResponse>,
-                        response: retrofit2.Response<SearchResponse>,
+                        call: Call<SearchMartResponse>,
+                        response: retrofit2.Response<SearchMartResponse>,
                     ) {
                         if (response.isSuccessful) {
                             val data = response.body()
@@ -103,7 +103,7 @@ class SearchResultFragment(private val isProduct: Boolean, private val keyword: 
                         }
                     }
 
-                    override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+                    override fun onFailure(call: Call<SearchMartResponse>, t: Throwable) {
                         Log.e("[ERROR/SEARCH]", t.message ?: "Api error")
                     }
                 })
