@@ -46,6 +46,23 @@ class ProductSimpleRVAdapter(
     inner class ViewHolder(private val binding: ItemHomeProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+//        init {
+//            binding.root.setOnClickListener {
+//                val idx = adapterPosition
+//                val intent = Intent(binding.root.context, ProductDetailActivity::class.java)
+//                Log.d(
+//                    "[PRINT/HOME]",
+//                    "${itemList[idx].itemId} ${itemList[idx].toString()}"
+//                )
+//                intent.putExtra(
+//                    ProductDetailActivity.EXTRA_MART_ID,
+//                    martNameToId(itemList[idx].martShopName)
+//                )
+//                intent.putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemList[idx].itemId)
+//                binding.root.context.startActivity(intent)
+//            }
+//        }
+
         fun bind(item: Item) {
             binding.apply {
                 Glide.with(itemView).load(item.pic).into(productImgIv)
@@ -75,9 +92,6 @@ class ProductSimpleRVAdapter(
                                 // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
                                 Log.d("Retrofit", "Update request successful for item $itemId")
                             } else {
-                                // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
-                                item.like = !isLiked
-                                updateLikeButton(!isLiked)
                                 Log.e("Retrofit", "Failed to send update request for item $itemId")
                             }
                         }
@@ -93,7 +107,29 @@ class ProductSimpleRVAdapter(
                         }
                     })
                 } else {
+                    api.unLikedItem(item.itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
+                        override fun onResponse(
+                            call: Call<ItemLikedResponseDTO>,
+                            response: Response<ItemLikedResponseDTO>,
+                        ) {
+                            if (response.isSuccessful) {
+                                // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
+                                Log.d("Retrofit", "Update request successful for item $itemId")
+                            } else {
+                                Log.e("Retrofit", "Failed to send update request for item $itemId")
+                            }
+                        }
 
+                        override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
+                            // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
+                            item.like = !isLiked
+                            updateLikeButton(!isLiked)
+                            Log.e(
+                                "ProductSimpleRVAdapter",
+                                "Failed to send update request for item $itemId"
+                            )
+                        }
+                    })
                 }
             }
         }

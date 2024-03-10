@@ -37,6 +37,7 @@
                 android:text="제로마트"
                 android:textAppearance="@style/lSemiBold"
                 android:textColor="@color/black"/>
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/notification_merchandise_tv_2"
                 android:layout_width="wrap_content"
@@ -72,25 +73,16 @@
         </LinearLayout>
 
         <!-- 중간 LinearLayout (RecyclerView 포함) -->
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_status_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginVertical="12dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_status_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:overScrollMode="never"
-                android:layout_marginVertical="12dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                android:visibility="visible"
-                tools:listitem="@layout/item_order_status" />
-
-        </LinearLayout>
+            android:overScrollMode="never"
+            android:layout_marginVertical="12dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:visibility="visible"
+            tools:listitem="@layout/item_order_status" />
 
         <!-- 하단 LinearLayout -->
         <LinearLayout
@@ -112,6 +104,7 @@
                 android:textColor="@color/primary400" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/total_price_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -141,7 +134,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

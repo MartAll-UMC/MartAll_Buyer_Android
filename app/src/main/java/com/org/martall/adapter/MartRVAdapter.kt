@@ -12,7 +12,9 @@ import com.org.martall.R
 import com.org.martall.databinding.ItemMartListBinding
 import com.org.martall.models.FollowResponseDTO
 import com.org.martall.models.MartDataDTO
-import com.org.martall.services.ApiServiceManager
+import com.org.martall.services.ApiService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +22,7 @@ import retrofit2.Response
 class MartRVAdapter(
     private var martList: List<MartDataDTO>,
     private val onItemClick: (MartDataDTO) -> Unit,
+    private var api: ApiService,
 ) :
     RecyclerView.Adapter<MartRVAdapter.ViewHolder>() {
 
@@ -138,46 +141,67 @@ class MartRVAdapter(
         }
 
         private fun handleBookmarkButtonClick(martId: Int) {
-            val apiService = ApiServiceManager.MartapiService
-            val call = if (isFollowed) {
-                // 이미 팔로우한 경우 팔로우 취소 요청
-                apiService.unfollowMart(martId)
+            GlobalScope.launch {
+                api = ApiService.createWithHeader(binding.root.context)
+                if (isFollowed) {
+                    // 이미 팔로우한 경우 팔로우 취소 요청
+                    api.unfollowMart(martId).enqueue(object: Callback<FollowResponseDTO> {
+                        override fun onResponse(
+                            call: Call<FollowResponseDTO>,
+                            response: Response<FollowResponseDTO>,
+                        ) {
+                            if (response.isSuccessful) {
+                                Log.d("[PRINT/MART]", "마트 팔로우 취소 성공")
 
-            } else {
-                // 팔로우하지 않은 경우 팔로우 요청
-                apiService.followMart(martId)
-            }
-
-            call.enqueue(object : Callback<FollowResponseDTO> {
-                override fun onResponse(
-                    call: Call<FollowResponseDTO>,
-                    response: Response<FollowResponseDTO>,
-                ) {
-                    if (response.isSuccessful) {
-                        val followResponse = response.body()
-                        if (followResponse != null) {
-                            // 성공적으로 팔로우/팔로우 취소 시 + isFollowed 값 업데이트
-                            val position = martList.indexOfFirst { it.martId == martId }
-                            if (position != -1) {
-                                isFollowed = !isFollowed
-                                updateUIAfterFollow(martId, isFollowed)
+                            } else {
+                                // 서버 오류 발생
+                                // Handle server error
                             }
-                        } else {
-                            // 서버 응답이 유효하지 않음
-                            // Handle accordingly
                         }
-                    } else {
-                        // 서버 오류 발생
-                        // Handle server error
-                    }
+
+                        override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                            // 통신 실패
+                            // Handle failure
+                            Log.d("check", "마트 팔로우 실패")
+                        }
+                    })
+
+                } else {
+                    // 팔로우하지 않은 경우 팔로우 요청
+                    api.followMart(martId)
                 }
 
-                override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                    // 통신 실패
-                    // Handle failure
-                    Log.d("check", "마트 팔로우 실패")
-                }
-            })
+//                call.enqueue(object : Callback<FollowResponseDTO> {
+//                    override fun onResponse(
+//                        call: Call<FollowResponseDTO>,
+//                        response: Response<FollowResponseDTO>,
+//                    ) {
+//                        if (response.isSuccessful) {
+////                        val followResponse = response.body()
+////                        if (followResponse != null) {
+////                            // 성공적으로 팔로우/팔로우 취소 시 + isFollowed 값 업데이트
+////                            val position = martList.indexOfFirst { it.martId == martId }
+////                            if (position != -1) {
+////                                isFollowed = !isFollowed
+////                                updateUIAfterFollow(martId, isFollowed)
+////                            }
+////                        } else {
+////                            // 서버 응답이 유효하지 않음
+////                            // Handle accordingly
+////                        }
+//                        } else {
+//                            // 서버 오류 발생
+//                            // Handle server error
+//                        }
+//                    }
+//
+//                    override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+//                        // 통신 실패
+//                        // Handle failure
+//                        Log.d("check", "마트 팔로우 실패")
+//                    }
+//                })
+            }
         }
 
         private fun updateUIAfterFollow(martId: Int, isFollowed: Boolean) {

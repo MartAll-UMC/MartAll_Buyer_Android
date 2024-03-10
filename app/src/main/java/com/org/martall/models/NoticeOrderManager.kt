@@ -1,7 +1,7 @@
 package com.org.martall.models
 
 import com.org.martall.BuildConfig
-import com.org.martall.interfaces.NoticeOrderApi
+import com.org.martall.interfaces.OrderApiInterface
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -11,7 +11,7 @@ object NoticeOrderManager {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    val NoticeOrderApiService: NoticeOrderApi by lazy {
-        retrofit.create(NoticeOrderApi::class.java)
+    val NoticeOrderApiService: OrderApiInterface by lazy {
+        retrofit.create(OrderApiInterface::class.java)
     }
 }

@@ -1,4 +1,4 @@
-package com.org.martall.view.mypage.customerservice.question
+package com.org.martall.view.mypage.question
 
 import android.os.Bundle
 import android.view.LayoutInflater

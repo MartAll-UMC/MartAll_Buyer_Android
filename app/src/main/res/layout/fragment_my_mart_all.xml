@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbars="none"
-    tools:context=".view.mypage.customerservice.MyMartAllFragment">
+    tools:context=".view.mypage.MyMartAllFragment">
 
     <include
         android:id="@+id/tb_mypage"
@@ -42,7 +42,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/mart_name_tv"
+                    android:id="@+id/user_name_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -60,8 +60,8 @@
                     android:text="#카카오"
                     android:textAppearance="@style/mMedium"
                     android:textColor="@color/primary400"
-                    app:layout_constraintStart_toStartOf="@id/mart_name_tv"
-                    app:layout_constraintTop_toBottomOf="@id/mart_name_tv" />
+                    app:layout_constraintStart_toStartOf="@id/user_name_tv"
+                    app:layout_constraintTop_toBottomOf="@id/user_name_tv" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -224,37 +224,37 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/service_intro_pannel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/service_intro_pannel"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/service_intro_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_bookmark_20dp"
-                        android:drawablePadding="8dp"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="15dp"
-                        android:text="서비스 소개 "
-                        android:textAppearance="@style/lBold"
-                        android:textColor="@color/grey700"
-                        app:drawableTint="@color/grey400"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <com.google.android.material.textview.MaterialTextView-->
+<!--                        android:id="@+id/service_intro_btn"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:drawableStart="@drawable/ic_bookmark_20dp"-->
+<!--                        android:drawablePadding="8dp"-->
+<!--                        android:paddingHorizontal="20dp"-->
+<!--                        android:paddingVertical="15dp"-->
+<!--                        android:text="서비스 소개 "-->
+<!--                        android:textAppearance="@style/lBold"-->
+<!--                        android:textColor="@color/grey700"-->
+<!--                        app:drawableTint="@color/grey400"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/ic_arrow_right_20dp"
-                        app:layout_constraintBottom_toBottomOf="@id/service_intro_btn"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/service_intro_btn"
-                        app:tint="@color/grey400" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:src="@drawable/ic_arrow_right_20dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/service_intro_btn"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="@id/service_intro_btn"-->
+<!--                        app:tint="@color/grey400" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 <Space
                     android:layout_width="match_parent"
@@ -273,35 +273,35 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="parent" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/myplace_pannel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:id="@+id/myplace_pannel"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/myplace_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="15dp"
-                        android:text="내 위치 "
-                        android:textAppearance="@style/lBold"
-                        android:textColor="@color/grey700"
-                        app:drawableTint="@color/grey400"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <com.google.android.material.textview.MaterialTextView-->
+<!--                        android:id="@+id/myplace_btn"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:paddingHorizontal="20dp"-->
+<!--                        android:paddingVertical="15dp"-->
+<!--                        android:text="내 위치 "-->
+<!--                        android:textAppearance="@style/lBold"-->
+<!--                        android:textColor="@color/grey700"-->
+<!--                        app:drawableTint="@color/grey400"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:src="@drawable/ic_arrow_right_20dp"
-                        app:layout_constraintBottom_toBottomOf="@id/myplace_btn"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/myplace_btn"
-                        app:tint="@color/grey400" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="15dp"-->
+<!--                        android:src="@drawable/ic_arrow_right_20dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/myplace_btn"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="@id/myplace_btn"-->
+<!--                        app:tint="@color/grey400" />-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 <TextView
                     android:id="@+id/logout_btn"

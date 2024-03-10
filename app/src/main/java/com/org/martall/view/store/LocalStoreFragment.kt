@@ -15,6 +15,7 @@ import com.org.martall.databinding.FragmentLocalStoreBinding
 import com.org.martall.models.MartDataDTO
 import com.org.martall.models.MartListResponseDTO
 import com.org.martall.services.ApiService
+import com.org.martall.view.cart.CartActivity
 import com.org.martall.view.search.SearchActivity
 import com.org.martall.view.store.user.bottomsheet.FilterBottomSheet
 import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
@@ -41,6 +42,11 @@ class LocalStoreFragment : Fragment() {
         binding.tbShop.ivSearch.setOnClickListener {
             val intent = Intent(context, SearchActivity::class.java)
             intent.putExtra("isProductSearch", false)
+            startActivity(intent)
+        }
+
+        binding.tbShop.ivCart.setOnClickListener {
+            val intent = Intent(context, CartActivity::class.java)
             startActivity(intent)
         }
 
@@ -106,14 +112,14 @@ class LocalStoreFragment : Fragment() {
     }
 
     private fun updateRecyclerView(martList: List<MartDataDTO>) {
-        val martRVAdapter = MartRVAdapter(martList) { selectedMart ->
+        val martRVAdapter = MartRVAdapter(martList, { selectedMart ->
             // 사용자가 마트를 선택했을 때, 해당 마트의 정보를 SharedViewModel에 설정
             sharedMartViewModel.setSelectedMart(selectedMart)
 
             val intent = Intent(requireContext(), MartDetailInfoActivity::class.java)
             intent.putExtra("martId", selectedMart.martId)
             startActivity(intent)
-        }
+        }, api)
         binding.groupRecyclerView.adapter = martRVAdapter
 //        Log.d("MartRVAdapter", "Adapter set with click listener")
     }

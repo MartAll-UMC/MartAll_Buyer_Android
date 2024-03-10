@@ -310,6 +310,7 @@
             android:layout_height="0dp" />
 
         <TextView
+            android:id="@+id/cart_btn"
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_weight="1"
@@ -324,6 +325,7 @@
             android:layout_height="0dp" />
 
         <TextView
+            android:id="@+id/buy_btn"
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_weight="1"

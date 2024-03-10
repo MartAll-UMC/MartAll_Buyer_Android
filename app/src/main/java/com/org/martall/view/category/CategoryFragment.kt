@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.org.martall.adapter.CategoryViewPagerAdapter
 import com.org.martall.databinding.FragmentCategoryBinding
+import com.org.martall.view.cart.CartActivity
 import com.org.martall.view.search.SearchActivity
 
 
@@ -21,9 +22,17 @@ class CategoryFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentCategoryBinding.inflate(inflater, container, false)
+
+        binding.sortTv.visibility = View.GONE // 삭제
+        binding.filterTv.visibility = View.GONE // 삭제
+
         binding.tbCategory.searchIc.setOnClickListener {
             val intent = Intent(context, SearchActivity::class.java)
             intent.putExtra("isProductSearch", true)
+            startActivity(intent)
+        }
+        binding.tbCategory.cartIc.setOnClickListener {
+            val intent = Intent(context, CartActivity::class.java)
             startActivity(intent)
         }
         return binding.root

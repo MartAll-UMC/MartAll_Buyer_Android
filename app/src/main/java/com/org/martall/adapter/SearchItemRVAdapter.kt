@@ -3,6 +3,7 @@ package com.org.martall.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.models.ItemSearchDTO
@@ -40,7 +41,7 @@ class SearchItemRVAdapter(private var itemList: List<ItemSearchDTO>) :
         }
 
         fun bind(item: ItemSearchDTO) {
-//            binding.ivProductImg.setImageResource(Uri.parse(item.img))
+            Glide.with(itemView).load(item.img).into(binding.ivProductImg)
             binding.tvProductName.text = item.name
             binding.tvProductPrice.text = "${item.price}원"
             binding.tvMartName.text = item.store

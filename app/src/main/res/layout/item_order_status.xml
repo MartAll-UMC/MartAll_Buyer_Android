@@ -9,8 +9,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/notification_order_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_gravity="fill_vertical"
         android:layout_marginStart="20dp"
         android:src="@drawable/mart_products_food_1_56dp_iv"

@@ -1,12 +1,16 @@
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.models.SecondItem
 import com.org.martall.services.ApiService
+import com.org.martall.utils.martNameToId
+import com.org.martall.view.store.ProductDetailActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -54,9 +58,7 @@ class CategoryRVAdapter(
                                 response: Response<ItemLikedResponseDTO>,
                             ) {
                                 if (!response.isSuccessful) {
-                                    // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                                    item.like = !item.like
-                                    updateLikeButton(item.like)
+
                                 } else {
                                     // 성공 시 로그로 상태 변경 확인
                                     Log.d("retrofit", "Like status changed: $item")
@@ -76,9 +78,7 @@ class CategoryRVAdapter(
                                 response: Response<ItemLikedResponseDTO>,
                             ) {
                                 if (!response.isSuccessful) {
-                                    // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                                    item.like = !item.like
-                                    updateLikeButton(item.like)
+
                                 } else {
                                     // 성공 시 로그로 상태 변경 확인
                                     Log.d("retrofit", "Like status changed: $item")
@@ -98,7 +98,9 @@ class CategoryRVAdapter(
 
         fun bind(item: SecondItem) {
             binding.apply {
+                Glide.with(itemView).load(item.pic).into(binding.ivProductImg)
                 tvProductName.text = item.itemName
+                tvMartName.text = item.martShopName
                 val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.price)
                 tvProductPrice.text = "${formattedPrice}원"
                 // 초기 버튼 상태 설정

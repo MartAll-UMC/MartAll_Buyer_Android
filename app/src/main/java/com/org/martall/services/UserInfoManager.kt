@@ -25,7 +25,7 @@ class UserInfoManager(context: Context) {
             val accessTokenExpire = prefs[accessTokenExpireKey]
             val refreshTokenExpire = prefs[refreshTokenExpireKey]
 
-            (accessToken != null && refreshToken != null && accessTokenExpire != null && refreshTokenExpire != null) && Instant.parse(
+            accessToken != "" && (accessToken != null && refreshToken != null && accessTokenExpire != null && refreshTokenExpire != null) && Instant.parse(
                 refreshTokenExpire
             ) > Instant.now()
         }.first()

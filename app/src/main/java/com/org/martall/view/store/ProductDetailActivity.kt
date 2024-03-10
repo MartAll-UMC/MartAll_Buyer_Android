@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.ViewModel.ProductDetailViewModel
 import com.org.martall.databinding.ActivityProductDetailBinding
+import com.org.martall.interfaces.CartApiInterface
 import com.org.martall.models.FollowResponseDTO
 import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.models.Mart
@@ -46,6 +48,10 @@ class ProductDetailActivity : AppCompatActivity() {
         val martId = intent.getIntExtra(EXTRA_MART_ID, -1)
         val itemId = intent.getIntExtra(EXTRA_ITEM_ID, -1)
 
+        binding.backIc.setOnClickListener {
+            finish()
+        }
+
         GlobalScope.launch {
             api = ApiService.createWithHeader(applicationContext)
 
@@ -53,8 +59,34 @@ class ProductDetailActivity : AppCompatActivity() {
             loadMartData(martId = martId, itemId = itemId)
         }
 
-        binding.backIc.setOnClickListener {
-            finish()
+
+        binding.cartBtn.setOnClickListener {
+            GlobalScope.launch {
+                api.addProductToCart(CartApiInterface.AddToCartBody(itemId = itemId))
+                    .enqueue(object :
+                        Callback<Unit> {
+                        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                            if (response.code() == 200) {
+                                Toast.makeText(
+                                    this@ProductDetailActivity,
+                                    "장바구니에 추가되었습니다.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                finish()
+                            } else {
+                                Toast.makeText(
+                                    this@ProductDetailActivity,
+                                    "장바구니엔 한 가게의 상품만 담을 수 있습니다.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<Unit>, t: Throwable) {
+                            Log.d("FailAddToCart", "장바구니 추가 실패")
+                        }
+                    })
+            }
         }
 
         binding.bookmarkBtn.setOnClickListener {
@@ -168,8 +200,10 @@ class ProductDetailActivity : AppCompatActivity() {
             likedCountTv.text = martDetail.likeCount.toString()
 
             var hashTag = ""
-            hashTag += "#${martDetail.martCategory ?: "#음식"}"
-            martHashtagTv1.text = hashTag
+            martDetail.martCategory?.forEach {
+                hashTag += "#$it "
+            }
+            martHashtagTv1.text = hashTag ?: "#음식"
         }
 //        setCategories(martDetail.martCategory)
     }
@@ -231,7 +265,6 @@ class ProductDetailActivity : AppCompatActivity() {
                 }
             })
         }
-
     }
 
     @SuppressLint("ResourceAsColor")

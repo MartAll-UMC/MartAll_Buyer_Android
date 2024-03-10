@@ -1,6 +1,19 @@
 package com.org.martall.models
 
+import com.google.gson.annotations.SerializedName
 import com.org.martall.R
+
+data class UserResponseDTO(
+    @SerializedName("status") val status: Int,
+    @SerializedName("message") val message: String,
+    @SerializedName("result") val result: UserDTO
+)
+
+data class UserDTO(
+    @SerializedName("id") val id: Int,
+    @SerializedName("username") val nickname: String,
+    @SerializedName("imgUrl") val imgUrl: String,
+)
 
 data class RecommendedMart(
     val martId: Int,

@@ -11,11 +11,13 @@ import com.org.martall.interfaces.DibsMartApiInterface
 import com.org.martall.interfaces.DibsProductApiInterface
 import com.org.martall.interfaces.HomeInterface
 import com.org.martall.interfaces.MartApiInterface
+import com.org.martall.interfaces.OrderApiInterface
 import com.org.martall.models.LoginRequest
 import com.org.martall.models.LoginResponse
 import com.org.martall.models.RefreshResponse
 import com.org.martall.models.SearchItemResponse
 import com.org.martall.models.SearchMartResponse
+import com.org.martall.models.UserResponseDTO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import okhttp3.Interceptor
@@ -23,6 +25,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -30,7 +33,7 @@ import retrofit2.http.Query
 import java.io.IOException
 
 interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, CategoryInterface,
-    DibsMartApiInterface, DibsProductApiInterface {
+    DibsMartApiInterface, DibsProductApiInterface, OrderApiInterface {
     @GET("/mart/shops/search")
     fun searchMartList(
         @Query("keyword") keyword: String,
@@ -50,6 +53,12 @@ interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, Catego
     fun refreshToken(
         @Header("refresh-token") refreshToken: String,
     ): Call<RefreshResponse>
+
+    @DELETE("/user/delete")
+    fun withdraw(): Call<Unit>
+
+    @GET("/user/profile")
+    fun getUserProfile(): Call<UserResponseDTO>
 
     companion object {
         private const val BASE_URL = BuildConfig.BASE_URL

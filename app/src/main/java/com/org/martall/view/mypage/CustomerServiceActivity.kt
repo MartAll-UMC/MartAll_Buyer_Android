@@ -1,4 +1,4 @@
-package com.org.martall.view.mypage.customerservice
+package com.org.martall.view.mypage
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

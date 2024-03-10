@@ -16,6 +16,7 @@ import com.org.martall.databinding.FragmentHomeBinding
 import com.org.martall.models.Response
 import com.org.martall.models.ResponseMart
 import com.org.martall.services.ApiService
+import com.org.martall.view.cart.CartActivity
 import com.org.martall.view.home.HomeAdFragment
 import com.org.martall.view.home.NewMerchActivity
 import com.org.martall.view.search.SearchActivity
@@ -37,6 +38,14 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         mainBinding = requireActivity() as MainActivity
+
+        binding.homeMartListTv.visibility = View.GONE
+        binding.homeMartMoreTv.visibility = View.GONE
+
+        binding.tbHome.ivCart.setOnClickListener {
+            val intent = Intent(context, CartActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.tbHome.btnAlarm.setOnClickListener {
             val intent = Intent(

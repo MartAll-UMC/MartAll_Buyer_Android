@@ -12,7 +12,7 @@ import com.org.martall.databinding.ActivityMainBinding
 import com.org.martall.services.UserInfoManager
 import com.org.martall.view.likelist.DibsFragment
 import com.org.martall.view.login.LoginActivity
-import com.org.martall.view.mypage.customerservice.MyMartAllFragment
+import com.org.martall.view.mypage.MyMartAllFragment
 import com.org.martall.view.store.LocalStoreFragment
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

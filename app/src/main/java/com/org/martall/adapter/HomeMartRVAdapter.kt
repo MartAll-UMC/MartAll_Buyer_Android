@@ -1,11 +1,15 @@
 package com.org.martall.adapter
 
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.databinding.ItemRecommendMartBinding
 import com.org.martall.models.RecommendedMart
+import com.org.martall.view.home.NewMerchActivity
+import com.org.martall.view.store.ProductDetailActivity
 
 class HomeMartRVAdapter(private var martList: List<RecommendedMart>) :
     RecyclerView.Adapter<HomeMartRVAdapter.ViewHolder>() {

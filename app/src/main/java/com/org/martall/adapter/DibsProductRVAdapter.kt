@@ -3,15 +3,16 @@ package com.org.martall.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.org.martall.R
-import com.org.martall.models.DibsProductResponseDTO
 import com.org.martall.databinding.ItemCategoryProductBinding
+import com.org.martall.models.DibsProductResponseDTO
 import java.text.NumberFormat
 import java.util.Locale
 
 class DibsProductRVAdapter(
     private val productList: List<DibsProductResponseDTO.DibsProducts>,
-    private val onCancelDibsProduct: (Int) -> Unit
+    private val onCancelDibsProduct: (Int) -> Unit,
 ) : RecyclerView.Adapter<DibsProductRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,7 +38,7 @@ class DibsProductRVAdapter(
         fun bind(product: DibsProductResponseDTO.DibsProducts) {
 
             val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(product.price)
-            //binding.ivProductImg.setImageResource(product.picName)
+            Glide.with(itemView).load(product.picName).into(binding.ivProductImg)
             binding.tvProductName.text = product.itemName
             binding.tvProductPrice.text = "${formattedPrice}원"
             binding.tvMartName.text = product.martName
