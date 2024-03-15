@@ -33,6 +33,57 @@
 
     </LinearLayout>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/new_merch_shimmer_fl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar_ll">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="true"
+            android:columnCount="2"
+            android:paddingVertical="20dp">
+
+            <include
+                layout="@layout/item_category_product_shimmer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginRight="20dp" />
+
+            <include
+                layout="@layout/item_category_product_shimmer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill_horizontal" />
+
+            <include
+                layout="@layout/item_category_product_shimmer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp" />
+
+            <include
+                layout="@layout/item_category_product_shimmer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill_horizontal"
+                android:layout_marginTop="20dp" />
+
+        </GridLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_list_rv"
         android:layout_width="match_parent"
@@ -41,8 +92,8 @@
         android:paddingVertical="20dp"
         android:paddingRight="20dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appbar_ll"
         app:spanCount="2"
         tools:listitem="@layout/item_category_product" />

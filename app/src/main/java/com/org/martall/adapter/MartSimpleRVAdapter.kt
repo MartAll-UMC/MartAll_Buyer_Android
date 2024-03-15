@@ -2,11 +2,13 @@ package com.org.martall.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.org.martall.R
 import com.org.martall.databinding.ItemDibsProductBinding
-import com.org.martall.model.MartDTO
+import com.org.martall.models.MartSimpleDTO
 
-class MartSimpleRVAdapter(private var martList: List<MartDTO>) :
+class MartSimpleRVAdapter(private var martList: List<MartSimpleDTO>) :
     RecyclerView.Adapter<MartSimpleRVAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -38,12 +40,31 @@ class MartSimpleRVAdapter(private var martList: List<MartDTO>) :
             }
         }
 
-        fun bind(mart: MartDTO) {
+        fun bind(mart: MartSimpleDTO) {
             binding.martNameTv.text = mart.name
             binding.martProfileIv.text = mart.name
-            binding.martHashtagTv1.text = mart.hashTag
-            binding.followerCountTv.text = mart.followerCount.toString()
-            binding.dibsCountTv.text = mart.visitorCount.toString()
+            var hashTag = ""
+            for (category in mart.categories) {
+                hashTag += "#${category} "
+            }
+            binding.martHashtagTv2.text = ""
+            binding.martHashtagTv3.text = ""
+            binding.martHashtagTv1.text = hashTag
+            binding.followerCountTv.text = mart.followerCnt.toString()
+            binding.dibsCountTv.text = mart.likeCnt.toString()
+            if (mart.isFollowed) {
+                binding.bookmarkBtn.text = "단골 가게"
+                binding.bookmarkBtn.isSelected = true
+                binding.bookmarkBtn.setTextColor(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.primary400
+                    )
+                )
+            } else {
+                binding.bookmarkBtn.text = "단골 추가"
+                binding.bookmarkBtn.isSelected = false
+            }
         }
     }
 }

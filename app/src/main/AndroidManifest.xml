@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".services.GlobalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -13,18 +14,44 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.App.Starting"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".view.cart.CartActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MartAll"/>
+        <activity
+            android:name=".view.mypage.service.ServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao${KAKAO_KEY}" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.login.LoginActivity"
+            android:exported="true"
+            android:saveEnabled="false"></activity>
         <activity
             android:name=".view.home.NewMerchActivity"
             android:theme="@style/Theme.MartAll" />
         <activity
-            android:name=".view.mypage.customerservice.PrivacyPolicyActivity"
+            android:name=".view.mypage.PrivacyPolicyActivity"
             android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".view.store.ProductDetailActivity"
             android:theme="@style/Theme.MartAll" />
         <activity
-            android:name=".view.mypage.customerservice.ServiceTermsActivity"
+            android:name=".view.mypage.ServiceTermsActivity"
             android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".MainActivity"
@@ -47,11 +74,10 @@
         <activity
             android:name=".view.store.StoreActivity"
             android:theme="@style/Theme.MartAll" />
-        <activity android:name=".view.mypage.customerservice.CustomerServiceActivity" />
+        <activity android:name=".view.mypage.CustomerServiceActivity" />
         <activity
-            android:name=".view.likelist.DibsActivity"
+            android:name=".view.store.MartDetailInfoActivity"
             android:theme="@style/Theme.MartAll" />
-        <activity android:name=".view.store.MartDetailInfoActivity" />
         <activity
             android:name=".view.search.SearchActivity"
             android:theme="@style/Theme.MartAll" />

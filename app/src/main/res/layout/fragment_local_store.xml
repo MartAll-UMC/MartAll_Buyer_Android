@@ -24,7 +24,7 @@
         android:drawableEnd="@drawable/ic_arrow_down_20dp"
         android:drawablePadding="2dp"
         android:drawableTint="@color/primary400"
-        android:text="최신순"
+        android:text="기본순"
         android:textAppearance="@style/mMedium"
         android:textColor="@color/primary400"
         app:layout_constraintBottom_toTopOf="@id/group_recyclerView"
