@@ -1,4 +1,4 @@
-package com.org.martall.view.store.user.bottomsheet
+package com.org.martall.view.mart.user.bottomsheet
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,11 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.google.android.material.slider.RangeSlider
 import com.org.martall.R
 import com.org.martall.databinding.FragmentFilterBottomSheetBinding
-import kotlinx.coroutines.selects.select
 
 class FilterBottomSheet : BottomSheetDialogFragment() {
 
@@ -21,18 +19,18 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
     private var selectedChipText: String? = null
     var previousSelectedChip: Chip? = null
 
-    private var selectedMembershipCountMin: Int? = null
-    private var selectedMembershipCountMax: Int? = null
-    private var selectedHeartCountMin: Int? = null
-    private var selectedHeartCountMax: Int? = null
+    private var selectedBookmarkCountMin: Int? = null
+    private var selectedBookmarkCountMax: Int? = null
+    private var selectedLikeCountMin: Int? = null
+    private var selectedLikeCountMax: Int? = null
 
     interface OnFilterAppliedListener {
         fun onFilterApplied(
             selectedChipText: String?,
-            selectedMembershipCountMin: Int?,
-            selectedMembershipCountMax: Int?,
-            selectedHeartCountMin: Int?,
-            selectedHeartCountMax: Int?
+            selectedBookmarkCountMin: Int?,
+            selectedBookmarkpCountMax: Int?,
+            selectedLikeCountMin: Int?,
+            selectedLikeCountMax: Int?
         )
     }
 
@@ -43,8 +41,8 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
     ): View? {
         binding = FragmentFilterBottomSheetBinding.inflate(inflater,container,false)
 
-        binding.sliderMembershipCount.stepSize = 1F
-        binding.sliderHeartCount.stepSize = 1F
+        binding.sliderBookmarkCount.stepSize = 1F
+        binding.sliderLikeCount.stepSize = 1F
 
         return binding.root
     }
@@ -58,8 +56,8 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
 //            Log.d("filterBottomSheet", selectedChipText ?: "No chip selected")
 //        }
 
-        binding.chipChildItem.setOnClickListener {
-            selectedChipText = binding.chipChildItem.text.toString()
+        binding.chipChildCategory.setOnClickListener {
+            selectedChipText = binding.chipChildCategory.text.toString()
 //            updateChipTextColor(binding.chipChildItem)
         }
 
@@ -94,7 +92,7 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
 //            updateChipTextColor(binding.chipMeat)
         }
 
-        val membershipCountSlider = binding.sliderMembershipCount
+        val membershipCountSlider = binding.sliderBookmarkCount
         membershipCountSlider.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: RangeSlider) {
                 Log.d("FilterBottomSheet", "단골 - 터치 시작")
@@ -102,12 +100,12 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
 
             override fun onStopTrackingTouch(slider: RangeSlider) {
                 // 터치 종료 시 처리
-                selectedMembershipCountMin = slider.values[0].toInt()
-                selectedMembershipCountMax = slider.values[1].toInt()
+                selectedBookmarkCountMin = slider.values[0].toInt()
+                selectedBookmarkCountMax = slider.values[1].toInt()
             }
         })
 
-        val heartCountSlider = binding.sliderHeartCount
+        val heartCountSlider = binding.sliderLikeCount
         heartCountSlider.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: RangeSlider) {
                 Log.d("FilterBottomSheet", "찜 - 터치 시작")
@@ -115,20 +113,20 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
 
             override fun onStopTrackingTouch(slider: RangeSlider) {
                 // 터치 종료 시 처리
-                selectedHeartCountMin = slider.values[0].toInt()
-                selectedHeartCountMax = slider.values[1].toInt()
+                selectedLikeCountMin = slider.values[0].toInt()
+                selectedLikeCountMax = slider.values[1].toInt()
             }
         })
 
-        val applyButton = binding.bottomsheetSaveBtn
+        val applyButton = binding.saveBtn
         applyButton.setOnClickListener {
             val listener = targetFragment as? OnFilterAppliedListener
             listener?.onFilterApplied(
                 selectedChipText,
-                selectedMembershipCountMin,
-                selectedMembershipCountMax,
-                selectedHeartCountMin,
-                selectedHeartCountMax
+                selectedBookmarkCountMin,
+                selectedBookmarkCountMax,
+                selectedLikeCountMin,
+                selectedLikeCountMax
             )
             dismiss()
         }

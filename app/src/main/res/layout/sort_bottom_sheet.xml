@@ -30,7 +30,7 @@
         android:fontFamily="@font/pretendardsemibold"/>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/membership_sort_tv"
+        android:id="@+id/bookmark_sort_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="단골 지수 순"
@@ -39,14 +39,13 @@
         android:fontFamily="@font/pretendardsemibold"/>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/heart_sort_tv"
+        android:id="@+id/like_sort_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="찜 지수 순"
         android:textSize="15dp"
         android:padding="10dp"
         android:fontFamily="@font/pretendardsemibold"/>
-
 
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.org.martall.view.store
+package com.org.martall.view.mart
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -19,7 +19,7 @@ import com.org.martall.models.MartDataDTO
 import com.org.martall.models.MartListResponseDTO
 import com.org.martall.services.ApiService
 import com.org.martall.services.ApiServiceManager
-import com.org.martall.view.store.user.bottomsheet.DetailBottomSheet
+import com.org.martall.view.mart.user.bottomsheet.DetailBottomSheet
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -31,7 +31,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
     private lateinit var api: ApiService
     private val sharedMartViewModel: SharedMartViewModel by viewModels()
 
-    private var isFollowing: Boolean = false
+    private var isBookmarked: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,16 +66,16 @@ class MartDetailInfoActivity : AppCompatActivity() {
             detailBottomSheet.show(supportFragmentManager, null)
         }
 
-        binding.addFavoriteMartBtn.setOnClickListener {
-            if (isFollowing) {
+        binding.addBookmarkBtn.setOnClickListener {
+            if (isBookmarked) {
                 // 언팔로우 요청
-                Log.d("follow", isFollowing.toString())
+                Log.d("follow", isBookmarked.toString())
                 Log.d("follow", "언팔로우 요청")
                 unfollowMart(martId)
             } else {
                 // 팔로우 요청
                 followMart(martId)
-                Log.d("follow", isFollowing.toString())
+                Log.d("follow", isBookmarked.toString())
                 Log.d("follow", "팔로우 요청")
             }
         }
@@ -97,7 +97,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val martList = response.body()?.result ?: emptyList()
 
-                        // 특정 martId의 데이터만 필터링하여 가져오기 (예시에서는 전체 데이터를 그대로 사용)
+                        // 특정 martId의 데이터만 필터링
                         val selectedMart = martList.find { it.martId == martId }
 
                         // 데이터 설정
@@ -135,7 +135,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     // 성공적으로 팔로우한 경우
-                    isFollowing = true
+                    isBookmarked = true
                     Log.d("SuccessFollow", "팔로우 통신 성공")
                     updateUI()
 
@@ -161,7 +161,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     // 성공적으로 팔로우한 경우
-                    isFollowing = false
+                    isBookmarked = false
                     Log.d("SuccessUnfollow", "언팔로우 성공")
                     updateUI()
 
@@ -179,23 +179,23 @@ class MartDetailInfoActivity : AppCompatActivity() {
     @SuppressLint("ResourceAsColor")
     private fun updateUI() {
         Log.d("SuccessUpdateUI", "UI 업데이트")
-        val buttonText = if (isFollowing) "단골 취소" else "단골 추가"
-        binding.addFavoriteMartBtn.text = buttonText
+        val buttonText = if (isBookmarked) "단골 취소" else "단골 추가"
+        binding.addBookmarkBtn.text = buttonText
 
         val buttonColor =
-            if (isFollowing) R.drawable.background_primary400_r12 else R.drawable.background_primary400_fill_r12
-        binding.addFavoriteMartBtn.setBackgroundResource(buttonColor)
+            if (isBookmarked) R.drawable.background_primary400_r12 else R.drawable.background_primary400_fill_r12
+        binding.addBookmarkBtn.setBackgroundResource(buttonColor)
 
-        val buttonTextColor = if (isFollowing) R.color.primary400 else R.color.white
-        binding.addFavoriteMartBtn.setTextColor(ContextCompat.getColor(this, buttonTextColor))
+        val buttonTextColor = if (isBookmarked) R.color.primary400 else R.color.white
+        binding.addBookmarkBtn.setTextColor(ContextCompat.getColor(this, buttonTextColor))
     }
 
 
     private fun updateMartDetailUI(selectedMart: MartDataDTO) {
         binding.martNameTv.text = selectedMart.name
         Log.d("selectedMart", selectedMart.name)
-        binding.followerCountTv.text = selectedMart.followersCount.toString()
-        binding.visitorCountTv.text = selectedMart.likeCount.toString()
+        binding.bookmarkCountTv.text = selectedMart.followersCount.toString()
+        binding.likeCountTv.text = selectedMart.likeCount.toString()
         binding.martPlaceTv.text = selectedMart.location
         binding.martProfileIv.text = selectedMart.name
         // Glide.with(this).load(selectedMart.imageUrl).into(binding.martProfileIv)
@@ -222,7 +222,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
         })
     }
 
-    // 카테고리 동적 생성
+    // 카테고리 개수에 따른 동적 생성
     private fun setCategories(categories: List<String>) {
 
         val linearLayout: LinearLayout = binding.martCategoriesLayout
@@ -251,13 +251,4 @@ class MartDetailInfoActivity : AppCompatActivity() {
             linearLayout.addView(textView)
         }
     }
-
-//    private fun showSortBottomSheet() {
-//        binding.sortTv.setOnClickListener {
-//            SortBottomSheet().show(
-//                supportFragmentManager,
-//                null
-//            )
-//        }
-//    }
 }

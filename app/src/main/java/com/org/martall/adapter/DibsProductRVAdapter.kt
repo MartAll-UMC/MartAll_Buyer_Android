@@ -38,9 +38,9 @@ class DibsProductRVAdapter(
         fun bind(product: DibsProductResponseDTO.DibsProducts) {
 
             val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(product.price)
-            Glide.with(itemView).load(product.picName).into(binding.ivProductImg)
-            binding.tvProductName.text = product.itemName
-            binding.tvProductPrice.text = "${formattedPrice}원"
+            Glide.with(itemView).load(product.picName).into(binding.ivItem)
+            binding.tvItemName.text = product.itemName
+            binding.tvItemPrice.text = "${formattedPrice}원"
             binding.tvMartName.text = product.martName
 
             setLikeButtonImage(product.like)

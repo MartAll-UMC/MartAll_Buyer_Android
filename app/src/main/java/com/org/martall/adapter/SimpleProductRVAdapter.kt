@@ -90,11 +90,11 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val api: 
 
         fun bind(item: Item) {
             binding.apply {
-                Glide.with(itemView).load(item.pic).into(ivProductImg)
-                tvProductName.text = item.itemName
+                Glide.with(itemView).load(item.pic).into(ivItem)
+                tvItemName.text = item.itemName
                 tvMartName.text = item.martShopName
                 val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.price)
-                tvProductPrice.text = "${formattedPrice}원"
+                tvItemPrice.text = "${formattedPrice}원"
                 // 초기 버튼 상태 설정
                 updateLikeButton(item.like)
             }

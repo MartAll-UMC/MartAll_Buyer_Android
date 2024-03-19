@@ -15,7 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.NumberFormat
 
-class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
+class MartDetailRVAdapter(private val martItem: MartDataDTO) :
     RecyclerView.Adapter<MartDetailRVAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
@@ -40,11 +40,11 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
     }
 
     override fun onBindViewHolder(holder: MartDetailRVAdapter.ViewHolder, position: Int) {
-        holder.bind(martProduct.items[position])
+        holder.bind(martItem.items[position])
     }
 
     override fun getItemCount(): Int {
-        return martProduct.items.size
+        return martItem.items.size
     }
 
     inner class ViewHolder(val binding: ItemCategoryProductBinding) :
@@ -53,8 +53,8 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
 
         init {
             binding.root.setOnClickListener {
-                val martId = martProduct.martId
-                val itemId = martProduct.items[adapterPosition].itemId
+                val martId = martItem.martId
+                val itemId = martItem.items[adapterPosition].itemId
 
                 // 리스너가 설정되어 있다면 실행
                 onItemClickListener?.onItemClick(martId, itemId)
@@ -67,12 +67,12 @@ class MartDetailRVAdapter(private val martProduct: MartDataDTO) :
         }
 
         fun bind(item: MartItemDTO) {
-            binding.tvMartName.text = martProduct.name
-            binding.tvProductName.text = item.name
+            binding.tvMartName.text = martItem.name
+            binding.tvItemName.text = item.name
 
             val formattedPrice = NumberFormat.getNumberInstance().format(item.price)
-            binding.tvProductPrice.text = "${formattedPrice}원"
-            Glide.with(itemView.context).load(item.imageUrl).into(binding.ivProductImg)
+            binding.tvItemPrice.text = "${formattedPrice}원"
+            Glide.with(itemView.context).load(item.imageUrl).into(binding.ivItem)
 
             isLiked = item.likeYn
             updateLikeUI()

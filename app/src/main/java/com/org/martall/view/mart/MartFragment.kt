@@ -1,4 +1,4 @@
-package com.org.martall.view.store
+package com.org.martall.view.mart
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,22 +11,22 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.org.martall.ViewModel.SharedMartViewModel
 import com.org.martall.adapter.MartRVAdapter
-import com.org.martall.databinding.FragmentLocalStoreBinding
+import com.org.martall.databinding.FragmentMartBinding
 import com.org.martall.models.MartDataDTO
 import com.org.martall.models.MartListResponseDTO
 import com.org.martall.services.ApiService
 import com.org.martall.view.cart.CartActivity
 import com.org.martall.view.search.SearchActivity
-import com.org.martall.view.store.user.bottomsheet.FilterBottomSheet
-import com.org.martall.view.store.user.bottomsheet.SortBottomSheet
+import com.org.martall.view.mart.user.bottomsheet.FilterBottomSheet
+import com.org.martall.view.mart.user.bottomsheet.SortBottomSheet
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LocalStoreFragment : Fragment() {
-    private lateinit var binding: FragmentLocalStoreBinding
+class MartFragment : Fragment() {
+    private lateinit var binding: FragmentMartBinding
     private val sharedMartViewModel: SharedMartViewModel by activityViewModels()
     private lateinit var api: ApiService
 
@@ -35,17 +35,17 @@ class LocalStoreFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentLocalStoreBinding.inflate(inflater, container, false)
+        binding = FragmentMartBinding.inflate(inflater, container, false)
 
         initRecyclerView()
 
-        binding.tbShop.ivSearch.setOnClickListener {
+        binding.tbMart.ivSearch.setOnClickListener {
             val intent = Intent(context, SearchActivity::class.java)
             intent.putExtra("isProductSearch", false)
             startActivity(intent)
         }
 
-        binding.tbShop.ivCart.setOnClickListener {
+        binding.tbMart.ivCart.setOnClickListener {
             val intent = Intent(context, CartActivity::class.java)
             startActivity(intent)
         }
@@ -64,7 +64,7 @@ class LocalStoreFragment : Fragment() {
 
     private fun initRecyclerView() {
         with(binding) {
-            groupRecyclerView.apply {
+            martListRecyclerView.apply {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             }
         }
@@ -120,7 +120,6 @@ class LocalStoreFragment : Fragment() {
             intent.putExtra("martId", selectedMart.martId)
             startActivity(intent)
         }, api)
-        binding.groupRecyclerView.adapter = martRVAdapter
-//        Log.d("MartRVAdapter", "Adapter set with click listener")
+        binding.martListRecyclerView.adapter = martRVAdapter
     }
 }

@@ -1,4 +1,4 @@
-package com.org.martall.view.store.user.bottomsheet
+package com.org.martall.view.mart.user.bottomsheet
 
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.org.martall.databinding.SortBottomSheetBinding
-import com.org.martall.view.store.LocalStoreFragment
 
 class SortBottomSheet : BottomSheetDialogFragment() {
     interface SortSelectionListener {
@@ -49,13 +48,13 @@ class SortBottomSheet : BottomSheetDialogFragment() {
             dismiss()
         }
 
-        binding.membershipSortTv.setOnClickListener {
+        binding.bookmarkSortTv.setOnClickListener {
             sortSelectionListener?.onSortSelected("단골 지수 순")
             Log.d("BottomSheet", "BottomSheet - Selected Sort: 단골 지수 순")
             dismiss()
         }
 
-        binding.heartSortTv.setOnClickListener {
+        binding.likeSortTv.setOnClickListener {
             sortSelectionListener?.onSortSelected("찜 지수 순")
             Log.d("BottomSheet", "BottomSheet - Selected Sort: 찜 지수 순")
             dismiss()

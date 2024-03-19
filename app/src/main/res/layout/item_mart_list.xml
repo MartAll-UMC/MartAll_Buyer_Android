@@ -67,7 +67,7 @@
         app:layout_constraintTop_toTopOf="@id/mart_profile_iv" />
 
     <LinearLayout
-        android:id="@+id/follower_visiter_count_tv"
+        android:id="@+id/bookmark_like_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="@id/mart_name_tv">
 
         <TextView
-            android:id="@+id/follower_description_tv"
+            android:id="@+id/bookmark_guide_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="단골 수"
@@ -83,7 +83,7 @@
             android:textColor="@color/grey700" />
 
         <TextView
-            android:id="@+id/follower_count_tv"
+            android:id="@+id/bookmark_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
@@ -102,7 +102,7 @@
             android:textSize="10sp" />
 
         <TextView
-            android:id="@+id/dibs_description_tv"
+            android:id="@+id/like_guide_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="상품 찜 수"
@@ -110,7 +110,7 @@
             android:textColor="@color/grey700" />
 
         <TextView
-            android:id="@+id/dibs_count_tv"
+            android:id="@+id/like_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
@@ -126,10 +126,10 @@
         android:layout_marginTop="12dp"
         android:scrollbars="none"
         app:layout_constraintStart_toStartOf="@id/mart_profile_iv"
-        app:layout_constraintTop_toBottomOf="@id/follower_visiter_count_tv">
+        app:layout_constraintTop_toBottomOf="@id/bookmark_like_layout">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mart_image_recyclerView"
+            android:id="@+id/mart_item_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="12dp"

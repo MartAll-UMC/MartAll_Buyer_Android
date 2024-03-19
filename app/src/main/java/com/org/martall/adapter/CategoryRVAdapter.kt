@@ -1,4 +1,3 @@
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,8 +8,6 @@ import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.models.SecondItem
 import com.org.martall.services.ApiService
-import com.org.martall.utils.martNameToId
-import com.org.martall.view.store.ProductDetailActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -98,11 +95,11 @@ class CategoryRVAdapter(
 
         fun bind(item: SecondItem) {
             binding.apply {
-                Glide.with(itemView).load(item.pic).into(binding.ivProductImg)
-                tvProductName.text = item.itemName
+                Glide.with(itemView).load(item.pic).into(binding.ivItem)
+                tvItemName.text = item.itemName
                 tvMartName.text = item.martShopName
                 val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.price)
-                tvProductPrice.text = "${formattedPrice}원"
+                tvItemPrice.text = "${formattedPrice}원"
                 // 초기 버튼 상태 설정
                 updateLikeButton(item.like)
             }

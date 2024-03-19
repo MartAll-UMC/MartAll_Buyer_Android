@@ -8,13 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemMartPostBinding
-import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.models.MartItemDTO
 //import com.org.martall.models.ItemLikedResponseDTO
-import com.org.martall.view.store.ProductDetailActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.org.martall.view.mart.ProductDetailActivity
 import java.text.NumberFormat
 
 class MartPostAdapter(private val itemList: List<MartItemDTO>, private val martId: Int) :
@@ -67,24 +63,24 @@ class MartPostAdapter(private val itemList: List<MartItemDTO>, private val martI
                 binding.root.context.startActivity(intent)
             }
 
-            binding.itemMartPostHeartIv.setOnClickListener {
+            binding.itemLikeIc.setOnClickListener {
                 toggleLikeState()
             }
         }
 
 
         fun bind(item: MartItemDTO) {
-            binding.itemMartPostNameTv.text = item.name
+            binding.itemNameTv.text = item.name
             val formattedPrice = NumberFormat.getNumberInstance().format(item.price)
-            binding.itemMartPostPriceTv.text = "${formattedPrice}원"
+            binding.itemPriceTv.text = "${formattedPrice}원"
             Log.d("MartPostAdapter", "Image URL: ${item.imageUrl}")
-            Glide.with(itemView.context).load(item.imageUrl).into(binding.localMartPropertyIv)
+            Glide.with(itemView.context).load(item.imageUrl).into(binding.itemImgIv)
 
             isLiked = item.likeYn
             if (isLiked)
-                binding.itemMartPostHeartIv.setImageResource(R.drawable.ic_like_filled_20dp)
+                binding.itemLikeIc.setImageResource(R.drawable.ic_like_filled_20dp)
             else
-                binding.itemMartPostHeartIv.setImageResource(R.drawable.ic_like_unfilled_20dp)
+                binding.itemLikeIc.setImageResource(R.drawable.ic_like_unfilled_20dp)
         }
 
         private fun toggleLikeState() {
@@ -140,10 +136,10 @@ class MartPostAdapter(private val itemList: List<MartItemDTO>, private val martI
             // isLiked에 따라 UI 업데이트
             if (isLiked) {
                 // 찜하기 상태: 하트가 빨간색으로 채워짐
-                binding.itemMartPostHeartIv.setImageResource(R.drawable.ic_like_filled_20dp)
+                binding.itemLikeIc.setImageResource(R.drawable.ic_like_filled_20dp)
             } else {
                 // 찜 취소 상태: 하트가 빈 상태
-                binding.itemMartPostHeartIv.setImageResource(R.drawable.ic_like_unfilled_20dp)
+                binding.itemLikeIc.setImageResource(R.drawable.ic_like_unfilled_20dp)
             }
         }
 

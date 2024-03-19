@@ -46,7 +46,7 @@
             android:name=".view.mypage.PrivacyPolicyActivity"
             android:theme="@style/Theme.MartAll" />
         <activity
-            android:name=".view.store.ProductDetailActivity"
+            android:name=".view.mart.ProductDetailActivity"
             android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".view.mypage.ServiceTermsActivity"
@@ -70,11 +70,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.store.StoreActivity"
+            android:name=".view.mart.StoreActivity"
             android:theme="@style/Theme.MartAll" />
         <activity android:name=".view.mypage.CustomerServiceActivity" />
         <activity
-            android:name=".view.store.MartDetailInfoActivity"
+            android:name=".view.mart.MartDetailInfoActivity"
             android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".view.search.SearchActivity"
