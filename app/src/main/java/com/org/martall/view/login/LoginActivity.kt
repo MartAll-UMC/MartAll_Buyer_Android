@@ -39,16 +39,18 @@ class LoginActivity : AppCompatActivity() {
 
         binding.kakaoLoginBtn.setOnClickListener {
             var keyHash = Utility.getKeyHash(this)
+            Log.d("[LOGIN]", "keyHash: $keyHash")
 
             val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
                 if (error != null) {
                     Log.e("[LOGIN]", "카카오계정으로 로그인 실패", error)
                 } else if (token != null) {
                     Log.i("[LOGIN]", "카카오계정으로 로그인 성공 ${token.accessToken}")
+                    login()
                 }
             }
 
-            if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
+            if (UserApiClient.instance.isKakaoTalkLoginAvailable(applicationContext)) {
                 UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                     if (error != null) {
                         Log.e("[LOGIN]", "카카오톡으로 로그인 실패", error)
@@ -64,7 +66,10 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
+                UserApiClient.instance.loginWithKakaoAccount(
+                    this,
+                    callback = callback
+                )
             }
         }
 
