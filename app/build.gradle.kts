@@ -33,11 +33,11 @@ android {
 
     buildTypes {
         debug {
-            manifestPlaceholders["KAKAO_KEY"] = properties["KAKAO_KEY"].toString()
+            manifestPlaceholders["KAKAO_KEY"] = properties["KAKAO_MANIFEST_KEY"].toString()
         }
         release {
             isMinifyEnabled = false
-            manifestPlaceholders["KAKAO_KEY"] = properties["KAKAO_KEY"].toString()
+            manifestPlaceholders["KAKAO_KEY"] = properties["KAKAO_MANIFEST_KEY"].toString()
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -94,7 +94,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1") // Gson
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0") // Kotlin Serialization
     implementation("com.github.bumptech.glide:glide:4.12.0") // 웹 이미지 로드
-    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0") // 웹 이미지 로드
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0") // 웹 이미지 로드
     implementation("com.facebook.shimmer:shimmer:0.5.0")
     implementation("com.kakao.sdk:v2-user:2.19.0")
 }
