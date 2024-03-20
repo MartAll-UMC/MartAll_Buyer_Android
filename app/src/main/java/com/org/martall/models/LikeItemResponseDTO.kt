@@ -1,6 +1,6 @@
 package com.org.martall.models
 
-data class DibsProductResponseDTO(
+data class LikeItemResponseDTO(
     val message: String,
     val status: Int,
     val success: Boolean,

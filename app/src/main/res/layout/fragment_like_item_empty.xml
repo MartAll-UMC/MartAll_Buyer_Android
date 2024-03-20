@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/regular_empty_ic"
+            android:id="@+id/like_empty_ic"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:background="@drawable/img_plus_140dp"
@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/regular_empty_tv_1"
+            android:id="@+id/like_empty_tv_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -33,10 +33,10 @@
             android:textColor="@color/grey800"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/regular_empty_ic" />
+            app:layout_constraintTop_toBottomOf="@id/like_empty_ic" />
 
         <TextView
-            android:id="@+id/regular_empty_tv_2"
+            android:id="@+id/like_empty_tv_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -46,7 +46,7 @@
             android:textColor="@color/grey700"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/regular_empty_tv_1" />
+            app:layout_constraintTop_toBottomOf="@id/like_empty_tv_1" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

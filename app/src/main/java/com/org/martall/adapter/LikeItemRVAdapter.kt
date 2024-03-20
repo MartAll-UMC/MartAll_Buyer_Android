@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemCategoryProductBinding
-import com.org.martall.models.DibsProductResponseDTO
+import com.org.martall.models.LikeItemResponseDTO
 import java.text.NumberFormat
 import java.util.Locale
 
-class DibsProductRVAdapter(
-    private val productList: List<DibsProductResponseDTO.DibsProducts>,
+class LikeItemRVAdapter(
+    private val productList: List<LikeItemResponseDTO.DibsProducts>,
     private val onCancelDibsProduct: (Int) -> Unit,
-) : RecyclerView.Adapter<DibsProductRVAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<LikeItemRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemCategoryProductBinding.inflate(
@@ -35,7 +35,7 @@ class DibsProductRVAdapter(
 
     inner class ViewHolder(val binding: ItemCategoryProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(product: DibsProductResponseDTO.DibsProducts) {
+        fun bind(product: LikeItemResponseDTO.DibsProducts) {
 
             val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(product.price)
             Glide.with(itemView).load(product.picName).into(binding.ivProductImg)
