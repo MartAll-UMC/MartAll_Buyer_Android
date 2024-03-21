@@ -1,6 +1,6 @@
 package com.org.martall.models
 
-data class DibsMartResponseDTO(
+data class BookMarkResponseDTO(
     val message: String,
     val status: Int,
     val followedMarts: List<DibsMarts>

@@ -7,7 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object DibsMartManager {
+object BookMarkManager {
     private val retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.MOCK_MART_URL)
         .addConverterFactory(GsonConverterFactory.create())

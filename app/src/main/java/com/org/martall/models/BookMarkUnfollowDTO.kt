@@ -1,6 +1,6 @@
 package com.org.martall.models
 
-data class DibsMartUnfollowDTO(
+data class BookMarkUnfollowDTO(
     val status: Int,
     val message: String,
     val bookmarkId: Int,

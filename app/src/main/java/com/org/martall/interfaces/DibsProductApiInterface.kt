@@ -1,6 +1,6 @@
 package com.org.martall.interfaces
 
-import com.org.martall.models.DibsProductResponseDTO
+import com.org.martall.models.LikeItemResponseDTO
 import com.org.martall.models.ItemLikedResponseDTO
 import retrofit2.Call
 import retrofit2.http.DELETE
@@ -10,7 +10,7 @@ import retrofit2.http.Path
 
 interface DibsProductApiInterface {
     @GET("/item-like")
-    fun getDibsProduct(): Call<DibsProductResponseDTO>
+    fun getDibsProduct(): Call<LikeItemResponseDTO>
 
     @POST("/item-like/{itemId}")
     fun likedItem(

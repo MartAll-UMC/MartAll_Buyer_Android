@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.org.martall.adapter.DibsMartRVAdapter
-import com.org.martall.databinding.FragmentDibsMartBinding
-import com.org.martall.models.DibsMartManager
-import com.org.martall.models.DibsMartResponseDTO
+import com.org.martall.adapter.BookMarkRVAdapter
+import com.org.martall.databinding.FragmentBookmarkBinding
+import com.org.martall.models.BookMarkManager
+import com.org.martall.models.BookMarkResponseDTO
 import com.org.martall.models.FollowResponseDTO
 import com.org.martall.services.ApiService
 import kotlinx.coroutines.GlobalScope
@@ -19,10 +19,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DibsMartFragment : Fragment() {
-    lateinit var binding: FragmentDibsMartBinding
+class BookMarkFragment : Fragment() {
+    lateinit var binding: FragmentBookmarkBinding
     private lateinit var api: ApiService
-    private val martList: ArrayList<DibsMartResponseDTO.DibsMarts> = ArrayList()
+    private val martList: ArrayList<BookMarkResponseDTO.DibsMarts> = ArrayList()
 
 
     override fun onCreateView(
@@ -30,7 +30,7 @@ class DibsMartFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentDibsMartBinding.inflate(inflater, container, false)
+        binding = FragmentBookmarkBinding.inflate(inflater, container, false)
         getLikedMarts() //단골마트 불러오기
         return binding.root
     }
@@ -39,10 +39,10 @@ class DibsMartFragment : Fragment() {
         GlobalScope.launch {
             api = ApiService.createWithHeader(requireContext())
 
-            api.getDibsMart().enqueue(object : Callback<DibsMartResponseDTO> {
+            api.getDibsMart().enqueue(object : Callback<BookMarkResponseDTO> {
                 override fun onResponse(
-                    call: Call<DibsMartResponseDTO>,
-                    response: Response<DibsMartResponseDTO>,
+                    call: Call<BookMarkResponseDTO>,
+                    response: Response<BookMarkResponseDTO>,
                 ) {
                     if (response.isSuccessful) {
                         martList.clear() //현재 목록을 초기화하고 새 데이터로 업데이트
@@ -54,7 +54,7 @@ class DibsMartFragment : Fragment() {
                 }
 
                 // API 요청이 실패했을 때 호출
-                override fun onFailure(call: Call<DibsMartResponseDTO>, t: Throwable) {
+                override fun onFailure(call: Call<BookMarkResponseDTO>, t: Throwable) {
                     Log.d("check", "failed")
                     showToast("단골 마트 목록을 가져오는 데 실패했습니다.")
                 }
@@ -64,16 +64,16 @@ class DibsMartFragment : Fragment() {
     }
 
     // RecyclerView를 업데이트
-    private fun updateRecyclerView(dibsMarts: ArrayList<DibsMartResponseDTO.DibsMarts>) {
+    private fun updateRecyclerView(dibsMarts: ArrayList<BookMarkResponseDTO.DibsMarts>) {
         if (dibsMarts.isEmpty()) {
             // 단골마트 없을 경우
-            binding.shopDibsLayout.root.visibility = View.VISIBLE
-            binding.groupRecyclerView.visibility = View.GONE
+            binding.bookmarkLayout.root.visibility = View.VISIBLE
+            binding.rvBookmarkList.visibility = View.GONE
         } else {
             // 단골마트 있을 경우
-            binding.shopDibsLayout.root.visibility = View.GONE
-            binding.groupRecyclerView.visibility = View.VISIBLE
-            binding.groupRecyclerView.adapter = DibsMartRVAdapter(dibsMarts) { martShopId ->
+            binding.bookmarkLayout.root.visibility = View.GONE
+            binding.rvBookmarkList.visibility = View.VISIBLE
+            binding.rvBookmarkList.adapter = BookMarkRVAdapter(dibsMarts) { martShopId ->
                 unfollowMart(martShopId) // 관심 목록에서 제거하는 함수를 호출
             }
         }
@@ -81,7 +81,7 @@ class DibsMartFragment : Fragment() {
 
     private fun unfollowMart(martShopId: Int) {
         Log.d("DibsMartFragment", "Unfollowing mart with ID: $martShopId")
-        val apiService = DibsMartManager.dibsMartApiService
+        val apiService = BookMarkManager.dibsMartApiService
         apiService.unfollowMart(martShopId).enqueue(object : Callback<FollowResponseDTO> {
             override fun onResponse(
                 call: Call<FollowResponseDTO>,
@@ -106,7 +106,7 @@ class DibsMartFragment : Fragment() {
         val position = martList.indexOfFirst { it.martshopId == martShopId }
         if (position != -1) {
             martList.removeAt(position)
-            binding.groupRecyclerView.adapter?.notifyItemRemoved(position) //아이템 제거
+            binding.rvBookmarkList.adapter?.notifyItemRemoved(position) //아이템 제거
         }
     }
 

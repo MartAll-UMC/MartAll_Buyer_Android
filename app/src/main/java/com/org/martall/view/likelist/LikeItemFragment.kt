@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.org.martall.adapter.DibsProductRVAdapter
-import com.org.martall.databinding.FragmentDibsProductBinding
-import com.org.martall.models.DibsProductResponseDTO
+import com.org.martall.adapter.LikeItemRVAdapter
+import com.org.martall.databinding.FragmentLikeItemBinding
+import com.org.martall.models.LikeItemResponseDTO
 import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.services.ApiService
 import kotlinx.coroutines.GlobalScope
@@ -18,35 +18,35 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DibsProductFragment : Fragment() {
-    private lateinit var binding: FragmentDibsProductBinding
+class LikeItemFragment : Fragment() {
+    private lateinit var binding: FragmentLikeItemBinding
     private lateinit var api: ApiService
-    private val productList: ArrayList<DibsProductResponseDTO.DibsProducts> = ArrayList()
-    private var adapter: DibsProductRVAdapter? = null
+    private val productList: ArrayList<LikeItemResponseDTO.DibsProducts> = ArrayList()
+    private var adapter: LikeItemRVAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentDibsProductBinding.inflate(inflater, container, false)
+        binding = FragmentLikeItemBinding.inflate(inflater, container, false)
         initializeRecyclerView()
         getLikedItems()
         return binding.root
     }
 
     private fun initializeRecyclerView() {
-        adapter = DibsProductRVAdapter(productList) { itemId ->
+        adapter = LikeItemRVAdapter(productList) { itemId ->
             onCancelDibsProduct(itemId)
         }
-        binding.rvProductList.adapter = adapter
+        binding.rvLikeList.adapter = adapter
     }
 
     private fun getLikedItems() {
         GlobalScope.launch {
             api = ApiService.createWithHeader(requireContext())
 
-            api.getDibsProduct().enqueue(object : Callback<DibsProductResponseDTO> {
+            api.getDibsProduct().enqueue(object : Callback<LikeItemResponseDTO> {
                 override fun onResponse(
-                    call: Call<DibsProductResponseDTO>, response: Response<DibsProductResponseDTO>,
+                    call: Call<LikeItemResponseDTO>, response: Response<LikeItemResponseDTO>,
                 ) {
                     if (response.isSuccessful) {
                         val dibsProducts = response.body()?.result?.item ?: emptyList()
@@ -57,7 +57,7 @@ class DibsProductFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<DibsProductResponseDTO>, t: Throwable) {
+                override fun onFailure(call: Call<LikeItemResponseDTO>, t: Throwable) {
                     Log.d("DibsProductFragment", "Failed to get liked items: ${t.message}")
                     showToast("찜한 상품을 가져오는 데 실패했습니다.")
                 }
@@ -66,16 +66,16 @@ class DibsProductFragment : Fragment() {
 
     }
 
-    private fun updateRecyclerView(dibsProducts: List<DibsProductResponseDTO.DibsProducts>) {
+    private fun updateRecyclerView(dibsProducts: List<LikeItemResponseDTO.DibsProducts>) {
         productList.clear()
         productList.addAll(dibsProducts)
 
         if (productList.isEmpty()) {
-            binding.shopDibsLayout.root.visibility = View.VISIBLE
-            binding.rvProductList.visibility = View.GONE
+            binding.likeLayout.root.visibility = View.VISIBLE
+            binding.rvLikeList.visibility = View.GONE
         } else {
-            binding.shopDibsLayout.root.visibility = View.GONE
-            binding.rvProductList.visibility = View.VISIBLE
+            binding.likeLayout.root.visibility = View.GONE
+            binding.rvLikeList.visibility = View.VISIBLE
             adapter?.notifyDataSetChanged()
         }
     }

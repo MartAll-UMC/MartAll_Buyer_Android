@@ -10,7 +10,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.org.martall.databinding.ActivityMainBinding
 import com.org.martall.services.UserInfoManager
-import com.org.martall.view.likelist.DibsFragment
+import com.org.martall.view.likelist.LikeFragment
 import com.org.martall.view.login.LoginActivity
 import com.org.martall.view.mypage.MyMartAllFragment
 import com.org.martall.view.store.LocalStoreFragment
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private val fragmentLocalStore = LocalStoreFragment()
     private val fragmentCategory = CategoryFragment()
     private val fragmentMyMartAll = MyMartAllFragment()
-    private val fragmentHeart = DibsFragment()
+    private val fragmentHeart = LikeFragment()
     private lateinit var userInfoManager: UserInfoManager
 
     override fun onCreate(savedInstanceState: Bundle?) {

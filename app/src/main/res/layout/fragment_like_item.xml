@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,23 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/group_recyclerView"
+        android:id="@+id/rv_like_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginVertical="20dp"
+        android:layout_marginEnd="20dp"
         android:orientation="vertical"
-        android:layout_marginVertical="16dp"
         android:overScrollMode="never"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_dibs_product" />
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/item_category_product" />
 
-    <include
-        android:id="@+id/shop_dibs_layout"
-        layout="@layout/fragment_dibs_mart_empty"
+   <include
+        android:id="@+id/like_layout"
+        layout="@layout/fragment_like_item_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"

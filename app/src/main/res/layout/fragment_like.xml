@@ -5,21 +5,21 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/shop_dibs_layout"
-        layout="@layout/layout_dibs_toolbar"
+        android:id="@+id/tb_like_layout"
+        layout="@layout/layout_like_toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/dibs_content_tb"
+        android:id="@+id/tl_like"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/shop_dibs_layout"
-        app:layout_constraintStart_toStartOf="@+id/shop_dibs_layout"
-        app:layout_constraintTop_toBottomOf="@+id/shop_dibs_layout"
+        app:layout_constraintEnd_toEndOf="@+id/tb_like_layout"
+        app:layout_constraintStart_toStartOf="@+id/tb_like_layout"
+        app:layout_constraintTop_toBottomOf="@+id/tb_like_layout"
         app:tabIndicatorColor="@color/primary400"
         app:tabIndicatorFullWidth="false"
         app:tabRippleColor="@color/transparent"
@@ -28,13 +28,13 @@
         app:tabTextColor="@color/black" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/dibs_content_vp"
+        android:id="@+id/vp_like_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dibs_content_tb" />
+        app:layout_constraintTop_toBottomOf="@+id/tl_like" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

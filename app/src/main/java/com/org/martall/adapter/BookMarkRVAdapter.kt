@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.org.martall.R
-import com.org.martall.models.DibsMartResponseDTO
+import com.org.martall.models.BookMarkResponseDTO
 import com.org.martall.databinding.ItemDibsProductBinding // 수정된 부분
 
-class DibsMartRVAdapter (private val MartList: List<DibsMartResponseDTO.DibsMarts>, private val onUnfollowClicked: (Int) -> Unit) : RecyclerView.Adapter<DibsMartRVAdapter.ViewHolder>() {
+class BookMarkRVAdapter (private val MartList: List<BookMarkResponseDTO.DibsMarts>, private val onUnfollowClicked: (Int) -> Unit) : RecyclerView.Adapter<BookMarkRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemDibsProductBinding.inflate(LayoutInflater.from(parent.context), parent, false) // 수정된 부분
@@ -25,7 +25,7 @@ class DibsMartRVAdapter (private val MartList: List<DibsMartResponseDTO.DibsMart
     }
     inner class ViewHolder(val binding: ItemDibsProductBinding) : RecyclerView.ViewHolder(binding.root) {
         // ViewHolder 클래스 내부
-        fun bind(Mart: DibsMartResponseDTO.DibsMarts) {
+        fun bind(Mart: BookMarkResponseDTO.DibsMarts) {
             binding.martNameTv.text = Mart.martname
             var isFollowed = false // 임시적으로 팔로우 상태를 관리하는 변수
 

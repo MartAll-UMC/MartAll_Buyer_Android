@@ -17,7 +17,7 @@ import com.org.martall.databinding.FragmentMyMartAllBinding
 import com.org.martall.models.UserResponseDTO
 import com.org.martall.services.ApiService
 import com.org.martall.services.UserInfoManager
-import com.org.martall.view.likelist.DibsFragment
+import com.org.martall.view.likelist.LikeFragment
 import com.org.martall.view.login.LoginActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -95,7 +95,7 @@ class MyMartAllFragment : Fragment() {
     }
 
     private fun navigateToDibsFragment(tabIndex: Int) {
-        val dibsFragment = DibsFragment().apply {
+        val dibsFragment = LikeFragment().apply {
             arguments = Bundle().apply {
                 putInt("selectedTab", tabIndex)
             }
