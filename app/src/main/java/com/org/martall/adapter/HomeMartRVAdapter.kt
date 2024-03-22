@@ -48,10 +48,10 @@ class HomeMartRVAdapter(private var martList: List<RecommendedMart>) :
             binding.apply {
                 martLogoTv.text = mart.name
                 recommendMartTv.text = mart.name
-                recommendMartTagTv.text = mart.martcategory.joinToString(" ") { "#$it" }
-                Glide.with(itemView.context)
-                    .load(mart.photo)
-                    .into(recommendMartIv)
+                recommendMartTagTv.text = mart.categories.joinToString(" ") { "#$it" }
+//                Glide.with(itemView.context)
+////                    .load(mart.photo)
+//                    .into(recommendMartIv)
 
             }
         }
