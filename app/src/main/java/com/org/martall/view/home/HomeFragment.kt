@@ -69,7 +69,7 @@ class HomeFragment : Fragment() {
                 ) {
                     if (response.isSuccessful) {
                         val recommendMartResponse = response.body()
-                        recommendMartResponse?.marts?.let { recommendedMarts ->
+                        recommendMartResponse?.recommendedMarts?.let { recommendedMarts ->
                             val adapter = HomeMartRVAdapter(recommendedMarts)
                             binding.homeRecommendRv.adapter = adapter
                             binding.homeRecommendRv.layoutManager = LinearLayoutManager(

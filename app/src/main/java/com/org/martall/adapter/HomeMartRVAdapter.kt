@@ -1,15 +1,11 @@
 package com.org.martall.adapter
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.databinding.ItemRecommendMartBinding
 import com.org.martall.models.RecommendedMart
-import com.org.martall.view.home.NewMerchActivity
-import com.org.martall.view.store.ProductDetailActivity
 
 class HomeMartRVAdapter(private var martList: List<RecommendedMart>) :
     RecyclerView.Adapter<HomeMartRVAdapter.ViewHolder>() {
@@ -46,12 +42,12 @@ class HomeMartRVAdapter(private var martList: List<RecommendedMart>) :
 
         fun bind(mart: RecommendedMart) {
             binding.apply {
-                martLogoTv.text = mart.name
-                recommendMartTv.text = mart.name
-                recommendMartTagTv.text = mart.categories.joinToString(" ") { "#$it" }
-//                Glide.with(itemView.context)
-////                    .load(mart.photo)
-//                    .into(recommendMartIv)
+                martLogoTv.text = mart.martName
+                recommendMartTv.text = mart.martName
+                recommendMartTagTv.text = mart.martCategory.joinToString(" ") { "#$it" }
+                Glide.with(itemView.context)
+                    .load(mart.martImg)
+                    .into(recommendMartIv)
 
             }
         }
