@@ -1,5 +1,6 @@
 package com.org.martall.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.models.Item
 import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.services.ApiService
+import com.org.martall.view.store.ProductDetailActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -97,6 +99,22 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val api: 
                 tvProductPrice.text = "${formattedPrice}원"
                 // 초기 버튼 상태 설정
                 updateLikeButton(item.like)
+
+                ivProductImg.setOnClickListener {
+                    val context = it.context
+                    val intent = Intent(context, ProductDetailActivity::class.java).apply {
+                        putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemId)
+                    }
+                    context.startActivity(intent)
+                }
+
+                tvProductName.setOnClickListener {
+                    val context = it.context
+                    val intent = Intent(context, ProductDetailActivity::class.java).apply {
+                        putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemId)
+                    }
+                    context.startActivity(intent)
+                }
             }
         }
 

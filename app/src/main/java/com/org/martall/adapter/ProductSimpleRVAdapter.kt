@@ -1,5 +1,6 @@
 package com.org.martall.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import com.org.martall.databinding.ItemHomeProductBinding
 import com.org.martall.models.Item
 import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.services.ApiService
+import com.org.martall.view.store.ProductDetailActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +39,9 @@ class ProductSimpleRVAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = itemList[position]
         holder.bind(currentItem)
+    }
+    override fun getItemId(position: Int): Long {
+        return itemList[position].itemId.toLong()
     }
 
     override fun getItemCount(): Int {
@@ -69,9 +74,28 @@ class ProductSimpleRVAdapter(
                 productNameTv.text = item.itemName
                 val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.price)
                 productPriceTv.text = "${formattedPrice}원"
+
+
+                productImgIv.setOnClickListener {
+                    val context = it.context
+                    val intent = Intent(context, ProductDetailActivity::class.java).apply {
+                        putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemId)
+                    }
+                    context.startActivity(intent)
+                }
+
+                productNameTv.setOnClickListener {
+                    val context = it.context
+                    val intent = Intent(context, ProductDetailActivity::class.java).apply {
+                        putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemId)
+                    }
+                    context.startActivity(intent)
+                }
             }
 
-            // 초기 상태 설정
+
+
+        // 초기 상태 설정
             updateLikeButton(item.like)
 
             binding.productLikeIb.setOnClickListener {
