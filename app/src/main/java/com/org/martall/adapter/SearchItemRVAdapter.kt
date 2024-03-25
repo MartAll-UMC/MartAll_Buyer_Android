@@ -41,17 +41,17 @@ class SearchItemRVAdapter(private var itemList: List<ItemSearchDTO>) :
         }
 
         fun bind(item: ItemSearchDTO) {
-            Glide.with(itemView).load(item.img).into(binding.ivItem)
-            binding.tvItemName.text = item.name
-            binding.tvItemPrice.text = "${item.price}원"
-            binding.tvMartName.text = item.store
+            Glide.with(itemView).load(item.img).into(binding.itemImgIv)
+            binding.itemNameTv.text = item.name
+            binding.itemPriceTv.text = "${item.price}원"
+            binding.martNameTv.text = item.store
             if (item.isLiked) {
-                binding.btnLike.setImageResource(R.drawable.ic_like_filled_20dp)
+                binding.likeBtn.setImageResource(R.drawable.ic_like_filled_20dp)
             } else {
-                binding.btnLike.setImageResource(R.drawable.ic_like_unfilled_20dp)
+                binding.likeBtn.setImageResource(R.drawable.ic_like_unfilled_20dp)
             }
 
-            binding.btnLike.setOnClickListener {
+            binding.likeBtn.setOnClickListener {
                 item.isLiked = !item.isLiked
                 bind(item)
             }

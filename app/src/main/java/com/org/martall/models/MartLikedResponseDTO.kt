@@ -20,5 +20,6 @@ data class LikedItemListDTO(
     @SerializedName("itemName") val itemName: String,
     @SerializedName("price") val price: Int,
     @SerializedName("martShopId") val martShopId: Long,
-    @SerializedName("martName") val martName: String
+    @SerializedName("martName") val martName: String,
+    @SerializedName("like") val like: Boolean
 )

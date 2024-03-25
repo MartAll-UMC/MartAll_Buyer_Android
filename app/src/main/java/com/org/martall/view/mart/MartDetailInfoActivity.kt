@@ -203,7 +203,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
     }
 
     private fun updateMartDetailProduct(martProduct: MartDataDTO) {
-        val martDetailRVAdapter = MartDetailRVAdapter(martProduct)
+        val martDetailRVAdapter = MartDetailRVAdapter(martProduct, api)
         val layoutManager = GridLayoutManager(this, 2)
 
         binding.martDetailRecyclerview.layoutManager = layoutManager

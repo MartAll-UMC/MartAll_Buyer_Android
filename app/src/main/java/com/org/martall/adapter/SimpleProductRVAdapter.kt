@@ -36,7 +36,7 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val api: 
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.btnLike.setOnClickListener {
+            binding.likeBtn.setOnClickListener {
                 val item = itemList[adapterPosition]
                 val itemId = item.itemId
 
@@ -90,11 +90,11 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val api: 
 
         fun bind(item: Item) {
             binding.apply {
-                Glide.with(itemView).load(item.pic).into(ivItem)
-                tvItemName.text = item.itemName
-                tvMartName.text = item.martShopName
+                Glide.with(itemView).load(item.pic).into(itemImgIv)
+                itemNameTv.text = item.itemName
+                martNameTv.text = item.martShopName
                 val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.price)
-                tvItemPrice.text = "${formattedPrice}원"
+                itemPriceTv.text = "${formattedPrice}원"
                 // 초기 버튼 상태 설정
                 updateLikeButton(item.like)
             }
@@ -102,9 +102,9 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val api: 
 
         private fun updateLikeButton(isLiked: Boolean) {
             if (isLiked) {
-                binding.btnLike.setImageResource(R.drawable.ic_like_filled_20dp)
+                binding.likeBtn.setImageResource(R.drawable.ic_like_filled_20dp)
             } else {
-                binding.btnLike.setImageResource(R.drawable.ic_like_unfilled_20dp)
+                binding.likeBtn.setImageResource(R.drawable.ic_like_unfilled_20dp)
             }
         }
     }

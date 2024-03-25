@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.ViewModel.ProductDetailViewModel
-import com.org.martall.databinding.ActivityProductDetailBinding
+import com.org.martall.databinding.ActivityItemDetailBinding
 import com.org.martall.interfaces.CartApiInterface
 import com.org.martall.models.FollowResponseDTO
 import com.org.martall.models.ItemLikedResponseDTO
@@ -32,17 +32,20 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private lateinit var viewModel: ProductDetailViewModel
-    private lateinit var binding: ActivityProductDetailBinding
+    private lateinit var binding: ActivityItemDetailBinding
     private lateinit var api: ApiService
 
     private var isHeartFilled = false
     private var isBookmarked: Boolean = false
     private var isLiked: Boolean = false
 
+    private lateinit var martDetail: Mart
+    private lateinit var productDetail: Results
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityProductDetailBinding.inflate(layoutInflater)
+        binding = ActivityItemDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val martId = intent.getIntExtra(EXTRA_MART_ID, -1)
@@ -104,45 +107,73 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
         binding.likeBtn.setOnClickListener {
-            GlobalScope.launch {
+
+//            GlobalScope.launch {
+                Log.d("[LIKE]", isLiked.toString())
+
+                isLiked = !productDetail.like
+                productDetail.like = isLiked
+                updateLikedUI(isLiked)
+
                 if (isLiked) {
-                    isLiked = !isLiked
-                    updateLikedUI(isLiked)
-
-                    // 찜 취소 서버 통신
-                    api.unLikedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
-                        override fun onResponse(
-                            call: Call<ItemLikedResponseDTO>,
-                            response: Response<ItemLikedResponseDTO>,
-                        ) {
-                            Log.d("isLiked", "찜취소 서버 통신 성공")
-                        }
-
-                        override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
-                            Log.d("isLiked", "찜취소 서버 통신 실패")
-                        }
-
-                    })
-                } else {
-                    isLiked = !isLiked
-                    updateLikedUI(isLiked)
-
-
+                    // 찜하기
                     api.likedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
                         override fun onResponse(
                             call: Call<ItemLikedResponseDTO>,
                             response: Response<ItemLikedResponseDTO>,
                         ) {
-                            Log.d("isLiked", "찜하기 서버 통신 성공")
+                            if (response.isSuccessful) {
+                                // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
+                                Log.d("[LIKE]", "Update request successful for item $isLiked")
+                                Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
+                            } else {
+                                Log.e("[LIKE]", "Failed to send update request for item $isLiked")
+                                Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
+
+                            }
                         }
 
                         override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
-                            Log.d("isLiked", "찜하기 서버 통신 실패")
+                            // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
+//                            item.like = !isLiked
+//                            updateLikeButton(!isLiked)
+                            Log.e(
+                                "[LIKE]",
+                                "Failed to send update request for item $itemId"
+                            )
+                        }
+                    })
+                } else {
+                    // 찜 취소
+                    api.unLikedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
+                        override fun onResponse(
+                            call: Call<ItemLikedResponseDTO>,
+                            response: Response<ItemLikedResponseDTO>,
+                        ) {
+                            if (response.isSuccessful) {
+                                // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
+                                Log.d("[LIKE]", "Update request successful for item $isLiked")
+                                Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
+
+                            } else {
+                                Log.d("[LIKE]", "Update request successful for item $isLiked")
+                                Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
+
+                            }
                         }
 
+                        override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
+                            // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
+//                            item.like = !isLiked
+//                            updateLikeButton(!isLiked)
+                            Log.e(
+                                "[LIKE]",
+                                "Failed to send update request for item $itemId"
+                            )
+                        }
                     })
                 }
-            }
+//            }
         }
     }
 
@@ -156,13 +187,12 @@ class ProductDetailActivity : AppCompatActivity() {
                     response: Response<ProductDetailResponseDTO>,
                 ) {
                     if (response.isSuccessful) {
-                        val productDetail = response.body()?.result
+                        productDetail = response.body()?.result!!
                         Log.d("ProductDetail", productDetail.toString())
 
-                        val martDetail = productDetail?.mart
-                        Log.d("ProductDetail", martDetail.toString())
-
-                        isLiked = productDetail?.like ?: false
+                        martDetail = productDetail?.mart!!
+                        Log.d("ProductDetail", productDetail.toString())
+                        Log.d("ProductDetail", productDetail.like.toString())
 
                         if (productDetail != null) {
                             updateProductUI(productDetail)
@@ -190,6 +220,7 @@ class ProductDetailActivity : AppCompatActivity() {
         }
         Glide.with(this).load(productDetail.pic).into(binding.itemImgIv)
         Glide.with(this).load(productDetail.content).into(binding.itemDetailIv)
+        updateLikedUI(productDetail.like)
     }
 
     private fun updateMartUI(martDetail: Mart) {
