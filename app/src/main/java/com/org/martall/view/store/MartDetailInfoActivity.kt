@@ -188,6 +188,9 @@ class MartDetailInfoActivity : AppCompatActivity() {
         binding.martProfileIv.text = selectedMart.name
         // Glide.with(this).load(selectedMart.imageUrl).into(binding.martProfileIv)
         setCategories(selectedMart.categories)
+
+        isBookmarked = selectedMart.bookmarkYn
+        updateFollowUI(selectedMart.bookmarkYn)
     }
 
     private fun updateMartDetailProduct(martProduct: MartDataDTO) {

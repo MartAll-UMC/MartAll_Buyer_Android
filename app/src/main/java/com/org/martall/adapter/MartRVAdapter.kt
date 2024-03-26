@@ -100,7 +100,8 @@ class MartRVAdapter(
             binding.martProfileIv.text = mart.name.toString()
             setCategories(mart.categories)
 
-//            updateUIAfterFollow(mart.martId, isBookmarked)
+            isBookmarked = mart.bookmarkYn
+            updateUIAfterFollow(mart.martId, mart.bookmarkYn)
 
 
             // martId 저장
