@@ -37,25 +37,25 @@ class SortBottomSheet : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.defaultSortTv.setOnClickListener {
-            sortSelectionListener?.onSortSelected("기본 순")
+            sortSelectionListener?.onSortSelected("기본")
             Log.d("BottomSheet", "BottomSheet - Selected Sort: 기본 순")
             dismiss() // 클릭 후 BottomSheet 닫음
         }
 
         binding.latestSortTv.setOnClickListener {
-            sortSelectionListener?.onSortSelected("최신 순")
+            sortSelectionListener?.onSortSelected("최신")
             Log.d("BottomSheet", "BottomSheet - Selected Sort: 최신 순")
             dismiss()
         }
 
         binding.bookmarkSortTv.setOnClickListener {
-            sortSelectionListener?.onSortSelected("단골 지수 순")
+            sortSelectionListener?.onSortSelected("단골")
             Log.d("BottomSheet", "BottomSheet - Selected Sort: 단골 지수 순")
             dismiss()
         }
 
         binding.likeSortTv.setOnClickListener {
-            sortSelectionListener?.onSortSelected("찜 지수 순")
+            sortSelectionListener?.onSortSelected("찜")
             Log.d("BottomSheet", "BottomSheet - Selected Sort: 찜 지수 순")
             dismiss()
         }

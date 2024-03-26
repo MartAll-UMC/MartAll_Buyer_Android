@@ -66,7 +66,7 @@ class MartPostAdapter(
                 val martId = martId
                 val itemId = itemList[adapterPosition].itemId
 
-                Log.d("MartPostAdapter", itemList[adapterPosition].isLike.toString())
+                Log.d("MartPostAdapter", itemList[adapterPosition].likeYn.toString())
 
                 val intent = Intent(binding.root.context, ProductDetailActivity::class.java)
                 intent.putExtra(ProductDetailActivity.EXTRA_MART_ID, martId)
@@ -79,16 +79,16 @@ class MartPostAdapter(
             }
 
             binding.itemLikeIc.setOnClickListener {
-                Log.d("MartPostAdapter", itemList[adapterPosition].isLike.toString())
+                Log.d("MartPostAdapter", itemList[adapterPosition].likeYn.toString())
 
-                itemList[adapterPosition].isLike = !itemList[adapterPosition].isLike
-                updateLikeUI(itemList[adapterPosition].isLike)
+                itemList[adapterPosition].likeYn = !itemList[adapterPosition].likeYn
+                updateLikeUI(itemList[adapterPosition].likeYn)
 
-                Log.d("MartPostAdapter", itemList[adapterPosition].isLike.toString())
+                Log.d("MartPostAdapter", itemList[adapterPosition].likeYn.toString())
 
-                Log.d("MartPostAdapter", itemList[adapterPosition].isLike.toString())
+                Log.d("MartPostAdapter", itemList[adapterPosition].likeYn.toString())
 
-                if (itemList[adapterPosition].isLike) {
+                if (itemList[adapterPosition].likeYn) {
                     api.likedItem(itemList[adapterPosition].itemId)
                         .enqueue(object : Callback<ItemLikedResponseDTO> {
                             override fun onResponse(
@@ -101,15 +101,15 @@ class MartPostAdapter(
                                     // 성공 시 로그로 상태 변경 확인
                                     Log.d(
                                         "MartPostAdapter",
-                                        "Like status changed: " + itemList[adapterPosition].isLike
+                                        "Like status changed: " + itemList[adapterPosition].likeYn
                                     )
                                 }
                             }
 
                             override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                                 // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                                itemList[adapterPosition].isLike = !itemList[adapterPosition].isLike
-                                updateLikeUI(itemList[adapterPosition].isLike)
+                                itemList[adapterPosition].likeYn = !itemList[adapterPosition].likeYn
+                                updateLikeUI(itemList[adapterPosition].likeYn)
                             }
                         })
                 } else {
@@ -125,15 +125,15 @@ class MartPostAdapter(
                                     // 성공 시 로그로 상태 변경 확인
                                     Log.d(
                                         "[MartPostAdapter]",
-                                        "Like status changed: " + itemList[adapterPosition].isLike
+                                        "Like status changed: " + itemList[adapterPosition].likeYn
                                     )
                                 }
                             }
 
                             override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                                 // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                                itemList[adapterPosition].isLike = !itemList[adapterPosition].isLike
-                                updateLikeUI(itemList[adapterPosition].isLike)
+                                itemList[adapterPosition].likeYn = !itemList[adapterPosition].likeYn
+                                updateLikeUI(itemList[adapterPosition].likeYn)
                             }
                         })
                     }
@@ -148,9 +148,9 @@ class MartPostAdapter(
             Log.d("MartPostAdapter", "Image URL: ${item.imageUrl}")
             Glide.with(itemView.context).load(item.imageUrl).into(binding.itemImgIc)
 
-            Log.d("MartPostAdapter", item.isLike.toString())
+            Log.d("MartPostAdapter", item.likeYn.toString())
             // 초기 상태 설정
-            updateLikeUI(item.isLike)
+            updateLikeUI(item.likeYn)
         }
 
         private fun updateLikeUI(isLiked: Boolean) {

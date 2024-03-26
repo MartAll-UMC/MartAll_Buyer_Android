@@ -68,9 +68,9 @@ class MartDetailRVAdapter(
 
                 Log.d("[LIKE]", isLiked.toString())
 
-                isLiked = !martItem.items[adapterPosition].isLike
-                martItem.items[adapterPosition].isLike = isLiked
-                updateLikeUI(martItem.items[adapterPosition].isLike)
+                isLiked = !martItem.items[adapterPosition].likeYn
+                martItem.items[adapterPosition].likeYn = isLiked
+                updateLikeUI(martItem.items[adapterPosition].likeYn)
 
                 if(isLiked) {
                     api.likedItem(martItem.martId)
@@ -90,7 +90,7 @@ class MartDetailRVAdapter(
                             override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                                 // 실패 시 처리: 클릭 상태를 이전 상태로 변경
                                 isLiked = !isLiked
-                                martItem.items[adapterPosition].isLike = isLiked
+                                martItem.items[adapterPosition].likeYn = isLiked
                                 updateLikeUI(isLiked)
                                 Log.e(
                                     "[LIKE]",
@@ -116,7 +116,7 @@ class MartDetailRVAdapter(
                             override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                                 // 실패 시 처리: 클릭 상태를 이전 상태로 변경
                                 isLiked = !isLiked
-                                martItem.items[adapterPosition].isLike = isLiked
+                                martItem.items[adapterPosition].likeYn = isLiked
                                 updateLikeUI(isLiked)
                             }
                         })
@@ -140,7 +140,7 @@ class MartDetailRVAdapter(
             }
             Glide.with(itemView.context).load(item.imageUrl).into(binding.itemImgIv)
 
-            updateLikeUI(item.isLike)
+            updateLikeUI(item.likeYn)
         }
 
         private fun toggleLikeState() {
