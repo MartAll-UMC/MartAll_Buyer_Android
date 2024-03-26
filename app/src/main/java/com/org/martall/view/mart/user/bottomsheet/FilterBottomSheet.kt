@@ -28,7 +28,7 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
         fun onFilterApplied(
             selectedChipText: String?,
             selectedBookmarkCountMin: Int?,
-            selectedBookmarkpCountMax: Int?,
+            selectedBookmarkCountMax: Int?,
             selectedLikeCountMin: Int?,
             selectedLikeCountMax: Int?
         )
@@ -92,6 +92,15 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
 //            updateChipTextColor(binding.chipMeat)
         }
 
+        // 초기화
+        binding.resetBtn.setOnClickListener {
+            selectedChipText = null
+            selectedBookmarkCountMin = null
+            selectedBookmarkCountMax = null
+            selectedLikeCountMin = null
+            selectedLikeCountMax = null
+        }
+
         val membershipCountSlider = binding.sliderBookmarkCount
         membershipCountSlider.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: RangeSlider) {
@@ -127,6 +136,20 @@ class FilterBottomSheet : BottomSheetDialogFragment() {
                 selectedBookmarkCountMax,
                 selectedLikeCountMin,
                 selectedLikeCountMax
+            )
+            dismiss()
+        }
+
+        // 초기화
+        val resetButton = binding.resetBtn
+        resetButton.setOnClickListener {
+            val listener = targetFragment as? OnFilterAppliedListener
+            listener?.onFilterApplied(
+                selectedChipText = null,
+                selectedBookmarkCountMin = null,
+                selectedBookmarkCountMax = null,
+                selectedLikeCountMin = null,
+                selectedLikeCountMax = null
             )
             dismiss()
         }

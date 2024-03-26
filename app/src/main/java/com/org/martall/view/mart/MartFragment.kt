@@ -21,6 +21,7 @@ import com.org.martall.view.mart.user.bottomsheet.FilterBottomSheet
 import com.org.martall.view.mart.user.bottomsheet.SortBottomSheet
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.selects.select
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,6 +67,10 @@ class MartFragment : Fragment(),
             showSortBottomSheet()
         }
 
+        binding.filterTv.setOnClickListener {
+            showFilterBottomSheet()
+        }
+
         return binding.root
     }
 
@@ -91,7 +96,14 @@ class MartFragment : Fragment(),
     // 콜백 메서드 override
     override fun onSortSelected(selectedSort: String) {
         Log.d("BottomSheet", "LocalStore - Selected Sort: $selectedSort")
-        binding.sortTv.text = selectedSort + " 순"
+
+        if (selectedSort === "기본" || selectedSort === "최신" ) {
+            binding.sortTv.text = selectedSort + "순"
+        }
+        else {
+            binding.sortTv.text = selectedSort + " 지수 순"
+        }
+
         sort = selectedSort
         updateFilterUI()
     }
