@@ -17,12 +17,12 @@ data class UserDTO(
 
 data class RecommendedMart(
     val martId: Int,
-    val name: String,
-    val photo: String,
-    val martcategory: List<String>,
-    val location: String
+    val martImg: String,
+    val martName: String,
+    val martCategory: List<String>
 )
 data class ResponseMart(
+    val timeStamp: String,
     val status: Int,
     val message: String,
     val recommendedMarts: List<RecommendedMart>
