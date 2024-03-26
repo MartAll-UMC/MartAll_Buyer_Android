@@ -61,12 +61,12 @@ class MyMartAllFragment : Fragment() {
 
         }
 
-        binding.likeProductBtn.setOnClickListener {
+        binding.likeItemBtn.setOnClickListener {
             mainBinding.bottomNavigationview.selectedItemId = R.id.menu_heart
             navigateToDibsFragment(0) // 0은 '찜한 상품' 탭을 나타냄
         }
 
-        binding.likeMartBtn.setOnClickListener {
+        binding.likeBookmarkBtn.setOnClickListener {
             mainBinding.bottomNavigationview.selectedItemId = R.id.menu_heart
             navigateToDibsFragment(1) // 1은 '단골 마트' 탭을 나타냄
         }

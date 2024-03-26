@@ -13,17 +13,16 @@ import com.org.martall.view.cart.CartActivity
 
 class LikeFragment : Fragment() {
     private lateinit var binding: FragmentLikeBinding
-
     private val information = arrayListOf("찜한 상품", "단골 마트")
-
-    private var isLiked: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLikeBinding.inflate(inflater, container, false)
+
+        val selectedTabIndex = arguments?.getInt("selectedTab") ?: 0
 
         binding.tbLikeLayout.icCart.setOnClickListener {
             val intent = Intent(context, CartActivity::class.java)
@@ -32,6 +31,7 @@ class LikeFragment : Fragment() {
 
         val dibsAdapter = LikeVPAdapter(this)
         binding.vpLikeContent.adapter = dibsAdapter
+        binding.vpLikeContent.currentItem = selectedTabIndex
 
         TabLayoutMediator(binding.tlLike, binding.vpLikeContent) { tab, position ->
             tab.text = information[position]
