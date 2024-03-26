@@ -31,7 +31,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
     private lateinit var api: ApiService
     private val sharedMartViewModel: SharedMartViewModel by viewModels()
 
-    private var isFollowing: Boolean = false
+    private var isBookmarked: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,16 +67,56 @@ class MartDetailInfoActivity : AppCompatActivity() {
         }
 
         binding.addFavoriteMartBtn.setOnClickListener {
-            if (isFollowing) {
-                // 언팔로우 요청
-                Log.d("follow", isFollowing.toString())
-                Log.d("follow", "언팔로우 요청")
-                unfollowMart(martId)
-            } else {
-                // 팔로우 요청
-                followMart(martId)
-                Log.d("follow", isFollowing.toString())
-                Log.d("follow", "팔로우 요청")
+            isBookmarked = !isBookmarked
+            updateFollowUI(isBookmarked)
+
+            GlobalScope.launch {
+                if (isBookmarked) {
+                    // 팔로우
+                    api.followMart(martId).enqueue(object: Callback<FollowResponseDTO> {
+                        override fun onResponse(
+                            call: Call<FollowResponseDTO>,
+                            response: Response<FollowResponseDTO>,
+                        ) {
+                            if (response.isSuccessful) {
+                                Log.d("[PRINT/MART]", "마트 팔로우 성공")
+
+                            } else {
+                                // 서버 오류 발생
+                                // Handle server error
+                            }
+                        }
+
+                        override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                            // 통신 실패
+                            // Handle failure
+                            Log.d("check", "마트 팔로우 실패")
+                        }
+                    })
+
+                } else {
+                    // 언팔로우 요청
+                    api.unfollowMart(martId).enqueue(object: Callback<FollowResponseDTO> {
+                        override fun onResponse(
+                            call: Call<FollowResponseDTO>,
+                            response: Response<FollowResponseDTO>,
+                        ) {
+                            if (response.isSuccessful) {
+                                Log.d("[PRINT/MART]", "마트 팔로우 취소 성공")
+
+                            } else {
+                                // 서버 오류 발생
+                                // Handle server error
+                            }
+                        }
+
+                        override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                            // 통신 실패
+                            // Handle failure
+                            Log.d("check", "마트 팔로우 실패")
+                        }
+                    })
+                }
             }
         }
     }
@@ -124,69 +164,17 @@ class MartDetailInfoActivity : AppCompatActivity() {
         }
     }
 
-    private fun followMart(martId: Int) {
-        val apiService = ApiServiceManager.MartapiService
-        val call = apiService.followMart(shopId = martId)
-
-        call.enqueue(object : Callback<FollowResponseDTO> {
-            override fun onResponse(
-                call: Call<FollowResponseDTO>,
-                response: Response<FollowResponseDTO>,
-            ) {
-                if (response.isSuccessful) {
-                    // 성공적으로 팔로우한 경우
-                    isFollowing = true
-                    Log.d("SuccessFollow", "팔로우 통신 성공")
-                    updateUI()
-
-                } else {
-                    Log.d("FailFollow", "통신 실패")
-                }
-            }
-
-            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                Log.d("check", "마트 전체 조회 연결 실패")
-            }
-        })
-    }
-
-    private fun unfollowMart(martId: Int) {
-        val apiService = ApiServiceManager.MartapiService
-        val call = apiService.unfollowMart(shopId = martId)
-
-        call.enqueue(object : Callback<FollowResponseDTO> {
-            override fun onResponse(
-                call: Call<FollowResponseDTO>,
-                response: Response<FollowResponseDTO>,
-            ) {
-                if (response.isSuccessful) {
-                    // 성공적으로 팔로우한 경우
-                    isFollowing = false
-                    Log.d("SuccessUnfollow", "언팔로우 성공")
-                    updateUI()
-
-                } else {
-                    Log.d("FailFollow", "통신 실패")
-                }
-            }
-
-            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                Log.d("check", "마트 전체 조회 연결 실패")
-            }
-        })
-    }
-
     @SuppressLint("ResourceAsColor")
-    private fun updateUI() {
+    private fun updateFollowUI(isBookmarked: Boolean) {
         Log.d("SuccessUpdateUI", "UI 업데이트")
-        val buttonText = if (isFollowing) "단골 취소" else "단골 추가"
+        val buttonText = if (isBookmarked) "단골 취소" else "단골 추가"
         binding.addFavoriteMartBtn.text = buttonText
 
         val buttonColor =
-            if (isFollowing) R.drawable.background_primary400_r12 else R.drawable.background_primary400_fill_r12
+            if (isBookmarked) R.drawable.background_primary400_r12 else R.drawable.background_primary400_fill_r12
         binding.addFavoriteMartBtn.setBackgroundResource(buttonColor)
 
-        val buttonTextColor = if (isFollowing) R.color.primary400 else R.color.white
+        val buttonTextColor = if (isBookmarked) R.color.primary400 else R.color.white
         binding.addFavoriteMartBtn.setTextColor(ContextCompat.getColor(this, buttonTextColor))
     }
 
@@ -251,13 +239,4 @@ class MartDetailInfoActivity : AppCompatActivity() {
             linearLayout.addView(textView)
         }
     }
-
-//    private fun showSortBottomSheet() {
-//        binding.sortTv.setOnClickListener {
-//            SortBottomSheet().show(
-//                supportFragmentManager,
-//                null
-//            )
-//        }
-//    }
 }
