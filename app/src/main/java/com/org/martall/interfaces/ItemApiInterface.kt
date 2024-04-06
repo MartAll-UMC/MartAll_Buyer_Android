@@ -6,14 +6,14 @@ import retrofit2.http.DELETE
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-//interface ItemApiInterface {
-//    @POST("/item-like/{itemId}")
-//    fun likedItem(
-//        @Path("itemId") itemId: Int)
-//    : Call<ItemLikedResponseDTO>
-//
-//    @DELETE("/item-like/{itemId}")
-//    fun unLikedItem(
-//        @Path("itemId") itemId: Int)
-//    : Call<ItemLikedResponseDTO>
-//}
+interface ItemApiInterface {
+    @POST("/item-like/{itemId}")
+    fun likedItem(
+        @Path("itemId") itemId: Int)
+    : Call<ItemLikedResponseDTO>
+
+    @DELETE("/item-like/{itemId}")
+    fun unLikedItem(
+        @Path("itemId") itemId: Int)
+    : Call<ItemLikedResponseDTO>
+}

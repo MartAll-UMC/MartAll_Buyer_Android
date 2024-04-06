@@ -1,4 +1,4 @@
-package com.org.martall.view.store
+package com.org.martall.view.mart
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.ViewModel.ProductDetailViewModel
-import com.org.martall.databinding.ActivityProductDetailBinding
+import com.org.martall.databinding.ActivityItemDetailBinding
 import com.org.martall.interfaces.CartApiInterface
 import com.org.martall.models.FollowResponseDTO
 import com.org.martall.models.ItemLikedResponseDTO
@@ -32,17 +32,20 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private lateinit var viewModel: ProductDetailViewModel
-    private lateinit var binding: ActivityProductDetailBinding
+    private lateinit var binding: ActivityItemDetailBinding
     private lateinit var api: ApiService
 
     private var isHeartFilled = false
-    private var isFollowing: Boolean = false
+    private var isBookmarked: Boolean = false
     private var isLiked: Boolean = false
+
+    private lateinit var martDetail: Mart
+    private lateinit var productDetail: Results
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityProductDetailBinding.inflate(layoutInflater)
+        binding = ActivityItemDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val martId = intent.getIntExtra(EXTRA_MART_ID, -1)
@@ -55,7 +58,7 @@ class ProductDetailActivity : AppCompatActivity() {
         GlobalScope.launch {
             api = ApiService.createWithHeader(applicationContext)
 
-            Log.d("ProductDetail", "martId: " + martId.toString() + "itemId: " + itemId.toString())
+            Log.d("ItemDetail", "martId: " + martId.toString() + "itemId: " + itemId.toString())
             loadMartData(martId = martId, itemId = itemId)
         }
 
@@ -90,59 +93,87 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
         binding.bookmarkBtn.setOnClickListener {
-            if (isFollowing) {
+            if (isBookmarked) {
                 // 언팔로우 요청
-                Log.d("follow", isFollowing.toString())
+                Log.d("follow", isBookmarked.toString())
                 Log.d("follow", "언팔로우 요청")
                 unfollowMart(martId)
             } else {
                 // 팔로우 요청
                 followMart(martId)
-                Log.d("follow", isFollowing.toString())
+                Log.d("follow", isBookmarked.toString())
                 Log.d("follow", "팔로우 요청")
             }
         }
 
         binding.likeBtn.setOnClickListener {
-            GlobalScope.launch {
+
+//            GlobalScope.launch {
+                Log.d("[LIKE]", isLiked.toString())
+
+                isLiked = !productDetail.like
+                productDetail.like = isLiked
+                updateLikedUI(isLiked)
+
                 if (isLiked) {
-                    isLiked = !isLiked
-                    updateLikedUI(isLiked)
-
-                    // 찜 취소 서버 통신
-                    api.unLikedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
-                        override fun onResponse(
-                            call: Call<ItemLikedResponseDTO>,
-                            response: Response<ItemLikedResponseDTO>,
-                        ) {
-                            Log.d("isLiked", "찜취소 서버 통신 성공")
-                        }
-
-                        override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
-                            Log.d("isLiked", "찜취소 서버 통신 실패")
-                        }
-
-                    })
-                } else {
-                    isLiked = !isLiked
-                    updateLikedUI(isLiked)
-
-
+                    // 찜하기
                     api.likedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
                         override fun onResponse(
                             call: Call<ItemLikedResponseDTO>,
                             response: Response<ItemLikedResponseDTO>,
                         ) {
-                            Log.d("isLiked", "찜하기 서버 통신 성공")
+                            if (response.isSuccessful) {
+                                // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
+                                Log.d("[LIKE]", "Update request successful for item $isLiked")
+                                Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
+                            } else {
+                                Log.e("[LIKE]", "Failed to send update request for item $isLiked")
+                                Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
+
+                            }
                         }
 
                         override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
-                            Log.d("isLiked", "찜하기 서버 통신 실패")
+                            // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
+//                            item.like = !isLiked
+//                            updateLikeButton(!isLiked)
+                            Log.e(
+                                "[LIKE]",
+                                "Failed to send update request for item $itemId"
+                            )
+                        }
+                    })
+                } else {
+                    // 찜 취소
+                    api.unLikedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
+                        override fun onResponse(
+                            call: Call<ItemLikedResponseDTO>,
+                            response: Response<ItemLikedResponseDTO>,
+                        ) {
+                            if (response.isSuccessful) {
+                                // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
+                                Log.d("[LIKE]", "Update request successful for item $isLiked")
+                                Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
+
+                            } else {
+                                Log.d("[LIKE]", "Update request successful for item $isLiked")
+                                Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
+
+                            }
                         }
 
+                        override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
+                            // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
+//                            item.like = !isLiked
+//                            updateLikeButton(!isLiked)
+                            Log.e(
+                                "[LIKE]",
+                                "Failed to send update request for item $itemId"
+                            )
+                        }
                     })
                 }
-            }
+//            }
         }
     }
 
@@ -156,13 +187,12 @@ class ProductDetailActivity : AppCompatActivity() {
                     response: Response<ProductDetailResponseDTO>,
                 ) {
                     if (response.isSuccessful) {
-                        val productDetail = response.body()?.result
+                        productDetail = response.body()?.result!!
                         Log.d("ProductDetail", productDetail.toString())
 
-                        val martDetail = productDetail?.mart
-                        Log.d("ProductDetail", martDetail.toString())
-
-                        isLiked = productDetail?.like ?: false
+                        martDetail = productDetail?.mart!!
+                        Log.d("ProductDetail", productDetail.toString())
+                        Log.d("ProductDetail", productDetail.like.toString())
 
                         if (productDetail != null) {
                             updateProductUI(productDetail)
@@ -184,26 +214,27 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun updateProductUI(productDetail: Results) {
         with(binding) {
-            productCategoryTv.text = productDetail.categoryName
-            productNameTv.text = productDetail.itemName
-            productPriceTv.text = productDetail.price.toString()
+            itemCategoryTv.text = productDetail.categoryName
+            itemNameTv.text = productDetail.itemName
+            itemPriceTv.text = productDetail.price.toString()
         }
-        Glide.with(this).load(productDetail.pic).into(binding.postImageIv)
-        Glide.with(this).load(productDetail.content).into(binding.productDetailIv)
+        Glide.with(this).load(productDetail.pic).into(binding.itemImgIv)
+        Glide.with(this).load(productDetail.content).into(binding.itemDetailIv)
+        updateLikedUI(productDetail.like)
     }
 
     private fun updateMartUI(martDetail: Mart) {
         with(binding) {
             martProfileIv.text = martDetail.martName
             martNameTv.text = martDetail.martName
-            followerCountTv.text = martDetail.bookmarkCount.toString()
-            likedCountTv.text = martDetail.likeCount.toString()
+            bookmarkCountTv.text = martDetail.bookmarkCount.toString()
+            likeCountTv.text = martDetail.likeCount.toString()
 
             var hashTag = ""
             martDetail.martCategory?.forEach {
                 hashTag += "#$it "
             }
-            martHashtagTv1.text = hashTag ?: "#음식"
+            martHashtagTv.text = hashTag ?: "#음식"
         }
 //        setCategories(martDetail.martCategory)
     }
@@ -225,7 +256,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         // 성공적으로 팔로우한 경우
-                        isFollowing = true
+                        isBookmarked = true
                         Log.d("SuccessFollow", "팔로우 통신 성공")
                         updateBookMarkUI()
 
@@ -251,7 +282,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         // 성공적으로 팔로우한 경우
-                        isFollowing = false
+                        isBookmarked = false
                         Log.d("SuccessUnfollow", "언팔로우 성공")
                         updateBookMarkUI()
 
@@ -270,17 +301,17 @@ class ProductDetailActivity : AppCompatActivity() {
     @SuppressLint("ResourceAsColor")
     private fun updateBookMarkUI() {
         Log.d("SuccessUpdateUI", "UI 업데이트")
-        val buttonText = if (isFollowing) "단골 취소" else "단골 추가"
+        val buttonText = if (isBookmarked) "단골 취소" else "단골 추가"
         binding.bookmarkBtn.text = buttonText
 
         Log.d("BookMark", buttonText)
-        Log.d("BookMark", isFollowing.toString())
+        Log.d("BookMark", isBookmarked.toString())
 
         val buttonColor =
-            if (isFollowing) R.drawable.background_white_r20 else R.drawable.background_primary400_r20
+            if (isBookmarked) R.drawable.background_white_r20 else R.drawable.background_primary400_r20
         binding.bookmarkBtn.setBackgroundResource(buttonColor)
 
-        val buttonTextColor = if (isFollowing) R.color.primary400 else R.color.white
+        val buttonTextColor = if (isBookmarked) R.color.primary400 else R.color.white
         binding.bookmarkBtn.setTextColor(ContextCompat.getColor(this, buttonTextColor))
     }
 

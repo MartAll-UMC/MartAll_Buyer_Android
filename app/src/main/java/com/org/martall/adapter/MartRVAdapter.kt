@@ -74,6 +74,7 @@ class MartRVAdapter(
 
     inner class ViewHolder(val binding: ItemMartListBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        private var isBookmarked: Boolean = false
 
         init {
             binding.root.setOnClickListener {
@@ -84,10 +85,10 @@ class MartRVAdapter(
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val selectedMart = martList[position]
-                    // selectedMart의 martId를 사용하여 서버와 통신하도록 처리
+                    // selectedMart의 martId를 사용하여 서버와 통신
                     handleBookmarkButtonClick(selectedMart.martId)
 //                    handleBookmarkButtonClick(selectedMart.martId, selectedMart.isFollowed)
-//                    Log.d("follow", selectedMart.isFollowed.toString())
+//                    Log.d("follow", selectedMart.isBookmarked.toString())
                 }
             }
         }
@@ -95,8 +96,8 @@ class MartRVAdapter(
         fun bind(mart: MartDataDTO) {
             // Access views using binding
             binding.martNameTv.text = mart.name
-            binding.followerCountTv.text = mart.followersCount.toString()
-            binding.dibsCountTv.text = mart.likeCount.toString()
+            binding.bookmarkCountTv.text = mart.followersCount.toString()
+            binding.likeCountTv.text = mart.likeCount.toString()
             binding.martProfileIv.text = mart.name.toString()
             setCategories(mart.categories)
 
@@ -107,8 +108,8 @@ class MartRVAdapter(
             // martId 저장
             val martId = mart.martId
             // MartPostAdapter 초기화
-            val itemAdapter = MartPostAdapter(mart.items, martId)
-            binding.martImageRecyclerView.apply {
+            val itemAdapter = MartPostAdapter(mart.items, martId, api)
+            binding.martItemRecyclerView.apply {
                 layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = itemAdapter
             }
@@ -151,30 +152,6 @@ class MartRVAdapter(
             GlobalScope.launch {
                 api = ApiService.createWithHeader(binding.root.context)
                 if (isBookmarked) {
-                    // 팔로우하지 않은 경우 팔로우 요청
-                    api.followMart(martId).enqueue(object: Callback<FollowResponseDTO> {
-                        override fun onResponse(
-                            call: Call<FollowResponseDTO>,
-                            response: Response<FollowResponseDTO>,
-                        ) {
-                            if (response.isSuccessful) {
-                                Log.d("[PRINT/MART]", "마트 팔로우 성공")
-
-                            } else {
-                                // 서버 오류 발생
-                                // Handle server error
-                            }
-                        }
-
-                        override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                            // 통신 실패
-                            // Handle failure
-                            Log.d("check", "마트 팔로우 실패")
-                        }
-                    })
-
-                } else {
-
                     // 이미 팔로우한 경우 팔로우 취소 요청
                     api.unfollowMart(martId).enqueue(object: Callback<FollowResponseDTO> {
                         override fun onResponse(
@@ -231,14 +208,14 @@ class MartRVAdapter(
             }
         }
 
-        private fun updateUIAfterFollow(martId: Int, isFollowed: Boolean) {
+        private fun updateUIAfterFollow(martId: Int, isBookmarked: Boolean) {
             // 해당 아이템의 위치 찾기
             val position = martList.indexOfFirst { it.martId == martId }
 
             // 아이템 업데이트 및 UI 갱신
             if (position != -1) {
                 // 여기서 UI를 변경하거나 필요한 작업을 수행
-                if (isFollowed) {
+                if (isBookmarked) {
                     // 팔로우한 경우
                     binding.bookmarkBtn.text = "단골 취소"
                     binding.bookmarkBtn.setTextColor(

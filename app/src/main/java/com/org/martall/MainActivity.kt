@@ -13,7 +13,7 @@ import com.org.martall.services.UserInfoManager
 import com.org.martall.view.likelist.LikeFragment
 import com.org.martall.view.login.LoginActivity
 import com.org.martall.view.mypage.MyMartAllFragment
-import com.org.martall.view.store.LocalStoreFragment
+import com.org.martall.view.mart.MartFragment
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private val fragmentHome = HomeFragment()
-    private val fragmentLocalStore = LocalStoreFragment()
+    private val fragmentLocalStore = MartFragment()
     private val fragmentCategory = CategoryFragment()
     private val fragmentMyMartAll = MyMartAllFragment()
     private val fragmentHeart = LikeFragment()

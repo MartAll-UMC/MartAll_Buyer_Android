@@ -17,14 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="태그"
-            app:layout_constraintStart_toStartOf="@id/cg_filter_item"
+            app:layout_constraintStart_toStartOf="@id/category_filter"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="15dp"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/dp_12"/>
 
         <com.google.android.material.chip.ChipGroup
-            android:id="@+id/cg_filter_item"
+            android:id="@+id/category_filter"
             android:layout_width="@dimen/full_charge"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_8"
@@ -37,7 +37,7 @@
             app:singleSelection="true" >
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_child_item"
+                android:id="@+id/chip_child_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="육아용품"
@@ -110,10 +110,10 @@
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/membership_count_tv"
+            android:id="@+id/bookmark_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/cg_filter_item"
+            app:layout_constraintTop_toBottomOf="@id/category_filter"
             app:layout_constraintStart_toStartOf="parent"
             android:text="단골 지수"
             android:layout_marginStart="@dimen/dp_16"
@@ -123,11 +123,11 @@
             android:textColor="@color/primary_color"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/membership_guide_tv"
+            android:id="@+id/bookmark_guide_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/membership_count_tv"
-            app:layout_constraintTop_toBottomOf="@id/membership_count_tv"
+            app:layout_constraintStart_toStartOf="@id/bookmark_count_tv"
+            app:layout_constraintTop_toBottomOf="@id/bookmark_count_tv"
             android:layout_marginEnd="@dimen/dp_12"
             android:text="해당 마트가 보유한 단골 회원 수입니다."
             android:textSize="10dp"
@@ -135,23 +135,23 @@
 
 
         <com.google.android.material.slider.RangeSlider
-            android:id="@+id/slider_membership_count"
+            android:id="@+id/slider_bookmark_count"
             android:layout_width="@dimen/full_charge"
             android:layout_height="@dimen/full_charge"
             android:valueFrom="0"
             android:valueTo="24"
             app:values="@array/initial_slider_values"
-            app:layout_constraintTop_toBottomOf="@id/membership_count_tv"
-            app:layout_constraintStart_toStartOf="@id/membership_count_tv"
+            app:layout_constraintTop_toBottomOf="@id/bookmark_count_tv"
+            app:layout_constraintStart_toStartOf="@id/bookmark_count_tv"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/dp_12"
             android:layout_marginEnd="@dimen/dp_24"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/heart_count_tv"
+            android:id="@+id/like_count_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/slider_membership_count"
+            app:layout_constraintTop_toBottomOf="@id/slider_bookmark_count"
             app:layout_constraintStart_toStartOf="parent"
             android:text="찜 수"
             android:layout_marginStart="@dimen/dp_16"
@@ -161,11 +161,11 @@
             android:textColor="@color/primary_color"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/heart_guide_tv"
+            android:id="@+id/like_guide_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/heart_count_tv"
-            app:layout_constraintTop_toBottomOf="@id/heart_count_tv"
+            app:layout_constraintStart_toStartOf="@id/like_count_tv"
+            app:layout_constraintTop_toBottomOf="@id/like_count_tv"
             android:layout_marginEnd="@dimen/dp_12"
             android:text="해당 마트에서 판매하는 상품이 받은 찜 수입니다."
             android:textSize="10dp"
@@ -173,20 +173,20 @@
 
 
         <com.google.android.material.slider.RangeSlider
-            android:id="@+id/slider_heart_count"
+            android:id="@+id/slider_like_count"
             android:layout_width="@dimen/full_charge"
             android:layout_height="@dimen/full_charge"
             android:valueFrom="0"
             android:valueTo="24"
             app:values="@array/initial_slider_values"
-            app:layout_constraintTop_toBottomOf="@id/heart_count_tv"
-            app:layout_constraintStart_toStartOf="@id/heart_count_tv"
+            app:layout_constraintTop_toBottomOf="@id/like_count_tv"
+            app:layout_constraintStart_toStartOf="@id/like_count_tv"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/dp_12"
             android:layout_marginEnd="@dimen/dp_24"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bottomsheet_reset_btn"
+            android:id="@+id/reset_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="초기화"
@@ -197,11 +197,11 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/bottomsheet_save_btn"
-            app:layout_constraintTop_toBottomOf="@id/slider_heart_count" />
+            app:layout_constraintEnd_toStartOf="@id/save_btn"
+            app:layout_constraintTop_toBottomOf="@id/slider_like_count" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bottomsheet_save_btn"
+            android:id="@+id/save_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="적용"
@@ -211,8 +211,8 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/background_primary400_fill_r12"
-            app:layout_constraintTop_toTopOf="@id/bottomsheet_reset_btn"
-            app:layout_constraintStart_toEndOf="@id/bottomsheet_reset_btn"
+            app:layout_constraintTop_toTopOf="@id/reset_btn"
+            app:layout_constraintStart_toEndOf="@id/reset_btn"
             app:layout_constraintEnd_toEndOf="parent" />
 
 

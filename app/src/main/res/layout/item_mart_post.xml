@@ -8,7 +8,7 @@
     android:id="@+id/layoutListItem">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/item_mart_post_cardView"
+        android:id="@+id/mart_item_cardView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:cardCornerRadius="8dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent" >
 
         <ImageView
-            android:id="@+id/local_mart_property_iv"
+            android:id="@+id/item_img_ic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -26,35 +26,35 @@
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/item_mart_post_heart_iv"
+        android:id="@+id/item_like_ic"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="5dp"
-        android:src="@drawable/white_heart_ic"
-        app:layout_constraintEnd_toEndOf="@id/item_mart_post_cardView"
-        app:layout_constraintTop_toTopOf="@id/item_mart_post_cardView" />
+        android:src="@drawable/ic_like_unfilled_20dp"
+        app:layout_constraintEnd_toEndOf="@id/mart_item_cardView"
+        app:layout_constraintTop_toTopOf="@id/mart_item_cardView" />
 
     <TextView
-        android:id="@+id/item_mart_post_name_tv"
+        android:id="@+id/item_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="바나나"
         android:textColor="@color/black"
         android:textAppearance="@style/mMedium"
-        app:layout_constraintStart_toStartOf="@id/item_mart_post_cardView"
-        app:layout_constraintTop_toBottomOf="@id/item_mart_post_cardView" />
+        app:layout_constraintStart_toStartOf="@id/mart_item_cardView"
+        app:layout_constraintTop_toBottomOf="@id/mart_item_cardView" />
 
     <TextView
-        android:id="@+id/item_mart_post_price_tv"
+        android:id="@+id/item_price_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="5000원"
         android:textAppearance="@style/mBold"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@id/item_mart_post_cardView"
-        app:layout_constraintTop_toBottomOf="@id/item_mart_post_name_tv" />
+        app:layout_constraintStart_toStartOf="@id/mart_item_cardView"
+        app:layout_constraintTop_toBottomOf="@id/item_name_tv" />
 
 
 

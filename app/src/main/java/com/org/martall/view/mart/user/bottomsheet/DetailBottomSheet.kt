@@ -1,4 +1,4 @@
-package com.org.martall.view.store.user.bottomsheet
+package com.org.martall.view.mart.user.bottomsheet
 
 import android.os.Bundle
 import android.util.Log
@@ -39,8 +39,12 @@ class DetailBottomSheet : BottomSheetDialogFragment() {
         val martId: Int = arguments?.getInt("martId") ?: -1
         Log.d("DetailmartId", martId.toString())
 
-        // TODO: martId를 사용하여 서버에서 데이터를 가져와 UI에 표시
+        // TODO: martId를 사용하여 서버 데이터 통신
         loadMartDetail(martId)
+
+        // 문의하기
+        askToMart()
+
 
         return binding.root
     }
@@ -79,6 +83,11 @@ class DetailBottomSheet : BottomSheetDialogFragment() {
                 Log.e("DetailBottomSheet", "서버 통신 실패", t)
             }
         })
+    }
+
+    private fun askToMart() {
+        // 문의하기 버튼 처리
+
     }
 
     private fun updateUI(martDetail: MartDetailDTO) {

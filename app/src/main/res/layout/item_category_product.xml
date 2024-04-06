@@ -7,7 +7,7 @@
     android:layout_marginBottom="20dp">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_product_img"
+        android:id="@+id/cv_item_img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_product_img"
+            android:id="@+id/item_img_iv"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
@@ -25,7 +25,7 @@
     </androidx.cardview.widget.CardView>
 
     <ImageButton
-        android:id="@+id/btn_like"
+        android:id="@+id/like_btn"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="@dimen/dp_8"
@@ -33,11 +33,11 @@
         android:src="@drawable/ic_like_unfilled_20dp"
         android:visibility="visible"
         android:background="@color/transparent"
-        app:layout_constraintEnd_toEndOf="@id/cv_product_img"
-        app:layout_constraintTop_toTopOf="@id/cv_product_img" />
+        app:layout_constraintEnd_toEndOf="@id/cv_item_img"
+        app:layout_constraintTop_toTopOf="@id/cv_item_img" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_mart_name"
+        android:id="@+id/mart_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
@@ -45,26 +45,26 @@
         android:textAppearance="@style/sRegular"
         android:textColor="@color/grey700"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_product_img" />
+        app:layout_constraintTop_toBottomOf="@id/cv_item_img" />
 
     <TextView
-        android:id="@+id/tv_product_name"
+        android:id="@+id/item_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:text="바나나"
         android:textAppearance="@style/mMedium"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_mart_name" />
+        app:layout_constraintTop_toBottomOf="@id/mart_name_tv" />
 
     <TextView
-        android:id="@+id/tv_product_price"
+        android:id="@+id/item_price_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="5,500원"
         android:textAppearance="@style/mBold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_product_name" />
+        app:layout_constraintTop_toBottomOf="@id/item_name_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

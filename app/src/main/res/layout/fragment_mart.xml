@@ -5,14 +5,15 @@
     android:id="@+id/local_store_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.store.LocalStoreFragment">
+    tools:context=".view.mart.MartFragment">
 
     <include
-        android:id="@+id/tb_shop"
+        android:id="@+id/tb_mart"
         layout="@layout/layout_mart_toolbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +30,7 @@
         android:textColor="@color/primary400"
         app:layout_constraintBottom_toTopOf="@id/group_recyclerView"
         app:layout_constraintEnd_toStartOf="@id/filter_tv"
-        app:layout_constraintTop_toBottomOf="@id/tb_shop" />
+        app:layout_constraintTop_toBottomOf="@id/tb_mart" />
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -55,7 +56,7 @@
         app:layout_constraintGuide_begin="104dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/group_recyclerView"
+        android:id="@+id/mart_list_recyclerView"
         android:layout_width="@dimen/full_charge"
         android:layout_height="@dimen/full_charge"
         android:orientation="vertical"

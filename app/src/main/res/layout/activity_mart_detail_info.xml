@@ -27,7 +27,7 @@
                 android:src="@drawable/ic_arrow_left_32dp" />
 
             <TextView
-                android:id="@+id/title_tv"
+                android:id="@+id/page_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendardbold"
@@ -113,7 +113,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/follower_visiter_count_tv"
+            android:id="@+id/bookmark_like_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -122,7 +122,7 @@
             app:layout_constraintTop_toBottomOf="@id/mart_categories_layout">
 
             <TextView
-                android:id="@+id/follower_guide_tv"
+                android:id="@+id/bookmark_guide_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendardregular"
@@ -131,7 +131,7 @@
                 app:layout_constraintTop_toBottomOf="@id/mart_hashtag_list_tv" />
 
             <TextView
-                android:id="@+id/follower_count_tv"
+                android:id="@+id/bookmark_count_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendardregular"
@@ -149,7 +149,7 @@
                 android:textSize="10sp" />
 
             <TextView
-                android:id="@+id/visitor_guide_tv"
+                android:id="@+id/like_guide_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -158,7 +158,7 @@
                 android:textSize="10sp" />
 
             <TextView
-                android:id="@+id/visitor_count_tv"
+                android:id="@+id/like_count_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -177,12 +177,12 @@
             android:text="상세정보"
             android:textColor="@color/grey400"
             android:textSize="14dp"
-            app:layout_constraintEnd_toStartOf="@id/add_favorite_mart_btn"
+            app:layout_constraintEnd_toStartOf="@id/add_bookmark_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mart_profile_iv" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/add_favorite_mart_btn"
+            android:id="@+id/add_bookmark_btn"
             android:layout_width="155dp"
             android:layout_height="40dp"
             android:background="@drawable/background_primary400_fill_r12"
@@ -215,7 +215,7 @@
             app:layout_constraintTop_toBottomOf="@id/place_guide_tv" />
 
         <TextView
-            android:id="@+id/goods_list_guide_tv"
+            android:id="@+id/item_list_guide_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
@@ -235,7 +235,7 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/goods_list_guide_tv"
+            app:layout_constraintTop_toBottomOf="@id/item_list_guide_tv"
             app:spanCount="2"
             tools:listitem="@layout/item_category_product" />
 

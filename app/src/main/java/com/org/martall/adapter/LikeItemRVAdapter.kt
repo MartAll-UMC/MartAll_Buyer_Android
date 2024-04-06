@@ -38,15 +38,15 @@ class LikeItemRVAdapter(
         fun bind(product: LikeItemResponseDTO.DibsProducts) {
 
             val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(product.price)
-            Glide.with(itemView).load(product.picName).into(binding.ivProductImg)
-            binding.tvProductName.text = product.itemName
-            binding.tvProductPrice.text = "${formattedPrice}원"
-            binding.tvMartName.text = product.martName
+            Glide.with(itemView).load(product.picName).into(binding.itemImgIv)
+            binding.itemNameTv.text = product.itemName
+            binding.itemPriceTv.text = "${formattedPrice}원"
+            binding.martNameTv.text = product.martName
 
             setLikeButtonImage(product.like)
 
             // 찜 버튼 클릭 이벤트.
-            binding.btnLike.setOnClickListener {
+            binding.likeBtn.setOnClickListener {
                 product.like = !product.like
                 setLikeButtonImage(product.like)
 
@@ -59,9 +59,9 @@ class LikeItemRVAdapter(
         // 찜 상태에 따른 버튼 이미지 설정
         private fun setLikeButtonImage(isLiked: Boolean) {
             if (isLiked) { //찜한 상태
-                binding.btnLike.setImageResource(R.drawable.ic_like_filled_20dp)
+                binding.likeBtn.setImageResource(R.drawable.ic_like_filled_20dp)
             } else { //찜취소
-                binding.btnLike.setImageResource(R.drawable.ic_like_unfilled_20dp)
+                binding.likeBtn.setImageResource(R.drawable.ic_like_unfilled_20dp)
             }
         }
     }
