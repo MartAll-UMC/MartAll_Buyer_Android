@@ -27,6 +27,7 @@ class MartRVAdapter(
     RecyclerView.Adapter<MartRVAdapter.ViewHolder>() {
 
     private lateinit var itemClickListener: OnItemClickListener
+    private var isBookmarked: Boolean = false
 
     init {
         itemClickListener = object : OnItemClickListener {
@@ -73,7 +74,6 @@ class MartRVAdapter(
 
     inner class ViewHolder(val binding: ItemMartListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private var isFollowed: Boolean = false
 
         init {
             binding.root.setOnClickListener {
@@ -99,6 +99,9 @@ class MartRVAdapter(
             binding.dibsCountTv.text = mart.likeCount.toString()
             binding.martProfileIv.text = mart.name.toString()
             setCategories(mart.categories)
+
+            isBookmarked = mart.bookmarkYn
+            updateUIAfterFollow(mart.martId, mart.bookmarkYn)
 
 
             // martId 저장
@@ -141,9 +144,37 @@ class MartRVAdapter(
         }
 
         private fun handleBookmarkButtonClick(martId: Int) {
+
+            isBookmarked = !isBookmarked
+            updateUIAfterFollow(martId, isBookmarked)
+
             GlobalScope.launch {
                 api = ApiService.createWithHeader(binding.root.context)
-                if (isFollowed) {
+                if (isBookmarked) {
+                    // 팔로우하지 않은 경우 팔로우 요청
+                    api.followMart(martId).enqueue(object: Callback<FollowResponseDTO> {
+                        override fun onResponse(
+                            call: Call<FollowResponseDTO>,
+                            response: Response<FollowResponseDTO>,
+                        ) {
+                            if (response.isSuccessful) {
+                                Log.d("[PRINT/MART]", "마트 팔로우 성공")
+
+                            } else {
+                                // 서버 오류 발생
+                                // Handle server error
+                            }
+                        }
+
+                        override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                            // 통신 실패
+                            // Handle failure
+                            Log.d("check", "마트 팔로우 실패")
+                        }
+                    })
+
+                } else {
+
                     // 이미 팔로우한 경우 팔로우 취소 요청
                     api.unfollowMart(martId).enqueue(object: Callback<FollowResponseDTO> {
                         override fun onResponse(
@@ -165,10 +196,6 @@ class MartRVAdapter(
                             Log.d("check", "마트 팔로우 실패")
                         }
                     })
-
-                } else {
-                    // 팔로우하지 않은 경우 팔로우 요청
-                    api.followMart(martId)
                 }
 
 //                call.enqueue(object : Callback<FollowResponseDTO> {
