@@ -17,6 +17,8 @@ import com.org.martall.models.LoginResponse
 import com.org.martall.models.RefreshResponse
 import com.org.martall.models.SearchItemResponse
 import com.org.martall.models.SearchMartResponse
+import com.org.martall.models.SignDTO
+import com.org.martall.models.SignupResponse
 import com.org.martall.models.UserResponseDTO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -59,6 +61,11 @@ interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, Catego
 
     @GET("/user/profile")
     fun getUserProfile(): Call<UserResponseDTO>
+
+    @GET("/user/join/idDupcheck")
+    fun getUserIdCheck(
+        @Body body: SignDTO
+    ) : Call<SignupResponse>
 
     companion object {
         private const val BASE_URL = BuildConfig.BASE_URL
