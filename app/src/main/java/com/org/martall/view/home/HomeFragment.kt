@@ -40,7 +40,6 @@ class HomeFragment : Fragment() {
         mainBinding = requireActivity() as MainActivity
 
         binding.homeMartListTv.visibility = View.GONE
-        binding.homeMartMoreTv.visibility = View.GONE
 
         binding.tbHome.ivCart.setOnClickListener {
             val intent = Intent(context, CartActivity::class.java)
@@ -149,9 +148,6 @@ class HomeFragment : Fragment() {
             startActivity(Intent(context, NewMerchActivity::class.java))
         }
 
-        binding.homeMartMoreTv.setOnClickListener {
-            (binding.root.context as MainActivity).selectBottomNavigationItem(R.id.menu_localMart)
-        }
 
         return binding.root
     }
