@@ -15,33 +15,68 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/kakao_login_btn"/>
+        app:layout_constraintBottom_toTopOf="@id/login_btn_box"/>
 
     <LinearLayout
-        android:id="@+id/kakao_login_btn"
+        android:id="@+id/login_btn_box"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/bg_kakao_border8"
-        android:gravity="center"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@id/contatct_tv"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/logo_iv"
+        app:layout_constraintBottom_toTopOf="@id/contatct_tv">
 
-        <ImageView
-            android:id="@+id/kakao_icon_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_kakao_28dp" />
+        <LinearLayout
+            android:id="@+id/kakao_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_kakao_border8"
+            android:gravity="center"
+            android:layout_marginBottom="12dp" >
 
-        <TextView
-            android:id="@+id/kakao_title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:text="카카오로 계속하기"
-            android:textAppearance="@style/mMedium"
-             />
+            <ImageView
+                android:id="@+id/kakao_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_kakao_28dp" />
+
+            <TextView
+                android:id="@+id/kakao_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="카카오로 계속하기"
+                android:textAppearance="@style/mMedium"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/martAll_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_blue_border8"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/martAll_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_logo_martall28" />
+
+            <TextView
+                android:id="@+id/martAll_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="마트올 로그인"
+                android:textColor="@color/white"
+                android:textAppearance="@style/mMedium" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

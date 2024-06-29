@@ -11,7 +11,7 @@ import com.org.martall.databinding.ItemCategoryProductBinding
 import com.org.martall.models.Item
 import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.services.ApiService
-import com.org.martall.view.store.ProductDetailActivity
+import com.org.martall.view.mart.ProductDetailActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -100,7 +100,7 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val api: 
                 // 초기 버튼 상태 설정
                 updateLikeButton(item.like)
 
-                ivProductImg.setOnClickListener {
+                itemImgIv.setOnClickListener {
                     val context = it.context
                     val intent = Intent(context, ProductDetailActivity::class.java).apply {
                         putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemId)
@@ -108,7 +108,7 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val api: 
                     context.startActivity(intent)
                 }
 
-                tvProductName.setOnClickListener {
+                itemNameTv.setOnClickListener {
                     val context = it.context
                     val intent = Intent(context, ProductDetailActivity::class.java).apply {
                         putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemId)

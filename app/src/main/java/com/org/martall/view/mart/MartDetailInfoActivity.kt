@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.org.martall.R
@@ -18,7 +19,6 @@ import com.org.martall.models.FollowResponseDTO
 import com.org.martall.models.MartDataDTO
 import com.org.martall.models.MartListResponseDTO
 import com.org.martall.services.ApiService
-import com.org.martall.services.ApiServiceManager
 import com.org.martall.view.mart.user.bottomsheet.DetailBottomSheet
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -125,55 +125,61 @@ class MartDetailInfoActivity : AppCompatActivity() {
     }
 
     private fun followMart(martId: Int) {
-        val apiService = ApiServiceManager.MartapiService
-        val call = apiService.followMart(shopId = martId)
+        GlobalScope.launch {
+            api = ApiService.createWithHeader(applicationContext)
 
-        call.enqueue(object : Callback<FollowResponseDTO> {
-            override fun onResponse(
-                call: Call<FollowResponseDTO>,
-                response: Response<FollowResponseDTO>,
-            ) {
-                if (response.isSuccessful) {
-                    // 성공적으로 팔로우한 경우
-                    isBookmarked = true
-                    Log.d("SuccessFollow", "팔로우 통신 성공")
-                    updateUI()
+            val call = api.followMart(shopId = martId)
 
-                } else {
-                    Log.d("FailFollow", "통신 실패")
+            call.enqueue(object : Callback<FollowResponseDTO> {
+                override fun onResponse(
+                    call: Call<FollowResponseDTO>,
+                    response: Response<FollowResponseDTO>,
+                ) {
+                    if (response.isSuccessful) {
+                        // 성공적으로 팔로우한 경우
+                        isBookmarked = true
+                        Log.d("SuccessFollow", "팔로우 통신 성공")
+                        updateUI()
+
+                    } else {
+                        Log.d("FailFollow", "통신 실패")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                Log.d("check", "마트 전체 조회 연결 실패")
-            }
-        })
+                override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                    Log.d("check", "마트 전체 조회 연결 실패")
+                }
+            })
+        }
     }
 
     private fun unfollowMart(martId: Int) {
-        val apiService = ApiServiceManager.MartapiService
-        val call = apiService.unfollowMart(shopId = martId)
+        GlobalScope.launch {
+            api = ApiService.createWithHeader(applicationContext)
+            val call = api.unfollowMart(shopId = martId)
 
-        call.enqueue(object : Callback<FollowResponseDTO> {
-            override fun onResponse(
-                call: Call<FollowResponseDTO>,
-                response: Response<FollowResponseDTO>,
-            ) {
-                if (response.isSuccessful) {
-                    // 성공적으로 팔로우한 경우
-                    isBookmarked = false
-                    Log.d("SuccessUnfollow", "언팔로우 성공")
-                    updateUI()
+            call.enqueue(object : Callback<FollowResponseDTO> {
+                override fun onResponse(
+                    call: Call<FollowResponseDTO>,
+                    response: Response<FollowResponseDTO>,
+                ) {
+                    if (response.isSuccessful) {
+                        // 성공적으로 팔로우한 경우
+                        isBookmarked = false
+                        Log.d("SuccessUnfollow", "언팔로우 성공")
+                        updateUI()
 
-                } else {
-                    Log.d("FailFollow", "통신 실패")
+                    } else {
+                        Log.d("FailFollow", "통신 실패")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                Log.d("check", "마트 전체 조회 연결 실패")
-            }
-        })
+                override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                    Log.d("check", "마트 전체 조회 연결 실패")
+                }
+            })
+
+        }
     }
 
     @SuppressLint("ResourceAsColor")
@@ -186,6 +192,18 @@ class MartDetailInfoActivity : AppCompatActivity() {
             if (isBookmarked) R.drawable.background_primary400_r12 else R.drawable.background_primary400_fill_r12
         binding.addBookmarkBtn.setBackgroundResource(buttonColor)
 
+        val buttonTextColor = if (isBookmarked) R.color.primary400 else R.color.white
+        binding.addBookmarkBtn.setTextColor(ContextCompat.getColor(this, buttonTextColor))
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun updateUI() {
+        Log.d("SuccessUpdateUI", "UI 업데이트")
+        val buttonText = if (isBookmarked) "단골 취소" else "단골 추가"
+        binding.addBookmarkBtn.text = buttonText
+        val buttonColor =
+            if (isBookmarked) R.drawable.background_primary400_r12 else R.drawable.background_primary400_fill_r12
+        binding.addBookmarkBtn.setBackgroundResource(buttonColor)
         val buttonTextColor = if (isBookmarked) R.color.primary400 else R.color.white
         binding.addBookmarkBtn.setTextColor(ContextCompat.getColor(this, buttonTextColor))
     }

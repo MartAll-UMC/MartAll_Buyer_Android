@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.org.martall.databinding.ActivityMainBinding
+import com.org.martall.services.MartAllUserInfoManager
 import com.org.martall.services.UserInfoManager
 import com.org.martall.view.likelist.LikeFragment
 import com.org.martall.view.login.LoginActivity
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val fragmentMyMartAll = MyMartAllFragment()
     private val fragmentHeart = LikeFragment()
     private lateinit var userInfoManager: UserInfoManager
+    private lateinit var MartAllUserInfoManager: MartAllUserInfoManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         userInfoManager = UserInfoManager(applicationContext)
+        MartAllUserInfoManager = MartAllUserInfoManager(applicationContext)
 
         GlobalScope.launch {
             Log.d("[PRINT/TOKEN]", "${userInfoManager.getTokens()}")

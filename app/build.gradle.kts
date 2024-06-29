@@ -26,6 +26,7 @@ android {
         buildConfigField("String", "MOCK_MART_URL", properties["MOCK_MART_URL"].toString())
         buildConfigField("String", "MOCK_ITEM_URL", properties["MOCK_ITEM_URL"].toString())
         buildConfigField("String", "MOCK_CART_URL", properties["MOCK_CART_URL"].toString())
+        buildConfigField("String", "MOCK_URL", properties["MOCK_URL"].toString())
         buildConfigField("String", "BASE_URL", properties["BASE_URL"].toString())
         buildConfigField("String", "KAKAO_KEY", properties["KAKAO_KEY"].toString())
         buildConfigField("String", "KAKAO_CHANNEL_URL", properties["KAKAO_CHANNEL"].toString())
@@ -97,5 +98,7 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0") // 웹 이미지 로드
     implementation("com.facebook.shimmer:shimmer:0.5.0")
     implementation("com.kakao.sdk:v2-user:2.19.0")
+
+    implementation ("com.squareup.retrofit2:converter-scalars:2.5.0")
 }
 

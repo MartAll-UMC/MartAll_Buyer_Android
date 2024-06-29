@@ -73,6 +73,14 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        binding.martAllLoginBtn.setOnClickListener {
+            Log.d("[LOGIN]", "마트올로 로그인 버튼 클릭")
+            val intent = Intent(this@LoginActivity, MartAllLoginActivity::class.java)
+            startActivity(intent)
+            Log.d("[LOGIN]", "마트올 로그인 - INTENT 실행")
+
+        }
+
         binding.contatctTv.setOnClickListener {
             val url = BuildConfig.KAKAO_CHANNEL_URL
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
