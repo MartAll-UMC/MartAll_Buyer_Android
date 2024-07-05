@@ -13,11 +13,13 @@ import com.org.martall.services.MartAllUserInfoManager
 import com.org.martall.services.UserInfoManager
 import com.org.martall.view.likelist.LikeFragment
 import com.org.martall.view.login.LoginActivity
-import com.org.martall.view.mypage.MyMartAllFragment
 import com.org.martall.view.mart.MartFragment
+import com.org.martall.view.mypage.MyMartAllFragment
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+@OptIn(DelicateCoroutinesApi::class)
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         GlobalScope.launch {
             Log.d("[PRINT/TOKEN]", "${userInfoManager.getTokens()}")
             if (!userInfoManager.isValidToken()) {
+                Log.d("[PRINT/TOKEN]", "유효하지 않은 토큰")
                 val intent = Intent(this@MainActivity, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

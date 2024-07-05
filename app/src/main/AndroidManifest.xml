@@ -79,9 +79,6 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.mart.StoreActivity"
-            android:theme="@style/Theme.MartAll" />
         <activity android:name=".view.mypage.CustomerServiceActivity" />
         <activity
             android:name=".view.mart.MartDetailInfoActivity"
