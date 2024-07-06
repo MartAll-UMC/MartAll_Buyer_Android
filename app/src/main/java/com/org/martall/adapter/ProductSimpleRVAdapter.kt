@@ -11,7 +11,7 @@ import com.org.martall.databinding.ItemHomeProductBinding
 import com.org.martall.models.Item
 import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.services.ApiService
-import com.org.martall.view.store.ProductDetailActivity
+import com.org.martall.view.mart.ProductDetailActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

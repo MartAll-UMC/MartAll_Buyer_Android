@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.org.martall.R
 import com.org.martall.databinding.ItemMartPostBinding
-import com.org.martall.models.DibsProductResponseDTO
 import com.org.martall.models.ItemLikedResponseDTO
 import com.org.martall.models.MartItemDTO
 import com.org.martall.services.ApiService
