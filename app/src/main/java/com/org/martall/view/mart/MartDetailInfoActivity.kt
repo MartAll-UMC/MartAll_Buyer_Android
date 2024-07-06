@@ -29,7 +29,6 @@ import retrofit2.Response
 class MartDetailInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMartDetailInfoBinding
     private lateinit var api: ApiService
-    private val sharedMartViewModel: SharedMartViewModel by viewModels()
 
     private var isBookmarked: Boolean = false
 
@@ -38,17 +37,6 @@ class MartDetailInfoActivity : AppCompatActivity() {
 
         binding = ActivityMartDetailInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        /*
-        val selectedMartLiveData: LiveData<MartDataDTO> = sharedMartViewModel.getSelectedMart()
-
-        selectedMartLiveData.observe(this) {
-            it?.let { selectedMart ->
-                updateUI(selectedMart)
-            }
-        }
-
-         */
 
         // 클릭된 아이템의 martId
         val martId = intent.getIntExtra("martId", -1)
@@ -102,16 +90,10 @@ class MartDetailInfoActivity : AppCompatActivity() {
 
                         // 데이터 설정
                         selectedMart?.let {
+
                             updateMartDetailUI(selectedMart)
                             updateMartDetailProduct(selectedMart)
                         }
-
-//                    val martProduct = selectedMart?.items
-//                    martProduct?.let {
-//                        if (martName != null) {
-//                            updateMartDetailProduct(martProduct, martName)
-//                        }
-//                    }
                     } else {
                         // Handle server error
                     }
@@ -196,9 +178,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
         Log.d("selectedMart", selectedMart.name)
         binding.bookmarkCountTv.text = selectedMart.followersCount.toString()
         binding.likeCountTv.text = selectedMart.likeCount.toString()
-        binding.martPlaceTv.text = selectedMart.location
         binding.martProfileIv.text = selectedMart.name
-        // Glide.with(this).load(selectedMart.imageUrl).into(binding.martProfileIv)
         setCategories(selectedMart.categories)
 
         isBookmarked = selectedMart.bookmarkYn

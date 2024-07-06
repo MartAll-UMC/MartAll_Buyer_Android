@@ -59,7 +59,6 @@ class MartPostAdapter(
 
     inner class ViewHolder(val binding: ItemMartPostBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private var isLiked: Boolean = false
 
         init {
             binding.root.setOnClickListener {
@@ -79,66 +78,68 @@ class MartPostAdapter(
             }
 
             binding.itemLikeIc.setOnClickListener {
-                Log.d("MartPostAdapter", itemList[adapterPosition].likeYn.toString())
 
-                itemList[adapterPosition].likeYn = !itemList[adapterPosition].likeYn
-                updateLikeUI(itemList[adapterPosition].likeYn)
+                val item = itemList[adapterPosition]
+                val itemId = item.itemId
 
-                Log.d("MartPostAdapter", itemList[adapterPosition].likeYn.toString())
+                item.likeYn = !item.likeYn
+                updateLikeUI(item.likeYn)
+                notifyItemChanged(adapterPosition)
 
-                Log.d("MartPostAdapter", itemList[adapterPosition].likeYn.toString())
-
-                if (itemList[adapterPosition].likeYn) {
-                    api.likedItem(itemList[adapterPosition].itemId)
+                if (item.likeYn) {
+                    api.likedItem(itemId)
                         .enqueue(object : Callback<ItemLikedResponseDTO> {
                             override fun onResponse(
                                 call: Call<ItemLikedResponseDTO>,
                                 response: Response<ItemLikedResponseDTO>,
                             ) {
-                                if (!response.isSuccessful) {
-                                    // 실패 시 처리: 클릭 상태를 이전 상태로 변경
+                                if (response.isSuccessful) {
+                                    Log.d("[LIKE/PRINT]", "찜하기 성공")
                                 } else {
-                                    // 성공 시 로그로 상태 변경 확인
-                                    Log.d(
-                                        "MartPostAdapter",
-                                        "Like status changed: " + itemList[adapterPosition].likeYn
-                                    )
+                                    // 이전 상태
+                                    Log.d("[LIKE/PRINT]", "찜하기 실패")
+                                    item.likeYn =  !item.likeYn
+                                    updateLikeUI(item.likeYn)
+                                    notifyItemChanged(adapterPosition)
                                 }
                             }
 
                             override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                                 // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                                itemList[adapterPosition].likeYn = !itemList[adapterPosition].likeYn
-                                updateLikeUI(itemList[adapterPosition].likeYn)
+                                Log.d("[LIKE/PRINT]", "찜하기 통신 실패")
+//                                item.likeYn =  !item.likeYn
+//                                updateLikeUI(item.likeYn)
+//                                notifyItemChanged(adapterPosition)
                             }
                         })
                 } else {
-                    api.unLikedItem(itemList[adapterPosition].itemId)
+                    api.unLikedItem(itemId)
                         .enqueue(object : Callback<ItemLikedResponseDTO> {
                             override fun onResponse(
                                 call: Call<ItemLikedResponseDTO>,
                                 response: Response<ItemLikedResponseDTO>,
                             ) {
-                                if (!response.isSuccessful) {
-                                    // 실패 시 처리: 클릭 상태를 이전 상태로 변경
+                                if (response.isSuccessful) {
+                                    Log.d("[LIKE]", "찜 취소 성공")
                                 } else {
-                                    // 성공 시 로그로 상태 변경 확인
-                                    Log.d(
-                                        "[MartPostAdapter]",
-                                        "Like status changed: " + itemList[adapterPosition].likeYn
-                                    )
+                                    // 이전 상태
+                                    Log.d("[LIKE]", "찜 취소 실패")
+//                                    item.likeYn =  !item.likeYn
+//                                    updateLikeUI(item.likeYn)
+//                                    notifyItemChanged(adapterPosition)
                                 }
                             }
 
                             override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
-                                // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                                itemList[adapterPosition].likeYn = !itemList[adapterPosition].likeYn
-                                updateLikeUI(itemList[adapterPosition].likeYn)
+                                // 이전 상태
+                                Log.d("[LIKE]", "찜 취소 통신 실패")
+                                item.likeYn =  !item.likeYn
+                                updateLikeUI(item.likeYn)
+                                notifyItemChanged(adapterPosition)
                             }
                         })
                     }
             }
-
 
         }
         fun bind(item: MartItemDTO) {
@@ -149,12 +150,12 @@ class MartPostAdapter(
             Glide.with(itemView.context).load(item.imageUrl).into(binding.itemImgIc)
 
             Log.d("MartPostAdapter", item.likeYn.toString())
-            // 초기 상태 설정
-            updateLikeUI(item.likeYn)
+            // 서버에서 가져온 데이터(itemList)의 값으로 초기화
+            val initialLikeState = itemList.find { it.itemId == item.itemId }?.likeYn ?: false
+            updateLikeUI(initialLikeState)
         }
 
         private fun updateLikeUI(isLiked: Boolean) {
-            // isLiked에 따라 UI 업데이트
             if (isLiked) binding.itemLikeIc.setImageResource(R.drawable.ic_like_filled_20dp)
             else binding.itemLikeIc.setImageResource(R.drawable.ic_like_unfilled_20dp)
         }

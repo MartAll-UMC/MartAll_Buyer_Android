@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.org.martall.adapter.BookMarkRVAdapter
 import com.org.martall.databinding.FragmentBookmarkBinding
 import com.org.martall.models.BookMarkManager
@@ -45,26 +46,29 @@ class BookMarkFragment : Fragment() {
                     response: Response<BookMarkResponseDTO>,
                 ) {
                     if (response.isSuccessful) {
-                        martList.clear() //현재 목록을 초기화하고 새 데이터로 업데이트
-                        martList.addAll(response.body()?.followedMarts ?: emptyList())
+                        val result = response.body()?.result ?: emptyList()
+                        Log.d("BookMarkFragment", "API call successful: ${response.body()}")
+                        Log.d("BookMarkFragment", "result size: ${result.size}")
+                        Log.d("BookMarkFragment", "Result: $result")
+
+                        martList.clear() // 현재 목록을 초기화하고 새 데이터로 업데이트
+                        martList.addAll(result)
                         updateRecyclerView(martList) // RecyclerView를 업데이트
                     } else {
-                        // 에러 처리
+                        Log.d("BookMarkFragment", "API Response not successful, code: ${response.code()}, message: ${response.message()}")
+                        showToast("단골 마트 목록을 가져오는 데 실패했습니다.")
                     }
                 }
 
-                // API 요청이 실패했을 때 호출
                 override fun onFailure(call: Call<BookMarkResponseDTO>, t: Throwable) {
-                    Log.d("check", "failed")
+                    Log.d("BookMarkFragment", "API call failed: ${t.message}")
                     showToast("단골 마트 목록을 가져오는 데 실패했습니다.")
                 }
             })
         }
-
     }
 
-    // RecyclerView를 업데이트
-    private fun updateRecyclerView(dibsMarts: ArrayList<BookMarkResponseDTO.DibsMarts>) {
+    private fun updateRecyclerView(dibsMarts: List<BookMarkResponseDTO.DibsMarts>) {
         if (dibsMarts.isEmpty()) {
             // 단골마트 없을 경우
             binding.bookmarkLayout.root.visibility = View.VISIBLE
@@ -79,36 +83,62 @@ class BookMarkFragment : Fragment() {
         }
     }
 
-    private fun unfollowMart(martShopId: Int) {
-        Log.d("DibsMartFragment", "Unfollowing mart with ID: $martShopId")
-        val apiService = BookMarkManager.dibsMartApiService
-        apiService.unfollowMart(martShopId).enqueue(object : Callback<FollowResponseDTO> {
-            override fun onResponse(
-                call: Call<FollowResponseDTO>,
-                response: Response<FollowResponseDTO>,
-            ) {
-                if (response.isSuccessful) {
-                    removeMartFromList(martShopId) // 목록에서 제거
-                    Log.d("DibsMartFragment", "Unfollow: $martShopId succeeded")
-                } else {
-                    Log.d("DibsMartFragment", "Unfollow: $martShopId failed")
+
+    private fun unfollowMart(martId: Int) {
+        Log.d("DibsMartFragment", "Unfollowing mart with ID: $martId")
+        GlobalScope.launch {
+            api = ApiService.createWithHeader(requireContext())
+            api.unfollowMart(martId).enqueue(object : Callback<FollowResponseDTO> {
+                override fun onResponse(
+                    call: Call<FollowResponseDTO>,
+                    response: Response<FollowResponseDTO>,
+                ) {
+                    if (response.isSuccessful) {
+                        removeMartFromList(martId) // 목록에서 제거
+                        Log.d("DibsMartFragment", "Unfollow: $martId succeeded")
+                    } else {
+                        Log.d("DibsMartFragment", "Unfollow: $martId failed")
+                    }
                 }
-            }
 
-            // 요청 실패 시
-            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                // 요청 실패 시
+                override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                    Log.d("DibsMartFragment", "API call failed: ${t.message}")
+                }
+            })
 
-            }
-        })
+        }
+//        Log.d("DibsMartFragment", "Unfollowing mart with ID: $martId")
+//        val apiService = BookMarkManager.dibsMartApiService
+//        apiService.unfollowMart(martId).enqueue(object : Callback<FollowResponseDTO> {
+//            override fun onResponse(
+//                call: Call<FollowResponseDTO>,
+//                response: Response<FollowResponseDTO>,
+//            ) {
+//                if (response.isSuccessful) {
+//                    removeMartFromList(martId) // 목록에서 제거
+//                    Log.d("DibsMartFragment", "Unfollow: $martId succeeded")
+//                } else {
+//                    Log.d("DibsMartFragment", "Unfollow: $martId failed")
+//                }
+//            }
+//
+//            // 요청 실패 시
+//            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+//                Log.d("DibsMartFragment", "API call failed: ${t.message}")
+//            }
+//        })
     }
 
-    private fun removeMartFromList(martShopId: Int) {
-        val position = martList.indexOfFirst { it.martshopId == martShopId }
+
+    private fun removeMartFromList(martId: Int) {
+        val position = martList.indexOfFirst { it.martId == martId }
         if (position != -1) {
             martList.removeAt(position)
             binding.rvBookmarkList.adapter?.notifyItemRemoved(position) //아이템 제거
         }
     }
+
 
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()

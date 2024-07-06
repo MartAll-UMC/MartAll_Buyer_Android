@@ -282,7 +282,7 @@
             android:paddingVertical="6dp">
 
             <ImageView
-                android:id="@+id/like_btn"
+                android:id="@+id/item_like_btn"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:clickable="true"
@@ -299,9 +299,9 @@
                 android:fontFamily="@font/pretendardregular"
                 android:text="찜"
                 android:textAppearance="@style/xsRegular"
-                app:layout_constraintEnd_toEndOf="@id/like_btn"
-                app:layout_constraintStart_toStartOf="@id/like_btn"
-                app:layout_constraintTop_toBottomOf="@id/like_btn" />
+                app:layout_constraintEnd_toEndOf="@id/item_like_btn"
+                app:layout_constraintStart_toStartOf="@id/item_like_btn"
+                app:layout_constraintTop_toBottomOf="@id/item_like_btn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -94,29 +94,24 @@ class ProductDetailActivity : AppCompatActivity() {
 
         binding.bookmarkBtn.setOnClickListener {
             if (isBookmarked) {
-                // 언팔로우 요청
                 Log.d("follow", isBookmarked.toString())
                 Log.d("follow", "언팔로우 요청")
                 unfollowMart(martId)
             } else {
-                // 팔로우 요청
-                followMart(martId)
                 Log.d("follow", isBookmarked.toString())
                 Log.d("follow", "팔로우 요청")
+                followMart(martId)
             }
         }
 
-        binding.likeBtn.setOnClickListener {
+        binding.itemLikeBtn.setOnClickListener {
 
-//            GlobalScope.launch {
-                Log.d("[LIKE]", isLiked.toString())
+            isLiked = !isLiked
+            updateLikedUI(isLiked)
 
-                isLiked = !productDetail.like
-                productDetail.like = isLiked
-                updateLikedUI(isLiked)
-
-                if (isLiked) {
-                    // 찜하기
+            if (isLiked) {
+                // 찜하기
+                GlobalScope.launch {
                     api.likedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
                         override fun onResponse(
                             call: Call<ItemLikedResponseDTO>,
@@ -125,25 +120,32 @@ class ProductDetailActivity : AppCompatActivity() {
                             if (response.isSuccessful) {
                                 // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
                                 Log.d("[LIKE]", "Update request successful for item $isLiked")
-                                Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
+                                Log.d(
+                                    "[LIKE]",
+                                    "Update request successful for item ${productDetail.like}"
+                                )
                             } else {
                                 Log.e("[LIKE]", "Failed to send update request for item $isLiked")
-                                Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
+                                Log.d(
+                                    "[LIKE]",
+                                    "Update request successful for item ${productDetail.like}"
+                                )
 
                             }
                         }
 
                         override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
-                            // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
-//                            item.like = !isLiked
-//                            updateLikeButton(!isLiked)
+                            // 이전 상태로 되돌리기
+                            isLiked = !isLiked
+                            updateLikedUI(isLiked)
                             Log.e(
                                 "[LIKE]",
                                 "Failed to send update request for item $itemId"
                             )
                         }
                     })
-                } else {
+                }
+            } else {
                     // 찜 취소
                     api.unLikedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
                         override fun onResponse(
@@ -158,14 +160,13 @@ class ProductDetailActivity : AppCompatActivity() {
                             } else {
                                 Log.d("[LIKE]", "Update request successful for item $isLiked")
                                 Log.d("[LIKE]", "Update request successful for item ${productDetail.like}")
-
                             }
                         }
 
                         override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
-                            // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
-//                            item.like = !isLiked
-//                            updateLikeButton(!isLiked)
+                            // 이전 상태로 되돌리기
+                            isLiked = !isLiked
+                            updateLikedUI(isLiked)
                             Log.e(
                                 "[LIKE]",
                                 "Failed to send update request for item $itemId"
@@ -173,7 +174,6 @@ class ProductDetailActivity : AppCompatActivity() {
                         }
                     })
                 }
-//            }
         }
     }
 
@@ -188,6 +188,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         productDetail = response.body()?.result!!
+                        isLiked = productDetail.like
                         Log.d("ProductDetail", productDetail.toString())
 
                         martDetail = productDetail?.mart!!
@@ -214,9 +215,9 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun updateProductUI(productDetail: Results) {
         with(binding) {
-            itemCategoryTv.text = productDetail.categoryName
             itemNameTv.text = productDetail.itemName
             itemPriceTv.text = productDetail.price.toString()
+
         }
         Glide.with(this).load(productDetail.pic).into(binding.itemImgIv)
         Glide.with(this).load(productDetail.content).into(binding.itemDetailIv)
@@ -241,9 +242,9 @@ class ProductDetailActivity : AppCompatActivity() {
 
     private fun updateLikedUI(isLiked: Boolean) {
         if (isLiked)
-            binding.likeBtn.setBackgroundResource(R.drawable.ic_heart_filled_20dp)
+            binding.itemLikeBtn.setBackgroundResource(R.drawable.ic_heart_filled_20dp)
         else
-            binding.likeBtn.setBackgroundResource(R.drawable.ic_heart_unfilled_20dp)
+            binding.itemLikeBtn.setBackgroundResource(R.drawable.ic_heart_unfilled_20dp)
     }
 
 
@@ -282,17 +283,17 @@ class ProductDetailActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful) {
                         // 성공적으로 팔로우한 경우
-                        isBookmarked = false
-                        Log.d("SuccessUnfollow", "언팔로우 성공")
+                        // isBookmarked = false
+                        Log.d("[BOOKMARK]", "언팔로우 성공")
                         updateBookMarkUI()
 
                     } else {
-                        Log.d("FailFollow", "통신 실패")
+                        Log.d("[BOOKMARK]", "언팔로우 실패")
                     }
                 }
 
                 override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                    Log.d("check", "마트 전체 조회 연결 실패")
+                    Log.d("[BOOKMARK]", "언팔로우 통신 실패")
                 }
             })
         }
@@ -313,18 +314,6 @@ class ProductDetailActivity : AppCompatActivity() {
 
         val buttonTextColor = if (isBookmarked) R.color.primary400 else R.color.white
         binding.bookmarkBtn.setTextColor(ContextCompat.getColor(this, buttonTextColor))
-    }
-
-
-    private fun toggleHeart() {
-        isHeartFilled = !isHeartFilled
-        val heartIcon = binding.likeBtn
-
-        if (isHeartFilled) {
-            heartIcon.setImageResource(R.drawable.ic_heart_filled_20dp)
-        } else {
-            heartIcon.setImageResource(R.drawable.ic_heart_unfilled_20dp)
-        }
     }
 
     // 카테고리 동적 생성
