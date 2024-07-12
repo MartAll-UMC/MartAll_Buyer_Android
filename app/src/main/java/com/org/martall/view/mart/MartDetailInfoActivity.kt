@@ -137,7 +137,6 @@ class MartDetailInfoActivity : AppCompatActivity() {
                     // 성공적으로 팔로우한 경우
                     isBookmarked = true
                     Log.d("SuccessFollow", "팔로우 통신 성공")
-                    updateUI()
 
                 } else {
                     Log.d("FailFollow", "통신 실패")
@@ -163,7 +162,6 @@ class MartDetailInfoActivity : AppCompatActivity() {
                     // 성공적으로 팔로우한 경우
                     isBookmarked = false
                     Log.d("SuccessUnfollow", "언팔로우 성공")
-                    updateUI()
 
                 } else {
                     Log.d("FailFollow", "통신 실패")
