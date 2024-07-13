@@ -135,7 +135,10 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun validatePasswordCheck() {
         passwordCheck = binding.passwordCheckEt.text.toString().trim()
-        if (password != passwordCheck) {
+        if (TextUtils.isEmpty(passwordCheck)) {
+            binding.passwordCheckEt.setBackgroundResource(R.drawable.bg_red_square_r8)
+        }
+        else if (!TextUtils.isEmpty(password) && password != passwordCheck) {
             binding.passwordCheckEt.setBackgroundResource(R.drawable.bg_red_square_r8)
             binding.passwordGuideTv.text = "비밀번호가 다릅니다."
             binding.passwordGuideTv.visibility = View.VISIBLE
@@ -148,14 +151,23 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun validateEmail() {
         email = binding.emailEt.text.toString().trim()
-        if (TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (TextUtils.isEmpty(email)) {
             binding.emailEt.setBackgroundResource(R.drawable.bg_red_square_r8)
-            binding.emailErrorTv.visibility = View.VISIBLE
             binding.emailGuideTv.visibility = View.GONE
+            binding.emailAlertTv.visibility = View.VISIBLE
+            binding.emailErrorTv.visibility = View.GONE
+
+        } else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.emailEt.setBackgroundResource(R.drawable.bg_red_square_r8)
+            binding.emailGuideTv.visibility = View.GONE
+            binding.emailAlertTv.visibility = View.GONE
+            binding.emailErrorTv.visibility = View.VISIBLE
+
         } else {
             binding.emailEt.setBackgroundResource(R.drawable.background_gray_square_r8)
-            binding.emailErrorTv.visibility = View.GONE
             binding.emailGuideTv.visibility = View.VISIBLE
+            binding.emailErrorTv.visibility = View.GONE
+            binding.emailAlertTv.visibility = View.GONE
         }
     }
 

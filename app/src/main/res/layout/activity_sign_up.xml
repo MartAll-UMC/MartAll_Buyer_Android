@@ -157,7 +157,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:hint="비밀번호"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:background="@drawable/background_gray_square_r8"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
@@ -189,7 +189,7 @@
             android:layout_height="48dp"
             android:background="@drawable/background_gray_square_r8"
             android:hint="비밀번호 확인"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:layout_marginStart="20dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
@@ -199,22 +199,6 @@
             android:paddingBottom="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_error_tv" />
-
-        <!--
-        <TextView
-            android:id="@+id/password_check_error_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/pink"
-            android:textSize="12sp"
-            android:text="비밀번호가 다릅니다."
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="12dp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/password_check_et"
-            app:layout_constraintStart_toStartOf="@id/password_check_et" />
-            -->
 
         <TextView
             android:id="@+id/password_guide_tv"
@@ -258,20 +242,6 @@
             app:layout_constraintTop_toBottomOf="@+id/email_tv" />
 
         <TextView
-            android:id="@+id/email_error_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/pink"
-            android:textSize="12sp"
-            android:text="이메일을 입력해주세요."
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="12dp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/email_et"
-            app:layout_constraintStart_toStartOf="@id/email_et" />
-
-        <TextView
             android:id="@+id/email_guide_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -280,6 +250,34 @@
             android:textSize="12sp"
             android:fontFamily="@font/pretendardregular"
             android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/email_et"
+            app:layout_constraintStart_toStartOf="@id/email_et" />
+
+        <TextView
+            android:id="@+id/email_alert_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/pink"
+            android:textSize="12sp"
+            android:text="이메일을 입력해주세요."
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="12dp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@id/email_et"
+            app:layout_constraintStart_toStartOf="@id/email_et" />
+
+        <TextView
+            android:id="@+id/email_error_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/pink"
+            android:textSize="12sp"
+            android:text="이메일 형식을 확인해주세요."
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="12dp"
+            android:visibility="invisible"
             app:layout_constraintTop_toBottomOf="@id/email_et"
             app:layout_constraintStart_toStartOf="@id/email_et" />
 
@@ -295,14 +293,12 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="40dp"
+            android:layout_marginBottom="44dp"
             android:paddingTop="14dp"
             android:paddingBottom="14dp"
             android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/email_guide_tv"
             app:layout_constraintStart_toStartOf="@id/email_guide_tv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 </ScrollView>

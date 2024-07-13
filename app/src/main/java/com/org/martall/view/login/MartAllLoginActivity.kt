@@ -2,7 +2,9 @@ package com.org.martall.view.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +48,33 @@ class MartAllLoginActivity : AppCompatActivity() {
             val intent = Intent(this@MartAllLoginActivity, SignUpActivity::class.java)
             startActivity(intent)
         }
+
+        binding.loginIdEt.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // 한 글자라도 입력되면 원래 색상으로 변경
+                if (!TextUtils.isEmpty(s)) {
+                    binding.loginIdEt.setBackgroundResource(R.drawable.background_gray_square_r8)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+        // loginPasswordEt에 TextWatcher 추가
+        binding.loginPasswordEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // 한 글자라도 입력되면 원래 색상으로 변경
+                if (!TextUtils.isEmpty(s)) {
+                    binding.loginPasswordEt.setBackgroundResource(R.drawable.background_gray_square_r8)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     @OptIn(DelicateCoroutinesApi::class)
