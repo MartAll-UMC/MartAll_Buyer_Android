@@ -14,16 +14,23 @@ import com.org.martall.interfaces.MartApiInterface
 import com.org.martall.interfaces.OrderApiInterface
 import com.org.martall.models.LoginRequest
 import com.org.martall.models.LoginResponse
+import com.org.martall.models.MartAllLogInRequest
 import com.org.martall.models.RefreshResponse
 import com.org.martall.models.ResponseMart
 import com.org.martall.models.SearchItemResponse
 import com.org.martall.models.SearchMartResponse
+import com.org.martall.models.SignUpIdCheckResponse
+import com.org.martall.models.SignUpRequest
+import com.org.martall.models.SignUpResponse
 import com.org.martall.models.UserResponseDTO
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -47,7 +54,7 @@ interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, Catego
     ): Call<SearchItemResponse>
 
     @POST("/user/login-kakao")
-    fun login(
+    fun kakaoLogin(
         @Body body: LoginRequest,
     ): Call<LoginResponse>
 
@@ -62,6 +69,15 @@ interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, Catego
     @GET("/user/profile")
     fun getUserProfile(): Call<UserResponseDTO>
 
+    @POST("/user/join")
+    fun signUp(@Body request: SignUpRequest): Call<SignUpResponse>
+
+    @GET("/user/join/idDupcheck")
+    fun idDupCheck(@Query("id") id: String): Call<SignUpIdCheckResponse>
+
+    @POST("/user/login")
+    fun login(@Body body: MartAllLogInRequest): Call<ResponseBody>
+      
     @GET("/mart/today")
     fun getTodayMart(): Call<ResponseMart>
 
@@ -72,7 +88,14 @@ interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, Catego
         private lateinit var userInfoManager: UserInfoManager
 
         fun create(): ApiService {
-            return retrofit2.Retrofit.Builder().baseUrl(BASE_URL)
+            return Retrofit.Builder().baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+                .create(ApiService::class.java)
+        }
+
+        fun createMock(): ApiService {
+            return Retrofit.Builder().baseUrl(MOCK_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(ApiService::class.java)
@@ -83,7 +106,7 @@ interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, Catego
             val interceptor =
                 AppInterceptor(userInfoManager.getTokens(), userInfoManager.needRefreshToken())
             val okHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
-            return retrofit2.Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient)
+            return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(ApiService::class.java)
@@ -101,6 +124,7 @@ interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, Catego
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     class AppInterceptor(
         private val tokens: Pair<String?, String?>,
         private val needRefresh: Boolean,
@@ -133,8 +157,8 @@ interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, Catego
             }
 
             val newRequest = request().newBuilder()
-                .addHeader("access-token", "${tokens.first ?: ""}")
-                .addHeader("refresh-token", "${tokens.second ?: ""}")
+                .addHeader("access-token", tokens.first ?: "")
+                .addHeader("refresh-token", tokens.second ?: "")
                 .build()
 
             val response = chain.proceed(newRequest)

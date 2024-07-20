@@ -26,6 +26,7 @@ android {
         buildConfigField("String", "MOCK_MART_URL", properties["MOCK_MART_URL"].toString())
         buildConfigField("String", "MOCK_ITEM_URL", properties["MOCK_ITEM_URL"].toString())
         buildConfigField("String", "MOCK_CART_URL", properties["MOCK_CART_URL"].toString())
+        buildConfigField("String", "MOCK_URL", properties["MOCK_URL"].toString())
         buildConfigField("String", "BASE_URL", properties["BASE_URL"].toString())
         buildConfigField("String", "KAKAO_KEY", properties["KAKAO_KEY"].toString())
         buildConfigField("String", "KAKAO_CHANNEL_URL", properties["KAKAO_CHANNEL"].toString())
@@ -53,20 +54,10 @@ android {
         viewBinding = true
         buildConfig = true
     }
-//
-//    composeOptions {
-//        kotlinCompilerExtensionVersion = "1.1.1"
-//    }
 
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-
-//    viewBinding {
-//        enable = true
-//    }
-
 }
 
 dependencies {
@@ -91,11 +82,12 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0") //converter
-    implementation("com.google.code.gson:gson:2.10.1") // Gson
+    implementation("com.google.code.gson:gson:2.11.0") // Gson
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0") // Kotlin Serialization
     implementation("com.github.bumptech.glide:glide:4.12.0") // 웹 이미지 로드
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0") // 웹 이미지 로드
     implementation("com.facebook.shimmer:shimmer:0.5.0")
     implementation("com.kakao.sdk:v2-user:2.19.0")
+    implementation ("com.squareup.retrofit2:converter-scalars:2.5.0")
 }
 

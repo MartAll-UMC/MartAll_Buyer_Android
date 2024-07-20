@@ -8,15 +8,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import com.org.martall.databinding.ActivityMainBinding
+import com.org.martall.services.MartAllUserInfoManager
 import com.org.martall.services.UserInfoManager
 import com.org.martall.view.home.HomeFragment
 import com.org.martall.view.likelist.LikeFragment
 import com.org.martall.view.login.LoginActivity
-import com.org.martall.view.mypage.MyMartAllFragment
 import com.org.martall.view.mart.MartFragment
+import com.org.martall.view.mypage.MyMartAllFragment
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+@OptIn(DelicateCoroutinesApi::class)
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val fragmentMyMartAll = MyMartAllFragment()
     private val fragmentHeart = LikeFragment()
     private lateinit var userInfoManager: UserInfoManager
+    private lateinit var MartAllUserInfoManager: MartAllUserInfoManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -35,10 +39,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         userInfoManager = UserInfoManager(applicationContext)
+        MartAllUserInfoManager = MartAllUserInfoManager(applicationContext)
 
         GlobalScope.launch {
             Log.d("[PRINT/TOKEN]", "${userInfoManager.getTokens()}")
             if (!userInfoManager.isValidToken()) {
+                Log.d("[PRINT/TOKEN]", "유효하지 않은 토큰")
                 val intent = Intent(this@MainActivity, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

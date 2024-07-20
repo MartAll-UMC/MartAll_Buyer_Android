@@ -20,6 +20,7 @@ import com.org.martall.models.LoginRequest
 import com.org.martall.models.LoginResponse
 import com.org.martall.services.ApiService
 import com.org.martall.services.UserInfoManager
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -46,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
                     Log.e("[LOGIN]", "카카오계정으로 로그인 실패", error)
                 } else if (token != null) {
                     Log.i("[LOGIN]", "카카오계정으로 로그인 성공 ${token.accessToken}")
-                    login()
+                    kakaoLogin()
                 }
             }
 
@@ -62,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
                         UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                     } else if (token != null) {
                         Log.i("[LOGIN]", "카카오톡으로 로그인 성공 ${token.accessToken}")
-                        login()
+                        kakaoLogin()
                     }
                 }
             } else {
@@ -73,6 +74,12 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
+        binding.martAllLoginBtn.setOnClickListener {
+            Log.d("[LOGIN]", "마트올로 로그인 버튼 클릭")
+            val intent = Intent(this@LoginActivity, MartAllLoginActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.contatctTv.setOnClickListener {
             val url = BuildConfig.KAKAO_CHANNEL_URL
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -80,12 +87,13 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun login() {
+    @OptIn(DelicateCoroutinesApi::class)
+    private fun kakaoLogin() {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Log.e("[LOGIN]", "사용자 정보 요청 실패", error)
             } else if (user != null) {
-                api.login(
+                api.kakaoLogin(
                     LoginRequest(
                         providerId = user.id.toString(),
                         email = user.kakaoAccount?.email.toString(),

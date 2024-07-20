@@ -17,9 +17,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.login.MartAllLoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MartAll" />
+        <activity
+            android:name=".view.login.SignUpActivity"
+            android:theme="@style/Theme.MartAll"
+            android:exported="false" />
+        <activity
             android:name=".view.cart.CartActivity"
             android:exported="false"
-            android:theme="@style/Theme.MartAll"/>
+            android:theme="@style/Theme.MartAll" />
         <activity
             android:name=".view.mypage.service.ServiceActivity"
             android:exported="false" />
@@ -28,8 +36,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="oauth"
                     android:scheme="kakao${KAKAO_KEY}" />
@@ -38,7 +48,7 @@
         <activity
             android:name=".view.login.LoginActivity"
             android:exported="true"
-            android:saveEnabled="false"></activity>
+            android:saveEnabled="false" />
         <activity
             android:name=".view.home.NewMerchActivity"
             android:theme="@style/Theme.MartAll" />
@@ -69,9 +79,6 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.mart.StoreActivity"
-            android:theme="@style/Theme.MartAll" />
         <activity android:name=".view.mypage.CustomerServiceActivity" />
         <activity
             android:name=".view.mart.MartDetailInfoActivity"

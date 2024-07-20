@@ -7,6 +7,7 @@ data class LoginResponse(
     @SerializedName("message") val message: String,
     @SerializedName("result") val results: LoginDTO,
 )
+
 data class LoginRequest(
     @SerializedName("username") val name: String,
     @SerializedName("email") val email: String,
@@ -15,6 +16,7 @@ data class LoginRequest(
     @SerializedName("provider") val provider: String = "kakao",
     @SerializedName("userType") val userType: Int = 1,
 )
+
 data class LoginDTO(
     @SerializedName("access_token") val accessToken: String,
     @SerializedName("access_expiredDate") val accessTokenExpiredDate: String,

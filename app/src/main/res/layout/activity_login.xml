@@ -11,49 +11,82 @@
         android:id="@+id/logo_iv"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_marginTop="188dp"
         android:src="@drawable/ic_logo_login_240dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/kakao_login_btn"/>
+        app:layout_constraintBottom_toTopOf="@id/login_btn_box"/>
 
     <LinearLayout
-        android:id="@+id/kakao_login_btn"
+        android:id="@+id/login_btn_box"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/bg_kakao_border8"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="129dp"
+        android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@id/contatct_tv"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/logo_iv">
 
-        <ImageView
-            android:id="@+id/kakao_icon_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_kakao_28dp" />
+        <LinearLayout
+            android:id="@+id/kakao_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_kakao_border8"
+            android:gravity="center"
+            android:layout_marginBottom="12dp" >
+
+            <ImageView
+                android:id="@+id/kakao_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_kakao_28dp" />
+
+            <TextView
+                android:id="@+id/kakao_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="카카오로 계속하기"
+                android:textAppearance="@style/mMedium"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/martAll_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_blue_border8"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/martAll_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_logo_martall28" />
+
+            <TextView
+                android:id="@+id/martAll_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="마트올 로그인"
+                android:textColor="@color/white"
+                android:textAppearance="@style/mMedium" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/kakao_title_tv"
+            android:id="@+id/contatct_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="12dp"
-            android:text="카카오로 계속하기"
-            android:textAppearance="@style/mMedium"
-             />
+            android:layout_marginTop="24dp"
+            android:text="마트올에게 문의하기"
+            android:textAppearance="@style/sRegular"
+            android:textColor="@color/grey700" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/contatct_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
-        android:text="마트올에게 문의하기"
-        android:textAppearance="@style/sRegular"
-        android:textColor="@color/grey700"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

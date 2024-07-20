@@ -9,7 +9,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.org.martall.databinding.MartDetailBottomsheetBinding
 import com.org.martall.models.MartDetailDTO
 import com.org.martall.models.MartDetailResponseDTO
-import com.org.martall.services.ApiServiceManager
+import com.org.martall.services.ApiService
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,35 +56,37 @@ class DetailBottomSheet : BottomSheetDialogFragment() {
     }
 
     private fun loadMartDetail(martId: Int) {
-        val apiService = ApiServiceManager.MartapiService
-        val call = apiService.getMartDetail(martId)
+        GlobalScope.launch {
+            val apiService = ApiService.createWithHeader(requireContext())
+            val call = apiService.getMartDetail(martId)
 
-        call.enqueue(object : Callback<MartDetailResponseDTO> {
-            override fun onResponse(
-                call: Call<MartDetailResponseDTO>,
-                response: Response<MartDetailResponseDTO>
-            ) {
-                if (response.isSuccessful) {
-                    val martDetailResponse = response.body()
-                    Log.d("DetailBottomSheet", "응답 성공: $martDetailResponse")
+            call.enqueue(object : Callback<MartDetailResponseDTO> {
+                override fun onResponse(
+                    call: Call<MartDetailResponseDTO>,
+                    response: Response<MartDetailResponseDTO>
+                ) {
+                    if (response.isSuccessful) {
+                        val martDetailResponse = response.body()
+                        Log.d("DetailBottomSheet", "응답 성공: $martDetailResponse")
 
-                    val martDetail = martDetailResponse?.data
-                    Log.d("DetailBottomSheet", "MartDetailDTO: $martDetail")
+                        val martDetail = martDetailResponse?.data
+                        Log.d("DetailBottomSheet", "MartDetailDTO: $martDetail")
 
-                    if (martDetail != null) {
-                        updateUI(martDetail)
+                        if (martDetail != null) {
+                            updateUI(martDetail)
+                        } else {
+                            Log.e("DetailBottomSheet", "응답 성공하지만 데이터가 null입니다.")
+                        }
                     } else {
-                        Log.e("DetailBottomSheet", "응답 성공하지만 데이터가 null입니다.")
+                        Log.e("DetailBottomSheet", "응답 실패: ${response.code()}")
                     }
-                } else {
-                    Log.e("DetailBottomSheet", "응답 실패: ${response.code()}")
                 }
-            }
 
-            override fun onFailure(call: Call<MartDetailResponseDTO>, t: Throwable) {
-                Log.e("DetailBottomSheet", "서버 통신 실패", t)
-            }
-        })
+                override fun onFailure(call: Call<MartDetailResponseDTO>, t: Throwable) {
+                    Log.e("DetailBottomSheet", "서버 통신 실패", t)
+                }
+            })
+        }
     }
 
     private fun askToMart() {
