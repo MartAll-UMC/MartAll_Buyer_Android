@@ -21,6 +21,7 @@
 
     <color name="transparent">#00000000</color>
     <color name="pink">#FFFF026D</color>
+    <color name="red">#FFF01A1A</color>
 
     <color name="ic_launcher_background">#FFFFFF</color>
 </resources>

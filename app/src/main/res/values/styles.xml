@@ -68,6 +68,10 @@
         <item name="android:fontFamily">@font/pretendardsemibold</item>
         <item name="android:fontWeight">600</item>
     </style>
+    <style name="xxxlSemiBold" parent="xxxl">
+        <item name="android:fontFamily">@font/pretendardsemibold</item>
+        <item name="android:fontWeight">600</item>
+    </style>
 
 
     <style name="mBold" parent="m">
@@ -115,6 +119,11 @@
     <style name="xxl">
         <item name="android:textSize">20sp</item>
         <item name="android:lineHeight">24sp</item>
+    </style>
+
+    <style name="xxxl">
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineHeight">32sp</item>
     </style>
 
     <!-- tablayout 폰트 적용-->
