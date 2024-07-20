@@ -42,6 +42,10 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.backIv.setOnClickListener {
+            finish()
+        }
+
         // 필드 텍스트 변경 리스너 설정
         setupTextWatchers()
 
