@@ -11,13 +11,8 @@ interface DibsMartApiInterface {
     @GET("/mart/shops/follows")
     fun getDibsMart(): Call<BookMarkResponseDTO>
 
-    @GET("/mart/shops/{shopid}/follow")
-    fun followMart(
-        @Path("shopid") shopId: Int)
-            : Call<FollowResponseDTO>
-
     @GET("/mart/shops/{shopid}/unfollow")
     fun unfollowMart(
-        @Path("shopid") shopId: Int)
-            : Call<FollowResponseDTO>
+        @Path("shopid") shopId: Int
+    ): Call<FollowResponseDTO>
 }
