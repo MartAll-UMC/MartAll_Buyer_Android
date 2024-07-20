@@ -27,6 +27,7 @@ class MartDetailRVAdapter(
 
     // 리스너 변수
     private var onItemClickListener: OnItemClickListener? = null
+    private var likeStates: MutableList<Boolean> = martItem.items.map { it.likeYn }.toMutableList()
 
     // 리스너 설정 메서드
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -43,7 +44,7 @@ class MartDetailRVAdapter(
     }
 
     override fun onBindViewHolder(holder: MartDetailRVAdapter.ViewHolder, position: Int) {
-        holder.bind(martItem.items[position])
+        holder.bind(martItem.items[position], likeStates[position])
     }
 
     override fun getItemCount(): Int {
@@ -52,27 +53,24 @@ class MartDetailRVAdapter(
 
     inner class ViewHolder(val binding: ItemCategoryProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private var isLiked: Boolean = false
 
         init {
             binding.root.setOnClickListener {
                 val martId = martItem.martId
                 val itemId = martItem.items[adapterPosition].itemId
-
-                // 리스너가 설정되어 있다면 실행
                 onItemClickListener?.onItemClick(martId, itemId)
             }
 
             // 찜 기능
             binding.likeBtn.setOnClickListener {
 
-                Log.d("[LIKE]", isLiked.toString())
+                Log.d("[LIKE]", likeStates.toString())
 
-                isLiked = !martItem.items[adapterPosition].likeYn
-                martItem.items[adapterPosition].likeYn = isLiked
-                updateLikeUI(martItem.items[adapterPosition].likeYn)
+                val position = adapterPosition
+                likeStates[position] = !likeStates[position]
+                updateLikeUI(likeStates[position])
 
-                if(isLiked) {
+                if(likeStates[position]) {
                     api.likedItem(martItem.martId)
                         .enqueue(object : Callback<ItemLikedResponseDTO> {
                             override fun onResponse(
@@ -81,20 +79,19 @@ class MartDetailRVAdapter(
                             ) {
                                 if (response.isSuccessful) {
                                     // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
-                                    Log.d("[LIKE]", "Update request successful for item $isLiked")
+                                    Log.d("[LIKE]", "Update request successful for item $likeStates[position]")
                                 } else {
-                                    Log.e("[LIKE]", "Failed to send update request for item $isLiked")
+                                    Log.e("[LIKE]", "Failed to send update request for item $likeStates[position]")
                                 }
                             }
 
                             override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                                 // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                                isLiked = !isLiked
-                                martItem.items[adapterPosition].likeYn = isLiked
-                                updateLikeUI(isLiked)
+                                likeStates[position] = !likeStates[position]
+                                updateLikeUI(likeStates[position])
                                 Log.e(
                                     "[LIKE]",
-                                    "Failed to send update request for item $itemId + $isLiked"
+                                    "Failed to send update request for item $itemId + $likeStates[position]"
                                 )
                             }
                         })
@@ -107,24 +104,23 @@ class MartDetailRVAdapter(
                             ) {
                                 if (response.isSuccessful) {
                                     // 성공 시 처리: 클릭 상태가 업데이트되었음을 로그로 출력
-                                    Log.d("[LIKE]", "Update request successful for item $isLiked")
+                                    Log.d("[LIKE]", "Update request successful for item $likeStates[position]")
                                 } else {
-                                    Log.d("[LIKE]", "Update request successful for item $isLiked")
+                                    Log.d("[LIKE]", "Update request successful for item $likeStates[position]")
                                 }
                             }
 
                             override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                                 // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                                isLiked = !isLiked
-                                martItem.items[adapterPosition].likeYn = isLiked
-                                updateLikeUI(isLiked)
+                                likeStates[position] = !likeStates[position]
+                                updateLikeUI(likeStates[position])
                             }
                         })
                 }
                 }
         }
 
-        fun bind(item: MartItemDTO) {
+        fun bind(item: MartItemDTO, isLiked: Boolean) {
             binding.martNameTv.text = martItem.name
             binding.itemNameTv.text = item.name
 
@@ -142,52 +138,6 @@ class MartDetailRVAdapter(
 
             updateLikeUI(item.likeYn)
         }
-
-        private fun toggleLikeState() {
-            if (isLiked) {
-                // 찜취소 -> UI 업데이트
-                isLiked = !isLiked
-
-//                // 찜취소 서버 통신
-//                val apiService = ItemApiServiceManager.ItemapiService
-//                val call =
-//                    apiService.unLikedItem(itemId = martProduct.items[adapterPosition].itemId)
-//
-//                call.enqueue(object : Callback<ItemLikedResponseDTO> {
-//                    override fun onResponse(
-//                        call: Call<ItemLikedResponseDTO>,
-//                        response: Response<ItemLikedResponseDTO>,
-//                    ) {
-//                        Log.d("isLiked", "찜 취소 서버 통신 성공")
-//                    }
-//
-//                    override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
-//                        Log.d("isLiked", "찜 취소 서버 통신 실패")
-//                    }
-//                })
-            } else {
-                isLiked = !isLiked
-                // 찜하기 성공 -> UI 업데이트
-
-//                // 찜하기 서버 통신
-//                val apiService = ItemApiServiceManager.ItemapiService
-//                val call = apiService.likedItem(itemId = martProduct.items[adapterPosition].itemId)
-//
-//                call.enqueue(object : Callback<ItemLikedResponseDTO> {
-//                    override fun onResponse(
-//                        call: Call<ItemLikedResponseDTO>,
-//                        response: Response<ItemLikedResponseDTO>,
-//                    ) {
-//                        Log.d("isLiked", "찜하기 서버 통신 성공")
-//                    }
-//
-//                    override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
-//                        Log.d("isLiked", "찜하기 서버 통신 실패")
-//                    }
-//                })
-            }
-        }
-
 
         private fun updateLikeUI(isLiked : Boolean) {
             // UI 업데이트

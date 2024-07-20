@@ -31,9 +31,8 @@ class MartFragment : Fragment(),
     FilterBottomSheet.OnFilterAppliedListener {
 
     private lateinit var binding: FragmentMartBinding
-    private val sharedMartViewModel: SharedMartViewModel by activityViewModels()
+    // private val sharedMartViewModel: SharedMartViewModel by activityViewModels()
     private lateinit var api: ApiService
-
 
     // 필터
     private var tag: String? = null
@@ -51,6 +50,38 @@ class MartFragment : Fragment(),
         binding = FragmentMartBinding.inflate(inflater, container, false)
 
         initRecyclerView()
+
+        GlobalScope.launch {
+            api = ApiService.createWithHeader(requireContext())
+
+            api.ShowAllShops(tag, minBookmark, maxBookmark, minLiked, maxLiked, sort).enqueue(object : Callback<MartListResponseDTO> {
+                override fun onResponse(
+                    call: Call<MartListResponseDTO>,
+                    response: Response<MartListResponseDTO>,
+                ) {
+                    if (response.isSuccessful) {
+                        val martResponse = response.body()
+                        martResponse?.result?.let { items ->
+                            Log.d("[MART/FRAGMENT]", "MartFragment items: $items")
+                            val adapter = MartRVAdapter(items, { selectedMart ->
+                                val intent = Intent(requireContext(), MartDetailInfoActivity::class.java)
+                                intent.putExtra("martId", selectedMart.martId)
+                                startActivity(intent)
+                            }, api)
+
+                            binding.martListRecyclerView.adapter = adapter
+                            binding.martListRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                        }
+                    } else {
+                        Log.d("[MART/PRINT]", "MartList failed")
+                    }
+                }
+
+                override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
+                    Log.d("check", "마트 전체 조회 연결 실패")
+                }
+            })
+        }
 
         binding.tbMart.ivSearch.setOnClickListener {
             val intent = Intent(context, SearchActivity::class.java)
@@ -76,7 +107,6 @@ class MartFragment : Fragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadMartData()
     }
 
     private fun initRecyclerView() {
@@ -146,74 +176,15 @@ class MartFragment : Fragment(),
     }
      */
 
-    private fun loadMartData() {
-        GlobalScope.launch {
-            api = ApiService.createWithHeader(requireContext())
-
-            api.ShowAllShops(tag, minBookmark, maxBookmark, minLiked, maxLiked, sort).enqueue(object : Callback<MartListResponseDTO> {
-                override fun onResponse(
-                    call: Call<MartListResponseDTO>,
-                    response: Response<MartListResponseDTO>,
-                ) {
-                    if (response.isSuccessful) {
-                        val martList = response.body()?.result ?: emptyList()
-                        // 데이터 설정
-                        sharedMartViewModel.setMartList(martList)
-
-                        updateRecyclerView(martList)
-                    } else {
-                        // Handle server error
-                    }
-                }
-
-                override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
-                    Log.d("check", "마트 전체 조회 연결 실패")
-                }
-            })
-        }
-    }
-
-    /*
-    private fun loadMartData() {
-        GlobalScope.launch {
-            api = ApiService.createWithHeader(requireContext())
-
-            api.getAllShops().enqueue(object : Callback<MartListResponseDTO> {
-                override fun onResponse(
-                    call: Call<MartListResponseDTO>,
-                    response: Response<MartListResponseDTO>,
-                ) {
-                    if (response.isSuccessful) {
-                        val martList = response.body()?.result ?: emptyList()
-                        // 데이터 설정
-                        sharedMartViewModel.setMartList(martList)
-
-                        updateRecyclerView(martList)
-                    } else {
-                        // Handle server error
-                    }
-                }
-
-                override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
-                    Log.d("check", "마트 전체 조회 연결 실패")
-                }
-            })
-        }
-    }
-
-     */
-
     private fun updateRecyclerView(martList: List<MartDataDTO>) {
         val martRVAdapter = MartRVAdapter(martList, { selectedMart ->
-            // 사용자가 마트를 선택했을 때, 해당 마트의 정보를 SharedViewModel에 설정
-            sharedMartViewModel.setSelectedMart(selectedMart)
-
             val intent = Intent(requireContext(), MartDetailInfoActivity::class.java)
             intent.putExtra("martId", selectedMart.martId)
             startActivity(intent)
         }, api)
         binding.martListRecyclerView.adapter = martRVAdapter
     }
+
 
     private fun updateFilterUI() {
         GlobalScope.launch{

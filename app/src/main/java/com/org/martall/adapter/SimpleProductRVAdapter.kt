@@ -107,7 +107,6 @@ class SimpleProductRVAdapter(private val itemList: List<Item>, private val api: 
                     }
                     context.startActivity(intent)
                 }
-
                 itemNameTv.setOnClickListener {
                     val context = it.context
                     val intent = Intent(context, ProductDetailActivity::class.java).apply {
