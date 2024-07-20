@@ -6,13 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.org.martall.R
-import com.org.martall.ViewModel.SharedMartViewModel
 import com.org.martall.adapter.MartDetailRVAdapter
 import com.org.martall.databinding.ActivityMartDetailInfoBinding
 import com.org.martall.models.FollowResponseDTO
@@ -107,7 +104,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
     }
 
     private fun followMart(martId: Int) {
-        val apiService = ApiServiceManager.MartapiService
+        val apiService = ApiService.create()
         val call = apiService.followMart(shopId = martId)
 
         call.enqueue(object : Callback<FollowResponseDTO> {
@@ -123,16 +120,16 @@ class MartDetailInfoActivity : AppCompatActivity() {
                 } else {
                     Log.d("FailFollow", "통신 실패")
                 }
+            }
 
-                override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                    Log.d("check", "마트 전체 조회 연결 실패")
-                }
-            })
-        }
+            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                Log.d("check", "마트 전체 조회 연결 실패")
+            }
+        })
     }
 
     private fun unfollowMart(martId: Int) {
-        val apiService = ApiServiceManager.MartapiService
+        val apiService = ApiService.create()
         val call = apiService.unfollowMart(shopId = martId)
 
         call.enqueue(object : Callback<FollowResponseDTO> {
@@ -148,13 +145,12 @@ class MartDetailInfoActivity : AppCompatActivity() {
                 } else {
                     Log.d("FailFollow", "통신 실패")
                 }
+            }
 
-                override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
-                    Log.d("check", "마트 전체 조회 연결 실패")
-                }
-            })
-
-        }
+            override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
+                Log.d("check", "마트 전체 조회 연결 실패")
+            }
+        })
     }
 
     @SuppressLint("ResourceAsColor")
