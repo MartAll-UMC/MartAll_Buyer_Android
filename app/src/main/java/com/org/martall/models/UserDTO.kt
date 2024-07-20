@@ -15,18 +15,21 @@ data class UserDTO(
     @SerializedName("imgUrl") val imgUrl: String,
 )
 
-data class RecommendedMart(
-    val martId: Int,
-    val martImg: String,
-    val martName: String,
-    val martCategory: List<String>
-)
 data class ResponseMart(
-    val timeStamp: String,
-    val status: Int,
-    val message: String,
-    val recommendedMarts: List<RecommendedMart>
+    @SerializedName("timeStamp") val timeStamp: String,
+    @SerializedName("status") val status: Int,
+    @SerializedName("message") val message: String,
+    @SerializedName("result") val result: List<RecommendedMart>,
+    @SerializedName("success") val success: Boolean
 )
+
+data class RecommendedMart(
+    @SerializedName("martId") val martId: Int,
+    @SerializedName("martImg") val martImg: String,
+    @SerializedName("martName") val martName: String,
+    @SerializedName("martCategory") val martCategory: List<String>
+)
+
 
 data class MartDTO(
     val imageUrl : Int? = null,

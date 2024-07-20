@@ -120,7 +120,6 @@ class MartDetailInfoActivity : AppCompatActivity() {
                     isBookmarked = true
                     Log.d("SuccessFollow", "팔로우 통신 성공")
                     updateFollowUI(isBookmarked)
-
                 } else {
                     Log.d("FailFollow", "통신 실패")
                 }
@@ -146,7 +145,6 @@ class MartDetailInfoActivity : AppCompatActivity() {
                     isBookmarked = false
                     Log.d("SuccessUnfollow", "언팔로우 성공")
                     updateFollowUI(isBookmarked)
-
                 } else {
                     Log.d("FailFollow", "통신 실패")
                 }
