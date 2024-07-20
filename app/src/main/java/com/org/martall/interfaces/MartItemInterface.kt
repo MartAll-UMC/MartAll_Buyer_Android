@@ -10,7 +10,7 @@ interface HomeInterface {
     @GET("/item/new-item")
     fun getNewItem(): Call<Response>
 
-    @GET("/mart/shops/recommended")
+    @GET("/mart/today")
     fun getRecommendMart(): Call<ResponseMart>
 }
 //interface MartItemdibs {

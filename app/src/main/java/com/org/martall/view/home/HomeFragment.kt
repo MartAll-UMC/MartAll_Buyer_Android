@@ -1,3 +1,5 @@
+package com.org.martall.view.home
+
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -5,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.org.martall.MainActivity
@@ -20,7 +23,6 @@ import com.org.martall.view.cart.CartActivity
 import com.org.martall.view.home.HomeAdFragment
 import com.org.martall.view.home.NewMerchActivity
 import com.org.martall.view.search.SearchActivity
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,18 +31,16 @@ import retrofit2.Response as RetrofitResponse
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var mainBinding: MainActivity
-    private lateinit var api: ApiService
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         mainBinding = requireActivity() as MainActivity
 
         binding.homeMartListTv.visibility = View.GONE
-        binding.homeMartMoreTv.visibility = View.GONE
 
         binding.tbHome.ivCart.setOnClickListener {
             val intent = Intent(context, CartActivity::class.java)
@@ -59,18 +59,42 @@ class HomeFragment : Fragment() {
         showMerchandiseData(isLoading = true)
         showMartData(isLoading = true)
 
-        GlobalScope.launch {
-            api = ApiService.createWithHeader(requireContext())
+        loadRecommendMart()
+        loadNewItem()
 
-            api.getRecommendMart().enqueue(object : Callback<ResponseMart> {
+        val adAdapter = HomeAdViewPagerAdapter(this)
+        adAdapter.addFragment(HomeAdFragment(R.drawable.img_ad_1_360dp))
+        adAdapter.addFragment(HomeAdFragment(R.drawable.img_ad_2_360dp))
+        adAdapter.addFragment(HomeAdFragment(R.drawable.img_ad_3_360dp))
+        adAdapter.addFragment(HomeAdFragment(R.drawable.img_ad_4_360dp))
+        binding.homeAdVp.adapter = adAdapter
+        binding.homeAdVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        binding.homeSearchTv.setOnClickListener {
+            val intent = Intent(context, SearchActivity::class.java)
+            intent.putExtra("isProduct", true)
+            startActivity(intent)
+        }
+
+        binding.homeMerchandiseMoreTv.setOnClickListener {
+            startActivity(Intent(context, NewMerchActivity::class.java))
+        }
+
+        return binding.root
+    }
+
+    private fun loadRecommendMart() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val api = ApiService.createNewMartService(requireContext())
+            api.getTodayMart().enqueue(object : Callback<ResponseMart> {
                 override fun onResponse(
                     call: Call<ResponseMart>,
-                    response: retrofit2.Response<ResponseMart>,
+                    response: RetrofitResponse<ResponseMart>,
                 ) {
                     if (response.isSuccessful) {
                         val recommendMartResponse = response.body()
-                        recommendMartResponse?.recommendedMarts?.let { recommendedMarts ->
-                            val adapter = HomeMartRVAdapter(recommendedMarts)
+                        recommendMartResponse?.result?.let { result ->
+                            val adapter = HomeMartRVAdapter(result)
                             binding.homeRecommendRv.adapter = adapter
                             binding.homeRecommendRv.layoutManager = LinearLayoutManager(
                                 requireContext(),
@@ -96,7 +120,12 @@ class HomeFragment : Fragment() {
                     showMartData(isLoading = false)
                 }
             })
+        }
+    }
 
+    private fun loadNewItem() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val api = ApiService.createWithHeader(requireContext())
             api.getNewItem().enqueue(object : Callback<Response> {
                 override fun onResponse(
                     call: Call<Response>,
@@ -130,33 +159,9 @@ class HomeFragment : Fragment() {
                 }
             })
         }
-
-        val adAdapter = HomeAdViewPagerAdapter(this)
-        adAdapter.addFragment(HomeAdFragment(R.drawable.img_ad_1_360dp))
-        adAdapter.addFragment(HomeAdFragment(R.drawable.img_ad_2_360dp))
-        adAdapter.addFragment(HomeAdFragment(R.drawable.img_ad_3_360dp))
-        adAdapter.addFragment(HomeAdFragment(R.drawable.img_ad_4_360dp))
-        binding.homeAdVp.adapter = adAdapter
-        binding.homeAdVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
-        binding.homeSearchTv.setOnClickListener {
-            val intent = Intent(context, SearchActivity::class.java)
-            intent.putExtra("isProduct", true)
-            startActivity(intent)
-        }
-
-        binding.homeMerchandiseMoreTv.setOnClickListener {
-            startActivity(Intent(context, NewMerchActivity::class.java))
-        }
-
-        binding.homeMartMoreTv.setOnClickListener {
-            (binding.root.context as MainActivity).selectBottomNavigationItem(R.id.menu_localMart)
-        }
-
-        return binding.root
     }
 
-    /* 스켈레톤 뷰 함수*/
+    /* 스켈레톤 뷰 함수 */
     private fun showMerchandiseData(isLoading: Boolean) {
         if (isLoading) {
             binding.homeShimmerFl.startShimmer()

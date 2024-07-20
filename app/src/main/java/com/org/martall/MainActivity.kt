@@ -1,7 +1,6 @@
 package com.org.martall
 
 import CategoryFragment
-import HomeFragment
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.org.martall.databinding.ActivityMainBinding
 import com.org.martall.services.MartAllUserInfoManager
 import com.org.martall.services.UserInfoManager
+import com.org.martall.view.home.HomeFragment
 import com.org.martall.view.likelist.LikeFragment
 import com.org.martall.view.login.LoginActivity
 import com.org.martall.view.mart.MartFragment

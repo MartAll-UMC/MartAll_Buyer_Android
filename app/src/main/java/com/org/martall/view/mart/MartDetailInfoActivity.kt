@@ -29,7 +29,6 @@ import retrofit2.Response
 class MartDetailInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMartDetailInfoBinding
     private lateinit var api: ApiService
-    private val sharedMartViewModel: SharedMartViewModel by viewModels()
 
     private var isBookmarked: Boolean = false
 
@@ -38,17 +37,6 @@ class MartDetailInfoActivity : AppCompatActivity() {
 
         binding = ActivityMartDetailInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        /*
-        val selectedMartLiveData: LiveData<MartDataDTO> = sharedMartViewModel.getSelectedMart()
-
-        selectedMartLiveData.observe(this) {
-            it?.let { selectedMart ->
-                updateUI(selectedMart)
-            }
-        }
-
-         */
 
         // 클릭된 아이템의 martId
         val martId = intent.getIntExtra("martId", -1)
@@ -102,16 +90,10 @@ class MartDetailInfoActivity : AppCompatActivity() {
 
                         // 데이터 설정
                         selectedMart?.let {
+
                             updateMartDetailUI(selectedMart)
                             updateMartDetailProduct(selectedMart)
                         }
-
-//                    val martProduct = selectedMart?.items
-//                    martProduct?.let {
-//                        if (martName != null) {
-//                            updateMartDetailProduct(martProduct, martName)
-//                        }
-//                    }
                     } else {
                         // Handle server error
                     }
@@ -125,25 +107,21 @@ class MartDetailInfoActivity : AppCompatActivity() {
     }
 
     private fun followMart(martId: Int) {
-        GlobalScope.launch {
-            api = ApiService.createWithHeader(applicationContext)
+        val apiService = ApiServiceManager.MartapiService
+        val call = apiService.followMart(shopId = martId)
 
-            val call = api.followMart(shopId = martId)
-
-            call.enqueue(object : Callback<FollowResponseDTO> {
-                override fun onResponse(
-                    call: Call<FollowResponseDTO>,
-                    response: Response<FollowResponseDTO>,
-                ) {
-                    if (response.isSuccessful) {
-                        // 성공적으로 팔로우한 경우
-                        isBookmarked = true
-                        Log.d("SuccessFollow", "팔로우 통신 성공")
-                        updateUI()
-
-                    } else {
-                        Log.d("FailFollow", "통신 실패")
-                    }
+        call.enqueue(object : Callback<FollowResponseDTO> {
+            override fun onResponse(
+                call: Call<FollowResponseDTO>,
+                response: Response<FollowResponseDTO>,
+            ) {
+                if (response.isSuccessful) {
+                    // 성공적으로 팔로우한 경우
+                    isBookmarked = true
+                    Log.d("SuccessFollow", "팔로우 통신 성공")
+                    updateFollowUI(isBookmarked)
+                } else {
+                    Log.d("FailFollow", "통신 실패")
                 }
 
                 override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
@@ -154,24 +132,21 @@ class MartDetailInfoActivity : AppCompatActivity() {
     }
 
     private fun unfollowMart(martId: Int) {
-        GlobalScope.launch {
-            api = ApiService.createWithHeader(applicationContext)
-            val call = api.unfollowMart(shopId = martId)
+        val apiService = ApiServiceManager.MartapiService
+        val call = apiService.unfollowMart(shopId = martId)
 
-            call.enqueue(object : Callback<FollowResponseDTO> {
-                override fun onResponse(
-                    call: Call<FollowResponseDTO>,
-                    response: Response<FollowResponseDTO>,
-                ) {
-                    if (response.isSuccessful) {
-                        // 성공적으로 팔로우한 경우
-                        isBookmarked = false
-                        Log.d("SuccessUnfollow", "언팔로우 성공")
-                        updateUI()
-
-                    } else {
-                        Log.d("FailFollow", "통신 실패")
-                    }
+        call.enqueue(object : Callback<FollowResponseDTO> {
+            override fun onResponse(
+                call: Call<FollowResponseDTO>,
+                response: Response<FollowResponseDTO>,
+            ) {
+                if (response.isSuccessful) {
+                    // 성공적으로 팔로우한 경우
+                    isBookmarked = false
+                    Log.d("SuccessUnfollow", "언팔로우 성공")
+                    updateFollowUI(isBookmarked)
+                } else {
+                    Log.d("FailFollow", "통신 실패")
                 }
 
                 override fun onFailure(call: Call<FollowResponseDTO>, t: Throwable) {
@@ -214,9 +189,7 @@ class MartDetailInfoActivity : AppCompatActivity() {
         Log.d("selectedMart", selectedMart.name)
         binding.bookmarkCountTv.text = selectedMart.followersCount.toString()
         binding.likeCountTv.text = selectedMart.likeCount.toString()
-        binding.martPlaceTv.text = selectedMart.location
         binding.martProfileIv.text = selectedMart.name
-        // Glide.with(this).load(selectedMart.imageUrl).into(binding.martProfileIv)
         setCategories(selectedMart.categories)
 
         isBookmarked = selectedMart.bookmarkYn

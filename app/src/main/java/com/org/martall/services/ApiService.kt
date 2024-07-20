@@ -16,6 +16,7 @@ import com.org.martall.models.LoginRequest
 import com.org.martall.models.LoginResponse
 import com.org.martall.models.MartAllLogInRequest
 import com.org.martall.models.RefreshResponse
+import com.org.martall.models.ResponseMart
 import com.org.martall.models.SearchItemResponse
 import com.org.martall.models.SearchMartResponse
 import com.org.martall.models.SignUpIdCheckResponse
@@ -41,6 +42,7 @@ import java.io.IOException
 
 interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, CategoryInterface,
     DibsMartApiInterface, DibsProductApiInterface, OrderApiInterface {
+
     @GET("/mart/shops/search")
     fun searchMartList(
         @Query("keyword") keyword: String,
@@ -75,10 +77,13 @@ interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, Catego
 
     @POST("/user/login")
     fun login(@Body body: MartAllLogInRequest): Call<ResponseBody>
+      
+    @GET("/mart/today")
+    fun getTodayMart(): Call<ResponseMart>
 
     companion object {
         private const val BASE_URL = BuildConfig.BASE_URL
-        private const val MOCK_URL = BuildConfig.MOCK_URL
+        private const val MOCK_URL = BuildConfig.MOCK_CART_URL
         private val gson: Gson = GsonBuilder().setLenient().create()
         private lateinit var userInfoManager: UserInfoManager
 
@@ -102,6 +107,17 @@ interface ApiService : HomeInterface, MartApiInterface, CartApiInterface, Catego
                 AppInterceptor(userInfoManager.getTokens(), userInfoManager.needRefreshToken())
             val okHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
             return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+                .create(ApiService::class.java)
+        }
+
+        suspend fun createNewMartService(context: Context): ApiService {
+            userInfoManager = UserInfoManager(context)
+            val interceptor =
+                AppInterceptor(userInfoManager.getTokens(), userInfoManager.needRefreshToken())
+            val okHttpClient = OkHttpClient.Builder().addInterceptor(interceptor).build()
+            return retrofit2.Retrofit.Builder().baseUrl(MOCK_URL).client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(ApiService::class.java)
