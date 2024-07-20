@@ -39,6 +39,9 @@ class MartAllLoginActivity : AppCompatActivity() {
         api = ApiService.createMock()
         userInfoManager = UserInfoManager(applicationContext)
 
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
 
         binding.loginBtn.setOnClickListener {
             login()

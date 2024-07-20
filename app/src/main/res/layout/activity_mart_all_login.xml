@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,25 +10,26 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/back_btn"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/ic_arrow_left_32dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="14dp"
-            android:layout_marginBottom="14dp" />
+            android:layout_marginBottom="14dp"
+            android:src="@drawable/ic_arrow_left_32dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="마트올 로그인"
-            android:textSize="16sp"
-            android:fontFamily="@font/pretendardsemibold"
             android:layout_marginStart="12dp"
             android:layout_marginTop="18dp"
-            android:layout_marginBottom="18dp" />
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/pretendardsemibold"
+            android:text="마트올 로그인"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -38,7 +38,8 @@
         android:layout_width="160dp"
         android:layout_height="160dp"
         android:layout_marginTop="44dp"
-        android:paddingBottom="31dp"
+        android:paddingHorizontal="44dp"
+        android:paddingVertical="32dp"
         android:src="@drawable/ic_logo_martall26"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,12 +55,10 @@
         android:background="@drawable/background_gray_square_r8"
         android:hint="아이디 입력"
         android:inputType="text"
-        android:textSize="14sp"
-        android:textColor="@color/grey500"
-        android:fontFamily="@font/pretendardregular"
-        android:paddingLeft="16dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="14dp"
+        android:textAppearance="@style/mRegular"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_flo_logo_iv" />
@@ -74,12 +73,10 @@
         android:background="@drawable/background_gray_square_r8"
         android:hint="비밀번호 입력"
         android:inputType="textPassword"
-        android:textSize="14sp"
-        android:textColor="@color/grey500"
-        android:fontFamily="@font/pretendardregular"
-        android:paddingLeft="16dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="14dp"
+        android:textAppearance="@style/mRegular"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_id_et" />
@@ -92,70 +89,70 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/bg_blue_border8"
+        android:fontFamily="@font/pretendardbold"
         android:text="로그인"
         android:textColor="@color/white"
         android:textSize="16sp"
-        android:fontFamily="@font/pretendardbold"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_password_et" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="16dp"
         android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@id/login_btn"
-        app:layout_constraintTop_toBottomOf="@id/login_btn" >
+        app:layout_constraintTop_toBottomOf="@id/login_btn">
 
         <TextView
             android:id="@+id/login_find_id_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/pretendardregular"
             android:text="아이디 찾기"
             android:textColor="@color/grey500"
-            android:textSize="12sp"
-            android:fontFamily="@font/pretendardregular"
-            android:layout_marginEnd="8dp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/login_division_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/pretendardregular"
             android:text="|"
             android:textColor="@color/grey500"
-            android:textSize="12sp"
-            android:fontFamily="@font/pretendardregular"
-            android:layout_marginEnd="8dp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/login_find_password_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/pretendardregular"
             android:text="비밀번호 찾기"
             android:textColor="@color/grey500"
-            android:textSize="12sp"
-            android:fontFamily="@font/pretendardregular"
-            android:layout_marginEnd="8dp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/login_division_tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/pretendardregular"
             android:text="|"
             android:textColor="@color/grey500"
-            android:textSize="12sp"
-            android:fontFamily="@font/pretendardregular"
-            android:layout_marginEnd="8dp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/signup_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendardregular"
             android:text="회원가입"
             android:textColor="@color/grey500"
-            android:fontFamily="@font/pretendardregular"
             android:textSize="12sp" />
 
     </LinearLayout>
