@@ -9,15 +9,15 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface DibsProductApiInterface {
-    @GET("/item-like")
+    @GET("/item-itemLike")
     fun getDibsProduct(): Call<LikeItemResponseDTO>
 
-    @POST("/item-like/{itemId}")
+    @POST("/item-itemLike/{itemId}")
     fun likedItem(
         @Path("itemId") itemId: Int)
     : Call<ItemLikedResponseDTO>
 
-    @DELETE("/item-like/{itemId}")
+    @DELETE("/item-itemLike/{itemId}")
     fun unLikedItem(
         @Path("itemId") itemId: Int)
     : Call<ItemLikedResponseDTO>

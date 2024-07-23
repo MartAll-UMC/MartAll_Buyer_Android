@@ -10,13 +10,13 @@ data class Response(
 
 data class Item(
     val itemId: Int,
-    val pic: String,
+    val itemImg: String,
     val categoryName: String,
     val martShopName: String,
     val itemName: String,
-    val price: Int,
+    val itemPrice: Int,
     val content: String,
-    var like: Boolean,
+    var itemLike: Boolean,
 )
 
 data class SecondResponse(
@@ -29,11 +29,18 @@ data class SecondResponse(
 
 data class SecondItem(
     val itemId: Int,
-    val pic: String,
-    val martShopName: String,
+    val itemImg: String,
+    val mart: CategoryMartDTO,
     val itemName: String,
-    val price: Int,
-    var like: Boolean,
+    val itemPrice: Int,
+    var itemLike: Boolean,
 )
-
+data class CategoryMartDTO(
+    val martId: Int,
+    val martName: String,
+    val martCategory: List<String>,
+    val bookmarkCount: Int,
+    val likeCount: Int,
+    val martBookmark: Boolean
+)
 

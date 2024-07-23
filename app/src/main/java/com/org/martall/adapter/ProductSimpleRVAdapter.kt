@@ -61,7 +61,7 @@ class ProductSimpleRVAdapter(
 //                )
 //                intent.putExtra(
 //                    ProductDetailActivity.EXTRA_MART_ID,
-//                    martNameToId(itemList[idx].martShopName)
+//                    martNameToId(itemList[idx].mart)
 //                )
 //                intent.putExtra(ProductDetailActivity.EXTRA_ITEM_ID, itemList[idx].itemId)
 //                binding.root.context.startActivity(intent)
@@ -70,9 +70,9 @@ class ProductSimpleRVAdapter(
 
         fun bind(item: Item) {
             binding.apply {
-                Glide.with(itemView).load(item.pic).into(productImgIv)
+                Glide.with(itemView).load(item.itemImg).into(productImgIv)
                 productNameTv.text = item.itemName
-                val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.price)
+                val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.itemPrice)
                 productPriceTv.text = "${formattedPrice}원"
 
 
@@ -96,17 +96,17 @@ class ProductSimpleRVAdapter(
 
 
         // 초기 상태 설정
-            updateLikeButton(item.like)
+            updateLikeButton(item.itemLike)
 
             binding.productLikeIb.setOnClickListener {
                 val itemId = item.itemId
-                val isLiked = !item.like
+                val isLiked = !item.itemLike
 
                 // 클릭 상태를 업데이트하여 UI를 변경
-                item.like = isLiked
+                item.itemLike = isLiked
                 updateLikeButton(isLiked)
 
-                if (item.like) {
+                if (item.itemLike) {
                     api.likedItem(item.itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
                         override fun onResponse(
                             call: Call<ItemLikedResponseDTO>,
@@ -122,7 +122,7 @@ class ProductSimpleRVAdapter(
 
                         override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                             // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
-                            item.like = !isLiked
+                            item.itemLike = !isLiked
                             updateLikeButton(!isLiked)
                             Log.e(
                                 "ProductSimpleRVAdapter",
@@ -146,7 +146,7 @@ class ProductSimpleRVAdapter(
 
                         override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                             // 실패 시 처리: 클릭 상태를 이전 상태로 변경하고 실패 메시지 출력
-                            item.like = !isLiked
+                            item.itemLike = !isLiked
                             updateLikeButton(!isLiked)
                             Log.e(
                                 "ProductSimpleRVAdapter",

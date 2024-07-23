@@ -45,10 +45,10 @@ class CategoryRVAdapter(
                     val item = itemList[adapterPosition]
                     val itemId = item.itemId
 
-                    item.like = !item.like
-                    updateLikeButton(item.like)
+                    item.itemLike = !item.itemLike
+                    updateLikeButton(item.itemLike)
 
-                    if (item.like) {
+                    if (item.itemLike) {
                         api.likedItem(itemId).enqueue(object : Callback<ItemLikedResponseDTO> {
                             override fun onResponse(
                                 call: Call<ItemLikedResponseDTO>,
@@ -64,8 +64,8 @@ class CategoryRVAdapter(
 
                             override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                                 // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                                item.like = !item.like
-                                updateLikeButton(item.like)
+                                item.itemLike = !item.itemLike
+                                updateLikeButton(item.itemLike)
                             }
                         })
                     } else {
@@ -84,8 +84,8 @@ class CategoryRVAdapter(
 
                             override fun onFailure(call: Call<ItemLikedResponseDTO>, t: Throwable) {
                                 // 실패 시 처리: 클릭 상태를 이전 상태로 변경
-                                item.like = !item.like
-                                updateLikeButton(item.like)
+                                item.itemLike = !item.itemLike
+                                updateLikeButton(item.itemLike)
                             }
                         })
                     }
@@ -95,13 +95,13 @@ class CategoryRVAdapter(
 
         fun bind(item: SecondItem) {
             binding.apply {
-                Glide.with(itemView).load(item.pic).into(binding.itemImgIv)
+                Glide.with(itemView).load(item.itemImg).into(binding.itemImgIv)
                 itemNameTv.text = item.itemName
-                martNameTv.text = item.martShopName
-                val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.price)
+                martNameTv.text = item.mart.martName
+                val formattedPrice = NumberFormat.getNumberInstance(Locale.KOREA).format(item.itemPrice)
                 itemPriceTv.text = "${formattedPrice}원"
                 // 초기 버튼 상태 설정
-                updateLikeButton(item.like)
+                updateLikeButton(item.itemLike)
             }
         }
 

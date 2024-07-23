@@ -14,10 +14,10 @@ data class Results(
     @SerializedName("mart") val mart: Mart,
     @SerializedName("categoryName") val categoryName: String,
     @SerializedName("itemName") val itemName: String,
-    @SerializedName("price") val price: Int,
+    @SerializedName("itemPrice") val price: Int,
     @SerializedName("content") val content: String,
-    @SerializedName("like") var like: Boolean,
-    @SerializedName("pic") var pic: String,
+    @SerializedName("itemLike") var like: Boolean,
+    @SerializedName("itemImg") var pic: String,
 )
 
 data class Mart(

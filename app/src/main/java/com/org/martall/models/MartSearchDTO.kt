@@ -24,11 +24,11 @@ data class MartSimpleDTO(
 
 data class ItemSearchDTO(
     @SerializedName("itemId") val id: Int,
-    @SerializedName("pic") val img: String,
+    @SerializedName("itemImg") val img: String,
     @SerializedName("categoryName") val category: String,
-    @SerializedName("martShopName") val store: String,
+    @SerializedName("mart") val store: String,
     @SerializedName("itemName") val name: String,
-    @SerializedName("price") val price: Int,
+    @SerializedName("itemPrice") val price: Int,
     @SerializedName("content") val content: String,
-    @SerializedName("like") var isLiked: Boolean,
+    @SerializedName("itemLike") var isLiked: Boolean,
 )
