@@ -14,9 +14,9 @@ interface HomeInterface {
     fun getRecommendMart(): Call<ResponseMart>
 }
 //interface MartItemdibs {
-//    @POST("/item-like/{itemId}")
-//    fun dibsItem(@Path("itemId") itemId: Int, @Query("like") like: Boolean): Call<Unit>
+//    @POST("/item-itemLike/{itemId}")
+//    fun dibsItem(@Path("itemId") itemId: Int, @Query("itemLike") itemLike: Boolean): Call<Unit>
 //
-//    @DELETE("/item-like/{itemId}")
+//    @DELETE("/item-itemLike/{itemId}")
 //    fun cancelDibsItem(@Path("itemId") itemId: Int): Call<Unit>
 //}
