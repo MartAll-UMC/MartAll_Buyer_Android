@@ -62,7 +62,10 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun setupTextWatchers() {
         binding.nameEt.addTextChangedListener(createTextWatcher { validateName() })
-        binding.idEt.addTextChangedListener(createTextWatcher { validateId() })
+        binding.idEt.addTextChangedListener(createTextWatcher {
+            validateId()
+            resetIdCheckButton()
+        })
         binding.passwordEt.addTextChangedListener(createTextWatcher { validatePassword() })
         binding.passwordCheckEt.addTextChangedListener(createTextWatcher { validatePasswordCheck() })
         binding.emailEt.addTextChangedListener(createTextWatcher { validateEmail() })
@@ -240,6 +243,12 @@ class SignUpActivity : AppCompatActivity() {
         } else {
             Log.d("[SIGNUP]", "아이디가 비어 있습니다.")
         }
+    }
+
+    private fun resetIdCheckButton() {
+        binding.idCheckBtn.setBackgroundResource(R.drawable.bg_white_border_blue8)
+        binding.idCheckBtn.text = "중복 확인"
+        binding.idCheckBtn.setTextColor(ContextCompat.getColor(this, R.color.primary400))
     }
 
     // 회원가입 통신
