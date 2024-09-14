@@ -98,7 +98,8 @@ class MartRVAdapter(
             binding.martNameTv.text = mart.name
             binding.bookmarkCountTv.text = mart.followersCount.toString()
             binding.likeCountTv.text = mart.likeCount.toString()
-            binding.martProfileIv.text = mart.name.toString()
+            binding.martProfileIv.text = mart.name
+
             setCategories(mart.categories)
             Log.d("[MART/PRINT]", "${mart.name} - bookmarkYn: ${mart.bookmarkYn}")
 

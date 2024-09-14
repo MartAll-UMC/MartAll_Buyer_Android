@@ -17,7 +17,7 @@
             android:id="@+id/product_img_iv"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             android:src="@drawable/img_item_banana_360dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

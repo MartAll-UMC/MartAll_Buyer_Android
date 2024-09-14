@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="100dp"
     android:layout_height="wrap_content"
     android:layout_marginRight="12dp"
     android:id="@+id/layoutListItem">
@@ -37,18 +37,20 @@
 
     <TextView
         android:id="@+id/item_name_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="바나나"
         android:textColor="@color/black"
         android:textAppearance="@style/mMedium"
+        android:maxLines="1"
+        android:ellipsize="end"
         app:layout_constraintStart_toStartOf="@id/mart_item_cardView"
         app:layout_constraintTop_toBottomOf="@id/mart_item_cardView" />
 
     <TextView
         android:id="@+id/item_price_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="5000원"
         android:textAppearance="@style/mBold"

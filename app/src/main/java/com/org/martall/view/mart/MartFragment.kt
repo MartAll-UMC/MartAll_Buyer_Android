@@ -7,21 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.org.martall.ViewModel.SharedMartViewModel
 import com.org.martall.adapter.MartRVAdapter
 import com.org.martall.databinding.FragmentMartBinding
 import com.org.martall.models.MartDataDTO
 import com.org.martall.models.MartListResponseDTO
 import com.org.martall.services.ApiService
 import com.org.martall.view.cart.CartActivity
-import com.org.martall.view.search.SearchActivity
 import com.org.martall.view.mart.user.bottomsheet.FilterBottomSheet
 import com.org.martall.view.mart.user.bottomsheet.SortBottomSheet
+import com.org.martall.view.search.SearchActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.selects.select
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +28,7 @@ class MartFragment : Fragment(),
     FilterBottomSheet.OnFilterAppliedListener {
 
     private lateinit var binding: FragmentMartBinding
+
     // private val sharedMartViewModel: SharedMartViewModel by activityViewModels()
     private lateinit var api: ApiService
 
@@ -54,33 +52,39 @@ class MartFragment : Fragment(),
         GlobalScope.launch {
             api = ApiService.createWithHeader(requireContext())
 
-            api.ShowAllShops(tag, minBookmark, maxBookmark, minLiked, maxLiked, sort).enqueue(object : Callback<MartListResponseDTO> {
-                override fun onResponse(
-                    call: Call<MartListResponseDTO>,
-                    response: Response<MartListResponseDTO>,
-                ) {
-                    if (response.isSuccessful) {
-                        val martResponse = response.body()
-                        martResponse?.result?.let { items ->
-                            Log.d("[MART/FRAGMENT]", "MartFragment items: $items")
-                            val adapter = MartRVAdapter(items, { selectedMart ->
-                                val intent = Intent(requireContext(), MartDetailInfoActivity::class.java)
-                                intent.putExtra("martId", selectedMart.martId)
-                                startActivity(intent)
-                            }, api)
+            api.ShowAllShops(tag, minBookmark, maxBookmark, minLiked, maxLiked, sort)
+                .enqueue(object : Callback<MartListResponseDTO> {
+                    override fun onResponse(
+                        call: Call<MartListResponseDTO>,
+                        response: Response<MartListResponseDTO>,
+                    ) {
+                        if (response.isSuccessful) {
+                            val martResponse = response.body()
+                            martResponse?.result?.let { items ->
+                                Log.d("[MART/FRAGMENT]", "MartFragment items: $items")
+                                val adapter = MartRVAdapter(items, { selectedMart ->
+                                    val intent =
+                                        Intent(requireContext(), MartDetailInfoActivity::class.java)
+                                    intent.putExtra("martId", selectedMart.martId)
+                                    startActivity(intent)
+                                }, api)
 
-                            binding.martListRecyclerView.adapter = adapter
-                            binding.martListRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                                binding.martListRecyclerView.adapter = adapter
+                                binding.martListRecyclerView.layoutManager = LinearLayoutManager(
+                                    context,
+                                    LinearLayoutManager.VERTICAL,
+                                    false
+                                )
+                            }
+                        } else {
+                            Log.d("[MART/PRINT]", "MartList failed")
                         }
-                    } else {
-                        Log.d("[MART/PRINT]", "MartList failed")
                     }
-                }
 
-                override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
-                    Log.d("check", "마트 전체 조회 연결 실패")
-                }
-            })
+                    override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
+                        Log.d("check", "마트 전체 조회 연결 실패")
+                    }
+                })
         }
 
         binding.tbMart.ivSearch.setOnClickListener {
@@ -123,14 +127,14 @@ class MartFragment : Fragment(),
         bottomSheet.setSortSelectionListener(this)
         bottomSheet.show(childFragmentManager, null)
     }
+
     // 콜백 메서드 override
     override fun onSortSelected(selectedSort: String) {
         Log.d("BottomSheet", "LocalStore - Selected Sort: $selectedSort")
 
-        if (selectedSort === "기본" || selectedSort === "최신" ) {
+        if (selectedSort === "기본" || selectedSort === "최신") {
             binding.sortTv.text = selectedSort + "순"
-        }
-        else {
+        } else {
             binding.sortTv.text = selectedSort + " 지수 순"
         }
 
@@ -149,7 +153,7 @@ class MartFragment : Fragment(),
         selectedMembershipCountMin: Int?,
         selectedMembershipCountMax: Int?,
         selectedHeartCountMin: Int?,
-        selectedHeartCountMax: Int?
+        selectedHeartCountMax: Int?,
     ) {
         Log.d(
             "LocalStoreFragment", "Filter Applied: " +
@@ -187,30 +191,34 @@ class MartFragment : Fragment(),
 
 
     private fun updateFilterUI() {
-        GlobalScope.launch{
+        GlobalScope.launch {
             api = ApiService.createWithHeader(requireContext())
 
-            api.ShowAllShops(tag, minBookmark, maxBookmark, minLiked, maxLiked, sort).enqueue(object : Callback<MartListResponseDTO> {
-                override fun onResponse(
-                    call: Call<MartListResponseDTO>,
-                    response: Response<MartListResponseDTO>
-                ) {
-                    if (response.isSuccessful) {
-                        val martList = response.body()?.result ?: emptyList()
-                        Log.d("updateFilterUI", "응답 성공")
-                        // 기존 어댑터에 데이터 설정 후 갱신
-                        Log.d("updateFilterUI", "어댑터 갱신 전") // 추가
-                        (binding.martListRecyclerView.adapter as? MartRVAdapter)?.setData(martList)
-                        (binding.martListRecyclerView.adapter as? MartRVAdapter)?.notifyDataSetChanged()
-                        Log.d("updateFilterUI", "어댑터 갱신 후") // 추가
-                    } else {
-                        // Handle server error
+            api.ShowAllShops(tag, minBookmark, maxBookmark, minLiked, maxLiked, sort)
+                .enqueue(object : Callback<MartListResponseDTO> {
+                    override fun onResponse(
+                        call: Call<MartListResponseDTO>,
+                        response: Response<MartListResponseDTO>,
+                    ) {
+                        if (response.isSuccessful) {
+                            val martList = response.body()?.result ?: emptyList()
+                            Log.d("updateFilterUI", "응답 성공")
+                            // 기존 어댑터에 데이터 설정 후 갱신
+                            Log.d("updateFilterUI", "어댑터 갱신 전") // 추가
+                            (binding.martListRecyclerView.adapter as? MartRVAdapter)?.setData(
+                                martList
+                            )
+                            (binding.martListRecyclerView.adapter as? MartRVAdapter)?.notifyDataSetChanged()
+                            Log.d("updateFilterUI", "어댑터 갱신 후") // 추가
+                        } else {
+                            // Handle server error
+                        }
                     }
-                }
-                override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
-                    Log.d("check", "마트 전체 조회 연결 실패")
-                }
-            })
+
+                    override fun onFailure(call: Call<MartListResponseDTO>, t: Throwable) {
+                        Log.d("check", "마트 전체 조회 연결 실패")
+                    }
+                })
         }
     }
 }

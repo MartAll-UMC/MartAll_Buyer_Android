@@ -1,6 +1,11 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Base.Theme.MartAll" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.MartAll" parent="Theme.Material3.Light.NoActionBar">
+        <item name="windowSplashScreenBackground">@color/primary400</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo_splash_240dp</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.MartAll</item>
+
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorSecondary">@color/secondary_color</item>
         <item name="android:windowBackground">@color/white</item>
@@ -8,15 +13,11 @@
         <item name="tabBackground">@color/white</item>
     </style>
 
-    <style name="Theme.MartAll" parent="Base.Theme.MartAll" />
-
-
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/primary400</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo_splash_240dp</item>
         <item name="windowSplashScreenAnimationDuration">500</item>
         <item name="postSplashScreenTheme">@style/Theme.MartAll</item>
-
     </style>
 
     <style name="RoundCornerBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
