@@ -28,7 +28,7 @@ data class CartProduct(
     @SerializedName("categoryName") val category: String,
     @SerializedName("itemName") val name: String,
     @SerializedName("count") val count: Int = 1,
-    @SerializedName("price") val price: Int,
+    @SerializedName("itemPrice") val price: Int,
     @SerializedName("picName") val img: String,
 )
 

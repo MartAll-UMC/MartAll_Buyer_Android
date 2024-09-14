@@ -17,6 +17,6 @@ class MartItemDTO(
     @SerializedName("itemId") val itemId: Int,
     @SerializedName("name") val name: String,
     @SerializedName("imageUrl") val imageUrl: String,
-    @SerializedName("price") val price: Int,
+    @SerializedName("itemPrice") val price: Int,
     @SerializedName("likeYn") var likeYn: Boolean
 )
